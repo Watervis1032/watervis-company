@@ -819,6 +819,41 @@
       *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
       .reveal { opacity: 1; transform: none; }
     }
+  
+    /* Header logo correction: preserve the official blue V and use white lettering. */
+    .brand img {
+      filter: none;
+    }
+
+    /* Keep the sticky header dark so the white header logo remains legible. */
+    .site-header.scrolled {
+      background: rgba(3, 18, 38, .94);
+      border-color: rgba(255,255,255,.12);
+      box-shadow: 0 8px 30px rgba(2, 19, 42, .18);
+      backdrop-filter: blur(14px);
+    }
+    .site-header.scrolled .desktop-nav {
+      color: rgba(255,255,255,.9);
+    }
+    .site-header.scrolled .desktop-nav .nav-cta {
+      color: var(--white);
+      background: rgba(255,255,255,.13);
+      border-color: rgba(255,255,255,.35);
+    }
+    .site-header.scrolled .desktop-nav .lang-link {
+      color: var(--white);
+      background: transparent;
+      border-color: rgba(255,255,255,.34);
+    }
+    .site-header.scrolled .desktop-nav .lang-link:hover,
+    .site-header.scrolled .desktop-nav .lang-link:focus-visible {
+      background: rgba(255,255,255,.12);
+    }
+    .site-header.scrolled .menu-button {
+      background: rgba(255,255,255,.12);
+      color: var(--white);
+    }
+
   </style>
 
   <script type="application/ld+json">
@@ -844,7 +879,7 @@
   <header class="site-header" id="header">
     <div class="container header-inner">
       <a class="brand" href="#top" aria-label="워터비스 홈">
-        <img src="assets/images/watervis-logo.webp" alt="WATERVIS" width="381" height="87" />
+        <img src="assets/images/watervis-logo-header.webp" alt="WATERVIS" width="381" height="87" />
       </a>
 
       <nav class="desktop-nav" aria-label="주요 메뉴">
