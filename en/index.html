@@ -1,21 +1,21 @@
 <!doctype html>
-<html lang="ko">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#061a33" />
-  <meta name="description" content="동해 수심 1,032m에서 취수한 해양심층수를 연구하고 제품화하는 해양심층수 전문기업, 워터비스입니다." />
-  <meta property="og:title" content="워터비스 | 해양심층수 전문기업" />
-  <meta property="og:description" content="깊은 바다에서 시작되는 워터비스의 새로운 여정" />
+  <meta name="description" content="WATERVIS is a deep ocean water specialist that researches and commercializes water sourced at a depth of 1,032 meters in the East Sea." />
+  <meta property="og:title" content="WATERVIS | Deep Ocean Water Specialist" />
+  <meta property="og:description" content="A new journey beginning in the deep ocean" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://www.watervis.co.kr/" />
-  <meta property="og:locale" content="ko_KR" />
-  <meta property="og:locale:alternate" content="en_US" />
-  <link rel="canonical" href="https://www.watervis.co.kr/" />
+  <meta property="og:url" content="https://www.watervis.co.kr/en/" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="ko_KR" />
+  <link rel="canonical" href="https://www.watervis.co.kr/en/" />
   <link rel="alternate" hreflang="ko" href="https://www.watervis.co.kr/" />
   <link rel="alternate" hreflang="en" href="https://www.watervis.co.kr/en/" />
   <link rel="alternate" hreflang="x-default" href="https://www.watervis.co.kr/" />
-  <title>워터비스 | 해양심층수 전문기업</title>
+  <title>WATERVIS | Deep Ocean Water Specialist</title>
 
   <style>
     :root {
@@ -43,9 +43,9 @@
       margin: 0;
       color: var(--ink);
       background: var(--white);
-      font-family: "Pretendard Variable", Pretendard, "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+      font-family: Inter, "Pretendard Variable", Pretendard, "Noto Sans", Arial, system-ui, sans-serif;
       line-height: 1.65;
-      word-break: keep-all;
+      word-break: normal;
       -webkit-font-smoothing: antialiased;
     }
     body.nav-open { overflow: hidden; }
@@ -904,55 +904,123 @@
       .footer-brand-divider { height: 24px; }
     }
 
+  
+    /* Header brands: WATERVIS + 몸愛좋은물 */
+    .header-brands {
+      display: inline-flex;
+      align-items: center;
+      gap: 15px;
+      min-width: 0;
+    }
+
+    .header-brands img {
+      display: block;
+      height: auto;
+      filter: none !important;
+      flex: 0 0 auto;
+    }
+
+    .header-brand-watervis {
+      width: 132px !important;
+      opacity: .98;
+    }
+
+    .header-brand-divider {
+      width: 1px;
+      height: 29px;
+      flex: 0 0 auto;
+      background: rgba(255, 255, 255, .34);
+    }
+
+    .header-brand-product {
+      width: 142px !important;
+      opacity: .98;
+    }
+
+    @media (max-width: 1180px) and (min-width: 1041px) {
+      .header-brands { gap: 11px; }
+      .header-brand-watervis { width: 116px !important; }
+      .header-brand-product { width: 124px !important; }
+      .header-brand-divider { height: 25px; }
+      .desktop-nav { gap: 18px; font-size: 14px; }
+    }
+
+    @media (max-width: 720px) {
+      .header-brands { gap: 9px; }
+      .header-brand-watervis { width: 98px !important; }
+      .header-brand-product { width: 104px !important; }
+      .header-brand-divider { height: 22px; }
+    }
+
+    @media (max-width: 380px) {
+      .header-brand-watervis { width: 88px !important; }
+      .header-brand-product { width: 94px !important; }
+      .header-brands { gap: 8px; }
+    }
+
   </style>
 
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "주식회사 워터비스",
-    "url": "https://www.watervis.co.kr/",
+    "name": "WATERVIS Co., Ltd.",
+    "url": "https://www.watervis.co.kr/en/",
     "telephone": "+82-33-672-1032",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "현남면 원포1길 53",
-      "addressLocality": "양양군",
-      "addressRegion": "강원특별자치도",
+      "streetAddress": "53, Wonpo 1-gil, Hyeonnam-myeon",
+      "addressLocality": "Yangyang-gun",
+      "addressRegion": "Gangwon State",
       "addressCountry": "KR"
     }
   }
   </script>
 </head>
 <body>
-  <a class="skip-link" href="#main">본문 바로가기</a>
+  <a class="skip-link" href="#main">Skip to main content</a>
 
   <header class="site-header" id="header">
     <div class="container header-inner">
-      <a class="brand" href="#top" aria-label="워터비스 홈">
-        <img src="assets/logos/watervis-white.png" alt="WATERVIS" width="1156" height="308" />
+      <a class="brand header-brands" href="#top" aria-label="WATERVIS home">
+        <img
+          class="header-brand-watervis"
+          src="../assets/logos/watervis-white.png"
+          alt="WATERVIS"
+          width="1156"
+          height="308"
+        />
+        <span class="header-brand-divider" aria-hidden="true"></span>
+        <img
+          class="header-brand-product"
+          src="../assets/logos/bodygoodwater-white.png"
+          alt="MOMAEJOEUNMUL"
+          width="992"
+          height="444"
+        />
       </a>
 
-      <nav class="desktop-nav" aria-label="주요 메뉴">
-        <a href="#company">회사소개</a>
-        <a href="#deep-ocean">1032m 해양심층수</a>
-        <a href="#technology">기술·생산</a>
-        <a href="#business">사업영역</a>
-        <a href="#contact">문의</a>
-        <a class="lang-link" href="en/" lang="en" hreflang="en" aria-label="View the English website">EN</a>
-        <a class="nav-cta" href="https://pouch.watervis.co.kr" aria-label="파우치 워터 신제품 사이트로 이동">파우치 워터 ↗</a>
+      <nav class="desktop-nav" aria-label="Primary navigation">
+        <a href="#company">About Us</a>
+        <a href="#deep-ocean">1,032m Deep Ocean Water</a>
+        <a href="#technology">Technology &amp; Production</a>
+        <a href="#business">Business Areas</a>
+        <a href="#contact">Contact</a>
+        <a class="lang-link" href="../" lang="ko" hreflang="ko" aria-label="View the Korean website">KO</a>
+        <a class="nav-cta" href="https://pouch.watervis.co.kr/en/" aria-label="Visit the pouch water product website">Pouch Water ↗</a>
       </nav>
 
-      <button class="menu-button" type="button" aria-label="메뉴 열기" aria-controls="mobile-nav" aria-expanded="false"><span></span></button>
+      <button class="menu-button" type="button" aria-label="Open menu" aria-controls="mobile-nav" aria-expanded="false"><span></span></button>
     </div>
 
-    <nav class="mobile-nav" id="mobile-nav" aria-label="모바일 메뉴">
-      <a href="#company">회사소개</a>
-      <a href="#deep-ocean">1032m 해양심층수</a>
-      <a href="#technology">기술·생산</a>
-      <a href="#business">사업영역</a>
-      <a href="#contact">문의</a>
-      <a class="mobile-lang" href="en/" lang="en" hreflang="en" aria-label="View the English website">EN · English</a>
-      <a class="mobile-cta" href="https://pouch.watervis.co.kr">파우치 워터 신제품 보기 ↗</a>
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+      <a href="#company">About Us</a>
+      <a href="#deep-ocean">1,032m Deep Ocean Water</a>
+      <a href="#technology">Technology &amp; Production</a>
+      <a href="#business">Business Areas</a>
+      <a href="#contact">Contact</a>
+      <a class="mobile-lang" href="../" lang="ko" hreflang="ko" aria-label="View the Korean website">KO · 한국어</a>
+      <a class="mobile-cta" href="https://pouch.watervis.co.kr/en/">View Pouch Water Product ↗</a>
     </nav>
   </header>
 
@@ -960,19 +1028,19 @@
     <section class="hero" id="top" aria-labelledby="hero-title">
       <div class="container hero-content">
         <p class="eyebrow">Deep Ocean · Pure Mineral</p>
-        <h1 id="hero-title">깊은 바다에서 시작되는<strong>워터비스의 새로운 여정</strong></h1>
-        <p class="hero-copy">동해 수심 1,032m에서 취수한 해양심층수의 청정함과 미네랄 가치를 연구하고, 새로운 제품으로 연결합니다.</p>
+        <h1 id="hero-title">Beginning in the Deep Ocean<strong>A New Journey for WATERVIS</strong></h1>
+        <p class="hero-copy">We research the purity and mineral value of deep ocean water sourced at a depth of 1,032 meters in the East Sea and transform it into new products.</p>
         <div class="hero-actions">
-          <a class="button button-primary button-arrow" href="#company">워터비스 소개</a>
-          <a class="button button-ghost" href="#contact">사업 문의</a>
+          <a class="button button-primary button-arrow" href="#company">About WATERVIS</a>
+          <a class="button button-ghost" href="#contact">Business Inquiries</a>
         </div>
       </div>
 
-      <div class="hero-index" aria-label="워터비스 핵심 정보">
-        <div><b>1,032m</b><span>취수 수심</span></div>
-        <div><b>17.5km</b><span>해상 취수 거리</span></div>
-        <div><b>2,400톤</b><span>일일 최대 취수량</span></div>
-        <div><b>Since 2005</b><span>축적된 기술과 경험</span></div>
+      <div class="hero-index" aria-label="Key WATERVIS facts">
+        <div><b>1,032m</b><span>Intake Depth</span></div>
+        <div><b>17.5km</b><span>Offshore Intake Distance</span></div>
+        <div><b>2,400 tons</b><span>Maximum Daily Intake</span></div>
+        <div><b>Since 2005</b><span>Technology &amp; Experience</span></div>
       </div>
     </section>
 
@@ -980,38 +1048,38 @@
       <div class="container intro-grid">
         <div class="reveal">
           <p class="section-kicker">About Watervis</p>
-          <h2 class="section-title">해양심층수의 가능성을<br />연구해 온 전문기업</h2>
-          <p class="section-lead">워터비스는 한국해양연구원 창업기업으로 출발해 해양심층수의 취수, 처리, 미네랄 조정 및 제품화 기술을 축적해 왔습니다.</p>
+          <h2 class="section-title">Advancing the Potential of<br />Deep Ocean Water</h2>
+          <p class="section-lead">WATERVIS was founded as a spin-off from the Korea Institute of Ocean Science &amp; Technology (KIOST) and has built expertise in sourcing, processing, mineral adjustment, and commercialization of deep ocean water.</p>
 
           <div class="feature-list">
             <div class="feature-item">
               <span class="feature-num">01</span>
-              <div><b>해양심층수 개발 역량</b><p>원수 취수부터 탈염·농축·미네랄 블렌딩까지 이어지는 기술 기반</p></div>
+              <div><b>Deep Ocean Water Development</b><p>An integrated technology base spanning source-water intake, desalination, concentration, and mineral blending.</p></div>
             </div>
             <div class="feature-item">
               <span class="feature-num">02</span>
-              <div><b>연구개발 중심 기업</b><p>기업부설연구소를 중심으로 해양 자원의 응용 가능성을 연구</p></div>
+              <div><b>R&amp;D-Driven Company</b><p>Research into new applications of marine resources through our corporate R&amp;D center.</p></div>
             </div>
             <div class="feature-item">
               <span class="feature-num">03</span>
-              <div><b>제품 및 사업화 경험</b><p>먹는 해양심층수와 식품·음료 분야의 OEM·ODM 개발 경험</p></div>
+              <div><b>Product Commercialization Experience</b><p>OEM/ODM development experience across drinking deep ocean water, food, and beverage applications.</p></div>
             </div>
           </div>
         </div>
 
         <figure class="intro-photo reveal">
-          <img src="assets/images/factory-actual.webp" alt="워터비스 실제 공장과 생산시설" loading="lazy" width="1049" height="741" />
-          <figcaption class="photo-badge"><b>양양 생산 기반</b><span>강원특별자치도 양양군 현남면</span></figcaption>
+          <img src="../assets/images/factory-actual.webp" alt="WATERVIS factory and production facilities" loading="lazy" width="1049" height="741" />
+          <figcaption class="photo-badge"><b>Yangyang Production Base</b><span>Hyeonnam-myeon, Yangyang-gun, Gangwon State</span></figcaption>
         </figure>
       </div>
     </section>
 
-    <section class="numbers" aria-label="워터비스 주요 수치">
+    <section class="numbers" aria-label="Key WATERVIS figures">
       <div class="container number-grid reveal">
-        <article class="number-card"><strong>2005</strong><b>회사 설립</b><p>해양심층수 기술과 사업의 시작</p></article>
-        <article class="number-card"><strong>1,032m</strong><b>취수 수심</b><p>동해 심층 해역에서 원수 취수</p></article>
-        <article class="number-card"><strong>17.5km</strong><b>취수 거리</b><p>육지에서 해상 취수 지점까지</p></article>
-        <article class="number-card"><strong>2,400t</strong><b>일일 최대 취수량</b><p>안정적인 원수 확보 기반</p></article>
+        <article class="number-card"><strong>2005</strong><b>Company Founded</b><p>The beginning of our deep ocean water technology and business.</p></article>
+        <article class="number-card"><strong>1,032m</strong><b>Intake Depth</b><p>Source water from the deep waters of the East Sea.</p></article>
+        <article class="number-card"><strong>17.5km</strong><b>Intake Distance</b><p>From the coast to the offshore intake point.</p></article>
+        <article class="number-card"><strong>2,400t</strong><b>Maximum Daily Intake</b><p>Stable source-water capacity.</p></article>
       </div>
     </section>
 
@@ -1019,21 +1087,21 @@
       <div class="container depth-grid">
         <div class="reveal">
           <p class="section-kicker">1,032m Deep Ocean Water</p>
-          <h2 class="section-title">수면 아래 1,032m,<br />워터비스의 출발점</h2>
-          <p class="section-lead">워터비스는 양양 앞바다의 깊은 해역에서 해양심층수 원수를 취수합니다. 취수한 원수는 용도에 맞춰 탈염하고 미네랄 농도와 경도를 조정해 제품과 원료로 개발됩니다.</p>
+          <h2 class="section-title">1,032m Below the Surface,<br />Where WATERVIS Begins</h2>
+          <p class="section-lead">WATERVIS sources deep ocean water from the deep offshore waters of Yangyang. The source water is desalinated, and its mineral concentration and hardness are adjusted for use in products and ingredients.</p>
 
           <div class="depth-points">
-            <article class="depth-point"><span>ORIGIN</span><b>깊은 해역 취수</b><p>동해 수심 1,032m의 원수를 육상 플랜트로 이송합니다.</p></article>
-            <article class="depth-point"><span>PROCESS</span><b>미네랄 조정</b><p>탈염과 농축, 혼합 공정을 통해 목적에 맞는 물을 설계합니다.</p></article>
-            <article class="depth-point"><span>APPLICATION</span><b>다양한 사업화</b><p>먹는 물, 원료, 소금 및 OEM·ODM 제품으로 연결합니다.</p></article>
+            <article class="depth-point"><span>ORIGIN</span><b>Deep-Water Intake</b><p>Source water from 1,032 meters in the East Sea is transported to the onshore plant.</p></article>
+            <article class="depth-point"><span>PROCESS</span><b>Mineral Adjustment</b><p>Desalination, concentration, and blending are used to create water suited to each application.</p></article>
+            <article class="depth-point"><span>APPLICATION</span><b>Multiple Applications</b><p>Developed into drinking water, ingredients, salt, and OEM/ODM products.</p></article>
           </div>
         </div>
 
         <figure class="depth-visual reveal">
-          <img src="assets/images/intake-overview.webp" alt="양양 앞바다 해양심층수 취수 개요" loading="lazy" width="1019" height="675" />
+          <img src="../assets/images/intake-overview.webp" alt="Overview of the deep ocean water intake system off Yangyang" loading="lazy" width="1019" height="675" />
           <figcaption class="depth-caption">
-            <div><strong>1,032m</strong><span>취수 수심</span></div>
-            <div><strong>17.5km</strong><span>해상 취수 거리</span></div>
+            <div><strong>1,032m</strong><span>Intake Depth</span></div>
+            <div><strong>17.5km</strong><span>Offshore Intake Distance</span></div>
           </figcaption>
         </figure>
       </div>
@@ -1044,43 +1112,43 @@
         <div class="process-head reveal">
           <div>
             <p class="section-kicker">Technology & Production</p>
-            <h2 class="section-title">취수에서 제품까지<br />연결되는 생산 체계</h2>
+            <h2 class="section-title">From Intake to Finished Product<br />An Integrated Production System</h2>
           </div>
-          <p class="section-lead">복잡한 제조공정을 핵심 단계로 단순화했습니다. 실제 운영 및 설비 현황에 따라 상세 내용은 지속적으로 갱신할 수 있습니다.</p>
+          <p class="section-lead">The complex manufacturing process is presented in five core stages. Details can be updated as operations and equipment evolve.</p>
         </div>
 
-        <div class="process-steps reveal" aria-label="해양심층수 제조공정">
-          <article class="process-step"><span class="step-index">STEP 01</span><h3>취수</h3><p>양양 앞바다의 해양심층수 원수를 육상 플랜트로 이송</p></article>
-          <article class="process-step"><span class="step-index">STEP 02</span><h3>탈염</h3><p>RO 공정을 통해 염분과 물을 분리하고 처리수 생산</p></article>
-          <article class="process-step"><span class="step-index">STEP 03</span><h3>미네랄 조정</h3><p>농축수와 탈염수를 목적에 맞게 혼합하여 경도 설계</p></article>
-          <article class="process-step"><span class="step-index">STEP 04</span><h3>제품화</h3><p>먹는 해양심층수와 다양한 응용제품 생산</p></article>
-          <article class="process-step"><span class="step-index">STEP 05</span><h3>포장·출하</h3><p>생산된 제품을 포장하고 품질 확인 후 출하</p></article>
+        <div class="process-steps reveal" aria-label="Deep ocean water production process">
+          <article class="process-step"><span class="step-index">STEP 01</span><h3>Intake</h3><p>Transport deep ocean water from offshore Yangyang to the onshore plant.</p></article>
+          <article class="process-step"><span class="step-index">STEP 02</span><h3>Desalination</h3><p>Separate salt from water through RO processing to produce treated water.</p></article>
+          <article class="process-step"><span class="step-index">STEP 03</span><h3>Mineral Adjustment</h3><p>Blend concentrated water and desalinated water to achieve the target hardness.</p></article>
+          <article class="process-step"><span class="step-index">STEP 04</span><h3>Product Manufacturing</h3><p>Produce drinking deep ocean water and a range of applied products.</p></article>
+          <article class="process-step"><span class="step-index">STEP 05</span><h3>Packaging &amp; Shipping</h3><p>Package finished products, verify quality, and ship.</p></article>
         </div>
 
         <div class="process-gallery reveal">
-          <figure class="process-photo"><img src="assets/images/production-line.webp" alt="워터비스 생산라인" loading="lazy" /><figcaption>생산라인</figcaption></figure>
-          <figure class="process-photo"><img src="assets/images/process-control.webp" alt="수처리 제어실" loading="lazy" /><figcaption>수처리 제어</figcaption></figure>
-          <figure class="process-photo"><img src="assets/images/palletizer.webp" alt="제품 팔레타이징 설비" loading="lazy" /><figcaption>포장·적재 설비</figcaption></figure>
+          <figure class="process-photo"><img src="../assets/images/production-line.webp" alt="WATERVIS production line" loading="lazy" /><figcaption>Production Line</figcaption></figure>
+          <figure class="process-photo"><img src="../assets/images/process-control.webp" alt="Water treatment control room" loading="lazy" /><figcaption>Water Treatment Control</figcaption></figure>
+          <figure class="process-photo"><img src="../assets/images/palletizer.webp" alt="Product palletizing equipment" loading="lazy" /><figcaption>Packaging &amp; Palletizing</figcaption></figure>
         </div>
       </div>
     </section>
 
     <section class="research" aria-labelledby="research-title">
       <div class="container research-grid">
-        <div class="research-collage reveal" aria-label="워터비스 연구소 이미지">
-          <img src="assets/images/research-lab-1.webp" alt="워터비스 연구원이 실험하는 모습" loading="lazy" />
-          <img src="assets/images/research-lab-2.webp" alt="워터비스 기업부설연구소" loading="lazy" />
+        <div class="research-collage reveal" aria-label="WATERVIS research center images">
+          <img src="../assets/images/research-lab-1.webp" alt="WATERVIS researcher conducting laboratory work" loading="lazy" />
+          <img src="../assets/images/research-lab-2.webp" alt="WATERVIS corporate research center" loading="lazy" />
         </div>
 
         <div class="reveal">
           <p class="section-kicker">Research & Development</p>
-          <h2 class="section-title" id="research-title">해양 자원의 가치를<br />기술로 확장합니다</h2>
-          <p class="section-lead">기업부설연구소와 축적된 전문인력을 기반으로 해양심층수의 처리 및 응용기술을 연구합니다.</p>
+          <h2 class="section-title" id="research-title">Expanding the Value of Marine Resources<br />Through Technology</h2>
+          <p class="section-lead">Based on our corporate R&amp;D center and experienced specialists, we research deep ocean water processing and application technologies.</p>
 
           <div class="research-points">
-            <div class="research-point"><b>탈염·농축 기술</b><span>해양심층수 원수에서 염분과 미네랄을 목적에 맞게 분리</span></div>
-            <div class="research-point"><b>미네랄 블렌딩</b><span>제품 특성에 맞는 경도와 미네랄 구성을 설계</span></div>
-            <div class="research-point"><b>제품 응용개발</b><span>먹는 물, 식품원료, 소금 등 다양한 분야로 확장</span></div>
+            <div class="research-point"><b>Desalination &amp; Concentration</b><span>Separate salt and minerals from source deep ocean water according to the intended purpose.</span></div>
+            <div class="research-point"><b>Mineral Blending</b><span>Design mineral composition and hardness for each product.</span></div>
+            <div class="research-point"><b>Applied Product Development</b><span>Extend into drinking water, food ingredients, salt, and other fields.</span></div>
           </div>
         </div>
       </div>
@@ -1090,15 +1158,15 @@
       <div class="container">
         <div class="reveal">
           <p class="section-kicker">Business Areas</p>
-          <h2 class="section-title">기술에서 제품으로,<br />제품에서 새로운 사업으로</h2>
-          <p class="section-lead">워터비스는 해양심층수 원수와 처리 기술을 기반으로 자체 제품 및 기업 협력 사업을 전개합니다.</p>
+          <h2 class="section-title">From Technology to Products,<br />and Products to New Opportunities</h2>
+          <p class="section-lead">WATERVIS develops proprietary products and business partnerships based on deep ocean water resources and processing technology.</p>
         </div>
 
         <div class="business-grid reveal">
-          <article class="business-card"><div class="business-icon">◉</div><h3>먹는 해양심층수</h3><p>경도별 미네랄 워터와 다양한 용량·포장 형태의 제품 개발</p></article>
-          <article class="business-card"><div class="business-icon">◇</div><h3>OEM·ODM</h3><p>브랜드와 유통 환경에 맞춘 제품 기획, 생산 및 공급 협력</p></article>
-          <article class="business-card"><div class="business-icon">≈</div><h3>원수·처리수</h3><p>해양심층수 원수, 탈염수, 농축수 등 사업 목적에 맞는 공급</p></article>
-          <article class="business-card"><div class="business-icon">✦</div><h3>미네랄 응용제품</h3><p>소금과 식품원료를 포함한 해양 미네랄 응용 분야 개발</p></article>
+          <article class="business-card"><div class="business-icon">◉</div><h3>Drinking Deep Ocean Water</h3><p>Develop mineral water in multiple hardness levels, sizes, and packaging formats.</p></article>
+          <article class="business-card"><div class="business-icon">◇</div><h3>OEM/ODM</h3><p>Collaborate on product planning, production, and supply tailored to brand and distribution needs.</p></article>
+          <article class="business-card"><div class="business-icon">≈</div><h3>Source &amp; Treated Water</h3><p>Supply deep ocean source water, desalinated water, concentrated water, and other solutions according to business needs.</p></article>
+          <article class="business-card"><div class="business-icon">✦</div><h3>Mineral Applications</h3><p>Develop marine mineral applications, including salt and food ingredients.</p></article>
         </div>
       </div>
     </section>
@@ -1106,14 +1174,14 @@
     <section class="pouch" aria-labelledby="pouch-title">
       <div class="container pouch-card reveal">
         <div class="pouch-image">
-          <img src="assets/images/pouch-gold.webp" alt="몸애좋은물 Gold 파우치 워터 신제품 소개" loading="lazy" />
+          <img src="../assets/images/pouch-gold.webp" alt="MOMAEJOEUNMUL Gold pouch water product" loading="lazy" />
         </div>
         <div class="pouch-copy">
-          <img class="pouch-brand-logo" src="assets/logos/bodygoodwater-navy.png" alt="몸愛좋은물" width="990" height="444" loading="lazy" />
+          <img class="pouch-brand-logo" src="../assets/logos/bodygoodwater-navy.png" alt="MOMAEJOEUNMUL" width="990" height="444" loading="lazy" />
           <span class="pouch-label">NEW PRODUCT</span>
-          <h2 id="pouch-title">새로운 파우치 워터의 시작</h2>
-          <p>몸愛좋은물 Gold의 제품 특징과 파우치 워터의 새로운 가능성은 전용 소개 페이지에서 자세히 확인할 수 있습니다.</p>
-          <a class="button button-dark button-arrow" href="https://pouch.watervis.co.kr">파우치 워터 자세히 보기</a>
+          <h2 id="pouch-title">A New Era of Pouch Water</h2>
+          <p>Explore the features of MOMAEJOEUNMUL Gold and the possibilities of pouch water on the dedicated product website.</p>
+          <a class="button button-dark button-arrow" href="https://pouch.watervis.co.kr/en/">Explore Pouch Water</a>
         </div>
       </div>
     </section>
@@ -1122,19 +1190,19 @@
       <div class="container contact-card reveal">
         <div>
           <p class="section-kicker">Contact</p>
-          <h2 class="section-title">워터비스와 새로운 가능성을<br />함께 만들어 보세요</h2>
-          <p>해양심층수 제품 개발, 원료 공급, OEM·ODM 및 파우치 워터 생산에 관한 상담을 진행합니다.</p>
+          <h2 class="section-title">Create New Possibilities<br />with WATERVIS</h2>
+          <p>We welcome inquiries about deep ocean water product development, ingredient supply, OEM/ODM, and pouch water production.</p>
           <div class="contact-actions">
-            <a class="button button-primary" href="tel:+82336721032">033-672-1032 전화하기</a>
-            <a class="button button-ghost" href="https://pouch.watervis.co.kr">파우치 전용 사이트 ↗</a>
+            <a class="button button-primary" href="tel:+82336721032">Call +82 33 672 1032</a>
+            <a class="button button-ghost" href="https://pouch.watervis.co.kr/en/">Pouch Water Site ↗</a>
           </div>
         </div>
 
         <dl class="contact-info">
-          <div class="contact-row"><dt>회사명</dt><dd>주식회사 워터비스</dd></div>
-          <div class="contact-row"><dt>주소</dt><dd>강원특별자치도 양양군 현남면 원포1길 53</dd></div>
-          <div class="contact-row"><dt>전화</dt><dd><a href="tel:+82336721032">033-672-1032</a></dd></div>
-          <div class="contact-row"><dt>팩스</dt><dd>033-672-5303</dd></div>
+          <div class="contact-row"><dt>Company</dt><dd>WATERVIS Co., Ltd.</dd></div>
+          <div class="contact-row"><dt>Address</dt><dd>53, Wonpo 1-gil, Hyeonnam-myeon, Yangyang-gun, Gangwon State, Republic of Korea</dd></div>
+          <div class="contact-row"><dt>Tel.</dt><dd><a href="tel:+82336721032">033-672-1032</a></dd></div>
+          <div class="contact-row"><dt>Fax</dt><dd>033-672-5303</dd></div>
         </dl>
       </div>
     </section>
@@ -1142,10 +1210,10 @@
 
   <footer class="site-footer">
     <div class="container footer-inner">
-      <div class="footer-brands" aria-label="워터비스와 몸愛좋은물 브랜드">
-        <img class="footer-brand-watervis" src="assets/logos/watervis-navy.png" alt="WATERVIS" width="1156" height="310" loading="lazy" />
+      <div class="footer-brands" aria-label="WATERVIS and MOMAEJOEUNMUL brands">
+        <img class="footer-brand-watervis" src="../assets/logos/watervis-navy.png" alt="WATERVIS" width="1156" height="310" loading="lazy" />
         <span class="footer-brand-divider" aria-hidden="true"></span>
-        <img class="footer-brand-product" src="assets/logos/bodygoodwater-navy.png" alt="몸愛좋은물" width="990" height="444" loading="lazy" />
+        <img class="footer-brand-product" src="../assets/logos/bodygoodwater-navy.png" alt="MOMAEJOEUNMUL" width="990" height="444" loading="lazy" />
       </div>
       <div>© <span id="current-year">2026</span> WATERVIS CO., LTD. All rights reserved.</div>
     </div>
@@ -1165,7 +1233,7 @@
     menuButton.addEventListener('click', () => {
       const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
       menuButton.setAttribute('aria-expanded', String(!isOpen));
-      menuButton.setAttribute('aria-label', isOpen ? '메뉴 열기' : '메뉴 닫기');
+      menuButton.setAttribute('aria-label', isOpen ? 'Open menu' : 'Close menu');
       mobileNav.classList.toggle('open', !isOpen);
       document.body.classList.toggle('nav-open', !isOpen);
     });
@@ -1173,7 +1241,7 @@
     mobileNav.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         menuButton.setAttribute('aria-expanded', 'false');
-        menuButton.setAttribute('aria-label', '메뉴 열기');
+        menuButton.setAttribute('aria-label', 'Open menu');
         mobileNav.classList.remove('open');
         document.body.classList.remove('nav-open');
       });
