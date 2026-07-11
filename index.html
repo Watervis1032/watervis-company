@@ -904,6 +904,60 @@
       .footer-brand-divider { height: 24px; }
     }
 
+  
+    /* Header brands: WATERVIS + 몸愛좋은물 */
+    .header-brands {
+      display: inline-flex;
+      align-items: center;
+      gap: 15px;
+      min-width: 0;
+    }
+
+    .header-brands img {
+      display: block;
+      height: auto;
+      filter: none !important;
+      flex: 0 0 auto;
+    }
+
+    .header-brand-watervis {
+      width: 132px !important;
+      opacity: .98;
+    }
+
+    .header-brand-divider {
+      width: 1px;
+      height: 29px;
+      flex: 0 0 auto;
+      background: rgba(255, 255, 255, .34);
+    }
+
+    .header-brand-product {
+      width: 142px !important;
+      opacity: .98;
+    }
+
+    @media (max-width: 1180px) and (min-width: 1041px) {
+      .header-brands { gap: 11px; }
+      .header-brand-watervis { width: 116px !important; }
+      .header-brand-product { width: 124px !important; }
+      .header-brand-divider { height: 25px; }
+      .desktop-nav { gap: 18px; font-size: 14px; }
+    }
+
+    @media (max-width: 720px) {
+      .header-brands { gap: 9px; }
+      .header-brand-watervis { width: 98px !important; }
+      .header-brand-product { width: 104px !important; }
+      .header-brand-divider { height: 22px; }
+    }
+
+    @media (max-width: 380px) {
+      .header-brand-watervis { width: 88px !important; }
+      .header-brand-product { width: 94px !important; }
+      .header-brands { gap: 8px; }
+    }
+
   </style>
 
   <script type="application/ld+json">
@@ -928,8 +982,22 @@
 
   <header class="site-header" id="header">
     <div class="container header-inner">
-      <a class="brand" href="#top" aria-label="워터비스 홈">
-        <img src="assets/logos/watervis-white.png" alt="WATERVIS" width="1156" height="308" />
+      <a class="brand header-brands" href="#top" aria-label="워터비스 홈">
+        <img
+          class="header-brand-watervis"
+          src="assets/logos/watervis-white.png"
+          alt="WATERVIS"
+          width="1156"
+          height="308"
+        />
+        <span class="header-brand-divider" aria-hidden="true"></span>
+        <img
+          class="header-brand-product"
+          src="assets/logos/bodygoodwater-white.png"
+          alt="몸愛좋은물"
+          width="992"
+          height="444"
+        />
       </a>
 
       <nav class="desktop-nav" aria-label="주요 메뉴">
