@@ -9,6 +9,12 @@
   <meta property="og:description" content="깊은 바다에서 시작되는 워터비스의 새로운 여정" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.watervis.co.kr/" />
+  <meta property="og:locale" content="ko_KR" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <link rel="canonical" href="https://www.watervis.co.kr/" />
+  <link rel="alternate" hreflang="ko" href="https://www.watervis.co.kr/" />
+  <link rel="alternate" hreflang="en" href="https://www.watervis.co.kr/en/" />
+  <link rel="alternate" hreflang="x-default" href="https://www.watervis.co.kr/" />
   <title>워터비스 | 해양심층수 전문기업</title>
 
   <style>
@@ -133,6 +139,29 @@
       background: var(--navy-900);
       border-color: var(--navy-900);
     }
+    .desktop-nav .lang-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 46px;
+      padding: 8px 12px;
+      border: 1px solid rgba(255,255,255,.34);
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .09em;
+      line-height: 1;
+    }
+    .desktop-nav .lang-link::after { display: none; }
+    .desktop-nav .lang-link:hover,
+    .desktop-nav .lang-link:focus-visible { background: rgba(255,255,255,.12); }
+    .site-header.scrolled .desktop-nav .lang-link {
+      color: var(--navy-900);
+      background: var(--white);
+      border-color: rgba(16,36,58,.20);
+    }
+    .site-header.scrolled .desktop-nav .lang-link:hover,
+    .site-header.scrolled .desktop-nav .lang-link:focus-visible { background: var(--ice-100); }
 
     .menu-button {
       display: none;
@@ -176,6 +205,18 @@
       border-bottom: 1px solid rgba(255,255,255,.13);
       font-size: 19px;
       font-weight: 650;
+    }
+    .mobile-nav .mobile-lang {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #9ee8f6;
+      font-size: 16px;
+      letter-spacing: .04em;
+    }
+    .mobile-nav .mobile-lang::after {
+      content: "→";
+      font-size: 18px;
     }
     .mobile-nav .mobile-cta {
       margin-top: 22px;
@@ -812,6 +853,7 @@
         <a href="#technology">기술·생산</a>
         <a href="#business">사업영역</a>
         <a href="#contact">문의</a>
+        <a class="lang-link" href="en/" lang="en" hreflang="en" aria-label="View the English website">EN</a>
         <a class="nav-cta" href="https://pouch.watervis.co.kr" aria-label="파우치 워터 신제품 사이트로 이동">파우치 워터 ↗</a>
       </nav>
 
@@ -824,6 +866,7 @@
       <a href="#technology">기술·생산</a>
       <a href="#business">사업영역</a>
       <a href="#contact">문의</a>
+      <a class="mobile-lang" href="en/" lang="en" hreflang="en" aria-label="View the English website">EN · English</a>
       <a class="mobile-cta" href="https://pouch.watervis.co.kr">파우치 워터 신제품 보기 ↗</a>
     </nav>
   </header>
