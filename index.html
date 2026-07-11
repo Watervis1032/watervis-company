@@ -854,6 +854,56 @@
       color: var(--white);
     }
 
+  
+    /* Official brand assets */
+    .brand img {
+      width: 188px;
+      height: auto;
+      filter: none !important;
+    }
+
+    .pouch-brand-logo {
+      display: block;
+      width: min(240px, 76%);
+      height: auto;
+      margin: 0 0 20px;
+      object-fit: contain;
+    }
+
+    .footer-brands {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      min-width: 0;
+    }
+
+    .footer-brand-watervis {
+      width: 132px;
+      height: auto;
+      opacity: .88;
+    }
+
+    .footer-brand-divider {
+      width: 1px;
+      height: 28px;
+      background: rgba(3, 18, 38, .16);
+    }
+
+    .footer-brand-product {
+      width: 142px;
+      height: auto;
+      opacity: .88;
+    }
+
+    @media (max-width: 640px) {
+      .brand img { width: 150px; }
+      .pouch-brand-logo { width: min(220px, 74%); }
+      .footer-brands { gap: 12px; }
+      .footer-brand-watervis { width: 112px; }
+      .footer-brand-product { width: 124px; }
+      .footer-brand-divider { height: 24px; }
+    }
+
   </style>
 
   <script type="application/ld+json">
@@ -879,7 +929,7 @@
   <header class="site-header" id="header">
     <div class="container header-inner">
       <a class="brand" href="#top" aria-label="워터비스 홈">
-        <img src="assets/images/watervis-logo-header.webp" alt="WATERVIS" width="381" height="87" />
+        <img src="assets/logos/watervis-white.png" alt="WATERVIS" width="1156" height="308" />
       </a>
 
       <nav class="desktop-nav" aria-label="주요 메뉴">
@@ -1059,6 +1109,7 @@
           <img src="assets/images/pouch-gold.webp" alt="몸애좋은물 Gold 파우치 워터 신제품 소개" loading="lazy" />
         </div>
         <div class="pouch-copy">
+          <img class="pouch-brand-logo" src="assets/logos/bodygoodwater-navy.png" alt="몸愛좋은물" width="990" height="444" loading="lazy" />
           <span class="pouch-label">NEW PRODUCT</span>
           <h2 id="pouch-title">새로운 파우치 워터의 시작</h2>
           <p>몸愛좋은물 Gold의 제품 특징과 파우치 워터의 새로운 가능성은 전용 소개 페이지에서 자세히 확인할 수 있습니다.</p>
@@ -1091,7 +1142,11 @@
 
   <footer class="site-footer">
     <div class="container footer-inner">
-      <img class="footer-logo" src="assets/images/watervis-logo.webp" alt="WATERVIS" loading="lazy" />
+      <div class="footer-brands" aria-label="워터비스와 몸愛좋은물 브랜드">
+        <img class="footer-brand-watervis" src="assets/logos/watervis-navy.png" alt="WATERVIS" width="1156" height="310" loading="lazy" />
+        <span class="footer-brand-divider" aria-hidden="true"></span>
+        <img class="footer-brand-product" src="assets/logos/bodygoodwater-navy.png" alt="몸愛좋은물" width="990" height="444" loading="lazy" />
+      </div>
       <div>© <span id="current-year">2026</span> WATERVIS CO., LTD. All rights reserved.</div>
     </div>
   </footer>
