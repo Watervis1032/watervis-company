@@ -1,0 +1,1140 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#061a33" />
+  <meta name="description" content="WATERVIS is a deep ocean water specialist that researches and commercializes water sourced at a depth of 1,032 meters in the East Sea." />
+  <meta property="og:title" content="WATERVIS | Deep Ocean Water Specialist" />
+  <meta property="og:description" content="A new journey beginning in the deep ocean" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.watervis.co.kr/en/" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="ko_KR" />
+  <link rel="canonical" href="https://www.watervis.co.kr/en/" />
+  <link rel="alternate" hreflang="ko" href="https://www.watervis.co.kr/" />
+  <link rel="alternate" hreflang="en" href="https://www.watervis.co.kr/en/" />
+  <link rel="alternate" hreflang="x-default" href="https://www.watervis.co.kr/" />
+  <title>WATERVIS | Deep Ocean Water Specialist</title>
+
+  <style>
+    :root {
+      --navy-950: #031226;
+      --navy-900: #061a33;
+      --navy-800: #0b2b50;
+      --blue-700: #005c9e;
+      --blue-500: #00a6d6;
+      --blue-200: #c9edf8;
+      --ice-100: #eef8fb;
+      --gold-500: #c7a35a;
+      --white: #ffffff;
+      --ink: #10243a;
+      --muted: #617488;
+      --line: rgba(16, 36, 58, 0.12);
+      --shadow: 0 24px 70px rgba(2, 19, 42, 0.14);
+      --radius-lg: 30px;
+      --radius-md: 20px;
+      --container: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--white);
+      font-family: Inter, "Pretendard Variable", Pretendard, "Noto Sans", Arial, system-ui, sans-serif;
+      line-height: 1.65;
+      word-break: normal;
+      -webkit-font-smoothing: antialiased;
+    }
+    body.nav-open { overflow: hidden; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+
+    .container {
+      width: min(calc(100% - 40px), var(--container));
+      margin-inline: auto;
+    }
+
+    .skip-link {
+      position: fixed;
+      left: 16px;
+      top: -80px;
+      z-index: 9999;
+      padding: 12px 16px;
+      border-radius: 10px;
+      background: var(--white);
+      color: var(--navy-900);
+      box-shadow: var(--shadow);
+    }
+    .skip-link:focus { top: 16px; }
+
+    .site-header {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 1000;
+      border-bottom: 1px solid transparent;
+      transition: background .25s ease, border-color .25s ease, box-shadow .25s ease;
+    }
+    .site-header.scrolled {
+      background: rgba(255,255,255,.94);
+      border-color: var(--line);
+      box-shadow: 0 8px 30px rgba(2, 19, 42, .08);
+      backdrop-filter: blur(14px);
+    }
+    .header-inner {
+      height: 84px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      flex: 0 0 auto;
+    }
+    .brand img {
+      width: 190px;
+      height: auto;
+      filter: brightness(0) invert(1);
+      transition: filter .25s ease;
+    }
+    .site-header.scrolled .brand img { filter: none; }
+
+    .desktop-nav {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      color: rgba(255,255,255,.9);
+      font-size: 15px;
+      font-weight: 650;
+      letter-spacing: -.02em;
+    }
+    .site-header.scrolled .desktop-nav { color: var(--ink); }
+    .desktop-nav a { position: relative; padding-block: 10px; }
+    .desktop-nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 100%;
+      bottom: 4px;
+      height: 2px;
+      background: var(--blue-500);
+      transition: right .2s ease;
+    }
+    .desktop-nav a:hover::after,
+    .desktop-nav a:focus-visible::after { right: 0; }
+    .desktop-nav .nav-cta {
+      padding: 12px 18px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.13);
+      border: 1px solid rgba(255,255,255,.35);
+    }
+    .desktop-nav .nav-cta::after { display: none; }
+    .site-header.scrolled .desktop-nav .nav-cta {
+      color: var(--white);
+      background: var(--navy-900);
+      border-color: var(--navy-900);
+    }
+    .desktop-nav .lang-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 46px;
+      padding: 8px 12px;
+      border: 1px solid rgba(255,255,255,.34);
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .09em;
+      line-height: 1;
+    }
+    .desktop-nav .lang-link::after { display: none; }
+    .desktop-nav .lang-link:hover,
+    .desktop-nav .lang-link:focus-visible { background: rgba(255,255,255,.12); }
+    .site-header.scrolled .desktop-nav .lang-link {
+      color: var(--navy-900);
+      background: var(--white);
+      border-color: rgba(16,36,58,.20);
+    }
+    .site-header.scrolled .desktop-nav .lang-link:hover,
+    .site-header.scrolled .desktop-nav .lang-link:focus-visible { background: var(--ice-100); }
+
+    .menu-button {
+      display: none;
+      width: 44px;
+      height: 44px;
+      border: 0;
+      border-radius: 12px;
+      background: rgba(255,255,255,.12);
+      color: var(--white);
+      cursor: pointer;
+    }
+    .site-header.scrolled .menu-button { background: var(--ice-100); color: var(--navy-900); }
+    .menu-button span,
+    .menu-button::before,
+    .menu-button::after {
+      content: "";
+      display: block;
+      width: 21px;
+      height: 2px;
+      margin: 5px auto;
+      border-radius: 2px;
+      background: currentColor;
+      transition: transform .2s ease, opacity .2s ease;
+    }
+    .menu-button[aria-expanded="true"] span { opacity: 0; }
+    .menu-button[aria-expanded="true"]::before { transform: translateY(7px) rotate(45deg); }
+    .menu-button[aria-expanded="true"]::after { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      inset: 84px 0 0;
+      padding: 22px 20px 40px;
+      background: rgba(3,18,38,.98);
+      color: var(--white);
+    }
+    .mobile-nav.open { display: block; }
+    .mobile-nav a {
+      display: block;
+      padding: 18px 4px;
+      border-bottom: 1px solid rgba(255,255,255,.13);
+      font-size: 19px;
+      font-weight: 650;
+    }
+    .mobile-nav .mobile-lang {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #9ee8f6;
+      font-size: 16px;
+      letter-spacing: .04em;
+    }
+    .mobile-nav .mobile-lang::after {
+      content: "→";
+      font-size: 18px;
+    }
+    .mobile-nav .mobile-cta {
+      margin-top: 22px;
+      padding: 15px 18px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,.35);
+      border-radius: 14px;
+      background: rgba(255,255,255,.08);
+    }
+
+    .hero {
+      position: relative;
+      min-height: 820px;
+      height: 100svh;
+      display: grid;
+      align-items: center;
+      overflow: hidden;
+      color: var(--white);
+      isolation: isolate;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -3;
+      background: url("assets/images/hero-ocean.webp") center 38% / cover no-repeat;
+      transform: scale(1.03);
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background:
+        radial-gradient(circle at 68% 12%, rgba(0, 197, 232, .20), transparent 28%),
+        linear-gradient(90deg, rgba(2,16,36,.94) 0%, rgba(2,23,49,.72) 48%, rgba(3,25,50,.28) 100%),
+        linear-gradient(0deg, rgba(3,18,38,.56), transparent 55%);
+    }
+    .hero-content { padding-top: 84px; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 0 24px;
+      color: #9ee8f6;
+      font-size: 13px;
+      font-weight: 750;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before {
+      content: "";
+      width: 40px;
+      height: 1px;
+      background: currentColor;
+    }
+    .hero h1 {
+      max-width: 840px;
+      margin: 0;
+      font-size: clamp(46px, 6.8vw, 86px);
+      line-height: 1.08;
+      letter-spacing: -.055em;
+      font-weight: 740;
+    }
+    .hero h1 strong {
+      display: block;
+      color: #90e3f3;
+      font-weight: inherit;
+    }
+    .hero-copy {
+      max-width: 660px;
+      margin: 30px 0 0;
+      color: rgba(255,255,255,.78);
+      font-size: clamp(17px, 2vw, 21px);
+      letter-spacing: -.02em;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 38px;
+    }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 52px;
+      padding: 0 22px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      font-size: 15px;
+      font-weight: 720;
+      transition: transform .2s ease, background .2s ease, border-color .2s ease;
+    }
+    .button:hover { transform: translateY(-2px); }
+    .button-primary { background: var(--white); color: var(--navy-900); }
+    .button-ghost { border-color: rgba(255,255,255,.35); background: rgba(255,255,255,.06); color: var(--white); }
+    .button-dark { background: var(--navy-900); color: var(--white); }
+    .button-outline { border-color: var(--line); background: var(--white); color: var(--ink); }
+    .button-arrow::after { content: "→"; font-size: 18px; }
+
+    .hero-index {
+      position: absolute;
+      right: max(20px, calc((100vw - var(--container)) / 2));
+      bottom: 44px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(130px, 1fr));
+      gap: 1px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 18px;
+      background: rgba(255,255,255,.14);
+      backdrop-filter: blur(12px);
+    }
+    .hero-index div {
+      min-width: 160px;
+      padding: 17px 20px;
+      background: rgba(3,18,38,.45);
+    }
+    .hero-index b { display: block; font-size: 23px; letter-spacing: -.035em; }
+    .hero-index span { color: rgba(255,255,255,.66); font-size: 12px; }
+
+    section { padding: 120px 0; }
+    .section-kicker {
+      margin: 0 0 16px;
+      color: var(--blue-700);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+    .section-title {
+      margin: 0;
+      font-size: clamp(36px, 5vw, 58px);
+      line-height: 1.16;
+      letter-spacing: -.045em;
+      font-weight: 760;
+    }
+    .section-lead {
+      max-width: 720px;
+      margin: 24px 0 0;
+      color: var(--muted);
+      font-size: 18px;
+      letter-spacing: -.018em;
+    }
+
+    .intro { background: var(--white); }
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 72px;
+      align-items: center;
+    }
+    .intro-photo {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      background: var(--ice-100);
+    }
+    .intro-photo img { width: 100%; aspect-ratio: 1.24 / 1; object-fit: cover; }
+    .photo-badge {
+      position: absolute;
+      left: 24px;
+      bottom: 24px;
+      max-width: 260px;
+      padding: 18px 20px;
+      border: 1px solid rgba(255,255,255,.25);
+      border-radius: 18px;
+      background: rgba(3,18,38,.78);
+      color: var(--white);
+      backdrop-filter: blur(10px);
+    }
+    .photo-badge b { display: block; font-size: 18px; }
+    .photo-badge span { color: rgba(255,255,255,.7); font-size: 13px; }
+
+    .feature-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 36px;
+    }
+    .feature-item {
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: 16px;
+      align-items: start;
+      padding: 17px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .feature-num {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--ice-100);
+      color: var(--blue-700);
+      font-weight: 800;
+      font-size: 13px;
+    }
+    .feature-item b { display: block; margin-bottom: 3px; font-size: 17px; }
+    .feature-item p { margin: 0; color: var(--muted); font-size: 14px; }
+
+    .numbers {
+      padding: 0 0 120px;
+      background: var(--white);
+    }
+    .number-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background: var(--white);
+      box-shadow: 0 18px 55px rgba(2,19,42,.07);
+    }
+    .number-card {
+      position: relative;
+      min-height: 210px;
+      padding: 34px 30px;
+      border-right: 1px solid var(--line);
+    }
+    .number-card:last-child { border-right: 0; }
+    .number-card::after {
+      content: "";
+      position: absolute;
+      left: 30px;
+      bottom: 0;
+      width: 44px;
+      height: 4px;
+      background: var(--blue-500);
+    }
+    .number-card strong {
+      display: block;
+      margin-bottom: 16px;
+      color: var(--navy-900);
+      font-size: clamp(38px, 4vw, 54px);
+      line-height: 1;
+      letter-spacing: -.05em;
+    }
+    .number-card b { display: block; margin-bottom: 6px; font-size: 16px; }
+    .number-card p { margin: 0; color: var(--muted); font-size: 13px; }
+
+    .depth {
+      position: relative;
+      overflow: hidden;
+      color: var(--white);
+      background: var(--navy-950);
+    }
+    .depth::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 85% 20%, rgba(0,166,214,.23), transparent 27%),
+        linear-gradient(120deg, rgba(0,92,158,.16), transparent 45%);
+      pointer-events: none;
+    }
+    .depth .section-kicker { color: #76d8ee; }
+    .depth .section-lead { color: rgba(255,255,255,.67); }
+    .depth-grid {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 70px;
+      align-items: center;
+    }
+    .depth-visual {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: var(--radius-lg);
+      background: rgba(255,255,255,.05);
+      box-shadow: 0 36px 100px rgba(0,0,0,.35);
+    }
+    .depth-visual img { width: 100%; aspect-ratio: 1.4 / 1; object-fit: cover; }
+    .depth-caption {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: rgba(255,255,255,.12);
+    }
+    .depth-caption div { padding: 22px; background: rgba(3,18,38,.9); }
+    .depth-caption strong { display: block; color: #8fe3f2; font-size: 25px; }
+    .depth-caption span { color: rgba(255,255,255,.6); font-size: 13px; }
+    .depth-points {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 38px;
+    }
+    .depth-point {
+      min-height: 155px;
+      padding: 24px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 20px;
+      background: rgba(255,255,255,.045);
+    }
+    .depth-point span { color: #76d8ee; font-size: 12px; font-weight: 800; letter-spacing: .12em; }
+    .depth-point b { display: block; margin: 10px 0 6px; font-size: 17px; }
+    .depth-point p { margin: 0; color: rgba(255,255,255,.58); font-size: 13px; }
+
+    .process { background: var(--ice-100); }
+    .process-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 40px;
+      margin-bottom: 54px;
+    }
+    .process-head .section-lead { max-width: 480px; margin: 0; }
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      margin-bottom: 44px;
+    }
+    .process-step {
+      position: relative;
+      min-height: 194px;
+      padding: 26px 22px;
+      border: 1px solid rgba(16,36,58,.1);
+      border-radius: 20px;
+      background: var(--white);
+    }
+    .process-step:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      z-index: 2;
+      right: -13px;
+      top: 50%;
+      width: 26px;
+      height: 26px;
+      display: grid;
+      place-items: center;
+      transform: translateY(-50%);
+      border-radius: 50%;
+      background: var(--navy-900);
+      color: var(--white);
+      font-size: 13px;
+    }
+    .step-index { color: var(--blue-700); font-size: 12px; font-weight: 800; letter-spacing: .12em; }
+    .process-step h3 { margin: 16px 0 8px; font-size: 20px; letter-spacing: -.03em; }
+    .process-step p { margin: 0; color: var(--muted); font-size: 13px; }
+    .process-gallery {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr .85fr;
+      gap: 16px;
+    }
+    .process-photo {
+      position: relative;
+      overflow: hidden;
+      min-height: 315px;
+      border-radius: 24px;
+      background: var(--navy-900);
+    }
+    .process-photo img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
+    .process-photo:hover img { transform: scale(1.035); }
+    .process-photo::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      height: 55%;
+      background: linear-gradient(0deg, rgba(3,18,38,.88), transparent);
+    }
+    .process-photo figcaption {
+      position: absolute;
+      z-index: 2;
+      left: 22px;
+      bottom: 18px;
+      color: var(--white);
+      font-weight: 700;
+    }
+
+    .research { background: var(--white); }
+    .research-grid {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 70px;
+      align-items: center;
+    }
+    .research-collage {
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      gap: 14px;
+    }
+    .research-collage img {
+      width: 100%;
+      height: 100%;
+      min-height: 420px;
+      object-fit: cover;
+      border-radius: 24px;
+      box-shadow: 0 18px 55px rgba(2,19,42,.1);
+    }
+    .research-collage img:first-child { margin-top: 56px; min-height: 350px; }
+    .research-points {
+      display: grid;
+      gap: 0;
+      margin-top: 34px;
+      border-top: 1px solid var(--line);
+    }
+    .research-point {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 22px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .research-point b { font-size: 15px; }
+    .research-point span { color: var(--muted); font-size: 14px; }
+
+    .business {
+      color: var(--white);
+      background: linear-gradient(135deg, var(--navy-900), #0b3861);
+    }
+    .business .section-kicker { color: #84dced; }
+    .business .section-lead { color: rgba(255,255,255,.68); }
+    .business-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 48px;
+    }
+    .business-card {
+      min-height: 280px;
+      padding: 30px;
+      border: 1px solid rgba(255,255,255,.13);
+      border-radius: 22px;
+      background: rgba(255,255,255,.05);
+      transition: transform .2s ease, background .2s ease;
+    }
+    .business-card:hover { transform: translateY(-5px); background: rgba(255,255,255,.08); }
+    .business-icon {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: rgba(125,224,243,.12);
+      color: #8fe3f2;
+      font-size: 20px;
+    }
+    .business-card h3 { margin: 48px 0 10px; font-size: 21px; }
+    .business-card p { margin: 0; color: rgba(255,255,255,.6); font-size: 14px; }
+
+    .pouch { background: #f6f3ed; }
+    .pouch-card {
+      display: grid;
+      grid-template-columns: 1.08fr .92fr;
+      overflow: hidden;
+      min-height: 520px;
+      border-radius: var(--radius-lg);
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+    .pouch-image { position: relative; overflow: hidden; background: var(--navy-950); }
+    .pouch-image img { width: 100%; height: 100%; object-fit: cover; object-position: 35% center; }
+    .pouch-image::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent 60%, rgba(3,18,38,.2));
+    }
+    .pouch-copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(38px, 6vw, 76px);
+    }
+    .pouch-label {
+      width: fit-content;
+      margin-bottom: 22px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(199,163,90,.13);
+      color: #8d6c2d;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .08em;
+    }
+    .pouch-copy h2 { margin: 0; font-size: clamp(36px, 4vw, 54px); line-height: 1.15; letter-spacing: -.045em; }
+    .pouch-copy p { margin: 22px 0 30px; color: var(--muted); font-size: 17px; }
+
+    .contact { padding-bottom: 70px; background: var(--white); }
+    .contact-card {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 70px;
+      padding: clamp(36px, 6vw, 72px);
+      border-radius: var(--radius-lg);
+      color: var(--white);
+      background: var(--navy-950);
+    }
+    .contact-card .section-kicker { color: #79d9ee; }
+    .contact-card .section-title { font-size: clamp(34px, 4vw, 50px); }
+    .contact-card p { color: rgba(255,255,255,.64); }
+    .contact-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
+    .contact-info {
+      display: grid;
+      align-content: center;
+      gap: 0;
+      border-top: 1px solid rgba(255,255,255,.15);
+    }
+    .contact-row {
+      display: grid;
+      grid-template-columns: 88px 1fr;
+      gap: 20px;
+      padding: 18px 0;
+      border-bottom: 1px solid rgba(255,255,255,.15);
+    }
+    .contact-row dt { color: rgba(255,255,255,.48); font-size: 13px; }
+    .contact-row dd { margin: 0; color: rgba(255,255,255,.9); font-size: 15px; }
+
+    .site-footer {
+      padding: 28px 0 36px;
+      background: var(--white);
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .footer-logo { width: 132px; opacity: .78; }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .65s ease, transform .65s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 1040px) {
+      .desktop-nav { display: none; }
+      .menu-button { display: block; }
+      .brand img { width: 170px; }
+      .intro-grid, .depth-grid, .research-grid { grid-template-columns: 1fr; gap: 50px; }
+      .number-grid { grid-template-columns: repeat(2, 1fr); }
+      .number-card:nth-child(2) { border-right: 0; }
+      .number-card:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+      .process-steps { grid-template-columns: repeat(2, 1fr); }
+      .process-step:not(:last-child)::after { display: none; }
+      .process-gallery { grid-template-columns: 1fr 1fr; }
+      .process-photo:first-child { grid-column: 1 / -1; }
+      .business-grid { grid-template-columns: repeat(2, 1fr); }
+      .pouch-card { grid-template-columns: 1fr; }
+      .pouch-image { min-height: 440px; }
+      .contact-card { grid-template-columns: 1fr; gap: 44px; }
+    }
+
+    @media (max-width: 720px) {
+      .container { width: min(calc(100% - 28px), var(--container)); }
+      .header-inner { height: 72px; }
+      .mobile-nav { inset-block-start: 72px; }
+      .brand img { width: 145px; }
+      .hero { min-height: 720px; height: auto; padding: 160px 0 180px; }
+      .hero-content { padding-top: 0; }
+      .hero h1 { font-size: clamp(42px, 13vw, 60px); }
+      .hero-index {
+        left: 14px;
+        right: 14px;
+        bottom: 28px;
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .hero-index div { min-width: 0; padding: 14px; }
+      .hero-index b { font-size: 19px; }
+      section { padding: 88px 0; }
+      .numbers { padding-bottom: 88px; }
+      .section-title { font-size: 38px; }
+      .section-lead { font-size: 16px; }
+      .intro-photo img { aspect-ratio: 1 / .82; }
+      .number-grid { grid-template-columns: 1fr; }
+      .number-card { min-height: 170px; border-right: 0; border-bottom: 1px solid var(--line); }
+      .number-card:last-child { border-bottom: 0; }
+      .number-card:nth-child(2) { border-right: 0; }
+      .depth-points { grid-template-columns: 1fr; }
+      .process-head { display: block; }
+      .process-head .section-lead { margin-top: 20px; }
+      .process-steps { grid-template-columns: 1fr; }
+      .process-gallery { grid-template-columns: 1fr; }
+      .process-photo:first-child { grid-column: auto; }
+      .process-photo { min-height: 260px; }
+      .research-collage { grid-template-columns: 1fr; }
+      .research-collage img, .research-collage img:first-child { min-height: 300px; margin-top: 0; }
+      .research-point { grid-template-columns: 1fr; gap: 6px; }
+      .business-grid { grid-template-columns: 1fr; }
+      .business-card { min-height: 230px; }
+      .business-card h3 { margin-top: 34px; }
+      .pouch-image { min-height: 310px; }
+      .pouch-copy { padding: 38px 28px 44px; }
+      .contact-card { padding: 38px 26px; }
+      .contact-row { grid-template-columns: 70px 1fr; }
+      .footer-inner { align-items: flex-start; flex-direction: column; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  
+    /* Header logo correction: preserve the official blue V and use white lettering. */
+    .brand img {
+      filter: none;
+    }
+
+    /* Keep the sticky header dark so the white header logo remains legible. */
+    .site-header.scrolled {
+      background: rgba(3, 18, 38, .94);
+      border-color: rgba(255,255,255,.12);
+      box-shadow: 0 8px 30px rgba(2, 19, 42, .18);
+      backdrop-filter: blur(14px);
+    }
+    .site-header.scrolled .desktop-nav {
+      color: rgba(255,255,255,.9);
+    }
+    .site-header.scrolled .desktop-nav .nav-cta {
+      color: var(--white);
+      background: rgba(255,255,255,.13);
+      border-color: rgba(255,255,255,.35);
+    }
+    .site-header.scrolled .desktop-nav .lang-link {
+      color: var(--white);
+      background: transparent;
+      border-color: rgba(255,255,255,.34);
+    }
+    .site-header.scrolled .desktop-nav .lang-link:hover,
+    .site-header.scrolled .desktop-nav .lang-link:focus-visible {
+      background: rgba(255,255,255,.12);
+    }
+    .site-header.scrolled .menu-button {
+      background: rgba(255,255,255,.12);
+      color: var(--white);
+    }
+
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "WATERVIS Co., Ltd.",
+    "url": "https://www.watervis.co.kr/en/",
+    "telephone": "+82-33-672-1032",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "53, Wonpo 1-gil, Hyeonnam-myeon",
+      "addressLocality": "Yangyang-gun",
+      "addressRegion": "Gangwon State",
+      "addressCountry": "KR"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header" id="header">
+    <div class="container header-inner">
+      <a class="brand" href="#top" aria-label="WATERVIS home">
+        <img src="../assets/images/watervis-logo-header.webp" alt="WATERVIS" width="381" height="87" />
+      </a>
+
+      <nav class="desktop-nav" aria-label="Primary navigation">
+        <a href="#company">About Us</a>
+        <a href="#deep-ocean">1,032m Deep Ocean Water</a>
+        <a href="#technology">Technology &amp; Production</a>
+        <a href="#business">Business Areas</a>
+        <a href="#contact">Contact</a>
+        <a class="lang-link" href="../" lang="ko" hreflang="ko" aria-label="View the Korean website">KO</a>
+        <a class="nav-cta" href="https://pouch.watervis.co.kr/en/" aria-label="Visit the pouch water product website">Pouch Water ↗</a>
+      </nav>
+
+      <button class="menu-button" type="button" aria-label="Open menu" aria-controls="mobile-nav" aria-expanded="false"><span></span></button>
+    </div>
+
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+      <a href="#company">About Us</a>
+      <a href="#deep-ocean">1,032m Deep Ocean Water</a>
+      <a href="#technology">Technology &amp; Production</a>
+      <a href="#business">Business Areas</a>
+      <a href="#contact">Contact</a>
+      <a class="mobile-lang" href="../" lang="ko" hreflang="ko" aria-label="View the Korean website">KO · 한국어</a>
+      <a class="mobile-cta" href="https://pouch.watervis.co.kr/en/">View Pouch Water Product ↗</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="container hero-content">
+        <p class="eyebrow">Deep Ocean · Pure Mineral</p>
+        <h1 id="hero-title">Beginning in the Deep Ocean<strong>A New Journey for WATERVIS</strong></h1>
+        <p class="hero-copy">We research the purity and mineral value of deep ocean water sourced at a depth of 1,032 meters in the East Sea and transform it into new products.</p>
+        <div class="hero-actions">
+          <a class="button button-primary button-arrow" href="#company">About WATERVIS</a>
+          <a class="button button-ghost" href="#contact">Business Inquiries</a>
+        </div>
+      </div>
+
+      <div class="hero-index" aria-label="Key WATERVIS facts">
+        <div><b>1,032m</b><span>Intake Depth</span></div>
+        <div><b>17.5km</b><span>Offshore Intake Distance</span></div>
+        <div><b>2,400 tons</b><span>Maximum Daily Intake</span></div>
+        <div><b>Since 2005</b><span>Technology &amp; Experience</span></div>
+      </div>
+    </section>
+
+    <section class="intro" id="company">
+      <div class="container intro-grid">
+        <div class="reveal">
+          <p class="section-kicker">About Watervis</p>
+          <h2 class="section-title">Advancing the Potential of<br />Deep Ocean Water</h2>
+          <p class="section-lead">WATERVIS was founded as a spin-off from the Korea Institute of Ocean Science &amp; Technology (KIOST) and has built expertise in sourcing, processing, mineral adjustment, and commercialization of deep ocean water.</p>
+
+          <div class="feature-list">
+            <div class="feature-item">
+              <span class="feature-num">01</span>
+              <div><b>Deep Ocean Water Development</b><p>An integrated technology base spanning source-water intake, desalination, concentration, and mineral blending.</p></div>
+            </div>
+            <div class="feature-item">
+              <span class="feature-num">02</span>
+              <div><b>R&amp;D-Driven Company</b><p>Research into new applications of marine resources through our corporate R&amp;D center.</p></div>
+            </div>
+            <div class="feature-item">
+              <span class="feature-num">03</span>
+              <div><b>Product Commercialization Experience</b><p>OEM/ODM development experience across drinking deep ocean water, food, and beverage applications.</p></div>
+            </div>
+          </div>
+        </div>
+
+        <figure class="intro-photo reveal">
+          <img src="../assets/images/factory-actual.webp" alt="WATERVIS factory and production facilities" loading="lazy" width="1049" height="741" />
+          <figcaption class="photo-badge"><b>Yangyang Production Base</b><span>Hyeonnam-myeon, Yangyang-gun, Gangwon State</span></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="numbers" aria-label="Key WATERVIS figures">
+      <div class="container number-grid reveal">
+        <article class="number-card"><strong>2005</strong><b>Company Founded</b><p>The beginning of our deep ocean water technology and business.</p></article>
+        <article class="number-card"><strong>1,032m</strong><b>Intake Depth</b><p>Source water from the deep waters of the East Sea.</p></article>
+        <article class="number-card"><strong>17.5km</strong><b>Intake Distance</b><p>From the coast to the offshore intake point.</p></article>
+        <article class="number-card"><strong>2,400t</strong><b>Maximum Daily Intake</b><p>Stable source-water capacity.</p></article>
+      </div>
+    </section>
+
+    <section class="depth" id="deep-ocean">
+      <div class="container depth-grid">
+        <div class="reveal">
+          <p class="section-kicker">1,032m Deep Ocean Water</p>
+          <h2 class="section-title">1,032m Below the Surface,<br />Where WATERVIS Begins</h2>
+          <p class="section-lead">WATERVIS sources deep ocean water from the deep offshore waters of Yangyang. The source water is desalinated, and its mineral concentration and hardness are adjusted for use in products and ingredients.</p>
+
+          <div class="depth-points">
+            <article class="depth-point"><span>ORIGIN</span><b>Deep-Water Intake</b><p>Source water from 1,032 meters in the East Sea is transported to the onshore plant.</p></article>
+            <article class="depth-point"><span>PROCESS</span><b>Mineral Adjustment</b><p>Desalination, concentration, and blending are used to create water suited to each application.</p></article>
+            <article class="depth-point"><span>APPLICATION</span><b>Multiple Applications</b><p>Developed into drinking water, ingredients, salt, and OEM/ODM products.</p></article>
+          </div>
+        </div>
+
+        <figure class="depth-visual reveal">
+          <img src="../assets/images/intake-overview.webp" alt="Overview of the deep ocean water intake system off Yangyang" loading="lazy" width="1019" height="675" />
+          <figcaption class="depth-caption">
+            <div><strong>1,032m</strong><span>Intake Depth</span></div>
+            <div><strong>17.5km</strong><span>Offshore Intake Distance</span></div>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="process" id="technology">
+      <div class="container">
+        <div class="process-head reveal">
+          <div>
+            <p class="section-kicker">Technology & Production</p>
+            <h2 class="section-title">From Intake to Finished Product<br />An Integrated Production System</h2>
+          </div>
+          <p class="section-lead">The complex manufacturing process is presented in five core stages. Details can be updated as operations and equipment evolve.</p>
+        </div>
+
+        <div class="process-steps reveal" aria-label="Deep ocean water production process">
+          <article class="process-step"><span class="step-index">STEP 01</span><h3>Intake</h3><p>Transport deep ocean water from offshore Yangyang to the onshore plant.</p></article>
+          <article class="process-step"><span class="step-index">STEP 02</span><h3>Desalination</h3><p>Separate salt from water through RO processing to produce treated water.</p></article>
+          <article class="process-step"><span class="step-index">STEP 03</span><h3>Mineral Adjustment</h3><p>Blend concentrated water and desalinated water to achieve the target hardness.</p></article>
+          <article class="process-step"><span class="step-index">STEP 04</span><h3>Product Manufacturing</h3><p>Produce drinking deep ocean water and a range of applied products.</p></article>
+          <article class="process-step"><span class="step-index">STEP 05</span><h3>Packaging &amp; Shipping</h3><p>Package finished products, verify quality, and ship.</p></article>
+        </div>
+
+        <div class="process-gallery reveal">
+          <figure class="process-photo"><img src="../assets/images/production-line.webp" alt="WATERVIS production line" loading="lazy" /><figcaption>Production Line</figcaption></figure>
+          <figure class="process-photo"><img src="../assets/images/process-control.webp" alt="Water treatment control room" loading="lazy" /><figcaption>Water Treatment Control</figcaption></figure>
+          <figure class="process-photo"><img src="../assets/images/palletizer.webp" alt="Product palletizing equipment" loading="lazy" /><figcaption>Packaging &amp; Palletizing</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="research" aria-labelledby="research-title">
+      <div class="container research-grid">
+        <div class="research-collage reveal" aria-label="WATERVIS research center images">
+          <img src="../assets/images/research-lab-1.webp" alt="WATERVIS researcher conducting laboratory work" loading="lazy" />
+          <img src="../assets/images/research-lab-2.webp" alt="WATERVIS corporate research center" loading="lazy" />
+        </div>
+
+        <div class="reveal">
+          <p class="section-kicker">Research & Development</p>
+          <h2 class="section-title" id="research-title">Expanding the Value of Marine Resources<br />Through Technology</h2>
+          <p class="section-lead">Based on our corporate R&amp;D center and experienced specialists, we research deep ocean water processing and application technologies.</p>
+
+          <div class="research-points">
+            <div class="research-point"><b>Desalination &amp; Concentration</b><span>Separate salt and minerals from source deep ocean water according to the intended purpose.</span></div>
+            <div class="research-point"><b>Mineral Blending</b><span>Design mineral composition and hardness for each product.</span></div>
+            <div class="research-point"><b>Applied Product Development</b><span>Extend into drinking water, food ingredients, salt, and other fields.</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="business" id="business">
+      <div class="container">
+        <div class="reveal">
+          <p class="section-kicker">Business Areas</p>
+          <h2 class="section-title">From Technology to Products,<br />and Products to New Opportunities</h2>
+          <p class="section-lead">WATERVIS develops proprietary products and business partnerships based on deep ocean water resources and processing technology.</p>
+        </div>
+
+        <div class="business-grid reveal">
+          <article class="business-card"><div class="business-icon">◉</div><h3>Drinking Deep Ocean Water</h3><p>Develop mineral water in multiple hardness levels, sizes, and packaging formats.</p></article>
+          <article class="business-card"><div class="business-icon">◇</div><h3>OEM/ODM</h3><p>Collaborate on product planning, production, and supply tailored to brand and distribution needs.</p></article>
+          <article class="business-card"><div class="business-icon">≈</div><h3>Source &amp; Treated Water</h3><p>Supply deep ocean source water, desalinated water, concentrated water, and other solutions according to business needs.</p></article>
+          <article class="business-card"><div class="business-icon">✦</div><h3>Mineral Applications</h3><p>Develop marine mineral applications, including salt and food ingredients.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="pouch" aria-labelledby="pouch-title">
+      <div class="container pouch-card reveal">
+        <div class="pouch-image">
+          <img src="../assets/images/pouch-gold.webp" alt="MOMAEJOEUNMUL Gold pouch water product" loading="lazy" />
+        </div>
+        <div class="pouch-copy">
+          <span class="pouch-label">NEW PRODUCT</span>
+          <h2 id="pouch-title">A New Era of Pouch Water</h2>
+          <p>Explore the features of MOMAEJOEUNMUL Gold and the possibilities of pouch water on the dedicated product website.</p>
+          <a class="button button-dark button-arrow" href="https://pouch.watervis.co.kr/en/">Explore Pouch Water</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="container contact-card reveal">
+        <div>
+          <p class="section-kicker">Contact</p>
+          <h2 class="section-title">Create New Possibilities<br />with WATERVIS</h2>
+          <p>We welcome inquiries about deep ocean water product development, ingredient supply, OEM/ODM, and pouch water production.</p>
+          <div class="contact-actions">
+            <a class="button button-primary" href="tel:+82336721032">Call +82 33 672 1032</a>
+            <a class="button button-ghost" href="https://pouch.watervis.co.kr/en/">Pouch Water Site ↗</a>
+          </div>
+        </div>
+
+        <dl class="contact-info">
+          <div class="contact-row"><dt>Company</dt><dd>WATERVIS Co., Ltd.</dd></div>
+          <div class="contact-row"><dt>Address</dt><dd>53, Wonpo 1-gil, Hyeonnam-myeon, Yangyang-gun, Gangwon State, Republic of Korea</dd></div>
+          <div class="contact-row"><dt>Tel.</dt><dd><a href="tel:+82336721032">033-672-1032</a></dd></div>
+          <div class="contact-row"><dt>Fax</dt><dd>033-672-5303</dd></div>
+        </dl>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <img class="footer-logo" src="../assets/images/watervis-logo.webp" alt="WATERVIS" loading="lazy" />
+      <div>© <span id="current-year">2026</span> WATERVIS CO., LTD. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>
+    const header = document.getElementById('header');
+    const menuButton = document.querySelector('.menu-button');
+    const mobileNav = document.getElementById('mobile-nav');
+
+    function syncHeader() {
+      header.classList.toggle('scrolled', window.scrollY > 28);
+    }
+    syncHeader();
+    window.addEventListener('scroll', syncHeader, { passive: true });
+
+    menuButton.addEventListener('click', () => {
+      const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
+      menuButton.setAttribute('aria-expanded', String(!isOpen));
+      menuButton.setAttribute('aria-label', isOpen ? 'Open menu' : 'Close menu');
+      mobileNav.classList.toggle('open', !isOpen);
+      document.body.classList.toggle('nav-open', !isOpen);
+    });
+
+    mobileNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        menuButton.setAttribute('aria-expanded', 'false');
+        menuButton.setAttribute('aria-label', 'Open menu');
+        mobileNav.classList.remove('open');
+        document.body.classList.remove('nav-open');
+      });
+    });
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
