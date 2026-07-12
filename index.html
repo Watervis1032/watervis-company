@@ -774,13 +774,16 @@
       .header-inner { height: 72px; }
       .mobile-nav { inset-block-start: 72px; }
       .brand img { width: 145px; }
-      .hero { min-height: 720px; height: auto; padding: 160px 0 180px; }
+      .hero { min-height: 720px; height: auto; padding: 160px 0 48px; }
       .hero-content { padding-top: 0; }
       .hero h1 { font-size: clamp(42px, 13vw, 60px); }
       .hero-index {
-        left: 14px;
-        right: 14px;
-        bottom: 28px;
+        position: static;
+        width: min(calc(100% - 28px), var(--container));
+        left: auto;
+        right: auto;
+        bottom: auto;
+        margin: 32px auto 0;
         grid-template-columns: repeat(2, 1fr);
       }
       .hero-index div { min-width: 0; padding: 14px; }
