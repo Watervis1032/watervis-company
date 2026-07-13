@@ -792,7 +792,8 @@
       .numbers { padding-bottom: 88px; }
       .section-title { font-size: 38px; }
       .section-lead { font-size: 16px; }
-      .intro-photo img { aspect-ratio: 1 / .82; }
+      .intro-photo { max-height: 320px; overflow: hidden; }
+      .intro-photo img { width: 100%; height: 320px; aspect-ratio: auto; object-fit: cover; }
       .number-grid { grid-template-columns: 1fr; }
       .number-card { min-height: 170px; border-right: 0; border-bottom: 1px solid var(--line); }
       .number-card:last-child { border-bottom: 0; }
