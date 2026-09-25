@@ -204,6 +204,11 @@ details.priv td:first-child{width:78px;background:#f6f8fa;color:#4b5868}
 .tdl dt{color:var(--muted)} .tdl dd{margin:0}
 .tcs{margin-top:16px;border-radius:16px;background:#f7f9fb;padding:16px 18px;font-size:14px}
 .tcs p{margin:4px 0 0;color:#5b6778}
+#postLayer{position:fixed;inset:0;z-index:95;background:rgba(3,16,31,.55);display:flex;align-items:flex-end;justify-content:center}
+.postwrap{background:#fff;width:100%;max-width:560px;height:88svh;border-radius:18px 18px 0 0;overflow:hidden;display:flex;flex-direction:column}
+.posthead{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--line)}
+.posthead button{background:none;border:0;font-size:15px;color:var(--navy);cursor:pointer;font-weight:600}
+#postBox{flex:1;min-height:0}
 footer{background:var(--deep);color:#7f93ac;padding:34px 22px 44px;font-size:12px;line-height:1.8;text-align:center}
 footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
 .toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);background:var(--navy);color:#fff;padding:11px 18px;border-radius:12px;font-size:14px;z-index:99;box-shadow:0 8px 22px rgba(0,0,0,.2)}
@@ -442,6 +447,13 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
   </div>
 </section>
 
+<div id="postLayer" class="hidden" role="dialog" aria-label="주소 찾기">
+  <div class="postwrap">
+    <div class="posthead"><b>주소 찾기</b><button type="button" id="postClose" aria-label="닫기">닫기 ✕</button></div>
+    <div id="postBox"></div>
+  </div>
+</div>
+
 <footer id="foot" class="hidden">
   <img class="flogo" src="img/logo-watervis-white.png" alt="WATERVIS" width="150" height="33">
   워터비스코퍼레이션(주) · 대표 김인호<br>
@@ -487,8 +499,9 @@ async function enter(){
     if(r.price) Object.assign(PRICE,r.price); if(r.bank) Object.assign(BANK,r.bank);
     $('gate').classList.add('hidden'); $('main').classList.remove('hidden'); $('foot').classList.remove('hidden');
     if(!API_URL){const d=document.createElement('div');d.className='demo';d.textContent='오픈 준비 중입니다 · 지금은 주문이 실제로 접수되지 않아요';document.body.appendChild(d);}
+    try{ sessionStorage.setItem('wv_code',S.code); }catch(_){}
     paintPrice(); calc(); window.scrollTo(0,0);
-  }catch(e){ S.code=''; $('gate').classList.remove('hidden'); $('gateMsg').textContent='입장 코드를 확인해 주세요.'; }
+  }catch(e){ S.code=''; try{ sessionStorage.removeItem('wv_code'); }catch(_){} $('gate').classList.remove('hidden'); $('gateMsg').textContent='입장 코드를 확인해 주세요.'; }
   finally{ $('codeBtn').disabled=false; }
 }
 /* 지인에게 준 링크(…/order.html#1032 또는 ?c=1032)는 코드 입력 없이 바로 들어간다.
@@ -496,7 +509,8 @@ async function enter(){
 window.addEventListener('DOMContentLoaded',function(){
   const h=decodeURIComponent((location.hash||'').replace(/^#/,'').replace(/^c=/,''));
   const q=new URLSearchParams(location.search).get('c')||'';
-  const code=(h||q).trim();
+  let saved=''; try{ saved=sessionStorage.getItem('wv_code')||''; }catch(_){}
+  const code=(h||q).trim() || saved;
   if(code==='track'){ openTrack(new URLSearchParams(location.search).get('no')||''); return; }
   if(code){ S.code=code; $('gate').classList.add('hidden'); enter(); }
 });
@@ -553,9 +567,17 @@ $('cashRcpt').onchange=()=>{ $('rcptBox').classList.toggle('hidden',!$('cashRcpt
 $('sameAs').onchange=()=>$('rcvBox').classList.toggle('hidden',$('sameAs').checked);
 $('buyer').addEventListener('input',()=>{ if(!$('payer').dataset.touched) $('payer').value=$('buyer').value; });
 $('payer').addEventListener('input',()=>$('payer').dataset.touched='1');
+/* 주소 찾기 — 새 창(open)을 쓰지 않고 이 페이지 안에 겹쳐 띄운다(embed).
+   휴대폰·카톡 브라우저에서 새 창이 같은 탭으로 열리며 페이지가 처음으로 돌아가던 문제 방지 */
+function closePost(){ $('postLayer').classList.add('hidden'); $('postBox').innerHTML=''; document.body.style.overflow=''; }
+$('postClose').onclick=closePost;
 $('findAddr').onclick=()=>{
   if(!(window.daum&&daum.Postcode)){ $('addr1').focus(); toast('주소를 직접 입력해 주세요.'); $('zip').readOnly=false; return; }
-  new daum.Postcode({oncomplete:d=>{ $('zip').value=d.zonecode; $('addr1').value=d.roadAddress||d.jibunAddress; $('addr2').focus(); }}).open();
+  $('postLayer').classList.remove('hidden'); document.body.style.overflow='hidden';
+  new daum.Postcode({
+    oncomplete:d=>{ $('zip').value=d.zonecode; $('addr1').value=d.roadAddress||d.jibunAddress; closePost(); setTimeout(()=>$('addr2').focus(),50); },
+    width:'100%', height:'100%'
+  }).embed($('postBox'));
 };
 
 /* 전화번호 모양 */
