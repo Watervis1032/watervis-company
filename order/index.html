@@ -126,6 +126,8 @@ details.priv summary{cursor:pointer;color:#4b5868}
 details.priv table{border-collapse:collapse;margin-top:8px;width:100%}
 details.priv td{border:1px solid var(--line);padding:6px 8px;vertical-align:top}
 details.priv td:first-child{width:78px;background:#f6f8fa;color:#4b5868}
+.paynote{background:#f3f6fa;border-radius:12px;padding:12px 14px;margin:0 0 12px;font-size:13.5px;color:#3b4b5e;text-align:center;line-height:1.55}
+.paynote b{color:var(--navy)}
 .bankbox{position:relative;border:1.5px solid var(--gold);background:linear-gradient(180deg,#fffdf6,#fff);border-radius:18px;padding:20px 18px 18px;margin:0 0 20px;text-align:center;box-shadow:0 6px 18px rgba(201,164,92,.12)}
 .bankbox .bhead{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:10px}
 .bankmark{display:inline-flex;align-items:center;gap:6px}
@@ -290,6 +292,7 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
       <div class="field"><label>배송 요청사항</label><input class="inp" id="shipMemo" placeholder="예: 문 앞에 놓아 주세요"></div>
 
       <div class="sec-title" style="margin-top:26px"><h2>입금</h2></div>
+      <div class="paynote"><b>카드 결제는 준비 중입니다.</b><br>당분간은 불편하시더라도 <b>계좌이체</b>로 부탁드립니다.</div>
       <div class="bankbox">
         <div class="bhead">
           <span class="bankmark"><img src="img/bank-nh.png" alt="" onerror="this.remove()"><em>농협</em><small>강릉농협</small></span>
@@ -305,6 +308,10 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
         <input class="inp" id="payer" placeholder="통장에 찍히는 이름">
       </div>
 
+      <label class="check" style="margin-top:-4px"><input type="checkbox" id="cashRcpt"> <span>현금영수증이 필요해요</span></label>
+      <div id="rcptBox" class="field hidden" style="margin-left:30px">
+        <input class="inp" id="rcptNo" inputmode="numeric" placeholder="휴대전화 번호 또는 사업자등록번호">
+      </div>
       <div class="bill">
         <div class="l"><span>상품 <span id="bQty">1</span>박스</span><span id="bGoods">18,000원</span></div>
         <div class="l"><span>택배비</span><span id="bShip">5,500원</span></div>
@@ -314,8 +321,8 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
       <label class="check"><input type="checkbox" id="agree"> <span>개인정보 수집·이용에 동의합니다 <em style="color:var(--bad);font-style:normal">(필수)</em></span></label>
       <details class="priv"><summary>내용 보기</summary>
         <table>
-          <tr><td>수집 항목</td><td>주문자·수령인 성함, 연락처, 주소, 입금자명, 추천인</td></tr>
-          <tr><td>이용 목적</td><td>주문 확인, 입금 확인, 상품 배송, 문의 응대</td></tr>
+          <tr><td>수집 항목</td><td>주문자·수령인 성함, 연락처, 주소, 입금자명, 추천인, (신청 시) 현금영수증 번호</td></tr>
+          <tr><td>이용 목적</td><td>주문 확인, 입금 확인, 상품 배송, 현금영수증 발급, 문의 응대</td></tr>
           <tr><td>보유 기간</td><td>관계 법령에 따른 기간(전자상거래 기록 5년) 동안 보관 후 파기</td></tr>
           <tr><td>거부 권리</td><td>동의를 거부하실 수 있으나, 이 경우 주문이 어렵습니다.</td></tr>
         </table>
@@ -427,6 +434,7 @@ function calc(){
 }
 
 /* 받는 곳 */
+$('cashRcpt').onchange=()=>{ $('rcptBox').classList.toggle('hidden',!$('cashRcpt').checked); if($('cashRcpt').checked&&!$('rcptNo').value) $('rcptNo').value=$('buyerTel').value; };
 $('sameAs').onchange=()=>$('rcvBox').classList.toggle('hidden',$('sameAs').checked);
 $('buyer').addEventListener('input',()=>{ if(!$('payer').dataset.touched) $('payer').value=$('buyer').value; });
 $('payer').addEventListener('input',()=>$('payer').dataset.touched='1');
@@ -452,6 +460,7 @@ function validate(){
   if(!$('addr1').value.trim()) e.push('주소를 입력해 주세요.');
   if(!$('addr2').value.trim()) e.push('상세 주소를 입력해 주세요.');
   if(!$('payer').value.trim()) e.push('입금하실 분 성함을 적어 주세요.');
+  if($('cashRcpt').checked && $('rcptNo').value.replace(/\D/g,'').length<10) e.push('현금영수증 받으실 번호를 확인해 주세요.');
   if(!$('agree').checked) e.push('개인정보 수집·이용에 동의해 주세요.');
   return e;
 }
@@ -467,7 +476,8 @@ $('submit').onclick=async()=>{
     buyer:$('buyer').value.trim(), buyerTel:$('buyerTel').value.trim(), ref:$('ref').value.trim(),
     rcv: same?$('buyer').value.trim():$('rcv').value.trim(), rcvTel: same?$('buyerTel').value.trim():$('rcvTel').value.trim(),
     zip:$('zip').value.trim(), addr:($('addr1').value.trim()+' '+$('addr2').value.trim()).trim(),
-    shipMemo:$('shipMemo').value.trim(), payer:$('payer').value.trim(), agree:true};
+    shipMemo:$('shipMemo').value.trim(), payer:$('payer').value.trim(),
+    cashReceipt: $('cashRcpt').checked ? $('rcptNo').value.replace(/\D/g,'') : '', agree:true};
   try{
     const r=await api('friendOrder',{order:o});
     const due=new Date(); due.setDate(due.getDate()+BANK.days);
@@ -477,7 +487,7 @@ $('submit').onclick=async()=>{
     $('dTo').textContent=o.rcv+' · '+o.addr;
     document.querySelectorAll('#main > section:not(#done)').forEach(s=>s.classList.add('hidden'));
     $('done').classList.remove('hidden'); window.scrollTo(0,0);
-    ['buyer','buyerTel','rcv','rcvTel','addr1','addr2','zip','payer','ref','shipMemo'].forEach(i=>$(i).value='');  // 공유 PC 대비
+    ['buyer','buyerTel','rcv','rcvTel','addr1','addr2','zip','payer','ref','shipMemo','rcptNo'].forEach(i=>$(i).value='');  // 공유 PC 대비
   }catch(err){ toast(err.message+' (다시 눌러도 두 번 접수되지 않습니다)'); }
   finally{ S.busy=false; $('submit').disabled=false; $('submit').textContent='주문 신청하기'; }
 };
