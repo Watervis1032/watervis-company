@@ -171,6 +171,38 @@ details.priv td:first-child{width:78px;background:#f6f8fa;color:#4b5868}
 #done .steps{text-align:left;font-size:13.5px;color:#4b5868;background:#f7f9fb;border-radius:12px;padding:14px 16px 14px 34px;margin:0 0 20px}
 #done .steps li{margin:3px 0}
 
+.glink{display:block;margin:22px auto 0;background:none;border:0;color:#c9d6e6;font-size:14px;cursor:pointer}
+.glink b{color:var(--gold2);font-weight:600}
+.tbtn{position:absolute;top:14px;left:14px;z-index:5;background:rgba(255,255,255,.75);border:1px solid rgba(11,42,82,.15);color:var(--navy);border-radius:99px;padding:6px 13px;font-size:13px;font-weight:600;cursor:pointer;backdrop-filter:blur(6px)}
+.savehint{font-size:13px;color:var(--gold);margin:-4px 0 12px}
+#track{min-height:100svh;background:var(--paper)}
+.thead{background:radial-gradient(100% 90% at 50% 0%,#12396b,var(--navy) 60%,var(--deep));color:#fff;padding:18px 22px 30px;text-align:center}
+.tback{display:block;background:none;border:0;color:#b9c7d8;font-size:14px;cursor:pointer;margin:0 0 14px;padding:0}
+.tlogo{width:120px;height:auto;margin:0 auto 10px}
+.thead h2{font-family:var(--serif);font-size:24px;margin:0 0 4px}
+.thead p{margin:0;color:#b9c7d8;font-size:14px}
+.tbody{padding:24px 22px 40px}
+.tcard{border:1px solid var(--line);border-radius:16px;padding:18px;margin-top:26px;background:#fff}
+.tno{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px}
+.tno span{font-size:13px;color:var(--muted)}
+.tno b{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:16px;color:var(--navy)}
+.stepper4{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);margin:0 0 14px;padding:0;counter-reset:s}
+.stepper4 li{position:relative;text-align:center;font-size:12px;color:#9aa4b1;padding-top:26px}
+.stepper4 li:before{counter-increment:s;content:counter(s);position:absolute;top:0;left:50%;transform:translateX(-50%);width:22px;height:22px;border-radius:50%;background:#e6ebf1;color:#8a95a3;font-size:12px;line-height:22px;font-weight:700;z-index:1}
+.stepper4 li:after{content:"";position:absolute;top:10px;left:-50%;width:100%;height:2px;background:#e6ebf1}
+.stepper4 li:first-child:after{display:none}
+.stepper4 li.done{color:var(--navy);font-weight:600}
+.stepper4 li.done:before{background:var(--navy);color:#fff}
+.stepper4 li.done:after{background:var(--navy)}
+.ship{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#f6f8fb;border-radius:12px;padding:12px 14px;margin-bottom:12px}
+.ship span{display:block;font-size:12px;color:var(--muted)}
+.ship b{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:16px;color:var(--navy)}
+.trackbtn{background:var(--navy);color:#fff;text-decoration:none;border-radius:10px;padding:10px 14px;font-size:14px;font-weight:700;white-space:nowrap}
+.tmsg{font-size:14px;color:#3b4b5e;margin:0 0 12px}
+.tdl{margin:0;display:grid;grid-template-columns:82px 1fr;gap:6px 10px;font-size:14px;border-top:1px solid var(--line);padding-top:12px}
+.tdl dt{color:var(--muted)} .tdl dd{margin:0}
+.tcs{margin-top:16px;border-radius:16px;background:#f7f9fb;padding:16px 18px;font-size:14px}
+.tcs p{margin:4px 0 0;color:#5b6778}
 footer{background:var(--deep);color:#7f93ac;padding:34px 22px 44px;font-size:12px;line-height:1.8;text-align:center}
 footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
 .toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);background:var(--navy);color:#fff;padding:11px 18px;border-radius:12px;font-size:14px;z-index:99;box-shadow:0 8px 22px rgba(0,0,0,.2)}
@@ -193,6 +225,7 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
       <button class="gbtn" id="codeBtn">확인</button>
     </div>
     <div id="gateMsg"></div>
+    <button type="button" class="glink" onclick="openTrack()">이미 주문하셨나요? <b>주문 조회</b> ›</button>
     <div class="note">워터비스 임직원 · 가족 · 지인 전용 페이지입니다.</div>
   </div>
 </section>
@@ -202,6 +235,7 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
   <!-- 첫 화면 -->
   <section class="hero">
     <div class="wrap">
+      <button type="button" class="tbtn" onclick="openTrack()">주문 조회</button>
       <div class="copy fade">
         <img class="hlogo" src="img/logo-watervis.png" alt="WATERVIS" width="132" height="29">
         <div class="eyebrow">Private Order</div>
@@ -350,15 +384,62 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
           <dt>받으시는 곳</dt><dd id="dTo" style="font-weight:500"></dd>
         </dl>
       </div>
+      <p class="savehint">주문번호는 <b>주문 조회</b>에 필요합니다. 이 화면을 캡처해 두세요.</p>
       <ol class="steps">
         <li>위 계좌로 <b>입금자명 그대로</b> 입금해 주세요.</li>
         <li>입금이 확인되면 문자로 알려 드리고 발송합니다.</li>
         <li>문의: 033-672-1032 · 주문번호를 알려 주세요.</li>
       </ol>
-      <button class="cta" style="margin:0 auto;width:100%" onclick="location.reload()">처음으로</button>
+      <button class="cta" style="margin:0 auto 10px;width:100%" onclick="openTrack($('dNo').textContent)">주문 조회로 가기</button>
+      <button class="cta" style="margin:0 auto;width:100%;background:#fff;color:var(--navy);border:1px solid var(--line);box-shadow:none" onclick="location.reload()">처음으로</button>
     </div>
   </section>
 </main>
+
+<!-- ═════════ 주문 조회 ═════════ -->
+<section id="track" class="hidden">
+  <div class="thead">
+    <div class="wrap">
+      <button type="button" class="tback" onclick="closeTrack()">‹ 돌아가기</button>
+      <img class="tlogo" src="img/logo-watervis-white.png" alt="WATERVIS" width="120" height="26">
+      <h2>주문 조회</h2>
+      <p>주문하실 때 적으신 연락처와 주문번호를 넣어 주세요.</p>
+    </div>
+  </div>
+  <div class="wrap tbody">
+    <div class="field"><label>연락처</label><input class="inp" id="tTel" type="tel" inputmode="tel" placeholder="010-0000-0000"></div>
+    <div class="field"><label>주문번호</label><input class="inp" id="tNo" autocapitalize="characters" placeholder="예: F260925-001"></div>
+    <ul class="errs" id="tErr"></ul>
+    <button class="submit" id="tBtn" style="background:var(--navy);color:#fff">조회하기</button>
+    <p class="fine">주문번호는 주문 완료 화면과 안내 문자에 있습니다.<br>잊으셨으면 033-672-1032 로 연락 주세요.</p>
+
+    <div id="tRes" class="hidden">
+      <div class="tcard">
+        <div class="tno"><span>주문번호</span><b id="rNo"></b></div>
+        <ol class="stepper4" id="rSteps">
+          <li>주문 접수</li><li>입금 확인</li><li>발송</li><li>배송 완료</li>
+        </ol>
+        <div class="ship hidden" id="rShip">
+          <div><span>한진택배</span><b id="rWb"></b></div>
+          <a class="trackbtn" id="rWbLink" target="_blank" rel="noopener">배송 조회 ›</a>
+        </div>
+        <p class="tmsg" id="rMsg"></p>
+        <dl class="tdl">
+          <dt>주문 상품</dt><dd id="rItems"></dd>
+          <dt>금액</dt><dd id="rAmt"></dd>
+          <dt>받으시는 분</dt><dd id="rTo"></dd>
+          <dt>주문일</dt><dd id="rDate"></dd>
+        </dl>
+      </div>
+      <div class="tcs">
+        <b>문의가 있으신가요?</b>
+        <p>주문번호를 말씀해 주시면 바로 확인해 드립니다.</p>
+        <a class="cta" style="margin:10px 0 0;width:100%;display:block;text-align:center;text-decoration:none" href="tel:0336721032">전화 문의 033-672-1032</a>
+        <p class="fine" style="margin-top:8px">온라인 문의하기는 곧 열립니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
 <footer id="foot" class="hidden">
   <img class="flogo" src="img/logo-watervis-white.png" alt="WATERVIS" width="150" height="33">
@@ -385,6 +466,8 @@ const S={code:'', qty:1, busy:false, reqId:null};
 async function api(action,payload){
   if(!API_URL){ await new Promise(r=>setTimeout(r,400));
     if(action==='friendLogin'){ if(S.code!=='1032') throw new Error('코드'); return {ok:true, price:PRICE, bank:BANK}; }
+    if(action==='track'){ if(!/^[A-Z]\d{6}-\d{3}$/.test(payload.orderNo)) throw new Error('주문을 찾을 수 없습니다. 연락처와 주문번호를 확인해 주세요.');
+      return {ok:true, order:{orderNo:payload.orderNo, step:2, status:'발송', waybill:'459497649203', carrier:'한진택배', items:'몸愛좋은물 Gold 350mL × 2박스', total:47000, to:'홍*동 · 강원 양양군 현남면 ***', date:'2026-09-25', message:'9월 26일 발송되었습니다. 보통 1~2일 안에 도착합니다.'}}; }
     if(action==='friendOrder'){ const d=new Date(); return {ok:true, orderNo:'F'+String(d.getFullYear()).slice(2)+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0')+'-001', total:payload.order.qty*(PRICE.box+PRICE.ship)}; }
   }
   const r=await fetch(API_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},
@@ -409,12 +492,43 @@ async function enter(){
 }
 /* 지인에게 준 링크(…/order.html#1032 또는 ?c=1032)는 코드 입력 없이 바로 들어간다.
    홈페이지에서 넘어온 주소(…/order.html)는 입장 코드 화면이 보인다. */
-(function(){
+window.addEventListener('DOMContentLoaded',function(){
   const h=decodeURIComponent((location.hash||'').replace(/^#/,'').replace(/^c=/,''));
   const q=new URLSearchParams(location.search).get('c')||'';
   const code=(h||q).trim();
+  if(code==='track'){ openTrack(new URLSearchParams(location.search).get('no')||''); return; }
   if(code){ S.code=code; $('gate').classList.add('hidden'); enter(); }
-})();
+});
+/* 주문 조회 — 입장 코드 없이도 열린다 (연락처 + 주문번호가 맞아야만 보임) */
+const HANJIN='https://www.hanjin.com/kor/CMS/DeliveryMgr/WaybillResult.do?mCode=MN038&schLang=KR&wblnumText2=';
+let trackFrom=null;
+function openTrack(no){
+  trackFrom=['gate','main'].find(id=>!$(id).classList.contains('hidden'))||'gate';
+  ['gate','main'].forEach(id=>$(id).classList.add('hidden'));
+  $('track').classList.remove('hidden'); $('foot').classList.remove('hidden');
+  if(no){ $('tNo').value=no; } $('tRes').classList.add('hidden'); window.scrollTo(0,0);
+}
+function closeTrack(){ $('track').classList.add('hidden'); $(trackFrom||'gate').classList.remove('hidden');
+  if(trackFrom==='gate') $('foot').classList.add('hidden'); window.scrollTo(0,0); }
+$('tTel').addEventListener('input',e=>{ const v=e.target.value.replace(/\D/g,'').slice(0,11);
+  e.target.value=v.length<4?v:v.length<8?v.slice(0,3)+'-'+v.slice(3):v.slice(0,3)+'-'+v.slice(3,v.length-4)+'-'+v.slice(-4); });
+$('tBtn').onclick=async()=>{
+  const tel=$('tTel').value.replace(/\D/g,''), no=$('tNo').value.trim().toUpperCase(), e=[];
+  if(tel.length<10) e.push('연락처를 확인해 주세요.'); if(!no) e.push('주문번호를 넣어 주세요.');
+  $('tErr').innerHTML=e.map(x=>'<li>'+x+'</li>').join(''); if(e.length) return;
+  $('tBtn').disabled=true; $('tBtn').textContent='조회 중…';
+  try{
+    const o=(await api('track',{tel, orderNo:no})).order;
+    $('rNo').textContent=o.orderNo;
+    [...$('rSteps').children].forEach((li,i)=>li.classList.toggle('done', i<o.step+1));
+    $('rShip').classList.toggle('hidden',!o.waybill);
+    if(o.waybill){ $('rWb').textContent=o.waybill; $('rWbLink').href=HANJIN+encodeURIComponent(o.waybill); }
+    $('rMsg').textContent=o.message||''; $('rItems').textContent=o.items; $('rAmt').textContent=won(o.total);
+    $('rTo').textContent=o.to; $('rDate').textContent=o.date;
+    $('tRes').classList.remove('hidden'); $('tErr').innerHTML='';
+  }catch(err){ $('tRes').classList.add('hidden'); $('tErr').innerHTML='<li>'+(err.message||'조회하지 못했습니다')+'</li>'; }
+  finally{ $('tBtn').disabled=false; $('tBtn').textContent='조회하기'; }
+};
 function paintBank(){ $('fAcct').textContent=BANK.no; $('fHolder').textContent=BANK.holder; $('fDays').textContent=BANK.days; }
 function paintPrice(){ paintBank();
   $('pWas').textContent=won(PRICE.list);
