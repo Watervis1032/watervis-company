@@ -126,6 +126,20 @@ details.priv summary{cursor:pointer;color:#4b5868}
 details.priv table{border-collapse:collapse;margin-top:8px;width:100%}
 details.priv td{border:1px solid var(--line);padding:6px 8px;vertical-align:top}
 details.priv td:first-child{width:78px;background:#f6f8fa;color:#4b5868}
+.bankbox{position:relative;border:1.5px solid var(--gold);background:linear-gradient(180deg,#fffdf6,#fff);border-radius:18px;padding:20px 18px 18px;margin:0 0 20px;text-align:center;box-shadow:0 6px 18px rgba(201,164,92,.12)}
+.bankbox .bhead{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:10px}
+.bankmark{display:inline-flex;align-items:center;gap:6px}
+.bankmark img{height:26px;width:auto}
+.bankmark em{font-style:normal;font-weight:800;font-size:17px;color:#0a6b3b;letter-spacing:-.01em}
+.bankmark img+em{display:none}
+.bankmark small{font-size:12.5px;color:var(--muted);font-weight:500}
+.bankbox .blabel{font-size:13px;color:var(--muted);border-left:1px solid var(--line);padding-left:10px}
+.bankbox .bno{font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;font-size:clamp(24px,7.2vw,30px);font-weight:800;color:var(--navy);letter-spacing:.02em;margin:2px 0 6px}
+.bankbox .bholder{font-size:15px;color:#3b4b5e}
+.bankbox .bholder b{color:var(--navy)}
+.bankbox .bcopy{margin:14px auto 0;display:block;width:100%;max-width:280px;border:1px solid var(--navy2);background:#fff;color:var(--navy2);border-radius:12px;padding:11px;font-weight:700;cursor:pointer}
+.bankbox p{margin:12px 0 0;font-size:13px;color:#5b6778}
+.bankbox .bnote{font-size:12px;color:#8a95a3}
 .bill{border-radius:16px;background:var(--navy);color:#fff;padding:18px 18px 16px;margin:18px 0 12px}
 .bill .l{display:flex;justify-content:space-between;font-size:14px;color:#c6d3e2;padding:3px 0}
 .bill .tot{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid rgba(230,207,154,.35);margin-top:10px;padding-top:12px}
@@ -276,6 +290,16 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
       <div class="field"><label>배송 요청사항</label><input class="inp" id="shipMemo" placeholder="예: 문 앞에 놓아 주세요"></div>
 
       <div class="sec-title" style="margin-top:26px"><h2>입금</h2></div>
+      <div class="bankbox">
+        <div class="bhead">
+          <span class="bankmark"><img src="img/bank-nh.png" alt="" onerror="this.remove()"><em>농협</em><small>강릉농협</small></span>
+          <span class="blabel">입금 계좌</span>
+        </div>
+        <div class="bno" id="fAcct">355-0097-3405-33</div>
+        <div class="bholder">예금주 <b id="fHolder">워터비스코퍼레이션(주)</b></div>
+        <button type="button" class="bcopy" id="copyAcct2">계좌번호 복사</button>
+        <p>주문 신청 후 <b id="fDays">3</b>일 안에 입금해 주시면 확인 후 발송합니다.<br><span class="bnote">송금할 때 은행 목록에 «농협»으로 안 되면 «지역농·축협»을 골라 주세요.</span></p>
+      </div>
       <div class="field">
         <label>입금하실 분 성함<em>*</em></label>
         <input class="inp" id="payer" placeholder="통장에 찍히는 이름">
@@ -345,7 +369,7 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
 const VERSION='friend-v0.2';
 const API_URL='';
 const PRICE={box:18000, list:28800, unit:36, ship:5500, maxQty:20};  // 서버가 다시 계산한다
-const BANK={name:'농협', no:'355-0097-3405-33', holder:'워터비스코퍼레이션(주)', days:3};
+const BANK={name:'농협(강릉농협)', no:'355-0097-3405-33', holder:'워터비스코퍼레이션(주)', days:3};
 
 const $=id=>document.getElementById(id);
 const won=n=>n.toLocaleString('ko-KR')+'원';
@@ -384,7 +408,8 @@ async function enter(){
   const code=(h||q).trim();
   if(code){ S.code=code; $('gate').classList.add('hidden'); enter(); }
 })();
-function paintPrice(){
+function paintBank(){ $('fAcct').textContent=BANK.no; $('fHolder').textContent=BANK.holder; $('fDays').textContent=BANK.days; }
+function paintPrice(){ paintBank();
   $('pWas').textContent=won(PRICE.list);
   $('pNow').innerHTML=PRICE.box.toLocaleString('ko-KR')+'<small>원</small>';
   $('pPer').textContent='1개당 '+won(Math.round(PRICE.box/PRICE.unit));
@@ -456,6 +481,7 @@ $('submit').onclick=async()=>{
   }catch(err){ toast(err.message+' (다시 눌러도 두 번 접수되지 않습니다)'); }
   finally{ S.busy=false; $('submit').disabled=false; $('submit').textContent='주문 신청하기'; }
 };
+$('copyAcct2').onclick=()=>$('copyAcct').onclick();
 $('copyAcct').onclick=async()=>{ try{ await navigator.clipboard.writeText(BANK.no.replace(/-/g,'')); toast('계좌번호를 복사했습니다.'); }catch(e){ toast(BANK.no); } };
 
 let tt; function toast(m){let t=document.querySelector('.toast');if(!t){t=document.createElement('div');t.className='toast';document.body.appendChild(t);}t.textContent=m;clearTimeout(tt);tt=setTimeout(()=>t.remove(),3000);}
