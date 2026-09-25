@@ -51,7 +51,7 @@ img{display:block;max-width:100%}
 
 /* ── 첫 화면 ── */
 .hero{position:relative;overflow:hidden;background:linear-gradient(180deg,#bcdcf6 0%,#dcebf8 40%,#fff 100%)}
-.hero .copy{position:relative;z-index:2;text-align:center;padding:40px 22px 0;color:var(--navy)}
+.hero .copy{position:relative;z-index:2;text-align:center;padding:72px 22px 0;color:var(--navy)}
 .hero .eyebrow{color:var(--navy2)}
 .hero .hlogo{width:132px;height:auto;margin:0 auto 14px}
 .hero h1{font-family:var(--serif);font-weight:800;font-size:clamp(24px,6.6vw,34px);line-height:1.32;margin:4px 0 10px;letter-spacing:-.02em;
@@ -171,9 +171,10 @@ details.priv td:first-child{width:78px;background:#f6f8fa;color:#4b5868}
 #done .steps{text-align:left;font-size:13.5px;color:#4b5868;background:#f7f9fb;border-radius:12px;padding:14px 16px 14px 34px;margin:0 0 20px}
 #done .steps li{margin:3px 0}
 
-.glink{display:block;margin:22px auto 0;background:none;border:0;color:#c9d6e6;font-size:14px;cursor:pointer}
+.glink{display:block;margin:26px auto 0;background:rgba(255,255,255,.06);border:1px solid rgba(230,207,154,.45);border-radius:12px;padding:13px 20px;color:#dbe6f2;font-size:15px;cursor:pointer;width:100%;max-width:320px}
 .glink b{color:var(--gold2);font-weight:600}
-.tbtn{position:absolute;top:14px;left:14px;z-index:5;background:rgba(255,255,255,.75);border:1px solid rgba(11,42,82,.15);color:var(--navy);border-radius:99px;padding:6px 13px;font-size:13px;font-weight:600;cursor:pointer;backdrop-filter:blur(6px)}
+.tbtn{position:absolute;top:14px;right:14px;z-index:5;display:inline-flex;align-items:center;gap:6px;background:var(--navy);border:1px solid rgba(230,207,154,.6);color:#fff;border-radius:99px;padding:10px 16px;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 6px 16px rgba(6,26,51,.25)}
+.tbtn svg{width:16px;height:16px;stroke:var(--gold2);fill:none;stroke-width:2}
 .savehint{font-size:13px;color:var(--gold);margin:-4px 0 12px}
 #track{min-height:100svh;background:var(--paper)}
 .thead{background:radial-gradient(100% 90% at 50% 0%,#12396b,var(--navy) 60%,var(--deep));color:#fff;padding:18px 22px 30px;text-align:center}
@@ -206,7 +207,7 @@ details.priv td:first-child{width:78px;background:#f6f8fa;color:#4b5868}
 footer{background:var(--deep);color:#7f93ac;padding:34px 22px 44px;font-size:12px;line-height:1.8;text-align:center}
 footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
 .toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);background:var(--navy);color:#fff;padding:11px 18px;border-radius:12px;font-size:14px;z-index:99;box-shadow:0 8px 22px rgba(0,0,0,.2)}
-.demo{position:fixed;top:10px;right:10px;z-index:90;background:#f6c343;color:#3a2a00;font-size:11.5px;padding:3px 9px;border-radius:99px}
+.demo{position:fixed;left:0;right:0;bottom:0;z-index:90;background:#f6c343;color:#3a2a00;font-size:12.5px;padding:7px 12px;text-align:center;font-weight:600}
 @media (prefers-reduced-motion:no-preference){.fade{animation:fade .7s ease both}@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}}
 </style>
 </head>
@@ -235,7 +236,7 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
   <!-- 첫 화면 -->
   <section class="hero">
     <div class="wrap">
-      <button type="button" class="tbtn" onclick="openTrack()">주문 조회</button>
+      <button type="button" class="tbtn" onclick="openTrack()"><svg viewBox="0 0 24 24"><path d="M3 7h13v10H3zM16 10h3l2 3v4h-5"/><circle cx="7" cy="18" r="1.6"/><circle cx="18" cy="18" r="1.6"/></svg>주문 조회</button>
       <div class="copy fade">
         <img class="hlogo" src="img/logo-watervis.png" alt="WATERVIS" width="132" height="29">
         <div class="eyebrow">Private Order</div>
@@ -485,7 +486,7 @@ async function enter(){
     const r=await api('friendLogin');
     if(r.price) Object.assign(PRICE,r.price); if(r.bank) Object.assign(BANK,r.bank);
     $('gate').classList.add('hidden'); $('main').classList.remove('hidden'); $('foot').classList.remove('hidden');
-    if(!API_URL){const d=document.createElement('div');d.className='demo';d.textContent='시안 · 저장 안 됨';document.body.appendChild(d);}
+    if(!API_URL){const d=document.createElement('div');d.className='demo';d.textContent='오픈 준비 중입니다 · 지금은 주문이 실제로 접수되지 않아요';document.body.appendChild(d);}
     paintPrice(); calc(); window.scrollTo(0,0);
   }catch(e){ S.code=''; $('gate').classList.remove('hidden'); $('gateMsg').textContent='입장 코드를 확인해 주세요.'; }
   finally{ $('codeBtn').disabled=false; }
