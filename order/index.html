@@ -209,6 +209,16 @@ details.priv td:first-child{width:78px;background:#f6f8fa;color:#4b5868}
 .posthead{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--line)}
 .posthead button{background:none;border:0;font-size:15px;color:var(--navy);cursor:pointer;font-weight:600}
 #postBox{flex:1;min-height:0}
+.glink2{display:block;margin:10px auto 0;background:none;border:0;color:#9fb3cb;font-size:14px;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.telbtn{display:block;text-align:center;color:var(--navy);font-weight:600;font-size:14px;text-decoration:none;padding:8px}
+.flink{background:none;border:0;color:#c9d6e6;font-size:12.5px;cursor:pointer;padding:0;text-decoration:underline;text-underline-offset:3px}
+#ask{min-height:100svh;background:var(--paper)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips button{border:1px solid #d6dde6;background:#fff;border-radius:99px;padding:9px 14px;font-size:14px;cursor:pointer;color:#3b4b5e}
+.chips button.on{background:var(--navy);border-color:var(--navy);color:#fff;font-weight:600}
+.qhint{font-size:12.5px;color:var(--gold);margin:8px 0 0;min-height:1em}
+.thumbs{display:flex;gap:8px;margin-top:8px}
+.thumbs img{width:72px;height:72px;object-fit:cover;border-radius:10px;border:1px solid var(--line)}
 footer{background:var(--deep);color:#7f93ac;padding:34px 22px 44px;font-size:12px;line-height:1.8;text-align:center}
 footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
 .toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);background:var(--navy);color:#fff;padding:11px 18px;border-radius:12px;font-size:14px;z-index:99;box-shadow:0 8px 22px rgba(0,0,0,.2)}
@@ -232,6 +242,7 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
     </div>
     <div id="gateMsg"></div>
     <button type="button" class="glink" onclick="openTrack()">이미 주문하셨나요? <b>주문 조회</b> ›</button>
+    <button type="button" class="glink2" onclick="openAsk()">궁금한 점이 있으신가요? 문의하기 ›</button>
     <div class="note">워터비스 임직원 · 가족 · 지인 전용 페이지입니다.</div>
   </div>
 </section>
@@ -439,11 +450,56 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
       </div>
       <div class="tcs">
         <b>문의가 있으신가요?</b>
-        <p>주문번호를 말씀해 주시면 바로 확인해 드립니다.</p>
-        <a class="cta" style="margin:10px 0 0;width:100%;display:block;text-align:center;text-decoration:none" href="tel:0336721032">전화 문의 033-672-1032</a>
-        <p class="fine" style="margin-top:8px">온라인 문의하기는 곧 열립니다.</p>
+        <p>이 주문에 대해 글로 남겨 주시면 담당자가 확인 후 답변드립니다.</p>
+        <button type="button" class="cta" style="margin:10px 0 8px;width:100%" onclick="openAsk($('rNo').textContent)">이 주문 문의하기</button>
+        <a class="telbtn" href="tel:0336721032">급하시면 전화 033-672-1032</a>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ═════════ 문의하기 ═════════ -->
+<section id="ask" class="hidden">
+  <div class="thead">
+    <div class="wrap">
+      <button type="button" class="tback" onclick="closeAsk()">‹ 돌아가기</button>
+      <img class="tlogo" src="img/logo-watervis-white.png" alt="WATERVIS" width="120" height="26">
+      <h2>문의하기</h2>
+      <p>남겨 주시면 담당자가 확인 후 연락드립니다.</p>
+    </div>
+  </div>
+  <div class="wrap tbody" id="askForm">
+    <div class="field"><label>무엇이 궁금하세요?<em>*</em></label>
+      <div class="chips" id="qType">
+        <button type="button" data-v="배송">배송</button>
+        <button type="button" data-v="입금·결제">입금·결제</button>
+        <button type="button" data-v="교환·반품">교환·반품</button>
+        <button type="button" data-v="제품">제품</button>
+        <button type="button" data-v="대량·정기 구매">대량·정기 구매</button>
+        <button type="button" data-v="기타">기타</button>
+      </div>
+      <p class="qhint" id="qHint"></p>
+    </div>
+    <div class="row2">
+      <div class="field"><label>성함<em>*</em></label><input class="inp" id="qName" autocomplete="name"></div>
+      <div class="field"><label>연락처<em>*</em></label><input class="inp" id="qTel" type="tel" inputmode="tel" placeholder="010-0000-0000"></div>
+    </div>
+    <div class="field"><label>주문번호 <span style="font-weight:400;color:var(--muted)">(주문 관련이면)</span></label><input class="inp" id="qNo" autocapitalize="characters" placeholder="예: F260925-001"></div>
+    <div class="field"><label>내용<em>*</em></label><textarea class="inp" id="qBody" rows="5" maxlength="1000" placeholder="편하게 적어 주세요."></textarea></div>
+    <div class="field" id="qPhotoBox"><label>사진 <span style="font-weight:400;color:var(--muted)">(선택 · 최대 2장)</span></label>
+      <input type="file" id="qPhoto" accept="image/*" multiple class="inp" style="padding:10px">
+      <div class="thumbs" id="qThumbs"></div>
+    </div>
+    <label class="check"><input type="checkbox" id="qAgree"> <span>문의 답변을 위한 개인정보(성함·연락처·내용) 수집·이용에 동의합니다 <em style="color:var(--bad);font-style:normal">(필수)</em></span></label>
+    <ul class="errs" id="qErr"></ul>
+    <button class="submit" id="qBtn" style="background:var(--navy);color:#fff">문의 보내기</button>
+    <p class="fine">담당자가 확인하는 대로 연락드립니다. 급하시면 <a href="tel:0336721032" style="color:var(--navy)">033-672-1032</a></p>
+  </div>
+  <div class="wrap tbody hidden" id="askDone" style="text-align:center">
+    <div class="seal" style="width:64px;height:64px;border-radius:50%;margin:10px auto 14px;display:grid;place-items:center;border:1px solid var(--gold);color:var(--gold)"><svg viewBox="0 0 32 32" style="width:30px;height:30px;stroke:currentColor;fill:none;stroke-width:1.6"><path d="M8 16.5l5.5 5.5L24.5 10"/></svg></div>
+    <h2 style="font-family:var(--serif);color:var(--navy);margin:0 0 6px">문의가 접수되었습니다</h2>
+    <p style="color:var(--muted);margin:0 0 20px">문의번호 <b id="qDoneNo" style="font-family:ui-monospace,Menlo,Consolas,monospace;color:var(--navy)"></b><br>담당자가 확인 후 연락드리겠습니다.</p>
+    <button class="cta" style="margin:0 auto;width:100%" onclick="closeAsk()">돌아가기</button>
   </div>
 </section>
 
@@ -460,14 +516,15 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
   사업자등록번호 682-87-03964 · 통신판매업 신고번호 <span id="mailOrderNo">신고 후 기재</span><br>
   강원특별자치도 양양군 현남면 원포1길 53, 환경동 1층<br>
   Tel 033-672-1032 · admin@watervis.co.kr<br>
-  <span style="opacity:.7">© 2026 WATERVIS CO., LTD.</span>
+  <button type="button" class="flink" onclick="openAsk()">문의하기</button> · <button type="button" class="flink" onclick="openTrack()">주문 조회</button><br>
+  <span style="opacity:.7">© 2026 WATERVIS CO., LTD. · 화면 v0.6</span>
 </footer>
 
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js" async></script>
 <script>
 /* 워터비스 Private Order  v0.1 (시안) — 2026-09-24
    API_URL 이 비어 있으면 데모: 아무 초대코드나 통과, 저장 안 함 */
-const VERSION='friend-v0.2';
+const VERSION='v0.6';
 const API_URL='';
 const PRICE={box:18000, list:28800, unit:36, ship:5500, maxQty:20};  // 서버가 다시 계산한다
 const BANK={name:'농협(강릉농협)', no:'355-0097-3405-33', holder:'워터비스코퍼레이션(주)', days:3};
@@ -481,6 +538,7 @@ async function api(action,payload){
     if(action==='friendLogin'){ if(S.code!=='1032') throw new Error('코드'); return {ok:true, price:PRICE, bank:BANK}; }
     if(action==='track'){ if(!/^[A-Z]\d{6}-\d{3}$/.test(payload.orderNo)) throw new Error('주문을 찾을 수 없습니다. 연락처와 주문번호를 확인해 주세요.');
       return {ok:true, order:{orderNo:payload.orderNo, step:2, status:'발송', waybill:'459497649203', carrier:'한진택배', items:'몸愛좋은물 Gold 350mL × 2박스', total:47000, to:'홍*동 · 강원 양양군 현남면 ***', date:'2026-09-25', message:'9월 26일 발송되었습니다. 보통 1~2일 안에 도착합니다.'}}; }
+    if(action==='ask'){ const d=new Date(); return {ok:true, askNo:'Q'+String(d.getFullYear()).slice(2)+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0')+'-001'}; }
     if(action==='friendOrder'){ const d=new Date(); return {ok:true, orderNo:'F'+String(d.getFullYear()).slice(2)+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0')+'-001', total:payload.order.qty*(PRICE.box+PRICE.ship)}; }
   }
   const r=await fetch(API_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},
@@ -512,17 +570,75 @@ window.addEventListener('DOMContentLoaded',function(){
   let saved=''; try{ saved=sessionStorage.getItem('wv_code')||''; }catch(_){}
   const code=(h||q).trim() || saved;
   if(code==='track'){ openTrack(new URLSearchParams(location.search).get('no')||''); return; }
+  if(code==='ask'){ openAsk(new URLSearchParams(location.search).get('no')||''); return; }
   if(code){ S.code=code; $('gate').classList.add('hidden'); enter(); }
 });
 /* 주문 조회 — 입장 코드 없이도 열린다 (연락처 + 주문번호가 맞아야만 보임) */
 const HANJIN='https://www.hanjin.com/kor/CMS/DeliveryMgr/WaybillResult.do?mCode=MN038&schLang=KR&wblnumText2=';
 let trackFrom=null;
+const PAGES=['gate','main','track','ask'];
+const curPage=()=>PAGES.find(id=>!$(id).classList.contains('hidden'))||'gate';
 function openTrack(no){
-  trackFrom=['gate','main'].find(id=>!$(id).classList.contains('hidden'))||'gate';
-  ['gate','main'].forEach(id=>$(id).classList.add('hidden'));
+  const c=curPage(); if(c!=='track') trackFrom=(c==='ask'?(askFrom||'gate'):c);
+  PAGES.forEach(id=>$(id).classList.add('hidden'));
   $('track').classList.remove('hidden'); $('foot').classList.remove('hidden');
   if(no){ $('tNo').value=no; } $('tRes').classList.add('hidden'); window.scrollTo(0,0);
 }
+/* 문의하기 — 주문과 상관없이도 보낼 수 있다. 주문 조회에서 오면 주문번호가 채워진다 */
+let askFrom=null, Q={type:'', photos:[], reqId:null, busy:false};
+const Q_HINT={'배송':'주문번호를 넣어 주시면 바로 확인합니다.','입금·결제':'입금하신 날짜·금액·입금자명을 적어 주세요.',
+  '교환·반품':'받으신 상태를 사진으로 보내 주시면 빠르게 처리됩니다.','제품':'','대량·정기 구매':'원하시는 수량·주기·배송지를 적어 주세요.','기타':''};
+function openAsk(no){
+  const c=curPage(); if(c!=='ask') askFrom=c;
+  PAGES.forEach(id=>$(id).classList.add('hidden'));
+  $('ask').classList.remove('hidden'); $('foot').classList.remove('hidden');
+  $('askForm').classList.remove('hidden'); $('askDone').classList.add('hidden');
+  if(no) $('qNo').value=no;
+  if(!$('qTel').value && $('tTel').value) $('qTel').value=$('tTel').value;
+  window.scrollTo(0,0);
+}
+function closeAsk(){ $('ask').classList.add('hidden'); const to=askFrom||'gate'; $(to).classList.remove('hidden');
+  if(to==='gate') $('foot').classList.add('hidden'); window.scrollTo(0,0); }
+$('qType').querySelectorAll('button').forEach(b=>b.onclick=()=>{
+  Q.type=b.dataset.v; $('qType').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));
+  $('qHint').textContent=Q_HINT[Q.type]||'';
+});
+$('askForm').addEventListener('input',()=>{$('qErr').innerHTML='';});
+$('askForm').addEventListener('click',e=>{ if(e.target.closest('.chips')) $('qErr').innerHTML=''; });
+$('qTel').addEventListener('input',e=>{ const v=e.target.value.replace(/\D/g,'').slice(0,11);
+  e.target.value=v.length<4?v:v.length<8?v.slice(0,3)+'-'+v.slice(3):v.slice(0,3)+'-'+v.slice(3,v.length-4)+'-'+v.slice(-4); });
+/* 사진은 휴대폰에서 줄여서(긴 변 1280px, JPEG) 보낸다 */
+function shrink(file){ return new Promise((ok,bad)=>{ const img=new Image(), url=URL.createObjectURL(file);
+  img.onload=()=>{ const k=Math.min(1,1280/Math.max(img.width,img.height)), c=document.createElement('canvas');
+    c.width=Math.round(img.width*k); c.height=Math.round(img.height*k); c.getContext('2d').drawImage(img,0,0,c.width,c.height);
+    URL.revokeObjectURL(url); ok(c.toDataURL('image/jpeg',0.82)); };
+  img.onerror=()=>bad(new Error('사진을 읽지 못했습니다')); img.src=url; }); }
+$('qPhoto').onchange=async e=>{
+  const files=[...e.target.files].slice(0,2); Q.photos=[];
+  for(const f of files){ try{ Q.photos.push(await shrink(f)); }catch(err){ toast(err.message); } }
+  $('qThumbs').innerHTML=Q.photos.map(d=>'<img src="'+d+'" alt="">').join('');
+  if(e.target.files.length>2) toast('사진은 2장까지만 보냅니다.');
+};
+$('qBtn').onclick=async()=>{
+  const e=[], tel=$('qTel').value.replace(/\D/g,'');
+  if(!Q.type) e.push('무엇이 궁금하신지 골라 주세요.');
+  if(!$('qName').value.trim()) e.push('성함을 적어 주세요.');
+  if(tel.length<10) e.push('연락처를 확인해 주세요.');
+  if($('qBody').value.trim().length<2) e.push('내용을 적어 주세요.');
+  if(!$('qAgree').checked) e.push('개인정보 수집·이용에 동의해 주세요.');
+  $('qErr').innerHTML=e.map(x=>'<li>'+x+'</li>').join(''); if(e.length||Q.busy) return;
+  Q.busy=true; $('qBtn').disabled=true; $('qBtn').textContent='보내는 중…';
+  if(!Q.reqId) Q.reqId=(crypto.randomUUID?crypto.randomUUID():Date.now()+'-'+Math.random().toString(36).slice(2));
+  try{
+    const r=await api('ask',{ask:{reqId:Q.reqId, type:Q.type, name:$('qName').value.trim(), tel,
+      orderNo:$('qNo').value.trim().toUpperCase(), body:$('qBody').value.trim(), photos:Q.photos, agree:true}});
+    $('qDoneNo').textContent=r.askNo; $('askForm').classList.add('hidden'); $('askDone').classList.remove('hidden');
+    ['qName','qTel','qNo','qBody'].forEach(i=>$(i).value=''); $('qPhoto').value=''; $('qThumbs').innerHTML='';
+    Q={type:'', photos:[], reqId:null, busy:false}; $('qType').querySelectorAll('button').forEach(x=>x.classList.remove('on')); $('qHint').textContent=''; $('qAgree').checked=false;
+    window.scrollTo(0,0);
+  }catch(err){ toast((err.message||'보내지 못했습니다')+' (다시 눌러도 두 번 접수되지 않습니다)'); }
+  finally{ Q.busy=false; $('qBtn').disabled=false; $('qBtn').textContent='문의 보내기'; }
+};
 function closeTrack(){ $('track').classList.add('hidden'); $(trackFrom||'gate').classList.remove('hidden');
   if(trackFrom==='gate') $('foot').classList.add('hidden'); window.scrollTo(0,0); }
 $('tTel').addEventListener('input',e=>{ const v=e.target.value.replace(/\D/g,'').slice(0,11);
