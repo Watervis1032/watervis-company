@@ -283,9 +283,9 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
   </div>
   <form class="wrap tbody" id="pwForm" onsubmit="return false">
     <input type="text" autocomplete="username" id="pwUser" hidden>
-    <div class="field"><label>지금 비밀번호 (받으신 임시 비밀번호)</label><input class="inp" id="pwOld" type="password" autocomplete="current-password"></div>
-    <div class="field"><label>새 비밀번호</label><input class="inp" id="pwNew" type="password" autocomplete="new-password"></div>
-    <div class="field"><label>새 비밀번호 한 번 더</label><input class="inp" id="pwNew2" type="password" autocomplete="new-password"></div>
+    <div class="field"><label>지금 비밀번호 (받으신 임시 비밀번호)</label><input class="inp" id="pwOld" type="password" maxlength="64" autocomplete="current-password"></div>
+    <div class="field"><label>새 비밀번호</label><input class="inp" id="pwNew" type="password" maxlength="64" autocomplete="new-password"></div>
+    <div class="field"><label>새 비밀번호 한 번 더</label><input class="inp" id="pwNew2" type="password" maxlength="64" autocomplete="new-password"></div>
     <ul class="pwrules"><li>8자 이상, 영문과 숫자를 섞어서</li><li>휴대폰 번호 뒷자리·1234·abcd 같은 쉬운 조합은 안 됩니다</li></ul>
     <ul class="errs" id="pwErr"></ul>
     <button class="submit" id="pwBtn" type="submit" style="background:var(--navy);color:#fff">비밀번호 바꾸기</button>
@@ -537,7 +537,7 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
   강원특별자치도 양양군 현남면 원포1길 53, 환경동 1층<br>
   Tel 033-672-1032 · admin@watervis.co.kr<br>
   <button type="button" class="flink" onclick="openAsk()">문의하기</button> · <button type="button" class="flink auth" onclick="openMine()">내 주문</button> · <button type="button" class="flink auth" onclick="logout()">로그아웃</button><br>
-  <span style="opacity:.7">© 2026 WATERVIS CO., LTD. · 임직원 화면 v0.3.1</span>
+  <span style="opacity:.7">© 2026 WATERVIS CO., LTD. · 임직원 화면 v0.3.2</span>
 </footer>
 
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js" async></script>
@@ -546,7 +546,7 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
    · 로그인 토큰은 이 탭의 메모리에만 둔다 (브라우저 저장소에 넣지 않음 → 탭을 닫으면 끝)
    · 30분 동안 아무 조작이 없으면 스스로 로그아웃 (서버도 따로 검사)
    · 가격은 서버가 계정·품목표로 다시 계산한다. 화면 숫자는 보여 주기용 */
-const VERSION='staff-v0.3';
+const VERSION='staff-v0.3.2';
 const API_URL='https://script.google.com/macros/s/AKfycby2u_oD8QlsYJj3fnSBsvO8bzUeiqZLuR1X7o3LAnhaHYdsWRJOo6tN9UweLoOma0G5/exec';
 const PRICE={box:0, list:0, unit:36, ship:0, maxQty:20};   // 로그인 후 서버가 알려 준다 (공개 소스에 가격을 두지 않음)
 const BANK={name:'농협(강릉농협)', no:'355-0097-3405-33', holder:'워터비스코퍼레이션(주)', days:3};
