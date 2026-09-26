@@ -107,7 +107,7 @@ img{display:block;max-width:100%}
 .inp{width:100%;border:1px solid #d6dde6;border-radius:11px;padding:13px 14px;background:#fff;font-size:16px}
 .inp:focus{outline:none;border-color:var(--navy2);box-shadow:0 0 0 3px rgba(11,42,82,.08)}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.qtyrow{display:flex;align-items:center;justify-content:space-between;border:1px solid #d6dde6;border-radius:14px;padding:10px 12px 10px 16px;margin-bottom:22px}
+.qtyrow{display:flex;align-items:center;justify-content:space-between;border:1px solid #d6dde6;border-radius:14px;padding:12px 16px;margin-bottom:22px}
 .qtyrow .t b{display:block;font-size:15px}
 .qtyrow .t span{font-size:12.5px;color:var(--muted)}
 .stepper{display:flex;align-items:center;gap:4px}
@@ -119,7 +119,6 @@ img{display:block;max-width:100%}
 .sbtn{border:1px solid var(--navy2);background:#fff;color:var(--navy2);border-radius:11px;padding:0 14px;font-weight:600;cursor:pointer;white-space:nowrap}
 .check{display:flex;gap:10px;align-items:flex-start;font-size:14px;margin:6px 0 4px;cursor:pointer}
 .check input{width:20px;height:20px;margin:2px 0 0;accent-color:var(--navy)}
-.same{font-size:13.5px;color:#4b5868;margin:-4px 0 14px}
 details.priv{font-size:12.5px;color:var(--muted);margin:0 0 16px 30px}
 details.priv summary{cursor:pointer;color:#4b5868}
 details.priv table{border-collapse:collapse;margin-top:8px;width:100%}
@@ -151,6 +150,56 @@ details.priv td:first-child{width:78px;background:#f6f8fa;color:#4b5868}
 .errs{list-style:none;margin:0 0 12px;padding:0;color:var(--bad);font-size:13.5px}
 .errs li:before{content:"· "}
 .fine{font-size:12.5px;color:var(--muted);text-align:center;margin:10px 0 0}
+
+/* ── 받는 곳 (v0.3.4 여러 곳) ── */
+.dhint{font-size:13px;color:var(--muted);margin:-6px 0 12px}
+.dcard{border:1px solid #d6dde6;border-radius:14px;margin-bottom:10px;background:#fff;overflow:hidden}
+.dcard.bad{border-color:var(--bad);box-shadow:0 0 0 2px rgba(184,58,58,.08)}
+.dhead{display:flex;align-items:center;gap:10px;padding:12px 14px;cursor:pointer;user-select:none}
+.dhead .dn{flex:none;width:24px;height:24px;border-radius:50%;background:var(--navy);color:#fff;font-size:12.5px;font-weight:700;display:grid;place-items:center}
+.dhead .dsum{flex:1;min-width:0;font-size:14.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dhead .dsum small{font-weight:400;color:var(--muted);margin-left:6px;font-size:13px}
+.dhead .dsum.empty{color:var(--muted);font-weight:500}
+.dhead .dq{font-size:13.5px;color:var(--navy);font-weight:700;white-space:nowrap}
+.dhead .dx{flex:none;border:0;background:none;color:var(--muted);font-size:13px;cursor:pointer;padding:4px 2px;text-decoration:underline;text-underline-offset:3px}
+.dhead .chev{flex:none;width:14px;height:14px;stroke:var(--muted);fill:none;stroke-width:2;transition:transform .2s}
+.dcard.open .dhead .chev{transform:rotate(180deg)}
+.dbody{padding:0 14px 14px;border-top:1px dashed var(--line)}
+.dcard:not(.open) .dbody{display:none}
+.mefill{border:1px solid var(--line);background:#f6f8fa;border-radius:99px;padding:6px 12px;font-size:13px;cursor:pointer;margin:12px 0 10px;color:var(--navy2);font-weight:600}
+.dqty{display:flex;align-items:center;justify-content:space-between;margin-top:4px}
+.dqty > span{font-size:13px;color:#4b5868;font-weight:600}
+.nozip{font-size:12px;color:#9a7a36;margin:6px 0 0}
+.dadd{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:4px 0 18px}
+.abtn{border:1px dashed var(--navy2);background:#fff;color:var(--navy2);border-radius:12px;padding:12px 8px;font-weight:700;font-size:14.5px;cursor:pointer}
+.abtn.ghost{border-style:solid;border-color:#d6dde6;color:#3b4b5e;font-weight:600}
+.abtn:disabled{opacity:.45;cursor:not-allowed}
+.pastebox{border:1px solid var(--line);background:#f7f9fb;border-radius:14px;padding:14px;margin:-8px 0 18px}
+.pastebox p{margin:0 0 10px;font-size:13px;color:#4b5868}
+.pastebox textarea{font-size:14px;min-height:130px;line-height:1.5}
+.prow{display:flex;gap:8px;margin-top:10px;align-items:center}
+.prow .sbtn{padding:11px 16px}
+.flat{border:0;background:none;color:var(--muted);cursor:pointer;font-size:14px}
+.pmsg{margin:10px 0 0!important;font-size:13px;white-space:pre-line}
+.pmsg.ok{color:var(--ok)} .pmsg.bad{color:var(--bad)}
+
+/* ── 주문 확인창 ── */
+#confirm{position:fixed;inset:0;z-index:96;background:rgba(3,16,31,.55);display:flex;align-items:flex-end;justify-content:center}
+.cbox{background:#fff;width:100%;max-width:560px;max-height:88svh;overflow:auto;border-radius:18px 18px 0 0;padding:22px 20px calc(20px + env(safe-area-inset-bottom))}
+.cbox h3{font-family:var(--serif);color:var(--navy);font-size:20px;margin:0 0 4px}
+.cbox .cwho{font-size:13.5px;color:var(--muted);margin:0 0 14px}
+.clist{list-style:none;margin:0 0 14px;padding:0;border-top:1px solid var(--line)}
+.clist li{padding:10px 0;border-bottom:1px solid var(--line);font-size:14px}
+.clist li b{color:var(--navy)}
+.clist li .q{float:right;font-weight:700;color:var(--navy)}
+.clist li small{display:block;color:#5b6778;font-size:13px;margin-top:2px}
+.ctot{display:flex;justify-content:space-between;align-items:baseline;margin:0 0 16px}
+.ctot span{font-size:14px;color:var(--muted)}
+.ctot b{font-family:var(--serif);font-size:24px;color:var(--navy)}
+.cbtns{display:grid;grid-template-columns:1fr 2fr;gap:8px}
+.cbtns button{border-radius:12px;padding:15px;font-weight:700;font-size:15.5px;cursor:pointer}
+.cbtns .no{border:1px solid var(--line);background:#fff;color:var(--navy)}
+.cbtns .yes{border:0;background:linear-gradient(180deg,var(--gold2),var(--gold));color:#2a1d05}
 
 /* ── 완료 ── */
 #done{padding:44px 22px 30px;background:#fff;text-align:center}
@@ -201,9 +250,15 @@ details.priv td:first-child{width:78px;background:#f6f8fa;color:#4b5868}
 .tmsg{font-size:14px;color:#3b4b5e;margin:0 0 12px}
 .tdl{margin:0;display:grid;grid-template-columns:82px 1fr;gap:6px 10px;font-size:14px;border-top:1px solid var(--line);padding-top:12px}
 .tdl dt{color:var(--muted)} .tdl dd{margin:0}
+.mdest{list-style:none;padding:0;margin:0 0 12px;border-top:1px solid var(--line)}
+.mdest li{border-bottom:1px solid var(--line);padding:10px 0;font-size:14px;display:flex;justify-content:space-between;gap:10px;align-items:center}
+.mdest li small{color:var(--muted);font-size:12.5px;display:block}
+.mdest li .wb{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12.5px;color:var(--navy);display:block}
+.mdest .trackbtn{padding:7px 10px;font-size:13px}
+.mdest .wait{font-size:12.5px;color:var(--muted);white-space:nowrap}
 .tcs{margin-top:16px;border-radius:16px;background:#f7f9fb;padding:16px 18px;font-size:14px}
 .tcs p{margin:4px 0 0;color:#5b6778}
-#postLayer{position:fixed;inset:0;z-index:95;background:rgba(3,16,31,.55);display:flex;align-items:flex-end;justify-content:center}
+#postLayer{position:fixed;inset:0;z-index:97;background:rgba(3,16,31,.55);display:flex;align-items:flex-end;justify-content:center}
 .postwrap{background:#fff;width:100%;max-width:560px;height:88svh;border-radius:18px 18px 0 0;overflow:hidden;display:flex;flex-direction:column}
 .posthead{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--line)}
 .posthead button{background:none;border:0;font-size:15px;color:var(--navy);cursor:pointer;font-weight:600}
@@ -363,29 +418,24 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
       <div class="sec-title"><h2>주문서</h2></div>
 
       <div class="qtyrow">
-        <div class="t"><b>몸愛좋은물 Gold 1박스</b><span>350mL × 36입</span></div>
-        <div class="stepper">
-          <button type="button" id="minus" aria-label="한 박스 빼기">−</button>
-          <output id="qty">1</output>
-          <button type="button" id="plus" aria-label="한 박스 더하기">+</button>
-        </div>
+        <div class="t"><b>몸愛좋은물 Gold 1박스</b><span>350mL × 36입 · 수량은 받는 곳마다 정합니다</span></div>
       </div>
 
       <div class="buyerbox"><span>주문하시는 분</span><b id="bName"></b> · <span id="bTel" style="display:inline;font-size:14.5px;color:inherit"></span></div>
 
       <div class="sec-title" style="margin-top:26px"><h2>받으시는 곳</h2></div>
-      <label class="check same"><input type="checkbox" id="sameAs" checked> 제가 받아요</label>
-      <div id="rcvBox" class="hidden row2">
-        <div class="field"><label>받으시는 분<em>*</em></label><input class="inp" id="rcv"></div>
-        <div class="field"><label>연락처<em>*</em></label><input class="inp" id="rcvTel" type="tel" inputmode="tel" placeholder="010-0000-0000"></div>
+      <p class="dhint">받으시는 분의 성함·연락처·주소를 넣어 주세요. 여러 곳으로 나눠 보낼 수 있습니다.</p>
+      <div id="dests"></div>
+      <div class="dadd">
+        <button type="button" class="abtn" id="addDest">+ 받는 곳 추가</button>
+        <button type="button" class="abtn ghost" id="openPaste">여러 명 한꺼번에 넣기</button>
       </div>
-      <div class="field">
-        <label>주소<em>*</em></label>
-        <div class="addr"><input class="inp" id="zip" placeholder="우편번호" readonly style="max-width:130px"><button type="button" class="sbtn" id="findAddr">주소 찾기</button></div>
-        <input class="inp" id="addr1" placeholder="기본 주소" style="margin-top:8px">
-        <input class="inp" id="addr2" placeholder="상세 주소 (동·호수)" style="margin-top:8px">
+      <div id="pasteBox" class="pastebox hidden">
+        <p>한 줄에 한 분씩 붙여 넣어 주세요. 엑셀 표를 그대로 복사해도 됩니다.<br><b>이름 · 연락처 · 주소 · 수량</b> — 수량은 «2박스»처럼 적고, 안 쓰면 1박스입니다.</p>
+        <textarea class="inp" id="pasteText" rows="6" placeholder="홍길동 010-1234-5678 서울 중구 세종대로 110 3층 2박스&#10;김영희 010-9876-5432 강원 양양군 현남면 원포1길 53"></textarea>
+        <div class="prow"><button type="button" class="sbtn" id="pasteGo">목록에 넣기</button><button type="button" class="flat" id="pasteClose">닫기</button></div>
+        <p class="pmsg" id="pasteMsg"></p>
       </div>
-      <div class="field"><label>배송 요청사항</label><input class="inp" id="shipMemo" placeholder="예: 문 앞에 놓아 주세요"></div>
 
       <div class="sec-title" style="margin-top:26px"><h2>입금</h2></div>
       <div class="bankbox">
@@ -408,7 +458,7 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
         <input class="inp" id="rcptNo" inputmode="numeric" placeholder="휴대전화 번호 또는 사업자등록번호">
       </div>
       <div class="bill">
-        <div class="l"><span>상품 <span id="bQty">1</span>박스</span><span id="bGoods"></span></div>
+        <div class="l"><span>상품 <span id="bQty">1</span>박스<span id="bDest"></span></span><span id="bGoods"></span></div>
         <div class="l"><span>택배비</span><span id="bShip"></span></div>
         <div class="tot"><span>입금하실 금액</span><b id="bTot"></b></div>
       </div>
@@ -456,6 +506,17 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
     </div>
   </section>
 </main>
+
+<!-- ═════════ 주문 확인창 ═════════ -->
+<div id="confirm" class="hidden" role="dialog" aria-label="주문 확인">
+  <div class="cbox">
+    <h3>이대로 주문할까요?</h3>
+    <p class="cwho" id="cWho"></p>
+    <ul class="clist" id="cList"></ul>
+    <div class="ctot"><span>입금하실 금액</span><b id="cTot"></b></div>
+    <div class="cbtns"><button type="button" class="no" id="cNo">고치기</button><button type="button" class="yes" id="cYes">주문 신청</button></div>
+  </div>
+</div>
 
 <!-- ═════════ 내 주문 ═════════ -->
 <section id="mine" class="hidden">
@@ -537,18 +598,19 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
   강원특별자치도 양양군 현남면 원포1길 53, 환경동 1층<br>
   Tel 033-672-1032 · admin@watervis.co.kr<br>
   <button type="button" class="flink" onclick="openAsk()">문의하기</button> · <button type="button" class="flink auth" onclick="openMine()">내 주문</button> · <button type="button" class="flink auth" onclick="logout()">로그아웃</button><br>
-  <span style="opacity:.7">© 2026 WATERVIS CO., LTD. · 임직원 화면 v0.3.3</span>
+  <span style="opacity:.7">© 2026 WATERVIS CO., LTD. · 임직원 화면 v0.3.4</span>
 </footer>
 
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js" async></script>
 <script>
-/* 워터비스 임직원 주문  v0.3 — 2026-09-26
+/* 워터비스 임직원 주문  v0.3.4 — 2026-09-26
    · 로그인 토큰은 이 탭의 메모리에만 둔다 (브라우저 저장소에 넣지 않음 → 탭을 닫으면 끝)
    · 30분 동안 아무 조작이 없으면 스스로 로그아웃 (서버도 따로 검사)
-   · 가격은 서버가 계정·품목표로 다시 계산한다. 화면 숫자는 보여 주기용 */
-const VERSION='staff-v0.3.3';
+   · 가격은 서버가 계정·품목표로 다시 계산한다. 화면 숫자는 보여 주기용
+   · v0.3.4: 받는 분 입력이 기본(«내 정보로 채우기» 버튼), 받는 곳 여러 개, 여러 명 붙여넣기, 주문 확인창 */
+const VERSION='staff-v0.3.4';
 const API_URL='https://script.google.com/macros/s/AKfycby2u_oD8QlsYJj3fnSBsvO8bzUeiqZLuR1X7o3LAnhaHYdsWRJOo6tN9UweLoOma0G5/exec';
-const PRICE={box:0, list:0, unit:36, ship:0, maxQty:20};   // 로그인 후 서버가 알려 준다 (공개 소스에 가격을 두지 않음)
+const PRICE={box:0, list:0, unit:36, ship:0, maxQty:20, maxTotal:60, maxDests:30};   // 로그인 후 서버가 알려 준다 (공개 소스에 가격을 두지 않음)
 const BANK={name:'농협(강릉농협)', no:'355-0097-3405-33', holder:'워터비스코퍼레이션(주)', days:3};
 const IDLE_MS=30*60*1000;
 
@@ -556,8 +618,9 @@ const $=id=>document.getElementById(id);
 const won=n=>Number(n).toLocaleString('ko-KR')+'원';
 const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
 const fmtTel=v=>{v=String(v||'').replace(/\D/g,'').slice(0,11);return v.length<4?v:v.length<8?v.slice(0,3)+'-'+v.slice(3):v.slice(0,3)+'-'+v.slice(3,v.length-4)+'-'+v.slice(-4);};
+const TEL=/^01[016789]-?\d{3,4}-?\d{4}$/;
 const T={token:null, user:null};
-const S={qty:1, busy:false, reqId:null};
+const S={busy:false, reqId:null};
 let lastAct=Date.now();
 
 async function api(action,payload){
@@ -625,7 +688,7 @@ async function enterMain(me){
   $('meName').textContent=T.user.name; $('meDept').textContent=T.user.dept?'· '+T.user.dept:'';
   $('bName').textContent=T.user.name+(T.user.dept?' ('+T.user.dept+')':''); $('bTel').textContent=fmtTel(T.user.id);
   if(!$('payer').dataset.touched) $('payer').value=T.user.name;
-  paintPrice(); calc(); newOrder();
+  paintPrice(); if(!D.length) D.push(blank()); renderDests(); newOrder();
 }
 function newOrder(){ document.querySelectorAll('#main > section').forEach(s=>s.classList.toggle('hidden',s.id==='done')); S.reqId=null; show('main'); }
 function paintPrice(){
@@ -636,70 +699,210 @@ function paintPrice(){
   $('pShip').textContent='택배비 박스당 '+won(PRICE.ship)+' 별도 · 입금 확인 후 발송';
   $('ctaSmall').textContent='임직원가 1박스 '+won(PRICE.box);
 }
-$('minus').onclick=()=>{S.qty=Math.max(1,S.qty-1);calc();};
-$('plus').onclick=()=>{S.qty=Math.min(PRICE.maxQty,S.qty+1);calc();};
 function calc(){
-  $('qty').textContent=S.qty; $('minus').disabled=S.qty<=1; $('plus').disabled=S.qty>=PRICE.maxQty;
-  const g=S.qty*PRICE.box, s=S.qty*PRICE.ship;
-  $('bQty').textContent=S.qty; $('bGoods').textContent=won(g); $('bShip').textContent=won(s); $('bTot').textContent=won(g+s);
+  const q=totQ(), g=q*PRICE.box, s=q*PRICE.ship;
+  $('bQty').textContent=q; $('bDest').textContent=D.length>1?' · '+D.length+'곳':'';
+  $('bGoods').textContent=won(g); $('bShip').textContent=won(s); $('bTot').textContent=won(g+s);
+  $('addDest').disabled=D.length>=PRICE.maxDests;
 }
+
+/* ── 받는 곳 (여러 곳) ── */
+const D=[];
+const blank=()=>({rcv:'',tel:'',zip:'',addr1:'',addr2:'',memo:'',qty:1,open:true});
+const totQ=()=>D.reduce((a,d)=>a+(Number(d.qty)||0),0);
+const isEmpty=d=>!d.rcv.trim()&&!d.tel.trim()&&!d.addr1.trim()&&!d.addr2.trim()&&!d.memo.trim();
+function destErrs(d){
+  const e=[];
+  if(!d.rcv.trim()) e.push('성함');
+  if(!TEL.test(d.tel.trim())) e.push('연락처');
+  if(d.addr1.trim().length<5) e.push('주소');
+  else if(d.zip&&!d.addr2.trim()) e.push('상세 주소');
+  if(!(d.qty>=1&&d.qty<=PRICE.maxQty)) e.push('수량(1~'+PRICE.maxQty+'박스)');
+  return e;
+}
+function sumHtml(d){
+  if(!d.rcv.trim()) return '받으시는 분을 넣어 주세요';
+  const a=d.addr1.trim().split(/\s+/).slice(0,3).join(' ');
+  return esc(d.rcv.trim())+(a?'<small>'+esc(a)+'</small>':'');
+}
+function paintHead(c,d){ const s=c.querySelector('.dsum'); s.innerHTML=sumHtml(d); s.classList.toggle('empty',!d.rcv.trim()); c.querySelector('.dq').textContent=d.qty+'박스'; }
+function renderDests(){
+  const many=D.length>1;
+  $('dests').innerHTML=D.map((d,i)=>`<div class="dcard${d.open?' open':''}" data-i="${i}">
+    <div class="dhead" data-act="toggle"><span class="dn">${i+1}</span><b class="dsum${d.rcv.trim()?'':' empty'}">${sumHtml(d)}</b><span class="dq">${d.qty}박스</span>${many?'<button type="button" class="dx" data-act="del">삭제</button>':''}<svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
+    <div class="dbody">
+      <button type="button" class="mefill" data-act="me">내 정보로 채우기</button>
+      <div class="row2">
+        <div class="field"><label>받으시는 분<em>*</em></label><input class="inp" data-f="rcv" value="${esc(d.rcv)}" autocomplete="off"></div>
+        <div class="field"><label>연락처<em>*</em></label><input class="inp" data-f="tel" type="tel" inputmode="tel" placeholder="010-0000-0000" value="${esc(d.tel)}"></div>
+      </div>
+      <div class="field"><label>주소<em>*</em></label>
+        <div class="addr"><input class="inp" data-f="zip" placeholder="우편번호" readonly style="max-width:130px" value="${esc(d.zip)}"><button type="button" class="sbtn" data-act="post">주소 찾기</button></div>
+        <input class="inp" data-f="addr1" placeholder="기본 주소" style="margin-top:8px" value="${esc(d.addr1)}">
+        <input class="inp" data-f="addr2" placeholder="상세 주소 (동·호수)" style="margin-top:8px" value="${esc(d.addr2)}">
+        ${!d.zip&&d.addr1.trim()?'<p class="nozip">붙여 넣은 주소입니다. «주소 찾기»로 한 번 확인하시면 더 정확합니다.</p>':''}
+      </div>
+      <div class="field"><label>배송 요청사항</label><input class="inp" data-f="memo" placeholder="예: 문 앞에 놓아 주세요" value="${esc(d.memo)}"></div>
+      <div class="dqty"><span>수량</span><div class="stepper"><button type="button" data-act="minus" aria-label="한 박스 빼기">−</button><output>${d.qty}</output><button type="button" data-act="plus" aria-label="한 박스 더하기">+</button></div></div>
+    </div></div>`).join('');
+  syncSteppers(); calc();
+}
+function syncSteppers(){
+  const full=totQ()>=PRICE.maxTotal;
+  [...$('dests').children].forEach((c,i)=>{ const d=D[i], b=c.querySelectorAll('.stepper button');
+    b[0].disabled=d.qty<=1; b[1].disabled=d.qty>=PRICE.maxQty||full; });
+}
+$('dests').addEventListener('input',e=>{
+  const f=e.target.dataset.f; if(!f) return;
+  const c=e.target.closest('.dcard'), d=D[+c.dataset.i];
+  if(f==='tel') e.target.value=fmtTel(e.target.value);
+  d[f]=e.target.value; c.classList.remove('bad'); paintHead(c,d); $('errs').innerHTML='';
+});
+$('dests').addEventListener('click',e=>{
+  const b=e.target.closest('[data-act]'); if(!b) return;
+  const c=b.closest('.dcard'), i=+c.dataset.i, d=D[i], act=b.dataset.act;
+  if(act==='toggle'){ d.open=!d.open; c.classList.toggle('open',d.open); }
+  else if(act==='del'){ e.stopPropagation(); if(D.length>1&&(isEmpty(d)||confirm((i+1)+'번 받는 곳('+(d.rcv.trim()||'이름 없음')+')을 지울까요?'))){ D.splice(i,1); renderDests(); } }
+  else if(act==='me'){ if(!T.user) return; d.rcv=T.user.name; d.tel=fmtTel(T.user.id);
+    c.querySelector('[data-f=rcv]').value=d.rcv; c.querySelector('[data-f=tel]').value=d.tel; c.classList.remove('bad'); paintHead(c,d);
+    c.querySelector('[data-f=addr1]').value?null:c.querySelector('[data-act=post]').focus(); }
+  else if(act==='post') openPost(i);
+  else if(act==='minus'||act==='plus'){
+    if(act==='minus') d.qty=Math.max(1,d.qty-1);
+    else if(totQ()<PRICE.maxTotal) d.qty=Math.min(PRICE.maxQty,d.qty+1);
+    c.querySelector('output').textContent=d.qty; paintHead(c,d); syncSteppers(); calc();
+    if(act==='plus'&&totQ()>=PRICE.maxTotal) toast('한 번에 '+PRICE.maxTotal+'박스까지 주문할 수 있습니다.');
+  }
+});
+$('addDest').onclick=()=>{
+  if(D.length>=PRICE.maxDests){ toast('한 번에 '+PRICE.maxDests+'곳까지 넣을 수 있습니다.'); return; }
+  D.forEach(d=>{ if(!destErrs(d).length) d.open=false; });   // 다 채운 곳은 접어서 짧게
+  D.push(blank()); renderDests();
+  const c=$('dests').lastElementChild; c.scrollIntoView({behavior:'smooth',block:'center'});
+  setTimeout(()=>c.querySelector('[data-f=rcv]').focus(),300);
+};
+
+/* 여러 명 붙여넣기 — 한 줄에 한 분: 이름 연락처 주소 [수량박스]  또는 엑셀 칸(탭)으로 */
+$('openPaste').onclick=()=>{ $('pasteBox').classList.toggle('hidden'); if(!$('pasteBox').classList.contains('hidden')) $('pasteText').focus(); };
+$('pasteClose').onclick=()=>{ $('pasteBox').classList.add('hidden'); $('pasteMsg').textContent=''; };
+const TELRX=/(01[016789])[\s.\-]?(\d{3,4})[\s.\-]?(\d{4})/;
+function mk(name,tel,addr,qty,memo){ return {rcv:String(name).slice(0,40),tel:fmtTel(tel),zip:'',addr1:String(addr).slice(0,200),addr2:'',memo:String(memo||'').slice(0,200),qty:Math.max(1,qty||1),open:false}; }
+function parseOne(s){
+  if(s.indexOf('\t')>=0){                                   // 엑셀·구글시트에서 복사
+    const cells=s.split('\t').map(x=>x.trim()).filter(Boolean);
+    let tel='', qty=1; const rest=[];
+    cells.forEach(c=>{ const t=c.replace(/[\s.\-]/g,'');
+      if(!tel&&/^01[016789]\d{7,8}$/.test(t)) tel=t;
+      else if(/^\d{1,3}\s*(박스|box|개)?$/i.test(c)) qty=parseInt(c,10);
+      else rest.push(c); });
+    if(!tel||rest.length<2) return null;
+    const addr=rest.reduce((a,b)=>b.length>a.length?b:a,''), others=rest.filter(x=>x!==addr);
+    if(addr.length<5||!others.length) return null;
+    return mk(others[0],tel,addr,qty,others.slice(1).join(' '));
+  }
+  const m=s.match(TELRX); if(!m) return null;
+  const name=s.slice(0,m.index).replace(/^\s*\d+\s*[.)]\s*/,'').replace(/[\s,\/·:|]+$/,'').trim();
+  let rest=s.slice(m.index+m[0].length).replace(/^[\s,\/·:|]+/,'').trim(), qty=1;
+  // 수량은 «2박스·2개·2box» 로 끝나거나 «, 2» 처럼 쉼표 뒤 숫자일 때만 (주소 끝 번지와 헷갈리지 않게)
+  const q=rest.match(/(?:^|[\s,\/·|])(\d{1,3})\s*(?:박스|box|개)\s*$/i)||rest.match(/[,\/|]\s*(\d{1,3})\s*$/);
+  if(q){ qty=parseInt(q[1],10); rest=rest.slice(0,q.index).replace(/[\s,\/·|]+$/,'').trim(); }
+  if(!name||name.length>20||rest.length<5) return null;
+  return mk(name,m[1]+m[2]+m[3],rest,qty,'');
+}
+$('pasteGo').onclick=()=>{
+  const lines=$('pasteText').value.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);
+  if(!lines.length){ $('pasteMsg').className='pmsg bad'; $('pasteMsg').textContent='붙여 넣은 내용이 없습니다.'; return; }
+  const ok=[], bad=[];
+  lines.forEach(s=>{ if(/^(이름|성함|받는)/.test(s)&&!TELRX.test(s)) return;   // 머리줄은 건너뜀
+    const r=parseOne(s); r?ok.push(r):bad.push(s); });
+  if(D.length===1&&isEmpty(D[0])) D.length=0;                                       // 빈 칸 하나뿐이면 바꿔 끼운다
+  const room=PRICE.maxDests-D.length, take=ok.slice(0,Math.max(room,0)), over=ok.length-take.length;
+  take.forEach(r=>D.push(r)); if(!D.length) D.push(blank());
+  renderDests();
+  const msg=[];
+  if(take.length) msg.push(take.length+'분을 목록에 넣었습니다. 한 분씩 눌러 확인해 주세요.');
+  if(over>0) msg.push(PRICE.maxDests+'곳이 넘어 '+over+'분은 넣지 못했습니다. 주문을 나눠 주세요.');
+  if(bad.length) msg.push('읽지 못한 줄 '+bad.length+'개는 아래에 남겨 두었습니다. 고쳐서 다시 넣거나 직접 추가해 주세요.');
+  $('pasteMsg').className='pmsg '+(bad.length||over>0?'bad':'ok'); $('pasteMsg').textContent=msg.join('\n');
+  $('pasteText').value=bad.join('\n');
+  if(!bad.length&&over<=0) setTimeout(()=>{ $('pasteBox').classList.add('hidden'); $('pasteMsg').textContent=''; },2500);
+};
+
 $('cashRcpt').onchange=()=>{ $('rcptBox').classList.toggle('hidden',!$('cashRcpt').checked); if($('cashRcpt').checked&&!$('rcptNo').value&&T.user) $('rcptNo').value=T.user.id; };
-$('sameAs').onchange=()=>$('rcvBox').classList.toggle('hidden',$('sameAs').checked);
 $('payer').addEventListener('input',()=>$('payer').dataset.touched='1');
-$('rcvTel').addEventListener('input',e=>e.target.value=fmtTel(e.target.value));
 
 /* 주소 찾기 — 페이지 안에 겹쳐 띄운다 (휴대폰에서 새 창이 처음 화면으로 돌아가던 문제 방지) */
 function closePost(){ $('postLayer').classList.add('hidden'); $('postBox').innerHTML=''; document.body.style.overflow=''; }
 $('postClose').onclick=closePost;
-$('findAddr').onclick=()=>{
-  if(!(window.daum&&daum.Postcode)){ $('addr1').focus(); toast('주소를 직접 입력해 주세요.'); $('zip').readOnly=false; return; }
+function openPost(i){
+  const c=$('dests').children[i];
+  if(!(window.daum&&daum.Postcode)){ const z=c.querySelector('[data-f=zip]'); z.readOnly=false; c.querySelector('[data-f=addr1]').focus(); toast('주소를 직접 입력해 주세요.'); return; }
   $('postLayer').classList.remove('hidden'); document.body.style.overflow='hidden';
   new daum.Postcode({
-    oncomplete:d=>{ $('zip').value=d.zonecode; $('addr1').value=d.roadAddress||d.jibunAddress; closePost(); setTimeout(()=>$('addr2').focus(),50); },
+    oncomplete:r=>{ const d=D[i]; if(!d) return closePost();
+      if(!d.zip) d.addr2='';                                  // 붙여 넣은 주소를 검색 주소로 바꾸면 상세 주소는 새로
+      d.zip=r.zonecode; d.addr1=r.roadAddress||r.jibunAddress; d.open=true; closePost(); renderDests();
+      setTimeout(()=>{ const a=$('dests').children[i].querySelector('[data-f=addr2]'); a.focus(); },50); },
     width:'100%', height:'100%'
   }).embed($('postBox'));
-};
+}
 
 function validate(){
-  const e=[], tel=/^01[016789]-?\d{3,4}-?\d{4}$/;
-  if(!$('sameAs').checked){
-    if(!$('rcv').value.trim()) e.push('받으시는 분 성함을 적어 주세요.');
-    if(!tel.test($('rcvTel').value.trim())) e.push('받으시는 분 연락처를 확인해 주세요.');
-  }
-  if(!$('addr1').value.trim()) e.push('주소를 입력해 주세요.');
-  if(!$('addr2').value.trim()) e.push('상세 주소를 입력해 주세요.');
+  const e=[], seen={}, many=D.length>1;
+  D.forEach((d,i)=>{
+    const x=destErrs(d);
+    if(!x.length){ const k=d.tel.replace(/\D/g,'')+'|'+(d.addr1+d.addr2).replace(/\s/g,'');
+      if(seen[k]) x.push(seen[k]+'번과 같은 받는 곳'); else seen[k]=i+1; }
+    const c=$('dests').children[i]; c.classList.toggle('bad',!!x.length);
+    if(x.length){ d.open=true; c.classList.add('open'); e.push((many?(i+1)+'번 받는 곳':'받는 곳')+' — '+x.join(', ')+' 확인'); }
+  });
+  if(totQ()>PRICE.maxTotal) e.push('한 번에 '+PRICE.maxTotal+'박스까지 주문할 수 있습니다.');
   if(!$('payer').value.trim()) e.push('입금하실 분 성함을 적어 주세요.');
   if($('cashRcpt').checked && $('rcptNo').value.replace(/\D/g,'').length<10) e.push('현금영수증 받으실 번호를 확인해 주세요.');
   if(!$('agree').checked) e.push('개인정보 수집·이용에 동의해 주세요.');
   return e;
 }
-$('main').addEventListener('input',()=>{$('errs').innerHTML='';});
-$('submit').onclick=async()=>{
+$('main').addEventListener('input',e=>{ if(!e.target.closest('#dests')) $('errs').innerHTML=''; });
+const addrOf=d=>(d.addr1.trim()+' '+d.addr2.trim()).trim();
+$('submit').onclick=()=>{
   const e=validate();
   $('errs').innerHTML=e.map(x=>'<li>'+esc(x)+'</li>').join('');
-  if(e.length||S.busy) return;
-  S.busy=true; $('submit').disabled=true; $('submit').textContent='접수하는 중…';
+  if(e.length){ const b=$('dests').querySelector('.dcard.bad'); (b||$('errs')).scrollIntoView({behavior:'smooth',block:'center'}); return; }
+  if(S.busy) return;
+  const q=totQ(), tot=q*(PRICE.box+PRICE.ship);
+  $('cWho').textContent='주문하시는 분 '+T.user.name+(T.user.dept?' ('+T.user.dept+')':'')+' · 받는 곳 '+D.length+'곳 · '+q+'박스';
+  $('cList').innerHTML=D.map((d,i)=>'<li><span class="q">'+d.qty+'박스</span><b>'+(D.length>1?(i+1)+'. ':'')+esc(d.rcv.trim())+'</b> '+esc(fmtTel(d.tel))
+    +(d.rcv.trim()===T.user.name?' <span style="color:var(--gold);font-size:12.5px">(본인)</span>':'')+'<small>'+esc(addrOf(d))+(d.memo.trim()?' · '+esc(d.memo.trim()):'')+'</small></li>').join('');
+  $('cTot').textContent=won(tot);
+  $('confirm').classList.remove('hidden'); document.body.style.overflow='hidden';
+};
+function closeConfirm(){ $('confirm').classList.add('hidden'); document.body.style.overflow=''; }
+$('cNo').onclick=closeConfirm;
+$('confirm').addEventListener('click',e=>{ if(e.target.id==='confirm'&&!S.busy) closeConfirm(); });
+$('cYes').onclick=async()=>{
+  if(S.busy) return;
+  S.busy=true; $('cYes').disabled=true; $('cYes').textContent='접수하는 중…'; $('submit').disabled=true;
   if(!S.reqId) S.reqId=(crypto.randomUUID?crypto.randomUUID():Date.now()+'-'+Math.random().toString(36).slice(2));
-  const same=$('sameAs').checked;
-  const o={reqId:S.reqId, qty:S.qty,
-    rcv: same?T.user.name:$('rcv').value.trim(), rcvTel: same?T.user.id:$('rcvTel').value.trim(),
-    zip:$('zip').value.trim(), addr:($('addr1').value.trim()+' '+$('addr2').value.trim()).trim(),
-    shipMemo:$('shipMemo').value.trim(), payer:$('payer').value.trim(),
+  const dests=D.map(d=>({rcv:d.rcv.trim(), rcvTel:d.tel.trim(), zip:d.zip.trim(), addr:addrOf(d), shipMemo:d.memo.trim(), qty:d.qty}));
+  const o={reqId:S.reqId, dests, qty:totQ(), payer:$('payer').value.trim(),
     cashReceipt: $('cashRcpt').checked ? $('rcptNo').value.replace(/\D/g,'') : ''};
+  if(dests.length===1) Object.assign(o,{rcv:dests[0].rcv, rcvTel:dests[0].rcvTel, zip:dests[0].zip, addr:dests[0].addr, shipMemo:dests[0].shipMemo});   // 옛 서버와도 맞게
   try{
     const r=await api('staffOrder',{order:o});
+    closeConfirm();
     const due=new Date(); due.setDate(due.getDate()+BANK.days);
     $('dNo').textContent=r.orderNo; $('dAmt').textContent=won(r.total);
     $('dAcct').textContent=BANK.name+' '+BANK.no; $('dHolder').textContent=BANK.holder;
     $('dPayer').textContent=o.payer; $('dDue').textContent=(due.getMonth()+1)+'월 '+due.getDate()+'일까지';
-    $('dTo').textContent=o.rcv+' · '+o.addr;
+    $('dTo').innerHTML=dests.map(d=>esc(d.rcv)+' · '+esc(d.addr)+(dests.length>1?' ('+d.qty+'박스)':'')).join('<br>');
     document.querySelectorAll('#main > section').forEach(s=>s.classList.toggle('hidden',s.id!=='done'));
     window.scrollTo(0,0);
-    ['rcv','rcvTel','addr1','addr2','zip','shipMemo','rcptNo'].forEach(i=>$(i).value='');
-    $('agree').checked=false; $('cashRcpt').checked=false; $('rcptBox').classList.add('hidden');
-    S.qty=1; calc(); S.reqId=null;
+    D.length=0; D.push(blank()); renderDests();
+    $('rcptNo').value=''; $('agree').checked=false; $('cashRcpt').checked=false; $('rcptBox').classList.add('hidden');
+    $('pasteText').value=''; $('pasteMsg').textContent=''; $('pasteBox').classList.add('hidden');
+    S.reqId=null;
   }catch(err){ if(T.token) toast(err.message+' (다시 눌러도 두 번 접수되지 않습니다)'); }
-  finally{ S.busy=false; $('submit').disabled=false; $('submit').textContent='주문 신청하기'; }
+  finally{ S.busy=false; $('cYes').disabled=false; $('cYes').textContent='주문 신청'; $('submit').disabled=false; }
 };
 $('copyAcct2').onclick=()=>$('copyAcct').onclick();
 $('copyAcct').onclick=async()=>{ try{ await navigator.clipboard.writeText(BANK.no.replace(/-/g,'')); toast('계좌번호를 복사했습니다.'); }catch(e){ toast(BANK.no); } };
@@ -714,13 +917,20 @@ async function openMine(){
   try{
     const r=await api('staffOrders');
     $('mList').innerHTML=r.orders.length?r.orders.map(o=>{
+      const multi=o.dests&&o.dests.length>1;
       const steps=['주문 접수','입금 확인','발송','배송 완료'].map((t,i)=>'<li'+(i<=o.step?' class="done"':'')+'>'+t+'</li>').join('');
-      const msg=o.status==='취소'?'취소된 주문입니다.':o.step===0?'입금 확인 전입니다. '+esc(BANK.name+' '+BANK.no)+' 로 '+won(o.total)+'을 입금해 주세요.':o.step===1?'입금이 확인되었습니다. 곧 발송합니다.':o.step===2?'발송되었습니다.':'배송이 완료되었습니다.';
+      const msg=o.status==='취소'?'취소된 주문입니다.':o.step===0?'입금 확인 전입니다. '+esc(BANK.name+' '+BANK.no)+' 로 '+won(o.total)+'을 입금해 주세요.':o.step===1?'입금이 확인되었습니다. 곧 발송합니다.'
+        :o.step===2?(multi&&o.shipped<o.dests.length?o.dests.length+'곳 중 '+o.shipped+'곳 발송되었습니다.':'발송되었습니다.'):'배송이 완료되었습니다.';
+      const destList=multi?'<ul class="mdest">'+o.dests.map(d=>'<li><div><b>'+esc(d.rcv)+'</b> · '+d.qty+'박스<small>'+esc(d.addr)+'</small>'
+          +(d.waybill?'<span class="wb">'+esc(d.carrier||'한진택배')+' '+esc(d.waybill)+'</span>':'')+'</div>'
+          +(d.waybill?'<a class="trackbtn" target="_blank" rel="noopener" href="'+HANJIN+encodeURIComponent(d.waybill)+'">조회 ›</a>':'<span class="wait">발송 전</span>')+'</li>').join('')+'</ul>'
+        :(o.waybill?'<div class="ship"><div><span>'+esc(o.carrier||'한진택배')+'</span><b>'+esc(o.waybill)+'</b></div><a class="trackbtn" target="_blank" rel="noopener" href="'+HANJIN+encodeURIComponent(o.waybill)+'">배송 조회 ›</a></div>':'');
       return '<div class="mcard"><div class="mhead"><b>'+esc(o.orderNo)+'</b><span>'+esc(o.date)+'</span></div>'
         +'<ol class="stepper4">'+steps+'</ol>'
-        +(o.waybill?'<div class="ship"><div><span>'+esc(o.carrier||'한진택배')+'</span><b>'+esc(o.waybill)+'</b></div><a class="trackbtn" target="_blank" rel="noopener" href="'+HANJIN+encodeURIComponent(o.waybill)+'">배송 조회 ›</a></div>':'')
+        +(multi?'':destList)
         +'<p class="tmsg">'+msg+'</p>'
-        +'<dl class="tdl"><dt>주문 상품</dt><dd>'+esc(o.items)+'</dd><dt>금액</dt><dd>'+won(o.total)+'</dd><dt>받으시는 곳</dt><dd>'+esc(o.to)+'</dd></dl>'
+        +(multi?destList:'')
+        +'<dl class="tdl"><dt>주문 상품</dt><dd>'+esc(o.items)+'</dd><dt>금액</dt><dd>'+won(o.total)+'</dd>'+(multi?'':'<dt>받으시는 곳</dt><dd>'+esc(o.to)+'</dd>')+'</dl>'
         +'<button type="button" class="ask" data-no="'+esc(o.orderNo)+'">이 주문 문의하기 ›</button></div>';
     }).join(''):'<p class="empty">최근 주문이 없습니다.</p>';
   }catch(err){ $('mList').innerHTML=''; $('mErr').innerHTML='<li>'+esc(err.message)+'</li>'; }
