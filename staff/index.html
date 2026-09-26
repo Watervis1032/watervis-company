@@ -186,7 +186,6 @@ details.priv td:first-child{width:78px;background:#f6f8fa;color:#4b5868}
 .seg3 button.on{background:var(--navy);border-color:var(--navy);color:#fff;font-weight:700}
 .pnote{font-size:12.5px;color:#6b5320;margin:8px 0 6px}
 .dpayer .check{font-size:13.5px;margin:4px 0 8px}
-.hint2{font-size:12px;color:var(--muted);margin:6px 0 0}
 .ptag{color:#9a7a36;font-weight:600}
 .bill .split{border-top:1px dashed rgba(230,207,154,.3);margin-top:8px;padding-top:8px;display:block;font-size:13px;color:var(--gold2)}
 .bill .split div{display:flex;justify-content:space-between;padding:1px 0}
@@ -455,17 +454,6 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
         <button type="button" class="bcopy" id="copyAcct2">계좌번호 복사</button>
         <p>주문 신청 후 <b id="fDays">3</b>일 안에 입금해 주시면 확인 후 발송합니다.<br><span class="bnote">송금할 때 은행 목록에 «농협»으로 안 되면 «지역농·축협»을 골라 주세요.</span></p>
       </div>
-      <div id="meBox">
-        <div class="field">
-          <label>임직원(주문자) 입금자명<em>*</em></label>
-          <input class="inp" id="payer" placeholder="통장에 찍히는 이름">
-          <p class="hint2">입금하실 분을 «임직원(주문자)»로 고른 받는 곳에 씁니다. 가족 통장으로 보내시면 그 이름으로 고쳐 주세요.</p>
-        </div>
-        <label class="check" style="margin-top:-4px"><input type="checkbox" id="cashRcpt"> <span>현금영수증이 필요해요 (주문자 입금분)</span></label>
-        <div id="rcptBox" class="field hidden" style="margin-left:30px">
-          <input class="inp" id="rcptNo" inputmode="numeric" placeholder="휴대전화 번호 또는 사업자등록번호">
-        </div>
-      </div>
       <div class="bill">
         <div class="l"><span>상품 <span id="bQty">1</span>박스<span id="bDest"></span></span><span id="bGoods"></span></div>
         <div class="l"><span>택배비</span><span id="bShip"></span></div>
@@ -617,6 +605,7 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
    · 로그인 토큰은 이 탭의 메모리에만 둔다 (브라우저 저장소에 넣지 않음 → 탭을 닫으면 끝)
    · 30분 동안 아무 조작이 없으면 스스로 로그아웃 (서버도 따로 검사)
    · 가격은 서버가 계정·품목표로 다시 계산한다. 화면 숫자는 보여 주기용
+   · v0.3.6: 아래 «입금하실 분 성함»·현금영수증 칸을 없애고 받는 곳 카드에서만 받음
    · v0.3.6: 입금하실 분을 받는 곳마다 «임직원(주문자)·받는 분·기타»로 고름. 여러 명 붙여넣기 뺌
    · v0.3.5: 받는 곳마다 입금자(다르면 입금자별로 주문이 나뉨)
    · v0.3.4: 받는 분 입력이 기본(«내 정보로 채우기» 버튼), 받는 곳 여러 개, 여러 명 붙여넣기, 주문 확인창 */
@@ -699,7 +688,6 @@ async function enterMain(me){
   T.user=r.user; Object.assign(PRICE,r.price||{}); Object.assign(BANK,r.bank||{});
   $('meName').textContent=T.user.name; $('meDept').textContent=T.user.dept?'· '+T.user.dept:'';
   $('bName').textContent=T.user.name+(T.user.dept?' ('+T.user.dept+')':''); $('bTel').textContent=fmtTel(T.user.id);
-  if(!$('payer').dataset.touched) $('payer').value=T.user.name;
   paintPrice(); if(!D.length) D.push(blank()); renderDests(); newOrder();
 }
 function newOrder(){ document.querySelectorAll('#main > section').forEach(s=>s.classList.toggle('hidden',s.id==='done')); S.reqId=null; show('main'); }
@@ -719,12 +707,11 @@ function calc(){
   $('bSplit').classList.toggle('hidden',G.length<2);
   $('bSplit').innerHTML=G.length>1?'입금하실 분마다 따로 입금 · 주문번호도 따로 나옵니다'+G.map(x=>'<div><span>'+esc(x.payer||'(이름 없음)')+'</span><span>'+won(x.amt)+'</span></div>').join(''):'';
   $('addDest').disabled=D.length>=PRICE.maxDests;
-  $('meBox').classList.toggle('hidden',!D.some(d=>d.pw==='me'));
 }
 /* 입금하실 분 — 받는 곳마다 임직원(주문자) / 받는 분 / 기타. 입금자 = 이름 + 휴대폰 으로 묶는다 */
 const PWL={me:'임직원(주문자)', rcv:'받는 분', etc:'기타'};
 const dig=v=>String(v||'').replace(/\D/g,'');
-const mainPayer=()=>$('payer').value.trim()||(T.user?T.user.name:'');
+const mainPayer=()=>T.user?T.user.name:'';   // 임직원(주문자) = 로그인한 직원 이름
 const payerOf=d=>d.pw==='rcv'?d.rcv.trim():d.pw==='etc'?d.pname.trim():mainPayer();
 const ptelOf=d=>d.pw==='rcv'?dig(d.tel):d.pw==='etc'?dig(d.ptel):(T.user?T.user.id:'');
 function payGroups(){
@@ -775,7 +762,7 @@ function renderDests(){
           <div class="field"><label>입금자 휴대폰<em>*</em></label><input class="inp" data-f="ptel" type="tel" inputmode="tel" placeholder="010-0000-0000" value="${esc(d.ptel)}"></div>
         </div>
         <p class="pnote">${pnote(d)}</p>
-        <label class="check rcchk${d.pw==='me'?' hidden':''}"><input type="checkbox" data-f="rc"${d.rc?' checked':''}> <span>현금영수증 발급 (입금자 휴대폰 번호로)</span></label>
+        <label class="check rcchk"><input type="checkbox" data-f="rc"${d.rc?' checked':''}> <span>현금영수증 발급 (입금자 휴대폰 번호로)</span></label>
       </div>
       <div class="field"><label>주소<em>*</em></label>
         <div class="addr"><input class="inp" data-f="zip" placeholder="우편번호" readonly style="max-width:130px" value="${esc(d.zip)}"><button type="button" class="sbtn" data-act="post">주소 찾기</button></div>
@@ -788,14 +775,13 @@ function renderDests(){
   syncSteppers(); calc();
 }
 function pnote(d){
-  if(d.pw==='me') return esc(mainPayer())+' 님 이름으로 입금합니다. (아래 «입금»에서 입금자명을 바꿀 수 있습니다)';
+  if(d.pw==='me') return esc(mainPayer())+' 님(주문자) 이름으로 입금합니다. 다른 통장으로 보내시면 «기타»를 골라 주세요.';
   if(d.pw==='rcv') return d.rcv.trim()?esc(d.rcv.trim())+' 님이 직접 입금합니다.':'받으시는 분 성함을 먼저 넣어 주세요.';
   return '아래 적으신 분이 입금합니다.';
 }
 function paintPay(c,d){
   c.querySelectorAll('.seg3 button').forEach(b=>b.classList.toggle('on',b.dataset.v===d.pw));
   c.querySelector('.etcbox').classList.toggle('hidden',d.pw!=='etc');
-  c.querySelector('.rcchk').classList.toggle('hidden',d.pw==='me');
   c.querySelector('.pnote').innerHTML=pnote(d);
 }
 function syncSteppers(){
@@ -807,7 +793,10 @@ $('dests').addEventListener('input',e=>{
   const f=e.target.dataset.f; if(!f) return;
   const c=e.target.closest('.dcard'), d=D[+c.dataset.i];
   if(f==='tel'||f==='ptel') e.target.value=fmtTel(e.target.value);
-  if(f==='rc') d.rc=e.target.checked; else d[f]=e.target.value;
+  if(f==='rc'){ d.rc=e.target.checked;
+    const k=payerOf(d)+'|'+ptelOf(d);                    // 같은 입금자(= 같은 주문)의 다른 받는 곳도 같이 맞춘다
+    D.forEach((x,j)=>{ if(x!==d&&payerOf(x)+'|'+ptelOf(x)===k){ x.rc=d.rc; const cb=$('dests').children[j].querySelector('[data-f=rc]'); if(cb) cb.checked=d.rc; } }); }
+  else d[f]=e.target.value;
   c.classList.remove('bad'); paintHead(c,d); $('errs').innerHTML='';
   if(['rcv','tel','pname','ptel'].indexOf(f)>=0){ c.querySelector('.pnote').innerHTML=pnote(d); calc(); }
 });
@@ -838,9 +827,6 @@ $('addDest').onclick=()=>{
 };
 
 
-$('cashRcpt').onchange=()=>{ $('rcptBox').classList.toggle('hidden',!$('cashRcpt').checked); if($('cashRcpt').checked&&!$('rcptNo').value&&T.user) $('rcptNo').value=T.user.id; };
-$('payer').addEventListener('input',()=>{ $('payer').dataset.touched='1'; calc();
-  [...$('dests').children].forEach((c,i)=>{ if(D[i].pw==='me') c.querySelector('.pnote').innerHTML=pnote(D[i]); }); });
 
 /* 주소 찾기 — 페이지 안에 겹쳐 띄운다 (휴대폰에서 새 창이 처음 화면으로 돌아가던 문제 방지) */
 function closePost(){ $('postLayer').classList.add('hidden'); $('postBox').innerHTML=''; document.body.style.overflow=''; }
@@ -867,9 +853,6 @@ function validate(){
     if(x.length){ d.open=true; c.classList.add('open'); e.push((many?(i+1)+'번 받는 곳':'받는 곳')+' — '+x.join(', ')+' 확인'); }
   });
   if(totQ()>PRICE.maxTotal) e.push('한 번에 '+PRICE.maxTotal+'박스까지 주문할 수 있습니다.');
-  const me=D.some(d=>d.pw==='me');
-  if(me&&!$('payer').value.trim()) e.push('임직원(주문자) 입금자명을 적어 주세요.');
-  if(me&&$('cashRcpt').checked && $('rcptNo').value.replace(/\D/g,'').length<10) e.push('현금영수증 받으실 번호를 확인해 주세요.');
   if(!$('agree').checked) e.push('개인정보 수집·이용에 동의해 주세요.');
   return e;
 }
@@ -899,9 +882,8 @@ $('cYes').onclick=async()=>{
   if(!S.reqId) S.reqId=(crypto.randomUUID?crypto.randomUUID():Date.now()+'-'+Math.random().toString(36).slice(2));
   const dests=D.map(d=>({rcv:d.rcv.trim(), rcvTel:d.tel.trim(), zip:d.zip.trim(), addr:addrOf(d), shipMemo:d.memo.trim(), qty:d.qty,
     payType:d.pw, payer: d.pw==='me'?'':payerOf(d), payerTel: d.pw==='me'?'':ptelOf(d), cashReceipt: d.pw!=='me'&&d.rc?ptelOf(d):''}));
-  const me=D.some(d=>d.pw==='me');
-  const o={reqId:S.reqId, dests, qty:totQ(), payer:mainPayer(),
-    cashReceipt: me&&$('cashRcpt').checked ? $('rcptNo').value.replace(/\D/g,'') : ''};
+  const o={reqId:S.reqId, dests, qty:totQ(), payer:mainPayer(),                     // 주문자 현금영수증 = 주문자 휴대폰 번호
+    cashReceipt: D.some(d=>d.pw==='me'&&d.rc) ? T.user.id : ''};
   if(dests.length===1) Object.assign(o,{rcv:dests[0].rcv, rcvTel:dests[0].rcvTel, zip:dests[0].zip, addr:dests[0].addr, shipMemo:dests[0].shipMemo});   // 옛 서버와도 맞게
   try{
     const r=await api('staffOrder',{order:o});
@@ -919,7 +901,7 @@ $('cYes').onclick=async()=>{
     document.querySelectorAll('#main > section').forEach(s=>s.classList.toggle('hidden',s.id!=='done'));
     window.scrollTo(0,0);
     D.length=0; D.push(blank()); renderDests();
-    $('rcptNo').value=''; $('agree').checked=false; $('cashRcpt').checked=false; $('rcptBox').classList.add('hidden');
+    $('agree').checked=false;
     S.reqId=null;
   }catch(err){ if(T.token) toast(err.message+' (다시 눌러도 두 번 접수되지 않습니다)'); }
   finally{ S.busy=false; $('cYes').disabled=false; $('cYes').textContent='주문 신청'; $('submit').disabled=false; }
