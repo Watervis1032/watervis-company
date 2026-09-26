@@ -247,6 +247,8 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
 .mcard .mhead span{font-size:12.5px;color:var(--muted)}
 .mcard .ask{background:none;border:0;color:var(--navy2);font-size:13.5px;cursor:pointer;padding:8px 0 0;text-decoration:underline;text-underline-offset:3px}
 .empty{text-align:center;color:var(--muted);padding:40px 0}
+.ghelp{margin-top:22px;font-size:14px;color:#9fb3cb;line-height:1.7}
+.ghelp a{display:inline-block;margin-top:6px;color:var(--gold2);font-weight:700;font-size:15.5px;text-decoration:none;border:1px solid rgba(230,207,154,.45);border-radius:99px;padding:9px 18px}
 </style>
 </head>
 <body>
@@ -265,7 +267,7 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
       <button class="gbtn" id="loginBtn" type="submit">로그인</button>
     </form>
     <div id="gateMsg"></div>
-    <button type="button" class="glink2" onclick="openAsk()">로그인이 안 되나요? 문의하기 ›</button>
+    <div class="ghelp">로그인이 안 되나요?<br><a href="tel:01027911239">관리자에게 전화 010-2791-1239</a></div>
     <div class="note">워터비스 임직원 전용 페이지입니다.<br>계정·비밀번호는 관리자에게 요청해 주세요.</div>
   </div>
 </section>
@@ -535,7 +537,7 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
   강원특별자치도 양양군 현남면 원포1길 53, 환경동 1층<br>
   Tel 033-672-1032 · admin@watervis.co.kr<br>
   <button type="button" class="flink" onclick="openAsk()">문의하기</button> · <button type="button" class="flink auth" onclick="openMine()">내 주문</button> · <button type="button" class="flink auth" onclick="logout()">로그아웃</button><br>
-  <span style="opacity:.7">© 2026 WATERVIS CO., LTD. · 임직원 화면 v0.3</span>
+  <span style="opacity:.7">© 2026 WATERVIS CO., LTD. · 임직원 화면 v0.3.1</span>
 </footer>
 
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js" async></script>
