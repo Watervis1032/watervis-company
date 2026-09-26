@@ -537,7 +537,7 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
   강원특별자치도 양양군 현남면 원포1길 53, 환경동 1층<br>
   Tel 033-672-1032 · admin@watervis.co.kr<br>
   <button type="button" class="flink" onclick="openAsk()">문의하기</button> · <button type="button" class="flink auth" onclick="openMine()">내 주문</button> · <button type="button" class="flink auth" onclick="logout()">로그아웃</button><br>
-  <span style="opacity:.7">© 2026 WATERVIS CO., LTD. · 임직원 화면 v0.3.2</span>
+  <span style="opacity:.7">© 2026 WATERVIS CO., LTD. · 임직원 화면 v0.3.3</span>
 </footer>
 
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js" async></script>
@@ -546,7 +546,7 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
    · 로그인 토큰은 이 탭의 메모리에만 둔다 (브라우저 저장소에 넣지 않음 → 탭을 닫으면 끝)
    · 30분 동안 아무 조작이 없으면 스스로 로그아웃 (서버도 따로 검사)
    · 가격은 서버가 계정·품목표로 다시 계산한다. 화면 숫자는 보여 주기용 */
-const VERSION='staff-v0.3.2';
+const VERSION='staff-v0.3.3';
 const API_URL='https://script.google.com/macros/s/AKfycby2u_oD8QlsYJj3fnSBsvO8bzUeiqZLuR1X7o3LAnhaHYdsWRJOo6tN9UweLoOma0G5/exec';
 const PRICE={box:0, list:0, unit:36, ship:0, maxQty:20};   // 로그인 후 서버가 알려 준다 (공개 소스에 가격을 두지 않음)
 const BANK={name:'농협(강릉농협)', no:'355-0097-3405-33', holder:'워터비스코퍼레이션(주)', days:3};
@@ -588,14 +588,15 @@ async function login(){
   const id=$('lid').value.replace(/\D/g,''), pw=$('lpw').value;
   if(id.length<10||!pw){ $('gateMsg').textContent='휴대폰 번호와 비밀번호를 넣어 주세요.'; return; }
   $('gateMsg').textContent=''; $('gateMsg').style.color=''; $('loginBtn').disabled=true; $('loginBtn').textContent='확인 중…';
+  const slow=setTimeout(()=>{ $('gateMsg').style.color='#cfe0f2'; $('gateMsg').textContent='서버 응답을 기다리는 중입니다. 보통 5~15초 걸립니다. 버튼을 다시 누르지 말고 기다려 주세요.'; },3000);
   try{
     const r=await api('staffLogin',{id,pw});
     T.token=r.token; T.user=r.user; lastAct=Date.now();
     $('lpw').value='';
     if(r.mustChange){ $('pwOld').value=pw; showPw(); }
-    else await enterMain();
-  }catch(e){ $('gateMsg').textContent=e.message; $('lpw').value=''; $('lpw').focus(); }
-  finally{ $('loginBtn').disabled=false; $('loginBtn').textContent='로그인'; }
+    else await enterMain(r.me);
+  }catch(e){ $('gateMsg').style.color=''; $('gateMsg').textContent=e.message; $('lpw').value=''; $('lpw').focus(); }
+  finally{ clearTimeout(slow); if(T.token&&$('gateMsg').style.color) $('gateMsg').textContent=''; $('loginBtn').disabled=false; $('loginBtn').textContent='로그인'; }
 }
 
 /* ── 비밀번호 바꾸기 (처음 로그인·임시 비밀번호) ── */
@@ -609,16 +610,17 @@ $('pwBtn').onclick=async()=>{
   $('pwErr').innerHTML=e.map(x=>'<li>'+esc(x)+'</li>').join(''); if(e.length) return;
   $('pwBtn').disabled=true;
   try{
-    await api('staffChangePw',{oldPw:o,newPw:n});
+    $('pwBtn').textContent='바꾸는 중… (10초쯤 걸립니다)';
+    const r=await api('staffChangePw',{oldPw:o,newPw:n});
     ['pwOld','pwNew','pwNew2'].forEach(i=>$(i).value='');
-    toast('비밀번호를 바꿨습니다.'); await enterMain();
+    toast('비밀번호를 바꿨습니다.'); await enterMain(r.me);
   }catch(err){ $('pwErr').innerHTML='<li>'+esc(err.message)+'</li>'; }
-  finally{ $('pwBtn').disabled=false; }
+  finally{ $('pwBtn').disabled=false; $('pwBtn').textContent='비밀번호 바꾸기'; }
 };
 
 /* ── 주문 화면 ── */
-async function enterMain(){
-  const r=await api('staffMe');
+async function enterMain(me){
+  const r=me||await api('staffMe');   // 새 서버는 로그인 응답에 같이 실어 보낸다 (한 번 덜 기다림)
   T.user=r.user; Object.assign(PRICE,r.price||{}); Object.assign(BANK,r.bank||{});
   $('meName').textContent=T.user.name; $('meDept').textContent=T.user.dept?'· '+T.user.dept:'';
   $('bName').textContent=T.user.name+(T.user.dept?' ('+T.user.dept+')':''); $('bTel').textContent=fmtTel(T.user.id);
@@ -788,7 +790,11 @@ function idleCheck(){ if(T.token && Date.now()-lastAct>IDLE_MS) logout('idle'); 
 setInterval(idleCheck,20000);
 document.addEventListener('visibilitychange',()=>{ if(!document.hidden) idleCheck(); });
 
+/* 구글 서버 깨우기 — 오래 안 쓰면 첫 요청이 느리다. 페이지를 열 때·번호를 넣기 시작할 때 가볍게 한 번 부른다 */
+let warmed=0; function warm(){ if(Date.now()-warmed<120000||!API_URL) return; warmed=Date.now(); try{ fetch(API_URL,{method:'GET'}).catch(()=>{}); }catch(_){} }
+$('lid').addEventListener('focus',warm);
 window.addEventListener('DOMContentLoaded',()=>{
+  warm();
   const q=new URLSearchParams(location.search), out=q.get('out');
   const MSG={bye:'로그아웃되었습니다.', idle:'30분 동안 사용이 없어 로그아웃되었습니다.', expired:'로그인 시간이 지났습니다. 다시 로그인해 주세요.'};
   if(out){ $('gateMsg').textContent=MSG[out]||MSG.bye; $('gateMsg').style.color='#cfe0f2'; history.replaceState(null,'',location.pathname); }
