@@ -182,6 +182,18 @@ details.priv td:first-child{width:78px;background:#f6f8fa;color:#4b5868}
 .flat{border:0;background:none;color:var(--muted);cursor:pointer;font-size:14px}
 .pmsg{margin:10px 0 0!important;font-size:13px;white-space:pre-line}
 .pmsg.ok{color:var(--ok)} .pmsg.bad{color:var(--bad)}
+.dpay{margin:12px 0 8px!important;font-size:13.5px!important;color:#4b5868}
+.dpaybox{background:#fbf8f0;border:1px solid #efe3c4;border-radius:12px;padding:12px 12px 0}
+.dpaybox label span{font-weight:400;color:var(--muted)}
+.ptag{color:#9a7a36;font-weight:600}
+.bill .split{border-top:1px dashed rgba(230,207,154,.3);margin-top:8px;padding-top:8px;display:block;font-size:13px;color:var(--gold2)}
+.bill .split div{display:flex;justify-content:space-between;padding:1px 0}
+.clist li.cg{background:#fbf8f0;border-bottom:1px solid #efe3c4;padding:9px 10px;margin-top:6px;border-radius:10px 10px 0 0}
+.clist li.cg b{color:#6b5320}
+.plist{list-style:none;margin:0;padding:0}
+.plist li{display:flex;justify-content:space-between;gap:8px;padding:2px 0}
+.plist li small{display:block;font-weight:400;color:var(--muted);font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px}
+.bundle{display:inline-block;font-size:11.5px;color:#9a7a36;border:1px solid #efe3c4;border-radius:99px;padding:1px 8px;margin-left:6px;font-weight:600}
 
 /* ── 주문 확인창 ── */
 #confirm{position:fixed;inset:0;z-index:96;background:rgba(3,16,31,.55);display:flex;align-items:flex-end;justify-content:center}
@@ -431,7 +443,7 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
         <button type="button" class="abtn ghost" id="openPaste">여러 명 한꺼번에 넣기</button>
       </div>
       <div id="pasteBox" class="pastebox hidden">
-        <p>한 줄에 한 분씩 붙여 넣어 주세요. 엑셀 표를 그대로 복사해도 됩니다.<br><b>이름 · 연락처 · 주소 · 수량</b> — 수량은 «2박스»처럼 적고, 안 쓰면 1박스입니다.</p>
+        <p>한 줄에 한 분씩 붙여 넣어 주세요. 엑셀 표를 그대로 복사해도 됩니다.<br><b>이름 · 연락처 · 주소 · 수량</b> — 수량은 «2박스»처럼 적고, 안 쓰면 1박스입니다.<br>다른 분이 입금하시면 줄 끝에 «입금 홍길동»을 붙여 주세요.</p>
         <textarea class="inp" id="pasteText" rows="6" placeholder="홍길동 010-1234-5678 서울 중구 세종대로 110 3층 2박스&#10;김영희 010-9876-5432 강원 양양군 현남면 원포1길 53"></textarea>
         <div class="prow"><button type="button" class="sbtn" id="pasteGo">목록에 넣기</button><button type="button" class="flat" id="pasteClose">닫기</button></div>
         <p class="pmsg" id="pasteMsg"></p>
@@ -451,6 +463,7 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
       <div class="field">
         <label>입금하실 분 성함<em>*</em></label>
         <input class="inp" id="payer" placeholder="통장에 찍히는 이름">
+        <p class="nozip" style="color:var(--muted)">받는 곳마다 «다른 분이 입금해요»를 고르면 그 분 이름으로 주문이 따로 나뉩니다.</p>
       </div>
 
       <label class="check" style="margin-top:-4px"><input type="checkbox" id="cashRcpt"> <span>현금영수증이 필요해요</span></label>
@@ -460,7 +473,8 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
       <div class="bill">
         <div class="l"><span>상품 <span id="bQty">1</span>박스<span id="bDest"></span></span><span id="bGoods"></span></div>
         <div class="l"><span>택배비</span><span id="bShip"></span></div>
-        <div class="tot"><span>입금하실 금액</span><b id="bTot"></b></div>
+        <div class="tot"><span>입금하실 금액<span id="bTotSub"></span></span><b id="bTot"></b></div>
+        <div class="split hidden" id="bSplit"></div>
       </div>
 
       <label class="check"><input type="checkbox" id="agree"> <span>배송을 위한 개인정보 수집·이용에 동의합니다 <em style="color:var(--bad);font-style:normal">(필수)</em></span></label>
@@ -484,20 +498,20 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
     <div class="wrap">
       <div class="seal"><svg viewBox="0 0 32 32"><path d="M8 16.5l5.5 5.5L24.5 10"/></svg></div>
       <h2>주문이 접수되었습니다</h2>
-      <div class="no">주문번호 <span id="dNo"></span></div>
+      <div class="no" id="dNoBox">주문번호 <span id="dNo"></span></div>
       <div class="receipt">
         <div class="top"><span>입금하실 금액</span><b id="dAmt"></b></div>
         <dl>
           <dt>입금 계좌</dt><dd><div class="acct"><span id="dAcct">농협 355-0097-3405-33</span><button class="copybtn" id="copyAcct">복사</button></div></dd>
           <dt>예금주</dt><dd id="dHolder">워터비스코퍼레이션(주)</dd>
-          <dt>입금자명</dt><dd id="dPayer"></dd>
+          <dt id="dPayerT">입금자명</dt><dd id="dPayer"></dd>
           <dt>입금 기한</dt><dd id="dDue"></dd>
           <dt>받으시는 곳</dt><dd id="dTo" style="font-weight:500"></dd>
         </dl>
       </div>
       <p class="savehint">주문 내역과 배송 상황은 언제든 <b>내 주문</b>에서 보실 수 있습니다.</p>
       <ol class="steps">
-        <li>위 계좌로 <b>입금자명 그대로</b> 입금해 주세요.</li>
+        <li id="dStep1">위 계좌로 <b>입금자명 그대로</b> 입금해 주세요.</li>
         <li>입금이 확인되면 발송합니다. 송장번호는 내 주문에 나옵니다.</li>
         <li>문의: 033-672-1032 · 주문번호를 알려 주세요.</li>
       </ol>
@@ -598,7 +612,7 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
   강원특별자치도 양양군 현남면 원포1길 53, 환경동 1층<br>
   Tel 033-672-1032 · admin@watervis.co.kr<br>
   <button type="button" class="flink" onclick="openAsk()">문의하기</button> · <button type="button" class="flink auth" onclick="openMine()">내 주문</button> · <button type="button" class="flink auth" onclick="logout()">로그아웃</button><br>
-  <span style="opacity:.7">© 2026 WATERVIS CO., LTD. · 임직원 화면 v0.3.4</span>
+  <span style="opacity:.7">© 2026 WATERVIS CO., LTD. · 임직원 화면 v0.3.5</span>
 </footer>
 
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js" async></script>
@@ -607,8 +621,9 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
    · 로그인 토큰은 이 탭의 메모리에만 둔다 (브라우저 저장소에 넣지 않음 → 탭을 닫으면 끝)
    · 30분 동안 아무 조작이 없으면 스스로 로그아웃 (서버도 따로 검사)
    · 가격은 서버가 계정·품목표로 다시 계산한다. 화면 숫자는 보여 주기용
+   · v0.3.5: 받는 곳마다 입금자(다르면 입금자별로 주문이 나뉨)
    · v0.3.4: 받는 분 입력이 기본(«내 정보로 채우기» 버튼), 받는 곳 여러 개, 여러 명 붙여넣기, 주문 확인창 */
-const VERSION='staff-v0.3.4';
+const VERSION='staff-v0.3.5';
 const API_URL='https://script.google.com/macros/s/AKfycby2u_oD8QlsYJj3fnSBsvO8bzUeiqZLuR1X7o3LAnhaHYdsWRJOo6tN9UweLoOma0G5/exec';
 const PRICE={box:0, list:0, unit:36, ship:0, maxQty:20, maxTotal:60, maxDests:30};   // 로그인 후 서버가 알려 준다 (공개 소스에 가격을 두지 않음)
 const BANK={name:'농협(강릉농협)', no:'355-0097-3405-33', holder:'워터비스코퍼레이션(주)', days:3};
@@ -700,15 +715,28 @@ function paintPrice(){
   $('ctaSmall').textContent='임직원가 1박스 '+won(PRICE.box);
 }
 function calc(){
-  const q=totQ(), g=q*PRICE.box, s=q*PRICE.ship;
+  const q=totQ(), g=q*PRICE.box, s=q*PRICE.ship, G=payGroups();
   $('bQty').textContent=q; $('bDest').textContent=D.length>1?' · '+D.length+'곳':'';
   $('bGoods').textContent=won(g); $('bShip').textContent=won(s); $('bTot').textContent=won(g+s);
+  $('bTotSub').textContent=G.length>1?' (합계)':'';
+  $('bSplit').classList.toggle('hidden',G.length<2);
+  $('bSplit').innerHTML=G.length>1?'입금하실 분마다 따로 입금 · 주문번호도 따로 나옵니다'+G.map(x=>'<div><span>'+esc(x.payer||'(이름 없음)')+'</span><span>'+won(x.amt)+'</span></div>').join(''):'';
   $('addDest').disabled=D.length>=PRICE.maxDests;
+}
+/* 입금자 — 받는 곳에 «다른 분이 입금»을 고르고 이름을 적으면 그 분, 아니면 위 «입금하실 분» */
+const mainPayer=()=>$('payer').value.trim();
+const payerOf=d=>(d.other&&d.payer.trim())?d.payer.trim():mainPayer();
+function payGroups(){
+  const G=[];
+  D.forEach((d,i)=>{ const p=payerOf(d); let g=G.find(x=>x.payer===p);
+    if(!g){ g={payer:p, idx:[], qty:0, amt:0}; G.push(g); }
+    g.idx.push(i); g.qty+=Number(d.qty)||0; g.amt+=(Number(d.qty)||0)*(PRICE.box+PRICE.ship); });
+  return G;
 }
 
 /* ── 받는 곳 (여러 곳) ── */
 const D=[];
-const blank=()=>({rcv:'',tel:'',zip:'',addr1:'',addr2:'',memo:'',qty:1,open:true});
+const blank=()=>({rcv:'',tel:'',zip:'',addr1:'',addr2:'',memo:'',qty:1,open:true,other:false,payer:'',prc:''});
 const totQ=()=>D.reduce((a,d)=>a+(Number(d.qty)||0),0);
 const isEmpty=d=>!d.rcv.trim()&&!d.tel.trim()&&!d.addr1.trim()&&!d.addr2.trim()&&!d.memo.trim();
 function destErrs(d){
@@ -718,12 +746,14 @@ function destErrs(d){
   if(d.addr1.trim().length<5) e.push('주소');
   else if(d.zip&&!d.addr2.trim()) e.push('상세 주소');
   if(!(d.qty>=1&&d.qty<=PRICE.maxQty)) e.push('수량(1~'+PRICE.maxQty+'박스)');
+  if(d.other&&!d.payer.trim()) e.push('입금하실 분');
+  if(d.other&&d.prc.trim()&&!/^\d{10,13}$/.test(d.prc.replace(/\D/g,''))) e.push('현금영수증 번호');
   return e;
 }
 function sumHtml(d){
   if(!d.rcv.trim()) return '받으시는 분을 넣어 주세요';
   const a=d.addr1.trim().split(/\s+/).slice(0,3).join(' ');
-  return esc(d.rcv.trim())+(a?'<small>'+esc(a)+'</small>':'');
+  return esc(d.rcv.trim())+(a?'<small>'+esc(a)+'</small>':'')+(d.other&&d.payer.trim()?'<small class="ptag">입금 '+esc(d.payer.trim())+'</small>':'');
 }
 function paintHead(c,d){ const s=c.querySelector('.dsum'); s.innerHTML=sumHtml(d); s.classList.toggle('empty',!d.rcv.trim()); c.querySelector('.dq').textContent=d.qty+'박스'; }
 function renderDests(){
@@ -744,6 +774,11 @@ function renderDests(){
       </div>
       <div class="field"><label>배송 요청사항</label><input class="inp" data-f="memo" placeholder="예: 문 앞에 놓아 주세요" value="${esc(d.memo)}"></div>
       <div class="dqty"><span>수량</span><div class="stepper"><button type="button" data-act="minus" aria-label="한 박스 빼기">−</button><output>${d.qty}</output><button type="button" data-act="plus" aria-label="한 박스 더하기">+</button></div></div>
+      <label class="check dpay"><input type="checkbox" data-f="other"${d.other?' checked':''}> <span>다른 분이 입금해요</span></label>
+      <div class="row2 dpaybox${d.other?'':' hidden'}">
+        <div class="field"><label>입금하실 분<em>*</em></label><input class="inp" data-f="payer" placeholder="통장에 찍히는 이름" value="${esc(d.payer)}"></div>
+        <div class="field"><label>현금영수증 <span>(선택)</span></label><input class="inp" data-f="prc" inputmode="numeric" placeholder="휴대폰·사업자번호" value="${esc(d.prc)}"></div>
+      </div>
     </div></div>`).join('');
   syncSteppers(); calc();
 }
@@ -756,7 +791,10 @@ $('dests').addEventListener('input',e=>{
   const f=e.target.dataset.f; if(!f) return;
   const c=e.target.closest('.dcard'), d=D[+c.dataset.i];
   if(f==='tel') e.target.value=fmtTel(e.target.value);
-  d[f]=e.target.value; c.classList.remove('bad'); paintHead(c,d); $('errs').innerHTML='';
+  if(f==='other'){ d.other=e.target.checked; c.querySelector('.dpaybox').classList.toggle('hidden',!d.other); if(d.other) setTimeout(()=>c.querySelector('[data-f=payer]').focus(),30); }
+  else d[f]=e.target.value;
+  c.classList.remove('bad'); paintHead(c,d); $('errs').innerHTML='';
+  if(f==='other'||f==='payer') calc();
 });
 $('dests').addEventListener('click',e=>{
   const b=e.target.closest('[data-act]'); if(!b) return;
@@ -786,7 +824,11 @@ $('addDest').onclick=()=>{
 $('openPaste').onclick=()=>{ $('pasteBox').classList.toggle('hidden'); if(!$('pasteBox').classList.contains('hidden')) $('pasteText').focus(); };
 $('pasteClose').onclick=()=>{ $('pasteBox').classList.add('hidden'); $('pasteMsg').textContent=''; };
 const TELRX=/(01[016789])[\s.\-]?(\d{3,4})[\s.\-]?(\d{4})/;
-function mk(name,tel,addr,qty,memo){ return {rcv:String(name).slice(0,40),tel:fmtTel(tel),zip:'',addr1:String(addr).slice(0,200),addr2:'',memo:String(memo||'').slice(0,200),qty:Math.max(1,qty||1),open:false}; }
+function mk(name,tel,addr,qty,memo){ return {rcv:String(name).slice(0,40),tel:fmtTel(tel),zip:'',addr1:String(addr).slice(0,200),addr2:'',memo:String(memo||'').slice(0,200),qty:Math.max(1,qty||1),open:false,other:false,payer:'',prc:''}; }
+/* «입금 홍길동»·«입금자:홍길동» 이 줄 어디에 있으면 그 분이 입금 */
+const PAYRX=/(?:^|[\s,\/·|\t(])입금(?:자)?\s*[:：]?\s*([가-힣A-Za-z]{2,12})\)?/;
+function parseLine(s){ const m=s.match(PAYRX); const r=parseOne(m?(s.slice(0,m.index)+' '+s.slice(m.index+m[0].length)).replace(/\t\s*\t/g,'\t'):s);
+  if(r&&m){ r.other=true; r.payer=m[1]; } return r; }
 function parseOne(s){
   if(s.indexOf('\t')>=0){                                   // 엑셀·구글시트에서 복사
     const cells=s.split('\t').map(x=>x.trim()).filter(Boolean);
@@ -814,7 +856,7 @@ $('pasteGo').onclick=()=>{
   if(!lines.length){ $('pasteMsg').className='pmsg bad'; $('pasteMsg').textContent='붙여 넣은 내용이 없습니다.'; return; }
   const ok=[], bad=[];
   lines.forEach(s=>{ if(/^(이름|성함|받는)/.test(s)&&!TELRX.test(s)) return;   // 머리줄은 건너뜀
-    const r=parseOne(s); r?ok.push(r):bad.push(s); });
+    const r=parseLine(s); r?ok.push(r):bad.push(s); });
   if(D.length===1&&isEmpty(D[0])) D.length=0;                                       // 빈 칸 하나뿐이면 바꿔 끼운다
   const room=PRICE.maxDests-D.length, take=ok.slice(0,Math.max(room,0)), over=ok.length-take.length;
   take.forEach(r=>D.push(r)); if(!D.length) D.push(blank());
@@ -829,7 +871,7 @@ $('pasteGo').onclick=()=>{
 };
 
 $('cashRcpt').onchange=()=>{ $('rcptBox').classList.toggle('hidden',!$('cashRcpt').checked); if($('cashRcpt').checked&&!$('rcptNo').value&&T.user) $('rcptNo').value=T.user.id; };
-$('payer').addEventListener('input',()=>$('payer').dataset.touched='1');
+$('payer').addEventListener('input',()=>{ $('payer').dataset.touched='1'; calc(); });
 
 /* 주소 찾기 — 페이지 안에 겹쳐 띄운다 (휴대폰에서 새 창이 처음 화면으로 돌아가던 문제 방지) */
 function closePost(){ $('postLayer').classList.add('hidden'); $('postBox').innerHTML=''; document.body.style.overflow=''; }
@@ -857,6 +899,8 @@ function validate(){
     if(x.length){ d.open=true; c.classList.add('open'); e.push((many?(i+1)+'번 받는 곳':'받는 곳')+' — '+x.join(', ')+' 확인'); }
   });
   if(totQ()>PRICE.maxTotal) e.push('한 번에 '+PRICE.maxTotal+'박스까지 주문할 수 있습니다.');
+  const rcs={}; D.forEach(d=>{ const p=payerOf(d); if(!d.other||p===mainPayer()) return; const r=d.prc.replace(/\D/g,''); if(!r) return;
+    if(rcs[p]&&rcs[p]!==r) e.push(p+' 님 현금영수증 번호가 받는 곳마다 다릅니다. 하나로 맞춰 주세요.'); else rcs[p]=r; });
   if(!$('payer').value.trim()) e.push('입금하실 분 성함을 적어 주세요.');
   if($('cashRcpt').checked && $('rcptNo').value.replace(/\D/g,'').length<10) e.push('현금영수증 받으실 번호를 확인해 주세요.');
   if(!$('agree').checked) e.push('개인정보 수집·이용에 동의해 주세요.');
@@ -869,11 +913,14 @@ $('submit').onclick=()=>{
   $('errs').innerHTML=e.map(x=>'<li>'+esc(x)+'</li>').join('');
   if(e.length){ const b=$('dests').querySelector('.dcard.bad'); (b||$('errs')).scrollIntoView({behavior:'smooth',block:'center'}); return; }
   if(S.busy) return;
-  const q=totQ(), tot=q*(PRICE.box+PRICE.ship);
-  $('cWho').textContent='주문하시는 분 '+T.user.name+(T.user.dept?' ('+T.user.dept+')':'')+' · 받는 곳 '+D.length+'곳 · '+q+'박스';
-  $('cList').innerHTML=D.map((d,i)=>'<li><span class="q">'+d.qty+'박스</span><b>'+(D.length>1?(i+1)+'. ':'')+esc(d.rcv.trim())+'</b> '+esc(fmtTel(d.tel))
-    +(d.rcv.trim()===T.user.name?' <span style="color:var(--gold);font-size:12.5px">(본인)</span>':'')+'<small>'+esc(addrOf(d))+(d.memo.trim()?' · '+esc(d.memo.trim()):'')+'</small></li>').join('');
-  $('cTot').textContent=won(tot);
+  const q=totQ(), tot=q*(PRICE.box+PRICE.ship), G=payGroups();
+  $('cWho').textContent='주문하시는 분 '+T.user.name+(T.user.dept?' ('+T.user.dept+')':'')+' · 받는 곳 '+D.length+'곳 · '+q+'박스'+(G.length>1?' · 입금자 '+G.length+'분 → 주문 '+G.length+'건':'');
+  const li=i=>{ const d=D[i]; return '<li><span class="q">'+d.qty+'박스</span><b>'+(D.length>1?(i+1)+'. ':'')+esc(d.rcv.trim())+'</b> '+esc(fmtTel(d.tel))
+    +(d.rcv.trim()===T.user.name?' <span style="color:var(--gold);font-size:12.5px">(본인)</span>':'')+'<small>'+esc(addrOf(d))+(d.memo.trim()?' · '+esc(d.memo.trim()):'')+'</small></li>'; };
+  $('cList').innerHTML=G.length>1
+    ? G.map(g=>'<li class="cg"><span class="q">'+won(g.amt)+'</span><b>입금 '+esc(g.payer)+'</b></li>'+g.idx.map(li).join('')).join('')
+    : '<li class="cg"><b>입금 '+esc(G[0].payer)+'</b></li>'+D.map((d,i)=>li(i)).join('');
+  $('cTot').textContent=won(tot); $('cTot').previousElementSibling.textContent=G.length>1?'입금하실 금액 (합계)':'입금하실 금액';
   $('confirm').classList.remove('hidden'); document.body.style.overflow='hidden';
 };
 function closeConfirm(){ $('confirm').classList.add('hidden'); document.body.style.overflow=''; }
@@ -883,7 +930,8 @@ $('cYes').onclick=async()=>{
   if(S.busy) return;
   S.busy=true; $('cYes').disabled=true; $('cYes').textContent='접수하는 중…'; $('submit').disabled=true;
   if(!S.reqId) S.reqId=(crypto.randomUUID?crypto.randomUUID():Date.now()+'-'+Math.random().toString(36).slice(2));
-  const dests=D.map(d=>({rcv:d.rcv.trim(), rcvTel:d.tel.trim(), zip:d.zip.trim(), addr:addrOf(d), shipMemo:d.memo.trim(), qty:d.qty}));
+  const dests=D.map(d=>({rcv:d.rcv.trim(), rcvTel:d.tel.trim(), zip:d.zip.trim(), addr:addrOf(d), shipMemo:d.memo.trim(), qty:d.qty,
+    payer: d.other?d.payer.trim():'', cashReceipt: d.other?d.prc.replace(/\D/g,''):''}));
   const o={reqId:S.reqId, dests, qty:totQ(), payer:$('payer').value.trim(),
     cashReceipt: $('cashRcpt').checked ? $('rcptNo').value.replace(/\D/g,'') : ''};
   if(dests.length===1) Object.assign(o,{rcv:dests[0].rcv, rcvTel:dests[0].rcvTel, zip:dests[0].zip, addr:dests[0].addr, shipMemo:dests[0].shipMemo});   // 옛 서버와도 맞게
@@ -891,9 +939,14 @@ $('cYes').onclick=async()=>{
     const r=await api('staffOrder',{order:o});
     closeConfirm();
     const due=new Date(); due.setDate(due.getDate()+BANK.days);
-    $('dNo').textContent=r.orderNo; $('dAmt').textContent=won(r.total);
+    const OR=r.orders&&r.orders.length?r.orders:[{orderNo:r.orderNo, payer:o.payer, total:r.total}], many=OR.length>1;
+    $('dNoBox').innerHTML=many?'주문 '+OR.length+'건 · 입금하실 분마다 주문번호가 따로 나왔습니다':'주문번호 <span id="dNo">'+esc(OR[0].orderNo)+'</span>';
+    $('dAmt').textContent=won(r.total); $('dAmt').previousElementSibling.textContent=many?'입금하실 금액 (합계)':'입금하실 금액';
     $('dAcct').textContent=BANK.name+' '+BANK.no; $('dHolder').textContent=BANK.holder;
-    $('dPayer').textContent=o.payer; $('dDue').textContent=(due.getMonth()+1)+'월 '+due.getDate()+'일까지';
+    $('dPayerT').textContent=many?'입금자별':'입금자명';
+    $('dPayer').innerHTML=many?'<ul class="plist">'+OR.map(x=>'<li><span>'+esc(x.payer)+'<small>'+esc(x.orderNo)+'</small></span><span>'+won(x.total)+'</span></li>').join('')+'</ul>':esc(OR[0].payer);
+    $('dStep1').innerHTML=many?'입금하실 분마다 <b>본인 이름으로, 위 금액만큼 따로</b> 입금해 주세요. (한 번에 합쳐 보내시면 확인이 늦어집니다)':'위 계좌로 <b>입금자명 그대로</b> 입금해 주세요.';
+    $('dDue').textContent=(due.getMonth()+1)+'월 '+due.getDate()+'일까지';
     $('dTo').innerHTML=dests.map(d=>esc(d.rcv)+' · '+esc(d.addr)+(dests.length>1?' ('+d.qty+'박스)':'')).join('<br>');
     document.querySelectorAll('#main > section').forEach(s=>s.classList.toggle('hidden',s.id!=='done'));
     window.scrollTo(0,0);
@@ -919,18 +972,18 @@ async function openMine(){
     $('mList').innerHTML=r.orders.length?r.orders.map(o=>{
       const multi=o.dests&&o.dests.length>1;
       const steps=['주문 접수','입금 확인','발송','배송 완료'].map((t,i)=>'<li'+(i<=o.step?' class="done"':'')+'>'+t+'</li>').join('');
-      const msg=o.status==='취소'?'취소된 주문입니다.':o.step===0?'입금 확인 전입니다. '+esc(BANK.name+' '+BANK.no)+' 로 '+won(o.total)+'을 입금해 주세요.':o.step===1?'입금이 확인되었습니다. 곧 발송합니다.'
+      const msg=o.status==='취소'?'취소된 주문입니다.':o.step===0?'입금 확인 전입니다. '+esc(BANK.name+' '+BANK.no)+' 로 '+(o.payer?'<b>'+esc(o.payer)+'</b> 님 이름으로 ':'')+won(o.total)+'을 입금해 주세요.':o.step===1?'입금이 확인되었습니다. 곧 발송합니다.'
         :o.step===2?(multi&&o.shipped<o.dests.length?o.dests.length+'곳 중 '+o.shipped+'곳 발송되었습니다.':'발송되었습니다.'):'배송이 완료되었습니다.';
       const destList=multi?'<ul class="mdest">'+o.dests.map(d=>'<li><div><b>'+esc(d.rcv)+'</b> · '+d.qty+'박스<small>'+esc(d.addr)+'</small>'
           +(d.waybill?'<span class="wb">'+esc(d.carrier||'한진택배')+' '+esc(d.waybill)+'</span>':'')+'</div>'
           +(d.waybill?'<a class="trackbtn" target="_blank" rel="noopener" href="'+HANJIN+encodeURIComponent(d.waybill)+'">조회 ›</a>':'<span class="wait">발송 전</span>')+'</li>').join('')+'</ul>'
         :(o.waybill?'<div class="ship"><div><span>'+esc(o.carrier||'한진택배')+'</span><b>'+esc(o.waybill)+'</b></div><a class="trackbtn" target="_blank" rel="noopener" href="'+HANJIN+encodeURIComponent(o.waybill)+'">배송 조회 ›</a></div>':'');
-      return '<div class="mcard"><div class="mhead"><b>'+esc(o.orderNo)+'</b><span>'+esc(o.date)+'</span></div>'
+      return '<div class="mcard"><div class="mhead"><b>'+esc(o.orderNo)+(o.bundle?'<span class="bundle">함께 주문 '+esc(o.bundle.slice(-3))+'</span>':'')+'</b><span>'+esc(o.date)+'</span></div>'
         +'<ol class="stepper4">'+steps+'</ol>'
         +(multi?'':destList)
         +'<p class="tmsg">'+msg+'</p>'
         +(multi?destList:'')
-        +'<dl class="tdl"><dt>주문 상품</dt><dd>'+esc(o.items)+'</dd><dt>금액</dt><dd>'+won(o.total)+'</dd>'+(multi?'':'<dt>받으시는 곳</dt><dd>'+esc(o.to)+'</dd>')+'</dl>'
+        +'<dl class="tdl"><dt>주문 상품</dt><dd>'+esc(o.items)+'</dd><dt>금액</dt><dd>'+won(o.total)+'</dd>'+(o.payer?'<dt>입금자</dt><dd>'+esc(o.payer)+'</dd>':'')+(multi?'':'<dt>받으시는 곳</dt><dd>'+esc(o.to)+'</dd>')+'</dl>'
         +'<button type="button" class="ask" data-no="'+esc(o.orderNo)+'">이 주문 문의하기 ›</button></div>';
     }).join(''):'<p class="empty">최근 주문이 없습니다.</p>';
   }catch(err){ $('mList').innerHTML=''; $('mErr').innerHTML='<li>'+esc(err.message)+'</li>'; }
