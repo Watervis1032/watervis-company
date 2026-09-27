@@ -47,6 +47,8 @@ img{display:block;max-width:100%}
 .codebox input:focus{outline:none;border-color:var(--gold2);background:rgba(255,255,255,.12)}
 .gbtn{border:0;border-radius:10px;padding:0 18px;background:linear-gradient(180deg,var(--gold2),var(--gold));color:#2a1d05;font-weight:700;cursor:pointer}
 #gateMsg{min-height:22px;margin-top:12px;font-size:13.5px;color:#f1c7c7}
+#gate .codehelp{margin-top:22px;font-size:14px;color:#b9c7d8;line-height:1.7}
+#gate .codehelp a{color:var(--gold2);font-weight:700;text-decoration:none;border-bottom:1px solid rgba(230,207,154,.5)}
 #gate .note{margin-top:28px;font-size:12.5px;color:#7f95b1}
 
 /* ── 첫 화면 ── */
@@ -319,6 +321,7 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
     <div id="gateMsg"></div>
     <button type="button" class="glink" onclick="openTrack()">이미 주문하셨나요? <b>주문 조회</b> ›</button>
     <button type="button" class="glink2" onclick="openAsk()">궁금한 점이 있으신가요? 문의하기 ›</button>
+    <div class="codehelp">입장 코드가 없으신가요?<br><a href="tel:0336721032">033-672-1032</a>로 문의해 주세요</div>
     <div class="note">워터비스 임직원 · 가족 · 지인 전용 페이지입니다.</div>
   </div>
 </section>
@@ -586,7 +589,7 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
   강원특별자치도 양양군 현남면 원포1길 53, 환경동 1층<br>
   Tel 033-672-1032 · admin@watervis.co.kr<br>
   <button type="button" class="flink" onclick="openAsk()">문의하기</button> · <button type="button" class="flink" onclick="openTrack()">주문 조회</button><br>
-  <span style="opacity:.7">© 2026 WATERVIS CO., LTD. · 화면 v0.9</span>
+  <span style="opacity:.7">© 2026 WATERVIS CO., LTD. · 화면 v0.9.1</span>
 </footer>
 
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js" async></script>
@@ -595,7 +598,7 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
    · v0.9: 임직원 화면과 같은 구조 — 받는 곳 여러 개, 받는 곳마다 입금하실 분(주문하신 분/받는 분/기타), 공장 방문 수령(택배비 없음)
    (v0.1 시안 2026-09-24)
    API_URL 이 비어 있으면 데모: 아무 초대코드나 통과, 저장 안 함 */
-const VERSION='v0.9';
+const VERSION='v0.9.1';
 const API_URL='https://script.google.com/macros/s/AKfycby2u_oD8QlsYJj3fnSBsvO8bzUeiqZLuR1X7o3LAnhaHYdsWRJOo6tN9UweLoOma0G5/exec';
 const PRICE={box:18000, list:28800, unit:36, ship:4500, maxQty:20, maxTotal:40, maxDests:10};  // 서버가 다시 계산한다
 const BANK={name:'농협(강릉농협)', no:'355-0097-3405-33', holder:'워터비스코퍼레이션(주)', days:3};
