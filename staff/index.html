@@ -140,7 +140,7 @@ details.priv td:first-child{width:78px;background:#f6f8fa;color:#4b5868}
 .bankbox .bcopy{margin:14px auto 0;display:block;width:100%;max-width:280px;border:1px solid var(--navy2);background:#fff;color:var(--navy2);border-radius:12px;padding:11px;font-weight:700;cursor:pointer}
 .bankbox p{margin:12px 0 0;font-size:13px;color:#5b6778}
 .bankbox .bnote{font-size:12px;color:#8a95a3}
-.bill{border-radius:16px;background:var(--navy);color:#fff;padding:18px 18px 16px;margin:18px 0 12px}
+.bill{border-radius:16px;background:var(--navy);color:#fff;padding:18px 18px 16px;margin:0 0 16px}
 .bill .l{display:flex;justify-content:space-between;font-size:14px;color:#c6d3e2;padding:3px 0}
 .bill .tot{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid rgba(230,207,154,.35);margin-top:10px;padding-top:12px}
 .bill .tot span{font-size:14px;color:var(--gold2)}
@@ -184,6 +184,13 @@ details.priv td:first-child{width:78px;background:#f6f8fa;color:#4b5868}
 .seg3{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
 .seg3 button{border:1px solid #d6dde6;background:#fff;border-radius:10px;padding:10px 4px;font-size:14px;cursor:pointer;color:#3b4b5e;word-break:keep-all}
 .seg3 button.on{background:var(--navy);border-color:var(--navy);color:#fff;font-weight:700}
+.shipsel{margin:0 0 14px}
+.shipsel .plabel{display:block;font-size:13px;color:#4b5868;margin-bottom:6px;font-weight:600}
+.seg2{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.seg2 button{border:1px solid #d6dde6;background:#fff;border-radius:10px;padding:10px 4px;font-size:14px;cursor:pointer;color:#3b4b5e;word-break:keep-all}
+.seg2 button.on{background:var(--navy);border-color:var(--navy);color:#fff;font-weight:700}
+.pickup{background:#eef5fb;border:1px solid #d3e4f3;border-radius:12px;padding:12px 14px;margin:0 0 14px;font-size:13.5px;color:#23405e;line-height:1.6}
+.pickup b{color:var(--navy)}
 .pnote{font-size:12.5px;color:#6b5320;margin:8px 0 6px}
 .dpayer .check{font-size:13.5px;margin:4px 0 8px}
 .ptag{color:#9a7a36;font-weight:600}
@@ -444,6 +451,12 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
       </div>
 
       <div class="sec-title" style="margin-top:26px"><h2>입금</h2></div>
+      <div class="bill">
+        <div class="l"><span>상품 <span id="bQty">1</span>박스<span id="bDest"></span></span><span id="bGoods"></span></div>
+        <div class="l"><span>택배비<span id="bShipSub"></span></span><span id="bShip"></span></div>
+        <div class="tot"><span>입금하실 금액<span id="bTotSub"></span></span><b id="bTot"></b></div>
+        <div class="split hidden" id="bSplit"></div>
+      </div>
       <div class="bankbox">
         <div class="bhead">
           <span class="bankmark"><img src="../order/img/bank-nh.png" alt="" onerror="this.remove()"><em>농협</em><small>강릉농협</small></span>
@@ -453,12 +466,6 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
         <div class="bholder">예금주 <b id="fHolder">워터비스코퍼레이션(주)</b></div>
         <button type="button" class="bcopy" id="copyAcct2">계좌번호 복사</button>
         <p>주문 신청 후 <b id="fDays">3</b>일 안에 입금해 주시면 확인 후 발송합니다.<br><span class="bnote">송금할 때 은행 목록에 «농협»으로 안 되면 «지역농·축협»을 골라 주세요.</span></p>
-      </div>
-      <div class="bill">
-        <div class="l"><span>상품 <span id="bQty">1</span>박스<span id="bDest"></span></span><span id="bGoods"></span></div>
-        <div class="l"><span>택배비</span><span id="bShip"></span></div>
-        <div class="tot"><span>입금하실 금액<span id="bTotSub"></span></span><b id="bTot"></b></div>
-        <div class="split hidden" id="bSplit"></div>
       </div>
 
       <label class="check"><input type="checkbox" id="agree"> <span>배송을 위한 개인정보 수집·이용에 동의합니다 <em style="color:var(--bad);font-style:normal">(필수)</em></span></label>
@@ -596,7 +603,7 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
   강원특별자치도 양양군 현남면 원포1길 53, 환경동 1층<br>
   Tel 033-672-1032 · admin@watervis.co.kr<br>
   <button type="button" class="flink" onclick="openAsk()">문의하기</button> · <button type="button" class="flink auth" onclick="openMine()">내 주문</button> · <button type="button" class="flink auth" onclick="logout()">로그아웃</button><br>
-  <span style="opacity:.7">© 2026 WATERVIS CO., LTD. · 임직원 화면 v0.3.6</span>
+  <span style="opacity:.7">© 2026 WATERVIS CO., LTD. · 임직원 화면 v0.3.7</span>
 </footer>
 
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js" async></script>
@@ -605,11 +612,12 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
    · 로그인 토큰은 이 탭의 메모리에만 둔다 (브라우저 저장소에 넣지 않음 → 탭을 닫으면 끝)
    · 30분 동안 아무 조작이 없으면 스스로 로그아웃 (서버도 따로 검사)
    · 가격은 서버가 계정·품목표로 다시 계산한다. 화면 숫자는 보여 주기용
+   · v0.3.7: 금액 박스를 입금 통장 바로 위로, 받는 곳마다 «공장에서 직접 가져가기»(택배비 없음)
    · v0.3.6: 아래 «입금하실 분 성함»·현금영수증 칸을 없애고 받는 곳 카드에서만 받음
    · v0.3.6: 입금하실 분을 받는 곳마다 «임직원(주문자)·받는 분·기타»로 고름. 여러 명 붙여넣기 뺌
    · v0.3.5: 받는 곳마다 입금자(다르면 입금자별로 주문이 나뉨)
    · v0.3.4: 받는 분 입력이 기본(«내 정보로 채우기» 버튼), 받는 곳 여러 개, 여러 명 붙여넣기, 주문 확인창 */
-const VERSION='staff-v0.3.6';
+const VERSION='staff-v0.3.7';
 const API_URL='https://script.google.com/macros/s/AKfycby2u_oD8QlsYJj3fnSBsvO8bzUeiqZLuR1X7o3LAnhaHYdsWRJOo6tN9UweLoOma0G5/exec';
 const PRICE={box:0, list:0, unit:36, ship:0, maxQty:20, maxTotal:60, maxDests:30};   // 로그인 후 서버가 알려 준다 (공개 소스에 가격을 두지 않음)
 const BANK={name:'농협(강릉농협)', no:'355-0097-3405-33', holder:'워터비스코퍼레이션(주)', days:3};
@@ -700,9 +708,10 @@ function paintPrice(){
   $('ctaSmall').textContent='임직원가 1박스 '+won(PRICE.box);
 }
 function calc(){
-  const q=totQ(), g=q*PRICE.box, s=q*PRICE.ship, G=payGroups();
+  const q=totQ(), g=q*PRICE.box, s=shipQ()*PRICE.ship, G=payGroups(), pq=q-shipQ();
   $('bQty').textContent=q; $('bDest').textContent=D.length>1?' · '+D.length+'곳':'';
   $('bGoods').textContent=won(g); $('bShip').textContent=won(s); $('bTot').textContent=won(g+s);
+  $('bShipSub').textContent=pq>0?(pq===q?' (방문 수령 — 없음)':' (방문 수령 '+pq+'박스 제외)'):'';
   $('bTotSub').textContent=G.length>1?' (합계)':'';
   $('bSplit').classList.toggle('hidden',G.length<2);
   $('bSplit').innerHTML=G.length>1?'입금하실 분마다 따로 입금 · 주문번호도 따로 나옵니다'+G.map(x=>'<div><span>'+esc(x.payer||'(이름 없음)')+'</span><span>'+won(x.amt)+'</span></div>').join(''):'';
@@ -718,21 +727,26 @@ function payGroups(){
   const G=[];
   D.forEach((d,i)=>{ const p=payerOf(d), k=p+'|'+ptelOf(d); let g=G.find(x=>x.key===k);
     if(!g){ g={key:k, payer:p, idx:[], qty:0, amt:0}; G.push(g); }
-    g.idx.push(i); g.qty+=Number(d.qty)||0; g.amt+=(Number(d.qty)||0)*(PRICE.box+PRICE.ship); });
+    g.idx.push(i); g.qty+=Number(d.qty)||0; g.amt+=amtOf(d); });
   return G;
 }
 
 /* ── 받는 곳 (여러 곳) ── */
 const D=[];
-const blank=()=>({rcv:'',tel:'',zip:'',addr1:'',addr2:'',memo:'',qty:1,open:true,pw:'me',pname:'',ptel:'',rc:false});
+const blank=()=>({rcv:'',tel:'',zip:'',addr1:'',addr2:'',memo:'',qty:1,open:true,pw:'me',pname:'',ptel:'',rc:false,ship:'택배'});
+const isPick=d=>d.ship==='방문수령';
+const shipQ=()=>D.reduce((a,d)=>a+(isPick(d)?0:(Number(d.qty)||0)),0);
+const amtOf=d=>(Number(d.qty)||0)*(PRICE.box+(isPick(d)?0:PRICE.ship));
 const totQ=()=>D.reduce((a,d)=>a+(Number(d.qty)||0),0);
 const isEmpty=d=>!d.rcv.trim()&&!d.tel.trim()&&!d.addr1.trim()&&!d.addr2.trim()&&!d.memo.trim();
 function destErrs(d){
   const e=[];
   if(!d.rcv.trim()) e.push('성함');
   if(!TEL.test(d.tel.trim())) e.push('연락처');
-  if(d.addr1.trim().length<5) e.push('주소');
-  else if(d.zip&&!d.addr2.trim()) e.push('상세 주소');
+  if(!isPick(d)){
+    if(d.addr1.trim().length<5) e.push('주소');
+    else if(d.zip&&!d.addr2.trim()) e.push('상세 주소');
+  }
   if(!(d.qty>=1&&d.qty<=PRICE.maxQty)) e.push('수량(1~'+PRICE.maxQty+'박스)');
   if(d.pw==='etc'&&!d.pname.trim()) e.push('입금자 성함');
   if(d.pw==='etc'&&!TEL.test(d.ptel.trim())) e.push('입금자 휴대폰');
@@ -740,7 +754,7 @@ function destErrs(d){
 }
 function sumHtml(d){
   if(!d.rcv.trim()) return '받으시는 분을 넣어 주세요';
-  const a=d.addr1.trim().split(/\s+/).slice(0,3).join(' ');
+  const a=isPick(d)?'공장 방문 수령':d.addr1.trim().split(/\s+/).slice(0,3).join(' ');
   return esc(d.rcv.trim())+(a?'<small>'+esc(a)+'</small>':'')+(d.pw!=='me'&&payerOf(d)?'<small class="ptag">입금 '+esc(payerOf(d))+'</small>':'');
 }
 function paintHead(c,d){ const s=c.querySelector('.dsum'); s.innerHTML=sumHtml(d); s.classList.toggle('empty',!d.rcv.trim()); c.querySelector('.dq').textContent=d.qty+'박스'; }
@@ -764,12 +778,17 @@ function renderDests(){
         <p class="pnote">${pnote(d)}</p>
         <label class="check rcchk"><input type="checkbox" data-f="rc"${d.rc?' checked':''}> <span>현금영수증 발급 (입금자 휴대폰 번호로)</span></label>
       </div>
-      <div class="field"><label>주소<em>*</em></label>
+      <div class="shipsel">
+        <span class="plabel">받는 방법</span>
+        <div class="seg2">${['택배','방문수령'].map(v=>`<button type="button" data-act="ship" data-v="${v}"${d.ship===v?' class="on"':''}>${v==='택배'?'택배로 받기':'공장에서 직접 가져가기'}</button>`).join('')}</div>
+      </div>
+      <div class="pickup${isPick(d)?'':' hidden'}"><b>공장 방문 수령 · 택배비 없음</b><br>강원 양양군 현남면 원포1길 53, 환경동 1층 · 033-672-1032<br>입금이 확인되면 준비해 두겠습니다. 오실 날짜를 아래에 적어 주세요.</div>
+      <div class="field addrbox${isPick(d)?' hidden':''}"><label>주소<em>*</em></label>
         <div class="addr"><input class="inp" data-f="zip" placeholder="우편번호" readonly style="max-width:130px" value="${esc(d.zip)}"><button type="button" class="sbtn" data-act="post">주소 찾기</button></div>
         <input class="inp" data-f="addr1" placeholder="기본 주소" style="margin-top:8px" value="${esc(d.addr1)}">
         <input class="inp" data-f="addr2" placeholder="상세 주소 (동·호수)" style="margin-top:8px" value="${esc(d.addr2)}">
       </div>
-      <div class="field"><label>배송 요청사항</label><input class="inp" data-f="memo" placeholder="예: 문 앞에 놓아 주세요" value="${esc(d.memo)}"></div>
+      <div class="field"><label class="memolbl">${isPick(d)?'방문 예정일·요청사항':'배송 요청사항'}</label><input class="inp" data-f="memo" placeholder="${isPick(d)?'예: 10월 2일 오후 방문':'예: 문 앞에 놓아 주세요'}" value="${esc(d.memo)}"></div>
       <div class="dqty"><span>수량</span><div class="stepper"><button type="button" data-act="minus" aria-label="한 박스 빼기">−</button><output>${d.qty}</output><button type="button" data-act="plus" aria-label="한 박스 더하기">+</button></div></div>
     </div></div>`).join('');
   syncSteppers(); calc();
@@ -804,6 +823,12 @@ $('dests').addEventListener('click',e=>{
   const b=e.target.closest('[data-act]'); if(!b) return;
   const c=b.closest('.dcard'), i=+c.dataset.i, d=D[i], act=b.dataset.act;
   if(act==='toggle'){ d.open=!d.open; c.classList.toggle('open',d.open); }
+  else if(act==='ship'){ d.ship=b.dataset.v; const p=isPick(d);
+    c.querySelectorAll('.seg2 button').forEach(x=>x.classList.toggle('on',x.dataset.v===d.ship));
+    c.querySelector('.pickup').classList.toggle('hidden',!p); c.querySelector('.addrbox').classList.toggle('hidden',p);
+    c.querySelector('.memolbl').textContent=p?'방문 예정일·요청사항':'배송 요청사항';
+    c.querySelector('[data-f=memo]').placeholder=p?'예: 10월 2일 오후 방문':'예: 문 앞에 놓아 주세요';
+    c.classList.remove('bad'); paintHead(c,d); calc(); }
   else if(act==='pw'){ d.pw=b.dataset.v; c.classList.remove('bad'); paintPay(c,d); paintHead(c,d); calc();
     if(d.pw==='etc') setTimeout(()=>c.querySelector('[data-f=pname]').focus(),30); }
   else if(act==='del'){ e.stopPropagation(); if(D.length>1&&(isEmpty(d)||confirm((i+1)+'번 받는 곳('+(d.rcv.trim()||'이름 없음')+')을 지울까요?'))){ D.splice(i,1); renderDests(); } }
@@ -847,7 +872,7 @@ function validate(){
   const e=[], seen={}, many=D.length>1;
   D.forEach((d,i)=>{
     const x=destErrs(d);
-    if(!x.length){ const k=d.tel.replace(/\D/g,'')+'|'+(d.addr1+d.addr2).replace(/\s/g,'');
+    if(!x.length){ const k=d.tel.replace(/\D/g,'')+'|'+(isPick(d)?'PICKUP':(d.addr1+d.addr2).replace(/\s/g,''));
       if(seen[k]) x.push(seen[k]+'번과 같은 받는 곳'); else seen[k]=i+1; }
     const c=$('dests').children[i]; c.classList.toggle('bad',!!x.length);
     if(x.length){ d.open=true; c.classList.add('open'); e.push((many?(i+1)+'번 받는 곳':'받는 곳')+' — '+x.join(', ')+' 확인'); }
@@ -857,13 +882,13 @@ function validate(){
   return e;
 }
 $('main').addEventListener('input',e=>{ if(!e.target.closest('#dests')) $('errs').innerHTML=''; });
-const addrOf=d=>(d.addr1.trim()+' '+d.addr2.trim()).trim();
+const addrOf=d=>isPick(d)?'공장 방문 수령 (택배비 없음)':(d.addr1.trim()+' '+d.addr2.trim()).trim();
 $('submit').onclick=()=>{
   const e=validate();
   $('errs').innerHTML=e.map(x=>'<li>'+esc(x)+'</li>').join('');
   if(e.length){ const b=$('dests').querySelector('.dcard.bad'); (b||$('errs')).scrollIntoView({behavior:'smooth',block:'center'}); return; }
   if(S.busy) return;
-  const q=totQ(), tot=q*(PRICE.box+PRICE.ship), G=payGroups();
+  const q=totQ(), tot=D.reduce((a,d)=>a+amtOf(d),0), G=payGroups();
   $('cWho').textContent='주문하시는 분 '+T.user.name+(T.user.dept?' ('+T.user.dept+')':'')+' · 받는 곳 '+D.length+'곳 · '+q+'박스'+(G.length>1?' · 입금자 '+G.length+'분 → 주문 '+G.length+'건':'');
   const li=i=>{ const d=D[i]; return '<li><span class="q">'+d.qty+'박스</span><b>'+(D.length>1?(i+1)+'. ':'')+esc(d.rcv.trim())+'</b> '+esc(fmtTel(d.tel))
     +(d.rcv.trim()===T.user.name?' <span style="color:var(--gold);font-size:12.5px">(본인)</span>':'')+'<small>'+esc(addrOf(d))+(d.memo.trim()?' · '+esc(d.memo.trim()):'')+'</small></li>'; };
@@ -880,11 +905,10 @@ $('cYes').onclick=async()=>{
   if(S.busy) return;
   S.busy=true; $('cYes').disabled=true; $('cYes').textContent='접수하는 중…'; $('submit').disabled=true;
   if(!S.reqId) S.reqId=(crypto.randomUUID?crypto.randomUUID():Date.now()+'-'+Math.random().toString(36).slice(2));
-  const dests=D.map(d=>({rcv:d.rcv.trim(), rcvTel:d.tel.trim(), zip:d.zip.trim(), addr:addrOf(d), shipMemo:d.memo.trim(), qty:d.qty,
+  const dests=D.map(d=>({rcv:d.rcv.trim(), rcvTel:d.tel.trim(), ship:d.ship, zip:isPick(d)?'':d.zip.trim(), addr:isPick(d)?'':addrOf(d), shipMemo:d.memo.trim(), qty:d.qty,
     payType:d.pw, payer: d.pw==='me'?'':payerOf(d), payerTel: d.pw==='me'?'':ptelOf(d), cashReceipt: d.pw!=='me'&&d.rc?ptelOf(d):''}));
   const o={reqId:S.reqId, dests, qty:totQ(), payer:mainPayer(),                     // 주문자 현금영수증 = 주문자 휴대폰 번호
     cashReceipt: D.some(d=>d.pw==='me'&&d.rc) ? T.user.id : ''};
-  if(dests.length===1) Object.assign(o,{rcv:dests[0].rcv, rcvTel:dests[0].rcvTel, zip:dests[0].zip, addr:dests[0].addr, shipMemo:dests[0].shipMemo});   // 옛 서버와도 맞게
   try{
     const r=await api('staffOrder',{order:o});
     closeConfirm();
@@ -897,7 +921,7 @@ $('cYes').onclick=async()=>{
     $('dPayer').innerHTML=many?'<ul class="plist">'+OR.map(x=>'<li><span>'+esc(x.payer)+'<small>'+esc(x.orderNo)+'</small></span><span>'+won(x.total)+'</span></li>').join('')+'</ul>':esc(OR[0].payer);
     $('dStep1').innerHTML=many?'입금하실 분마다 <b>본인 이름으로, 위 금액만큼 따로</b> 입금해 주세요. (한 번에 합쳐 보내시면 확인이 늦어집니다)':'위 계좌로 <b>입금자명 그대로</b> 입금해 주세요.';
     $('dDue').textContent=(due.getMonth()+1)+'월 '+due.getDate()+'일까지';
-    $('dTo').innerHTML=dests.map(d=>esc(d.rcv)+' · '+esc(d.addr)+(dests.length>1?' ('+d.qty+'박스)':'')).join('<br>');
+    $('dTo').innerHTML=dests.map(d=>esc(d.rcv)+' · '+esc(d.ship==='방문수령'?'공장 방문 수령':d.addr)+(dests.length>1?' ('+d.qty+'박스)':'')).join('<br>');
     document.querySelectorAll('#main > section').forEach(s=>s.classList.toggle('hidden',s.id!=='done'));
     window.scrollTo(0,0);
     D.length=0; D.push(blank()); renderDests();
@@ -925,7 +949,7 @@ async function openMine(){
         :o.step===2?(multi&&o.shipped<o.dests.length?o.dests.length+'곳 중 '+o.shipped+'곳 발송되었습니다.':'발송되었습니다.'):'배송이 완료되었습니다.';
       const destList=multi?'<ul class="mdest">'+o.dests.map(d=>'<li><div><b>'+esc(d.rcv)+'</b> · '+d.qty+'박스<small>'+esc(d.addr)+'</small>'
           +(d.waybill?'<span class="wb">'+esc(d.carrier||'한진택배')+' '+esc(d.waybill)+'</span>':'')+'</div>'
-          +(d.waybill?'<a class="trackbtn" target="_blank" rel="noopener" href="'+HANJIN+encodeURIComponent(d.waybill)+'">조회 ›</a>':'<span class="wait">발송 전</span>')+'</li>').join('')+'</ul>'
+          +(d.waybill?'<a class="trackbtn" target="_blank" rel="noopener" href="'+HANJIN+encodeURIComponent(d.waybill)+'">조회 ›</a>':'<span class="wait">'+(d.pickup?'방문 수령':'발송 전')+'</span>')+'</li>').join('')+'</ul>'
         :(o.waybill?'<div class="ship"><div><span>'+esc(o.carrier||'한진택배')+'</span><b>'+esc(o.waybill)+'</b></div><a class="trackbtn" target="_blank" rel="noopener" href="'+HANJIN+encodeURIComponent(o.waybill)+'">배송 조회 ›</a></div>':'');
       return '<div class="mcard"><div class="mhead"><b>'+esc(o.orderNo)+(o.bundle?'<span class="bundle">함께 주문 '+esc(o.bundle.slice(-3))+'</span>':'')+'</b><span>'+esc(o.date)+'</span></div>'
         +'<ol class="stepper4">'+steps+'</ol>'
