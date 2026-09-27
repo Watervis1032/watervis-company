@@ -361,6 +361,17 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
 .arow{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);font-size:13.5px}
 .arow small{display:block;color:var(--muted);font-size:12.5px}
 .h3{font-family:var(--serif);color:var(--navy);font-size:18px;margin:6px 0 12px}
+.qin{width:72px;height:40px;border:1px solid #d6dde6;border-radius:10px;text-align:center;font-weight:700;font-size:18px;background:#fff;-moz-appearance:textfield}
+.qin::-webkit-outer-spin-button,.qin::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.qin:focus{outline:none;border-color:var(--navy2);box-shadow:0 0 0 3px rgba(11,42,82,.08)}
+.qunit{font-size:14px;font-weight:700;color:var(--navy);margin-left:2px}
+.pcswarn{background:#fff3e0;border:1px solid #f0c890;color:#6b4a12;border-radius:12px;padding:12px 14px;font-size:14px;margin:0 0 14px}
+.pcswarn b{color:#b35a00}
+.quick{display:flex;gap:6px;justify-content:flex-end;margin-top:8px}
+.quick button{border:1px solid #d6dde6;background:#fff;border-radius:99px;padding:6px 12px;font-size:13px;cursor:pointer;color:var(--navy2);font-weight:600}
+#swarn{position:fixed;inset:0;z-index:97;background:rgba(3,16,31,.55);display:flex;align-items:center;justify-content:center;padding:20px}
+#swarn .cbox{border-radius:18px;max-width:420px}
+#swarn .big{font-size:22px;font-weight:800;color:#b35a00;margin:6px 0 10px}
 </style>
 </head>
 <body>
@@ -433,7 +444,7 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
   <section class="staffbar">
     <div class="wrap">
       <button type="button" class="sbar" onclick="openFree()"><b>회사 출고</b><span>샘플 · 선물 · 방문객 · 냉장고 (무상)</span><i>›</i></button>
-      <button type="button" class="sbar appr hidden" id="apprBtn" onclick="openAppr()"><b>출고 승인</b><span id="apprTxt">승인 대기와 최근 30일 회사 출고</span><i>›</i></button>
+      <button type="button" class="sbar appr hidden" id="apprBtn" onclick="openAppr()"><b id="apprT">출고 승인</b><span id="apprTxt">승인 대기와 최근 30일 회사 출고</span><i>›</i></button>
     </div>
   </section>
 
@@ -660,7 +671,7 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
     <p class="fnote" id="fRule"></p>
     <ul class="errs" id="fErr"></ul>
     <button class="submit" id="fBtn" style="background:var(--navy);color:#fff">요청하기</button>
-    <p class="fine">박스 단위로 적습니다. 냉장고에서 꺼내 드시거나 몇 개 가져가시는 것은 적지 않습니다.</p>
+    <p class="fine">샘플·선물·방문객은 <b>박스</b>, 냉장고 채우기는 <b>낱개(개)</b>로 적습니다. 냉장고에서 꺼내 드시는 것은 적지 않습니다.</p>
   </div>
   <div class="wrap tbody hidden" id="freeDone" style="text-align:center">
     <div style="width:64px;height:64px;border-radius:50%;margin:10px auto 14px;display:grid;place-items:center;border:1px solid var(--gold);color:var(--gold)"><svg viewBox="0 0 32 32" style="width:30px;height:30px;stroke:currentColor;fill:none;stroke-width:1.6"><path d="M8 16.5l5.5 5.5L24.5 10"/></svg></div>
@@ -683,6 +694,16 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
   </div>
 </div>
 
+<!-- 냉장고 채우기 주의 -->
+<div id="swarn" class="hidden" role="dialog" aria-label="냉장고 채우기 주의">
+  <div class="cbox">
+    <h3>냉장고 채우기</h3>
+    <p class="big">숫자는 낱개(파우치 개수)입니다</p>
+    <p style="margin:0 0 16px;font-size:15px;color:#3b4b5e">박스 수가 아닙니다. 직접 옮기신 <b>파우치 개수</b>를 적어 주세요.<br>참고: 1박스 = 36개</p>
+    <button type="button" class="submit" id="swOk" style="background:var(--navy);color:#fff">알겠습니다</button>
+  </div>
+</div>
+
 <!-- ═════════ 출고 승인 (승인자만) ═════════ -->
 <section id="appr" class="hidden">
   <div class="thead">
@@ -695,7 +716,7 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
   </div>
   <div class="wrap tbody">
     <ul class="errs" id="aErr"></ul>
-    <div class="h3">승인 대기</div>
+    <div class="h3" id="aPendH">승인 대기</div>
     <div id="aPending"><p class="empty">불러오는 중…</p></div>
     <div class="h3" style="margin-top:26px">최근 30일 회사 출고</div>
     <div class="asum" id="aSum"></div>
@@ -717,7 +738,7 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
   강원특별자치도 양양군 현남면 원포1길 53, 환경동 1층<br>
   Tel 033-672-1032 · admin@watervis.co.kr<br>
   <button type="button" class="flink" onclick="openAsk()">문의하기</button> · <button type="button" class="flink auth" onclick="openMine()">내 주문</button> · <button type="button" class="flink auth" onclick="logout()">로그아웃</button><br>
-  <span style="opacity:.7">© 2026 WATERVIS CO., LTD. · 임직원 화면 v0.4.0</span>
+  <span style="opacity:.7">© 2026 WATERVIS CO., LTD. · 임직원 화면 v0.4.2</span>
 </footer>
 
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js" async></script>
@@ -726,13 +747,15 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
    · 로그인 토큰은 이 탭의 메모리에만 둔다 (브라우저 저장소에 넣지 않음 → 탭을 닫으면 끝)
    · 30분 동안 아무 조작이 없으면 스스로 로그아웃 (서버도 따로 검사)
    · 가격은 서버가 계정·품목표로 다시 계산한다. 화면 숫자는 보여 주기용
+   · v0.4.2: 냉장고 채우기는 낱개(개) — 누르면 주의창, 수량 칸에 숫자 직접 입력(+10·+36 버튼)
+   · v0.4.1: 승인 없이 운영(FREE_AUTO_MAX ≥ 60) — 안내 문구·«회사 출고 현황»
    · v0.4.0: 회사 출고(무상: 거래처 샘플·선물·방문객·냉장고) + 출고 승인(승인자) + 인사말에 직급(«임승혁 대표님»)
    · v0.3.7: 금액 박스를 입금 통장 바로 위로, 받는 곳마다 «공장에서 직접 가져가기»(택배비 없음)
    · v0.3.6: 아래 «입금하실 분 성함»·현금영수증 칸을 없애고 받는 곳 카드에서만 받음
    · v0.3.6: 입금하실 분을 받는 곳마다 «임직원(주문자)·받는 분·기타»로 고름. 여러 명 붙여넣기 뺌
    · v0.3.5: 받는 곳마다 입금자(다르면 입금자별로 주문이 나뉨)
    · v0.3.4: 받는 분 입력이 기본(«내 정보로 채우기» 버튼), 받는 곳 여러 개, 여러 명 붙여넣기, 주문 확인창 */
-const VERSION='staff-v0.4.0';
+const VERSION='staff-v0.4.2';
 const API_URL='https://script.google.com/macros/s/AKfycby2u_oD8QlsYJj3fnSBsvO8bzUeiqZLuR1X7o3LAnhaHYdsWRJOo6tN9UweLoOma0G5/exec';
 const PRICE={box:0, list:0, unit:36, ship:0, maxQty:20, maxTotal:60, maxDests:30};   // 로그인 후 서버가 알려 준다 (공개 소스에 가격을 두지 않음)
 const BANK={name:'농협(강릉농협)', no:'355-0097-3405-33', holder:'워터비스코퍼레이션(주)', days:3};
@@ -1053,7 +1076,9 @@ $('copyAcct').onclick=async()=>{ try{ await navigator.clipboard.writeText(BANK.n
 /* ── 회사 출고 (무상) v0.4.0 — 12_무상출고_기획 ──
    거래처 샘플 → 샘플 · 선물·접대 → 증정 · 방문객 드림 → 증정(현장 전달) · 냉장고 채우기 → 내부사용
    박스 단위. 금액 없음. 목적 필수. N박스 이하·승인자·냉장고는 바로 출고 대기, 그 밖은 승인 대기 */
-const FREE={autoMax:2, maxQty:20, maxTotal:60, maxDests:30, pending:0};
+const FREE={autoMax:2, maxQty:20, maxTotal:60, maxDests:30, stockMax:2000, pending:0};
+const U=()=>FR.kind==='stock'?'개':'박스';
+const oneMax=()=>FR.kind==='stock'?FREE.stockMax:FREE.maxQty;
 const FK={
   sample:{label:'거래처 샘플', hint:'판매를 위해 거래처·예비 거래처에 보내는 견본입니다.', ph:'예: ○○호텔 구매팀 납품 검토용'},
   gift:{label:'선물·접대', hint:'손님·지인께 택배로 보내는 선물입니다. 여러 곳이면 [+ 받는 곳 추가]로 한 분씩 넣어 주세요.', ph:'예: 추석 선물 · 회장님 지시'},
@@ -1078,7 +1103,9 @@ function openFree(){
 function closeFree(){ show(T.token?(freeFrom==='free'?'main':freeFrom):'gate'); }
 function newFree(){ FR.kind=''; FR.D=[fblank()]; FR.one={qty:1,who:'',tel:'',date:todayStr(),place:'회사 냉장고'}; FR.reqId=null; $('fPurpose').value=''; openFree(); }
 $('fKind').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return;
-  if(FR.kind!==b.dataset.v){ FR.kind=b.dataset.v; FR.reqId=null; } $('fErr').innerHTML=''; renderFree(); });
+  if(FR.kind!==b.dataset.v){ FR.kind=b.dataset.v; FR.reqId=null; FR.one.qty=1; } $('fErr').innerHTML=''; renderFree();
+  if(FR.kind==='stock'){ $('swarn').classList.remove('hidden'); document.body.style.overflow='hidden'; } });
+$('swOk').onclick=()=>{ $('swarn').classList.add('hidden'); document.body.style.overflow=''; const q=$('fBody').querySelector('.qin'); if(q){ q.focus(); q.select(); } };
 function fSum(d){
   const who=FR.kind==='sample'?(d.company.trim()+(d.rcv.trim()?' · '+d.rcv.trim():'')):d.rcv.trim();
   if(!who) return FR.kind==='sample'?'회사명·담당자를 넣어 주세요':'받으시는 분을 넣어 주세요';
@@ -1102,7 +1129,7 @@ function fCard(d,i){
         <input class="inp" data-f="addr2" placeholder="상세 주소 (동·호수)" style="margin-top:8px" value="${esc(d.addr2)}">
       </div>
       <div class="field"><label>${direct?'전달 예정·메모':'배송 요청사항'}</label><input class="inp" data-f="memo" placeholder="${direct?'예: 10월 2일 미팅 때 전달':'예: 부재 시 경비실'}" value="${esc(d.memo)}"></div>
-      <div class="dqty"><span>수량</span><div class="stepper"><button type="button" data-act="minus" aria-label="한 박스 빼기">−</button><output>${d.qty}</output><button type="button" data-act="plus" aria-label="한 박스 더하기">+</button></div></div>
+      <div class="dqty"><span>수량 (박스)</span><div class="stepper"><button type="button" data-act="minus" aria-label="한 박스 빼기">−</button><input class="qin" data-q type="number" inputmode="numeric" min="1" value="${d.qty}" aria-label="수량"><button type="button" data-act="plus" aria-label="한 박스 더하기">+</button></div></div>
     </div></div>`;
 }
 function renderFree(){
@@ -1120,19 +1147,23 @@ function renderFree(){
         <div class="field"><label>연락처</label><input class="inp" data-o="tel" type="tel" inputmode="tel" placeholder="(선택)" value="${esc(FR.one.tel)}"></div>
       </div>
       <div class="field"><label>방문하신 분 (회사·성함)<em>*</em></label><input class="inp" data-o="who" placeholder="예: ○○시청 김과장 외 3명" value="${esc(FR.one.who)}"></div>
-      <div class="dqty"><span>드린 수량</span><div class="stepper"><button type="button" data-act="ominus" aria-label="한 박스 빼기">−</button><output>${FR.one.qty}</output><button type="button" data-act="oplus" aria-label="한 박스 더하기">+</button></div></div>
+      <div class="dqty"><span>드린 수량 (박스)</span><div class="stepper"><button type="button" data-act="ominus" aria-label="하나 빼기">−</button><input class="qin" data-q type="number" inputmode="numeric" min="1" value="${FR.one.qty}" aria-label="수량"><button type="button" data-act="oplus" aria-label="하나 더하기">+</button></div></div>
     </div>`;
-  else h=`<div class="one">
+  else h=`<div class="pcswarn">⚠ 여기에 넣는 숫자는 <b>낱개(파우치 개수)</b>입니다. 박스 수가 아닙니다. (1박스 = 36개)</div>
+    <div class="one">
       <div class="field"><label>보관 장소</label><input class="inp" data-o="place" placeholder="예: 본관 냉장고" value="${esc(FR.one.place)}"></div>
-      <div class="dqty"><span>옮긴 수량</span><div class="stepper"><button type="button" data-act="ominus" aria-label="한 박스 빼기">−</button><output>${FR.one.qty}</output><button type="button" data-act="oplus" aria-label="한 박스 더하기">+</button></div></div>
+      <div class="dqty"><span>옮긴 개수 <b style="color:#b35a00">(낱개)</b></span><div class="stepper"><button type="button" data-act="ominus" aria-label="하나 빼기">−</button><input class="qin" data-q type="number" inputmode="numeric" min="1" value="${FR.one.qty}" aria-label="수량"><span class="qunit">개</span><button type="button" data-act="oplus" aria-label="하나 더하기">+</button></div></div>
+      <div class="quick"><button type="button" data-act="oadd" data-n="10">+10개</button><button type="button" data-act="oadd" data-n="36">+36개 (1박스)</button></div>
     </div>`;
   $('fBody').innerHTML=h; fRule(); fSteppers();
 }
-function fAuto(){ return FR.kind==='stock'||(T.user&&T.user.canApprove)||fTotQ()<=FREE.autoMax; }
+const noAppr=()=>FREE.autoMax>=FREE.maxTotal;   // 승인 없이 운영 (대표님 2026-09-27: FREE_AUTO_MAX=60)
+function fAuto(){ return noAppr()||FR.kind==='stock'||(T.user&&T.user.canApprove)||fTotQ()<=FREE.autoMax; }
 function fRule(){
   const r=$('fRule'); if(!FR.kind){ r.classList.add('hidden'); return; } r.classList.remove('hidden');
   const q=fTotQ();
-  if(FR.kind==='stock') r.innerHTML='냉장고 채우기는 <b>바로 출고 대기</b>로 넘어갑니다. 지금 <b>'+q+'박스</b>';
+  if(noAppr()) r.innerHTML='요청하면 <b>바로 출고 대기</b>로 넘어갑니다. 누가·어디에·왜 나갔는지는 회사 출고 현황에 남습니다. 지금 <b>'+q+U()+'</b>';
+  else if(FR.kind==='stock') r.innerHTML='냉장고 채우기는 <b>바로 출고 대기</b>로 넘어갑니다. 지금 <b>'+q+'개</b>';
   else if(T.user&&T.user.canApprove) r.innerHTML='승인자 요청이라 <b>바로 출고 대기</b>로 넘어갑니다. 지금 <b>'+q+'박스</b>';
   else r.innerHTML='한 번에 <b>'+FREE.autoMax+'박스까지</b>는 바로 출고 대기, 넘으면 <b>승인 후</b> 출고됩니다. 지금 <b>'+q+'박스</b>'+(q>FREE.autoMax?' → 승인 대기':' → 바로 출고 대기');
   r.classList.toggle('warn',!fAuto());
@@ -1140,11 +1171,23 @@ function fRule(){
 function fSteppers(){
   const full=fTotQ()>=FREE.maxTotal;
   if(multiKind()) [...$('fBody').querySelectorAll('.fcard')].forEach((c,i)=>{ const d=FR.D[i], b=c.querySelectorAll('.stepper button'); b[0].disabled=d.qty<=1; b[1].disabled=d.qty>=FREE.maxQty||full; });
-  else { const b=$('fBody').querySelectorAll('.stepper button'); if(b.length){ b[0].disabled=FR.one.qty<=1; b[1].disabled=FR.one.qty>=FREE.maxQty; } }
+  else { const b=$('fBody').querySelectorAll('.stepper button'); if(b.length){ b[0].disabled=FR.one.qty<=1; b[1].disabled=FR.one.qty>=oneMax(); } }
   const a=$('fBody').querySelector('[data-act=add]'); if(a) a.disabled=FR.D.length>=FREE.maxDests;
 }
+/* 수량 칸에 숫자를 바로 넣을 수 있다 (+ − 도 그대로) */
+function qSet(t,commit){
+  const card=t.closest('.fcard'), max=card?FREE.maxQty:oneMax();
+  let n=parseInt(String(t.value).replace(/\D/g,''),10);
+  if(!(n>=1)){ if(commit){ n=1; } else return; }
+  if(n>max){ n=max; toast('한 번에 '+max+(card?'박스':U())+'까지입니다.'); t.value=n; }
+  if(card){ const d=FR.D[+card.dataset.i]; d.qty=n; card.querySelector('.dq').textContent=n+'박스'; } else FR.one.qty=n;
+  if(commit) t.value=n; fSteppers(); fRule();
+}
+$('fBody').addEventListener('change',e=>{ if(e.target.dataset.q!==undefined) qSet(e.target,true); });
+$('fBody').addEventListener('focusin',e=>{ if(e.target.dataset.q!==undefined) setTimeout(()=>e.target.select(),0); });
 $('fBody').addEventListener('input',e=>{
   const t=e.target; $('fErr').innerHTML='';
+  if(t.dataset.q!==undefined){ qSet(t,false); return; }
   if(t.dataset.o){ if(t.dataset.o==='tel') t.value=fmtTel(t.value); FR.one[t.dataset.o]=t.value; return; }
   const f=t.dataset.f; if(!f) return;
   const c=t.closest('.fcard'), d=FR.D[+c.dataset.i];
@@ -1156,8 +1199,9 @@ $('fBody').addEventListener('click',e=>{
   const act=b.dataset.act;
   if(act==='add'){ if(FR.D.length>=FREE.maxDests) return; FR.D.push(fblank()); renderFree();
     const c=$('fBody').querySelectorAll('.fcard'); const last=c[c.length-1]; last.scrollIntoView({behavior:'smooth',block:'center'}); setTimeout(()=>last.querySelector('[data-f]').focus(),300); return; }
-  if(act==='ominus'||act==='oplus'){ FR.one.qty=act==='ominus'?Math.max(1,FR.one.qty-1):Math.min(FREE.maxQty,FR.one.qty+1);
-    b.parentNode.querySelector('output').textContent=FR.one.qty; fSteppers(); fRule(); return; }
+  if(act==='ominus'||act==='oplus'||act==='oadd'){
+    FR.one.qty=act==='ominus'?Math.max(1,FR.one.qty-1):Math.min(oneMax(),FR.one.qty+(act==='oadd'?Number(b.dataset.n):1));
+    $('fBody').querySelector('.one .qin').value=FR.one.qty; fSteppers(); fRule(); return; }
   const c=b.closest('.fcard'); if(!c) return; const i=+c.dataset.i, d=FR.D[i];
   if(act==='del'){ const empty=!d.company.trim()&&!d.rcv.trim()&&!d.addr1.trim();
     if(FR.D.length>1&&(empty||confirm((i+1)+'번 받는 곳을 지울까요?'))){ FR.D.splice(i,1); renderFree(); } }
@@ -1166,7 +1210,7 @@ $('fBody').addEventListener('click',e=>{
       setTimeout(()=>{ const a=$('fBody').querySelectorAll('.fcard')[i]; if(a) a.querySelector('[data-f=addr2]').focus(); },50); }, c);
   else if(act==='minus'||act==='plus'){
     if(act==='minus') d.qty=Math.max(1,d.qty-1); else if(fTotQ()<FREE.maxTotal) d.qty=Math.min(FREE.maxQty,d.qty+1);
-    c.querySelector('output').textContent=d.qty; c.querySelector('.dq').textContent=d.qty+'박스'; fSteppers(); fRule();
+    c.querySelector('.qin').value=d.qty; c.querySelector('.dq').textContent=d.qty+'박스'; fSteppers(); fRule();
     if(act==='plus'&&fTotQ()>=FREE.maxTotal) toast('한 번에 '+FREE.maxTotal+'박스까지입니다.');
   }
 });
@@ -1191,7 +1235,8 @@ function fValidate(){
     if(!FR.one.who.trim()) e.push('방문하신 분(회사·성함)을 넣어 주세요.');
     if(FR.one.tel.trim()&&!TEL.test(FR.one.tel.trim())) e.push('연락처를 확인해 주세요.');
   }
-  if(fTotQ()>FREE.maxTotal) e.push('한 번에 '+FREE.maxTotal+'박스까지입니다.');
+  if(K==='stock'&&!(FR.one.qty>=1&&FR.one.qty<=FREE.stockMax)) e.push('옮긴 개수를 넣어 주세요 (1~'+FREE.stockMax+'개).');
+  if(multiKind()&&fTotQ()>FREE.maxTotal) e.push('한 번에 '+FREE.maxTotal+'박스까지입니다.');
   if($('fPurpose').value.trim().length<2) e.push('목적을 적어 주세요.');
   return e;
 }
@@ -1204,9 +1249,9 @@ $('fBtn').onclick=()=>{
   $('fcWho').textContent=K.label+' · 요청 '+T.user.disp+' · '+(fAuto()?'바로 출고 대기':'승인 후 출고');
   $('fcList').innerHTML=(multiKind()?FR.D.map((d,i)=>'<li><span class="q">'+d.qty+'박스</span><b>'+(FR.D.length>1?(i+1)+'. ':'')+esc(FR.kind==='sample'?d.company.trim()+' · '+d.rcv.trim():d.rcv.trim())+'</b> '+esc(fmtTel(d.tel))+'<small>'+esc(fAddr(d))+(d.memo.trim()?' · '+esc(d.memo.trim()):'')+'</small></li>').join('')
     :FR.kind==='visit'?'<li><span class="q">'+q+'박스</span><b>'+esc(FR.one.who.trim())+'</b><small>'+esc(FR.one.date)+' 공장 방문 · 현장 전달</small></li>'
-    :'<li><span class="q">'+q+'박스</span><b>'+esc(FR.one.place.trim()||'회사 냉장고')+'</b><small>사내 비치</small></li>')
+    :'<li><span class="q">'+q+'개</span><b>'+esc(FR.one.place.trim()||'회사 냉장고')+'</b><small>사내 비치 · 낱개 '+q+'개 (약 '+(Math.round(q/36*10)/10)+'박스)</small></li>')
     +'<li class="cg"><b>목적</b> '+esc($('fPurpose').value.trim())+'</li>';
-  $('fcTot').textContent=q+'박스';
+  $('fcTot').textContent=q+U(); $('fcTotL').textContent=FR.kind==='stock'?'옮긴 개수 (낱개)':'출고 수량';
   $('fconfirm').classList.remove('hidden'); document.body.style.overflow='hidden';
 };
 function closeFConfirm(){ $('fconfirm').classList.add('hidden'); document.body.style.overflow=''; }
@@ -1224,11 +1269,12 @@ $('fcYes').onclick=async()=>{
     const r=await api('freeOrder',{order:o});
     closeFConfirm();
     const wait=r.status==='승인대기';
-    $('fdTitle').textContent=wait?'승인 요청되었습니다':'요청되었습니다';
+    $('fdTitle').textContent=wait?'승인 요청되었습니다':'기록되었습니다';
     $('fdNo').textContent=r.orderNo;
     $('fdMsg').className='fnote'+(wait?' warn':'');
-    $('fdMsg').innerHTML=wait?'<b>'+r.qty+'박스</b> — 한 번에 '+FREE.autoMax+'박스를 넘어 <b>승인자가 확인한 뒤</b> 출고됩니다. 진행은 내 주문에서 보실 수 있습니다.'
-      :'<b>'+r.qty+'박스</b> — <b>출고 대기</b>로 넘어갔습니다. '+(FR.kind==='visit'||FR.kind==='stock'?'기록되었습니다.':'출고 담당이 준비합니다.');
+    const uu=r.unit||'박스';
+    $('fdMsg').innerHTML=wait?'<b>'+r.qty+uu+'</b> — 한 번에 '+FREE.autoMax+'박스를 넘어 <b>승인자가 확인한 뒤</b> 출고됩니다. 진행은 내 주문에서 보실 수 있습니다.'
+      :'<b>'+r.qty+uu+'</b> — <b>출고 대기</b>로 넘어갔습니다. '+(FR.kind==='visit'||FR.kind==='stock'?'기록되었습니다.':'출고 담당이 준비합니다.');
     $('freeForm').classList.add('hidden'); $('freeDone').classList.remove('hidden'); window.scrollTo(0,0);
     FR.kind=''; FR.D=[fblank()]; FR.one={qty:1,who:'',tel:'',date:todayStr(),place:'회사 냉장고'}; FR.reqId=null; $('fPurpose').value='';
   }catch(err){ if(T.token) toast(err.message+' (다시 눌러도 두 번 접수되지 않습니다)'); }
@@ -1238,7 +1284,8 @@ $('fcYes').onclick=async()=>{
 /* ── 출고 승인 (승인자만) ── */
 let apprFrom='main';
 function paintApprBtn(){ const on=!!(T.user&&T.user.canApprove); $('apprBtn').classList.toggle('hidden',!on);
-  $('apprTxt').innerHTML=FREE.pending?'승인 대기 <span class="cnt">'+FREE.pending+'</span>':'승인 대기 없음 · 최근 30일 회사 출고 보기'; }
+  $('apprT').textContent=noAppr()?'회사 출고 현황':'출고 승인';
+  $('apprTxt').innerHTML=noAppr()&&!FREE.pending?'최근 30일 누가·어디에·몇 박스':FREE.pending?'승인 대기 <span class="cnt">'+FREE.pending+'</span>':'승인 대기 없음 · 최근 30일 회사 출고 보기'; }
 async function openAppr(){
   if(!T.token){ show('gate'); return; }
   const c=curPage(); if(c!=='appr') apprFrom=c;
@@ -1246,18 +1293,21 @@ async function openAppr(){
   try{
     const r=await api('freeBoard');
     FREE.pending=r.pending.length; paintApprBtn();
-    $('aSub').textContent=r.autoMax+'박스를 넘는 요청은 여기서 승인합니다';
-    const dl=x=>'<ul>'+x.dests.map(d=>'<li>'+esc(d.to)+(d.rcv&&d.rcv!==d.to?' · '+esc(d.rcv):'')+' · '+d.qty+'박스<br><small style="color:var(--muted)">'+esc(d.addr)+'</small></li>').join('')+'</ul>';
+    const na=r.autoMax>=FREE.maxTotal;
+    $('appr').querySelector('.thead h2').textContent=na?'회사 출고 현황':'출고 승인';
+    $('aSub').textContent=na?'최근 30일 누가·어디에·왜·몇 박스 나갔는지':r.autoMax+'박스를 넘는 요청은 여기서 승인합니다';
+    $('aPendH').classList.toggle('hidden',na&&!r.pending.length); $('aPending').classList.toggle('hidden',na&&!r.pending.length);
+    const dl=x=>'<ul>'+x.dests.map(d=>'<li>'+esc(d.to)+(d.rcv&&d.rcv!==d.to?' · '+esc(d.rcv):'')+' · '+d.qty+esc(x.unit||'박스')+'<br><small style="color:var(--muted)">'+esc(d.addr)+'</small></li>').join('')+'</ul>';
     $('aPending').innerHTML=r.pending.length?r.pending.map(x=>'<div class="acard" data-no="'+esc(x.orderNo)+'"><div class="ah"><b>'+esc(x.orderNo)+'<span class="kind">'+esc(x.kind)+'</span></b><span>'+esc(x.date)+'</span></div>'
-      +'<p class="ap"><b>'+esc(x.who)+'</b>'+(x.dept?' ('+esc(x.dept)+')':'')+' · <b>'+x.qty+'박스</b><br>목적: '+esc(x.purpose)+'</p>'+dl(x)
+      +'<p class="ap"><b>'+esc(x.who)+'</b>'+(x.dept?' ('+esc(x.dept)+')':'')+' · <b>'+x.qty+esc(x.unit||'박스')+'</b><br>목적: '+esc(x.purpose)+'</p>'+dl(x)
       +'<input class="inp" data-memo placeholder="메모 (반려할 때는 사유 필수)" style="padding:10px 12px;font-size:14.5px">'
       +'<div class="abtns"><button type="button" class="no" data-d="반려">반려</button><button type="button" class="yes" data-d="승인">승인</button></div></div>').join('')
       :'<p class="fnote">승인 대기 중인 요청이 없습니다.</p>';
     const T2={'샘플':'샘플','증정':'선물·방문객','내부사용':'냉장고'};
-    $('aSum').innerHTML=Object.keys(r.sum).length?Object.keys(r.sum).map(k=>'<span>'+esc(T2[k]||k)+' <b>'+r.sum[k]+'박스</b></span>').join(''):'';
+    $('aSum').innerHTML=Object.keys(r.sum).length?Object.keys(r.sum).map(k=>{ const t=k.split('|')[0], u=k.split('|')[1]||'박스'; return '<span>'+esc(T2[t]||t)+' <b>'+r.sum[k]+esc(u)+'</b></span>'; }).join(''):'';
     const cls=s=>s==='반려'?'no':s==='승인대기'?'wait':'ok';
     $('aRecent').innerHTML=r.recent.length?r.recent.map(x=>'<div class="arow"><div><b>'+esc(x.kind)+'</b> · '+esc(x.dests[0]?x.dests[0].to:'')+(x.dests.length>1?' 외 '+(x.dests.length-1)+'곳':'')
-      +'<small>'+esc(x.date)+' · '+esc(x.who)+' · '+esc(x.purpose)+'</small></div><div style="text-align:right;white-space:nowrap"><b>'+x.qty+'박스</b><small><span class="st '+cls(x.status)+'">'+esc(x.status)+'</span></small></div></div>').join('')
+      +'<small>'+esc(x.date)+' · '+esc(x.who)+' · '+esc(x.purpose)+'</small></div><div style="text-align:right;white-space:nowrap"><b>'+x.qty+esc(x.unit||'박스')+'</b><small><span class="st '+cls(x.status)+'">'+esc(x.status)+'</span></small></div></div>').join('')
       :'<p class="fnote">최근 30일 회사 출고가 없습니다.</p>';
   }catch(err){ $('aPending').innerHTML=''; $('aErr').innerHTML='<li>'+esc(err.message)+'</li>'; }
 }
@@ -1309,7 +1359,7 @@ function freeCard(o){
     :o.status==='승인대기'?'승인을 기다리고 있습니다.'
     :o.step===1?'출고 대기 중입니다'+(o.approver&&!auto?' · 승인 '+esc(o.approver):'')+'.'
     :o.step===2?'출고되었습니다.':'전달이 끝났습니다.';
-  const destList='<ul class="mdest">'+o.dests.map(d=>'<li><div><b>'+esc(d.to||d.rcv)+'</b>'+(d.rcv&&d.to&&d.rcv!==d.to?' · '+esc(d.rcv):'')+' · '+d.qty+'박스<small>'+esc(d.addr)+'</small>'
+  const destList='<ul class="mdest">'+o.dests.map(d=>'<li><div><b>'+esc(d.to||d.rcv)+'</b>'+(d.rcv&&d.to&&d.rcv!==d.to?' · '+esc(d.rcv):'')+' · '+d.qty+esc(o.unit||'박스')+'<small>'+esc(d.addr)+'</small>'
     +(d.waybill?'<span class="wb">'+esc(d.carrier||'한진택배')+' '+esc(d.waybill)+'</span>':'')+'</div>'
     +(d.waybill?'<a class="trackbtn" target="_blank" rel="noopener" href="'+HANJIN+encodeURIComponent(d.waybill)+'">조회 ›</a>':'')+'</li>').join('')+'</ul>';
   return '<div class="mcard"><div class="mhead"><b>'+esc(o.orderNo)+'<span class="kind">'+esc(o.kind)+'</span></b><span>'+esc(o.date)+'</span></div>'
