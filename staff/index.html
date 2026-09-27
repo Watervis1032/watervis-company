@@ -324,6 +324,43 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
 .empty{text-align:center;color:var(--muted);padding:40px 0}
 .ghelp{margin-top:22px;font-size:14px;color:#9fb3cb;line-height:1.7}
 .ghelp a{display:inline-block;margin-top:6px;color:var(--gold2);font-weight:700;font-size:15.5px;text-decoration:none;border:1px solid rgba(230,207,154,.45);border-radius:99px;padding:9px 18px}
+/* ── v0.4.0 회사 출고 · 승인 ── */
+.staffbar{background:#fff;border-bottom:1px solid var(--line);padding:14px 22px}
+.staffbar .wrap{display:grid;gap:8px}
+.sbar{display:flex;align-items:center;gap:12px;width:100%;border:1px solid #d6dde6;background:#fff;border-radius:14px;padding:13px 16px;cursor:pointer;text-align:left;color:var(--ink)}
+.sbar b{font-size:15.5px;color:var(--navy);white-space:nowrap}
+.sbar span{flex:1;font-size:13px;color:var(--muted)}
+.sbar i{font-style:normal;color:var(--gold);font-weight:700}
+.sbar.appr{border-color:var(--gold2);background:#fffaf0}
+.sbar .cnt{display:inline-block;min-width:22px;text-align:center;background:var(--bad);color:#fff;border-radius:99px;padding:1px 8px;font-size:12.5px;font-weight:700;margin-left:4px}
+#free,#appr{min-height:100svh;background:var(--paper)}
+.fhint{font-size:13px;color:var(--gold);margin:8px 0 0;min-height:1em}
+.fnote{font-size:13px;color:#4b5868;background:#f7f9fb;border-radius:12px;padding:12px 14px;margin:0 0 14px}
+.fnote b{color:var(--navy)}
+.fnote.warn{background:#fff6e6;color:#6b4a12}
+.fcard .dhead{cursor:default}
+.one{border:1px solid #d6dde6;border-radius:14px;background:#fff;padding:16px 16px 10px;margin-bottom:14px}
+#fconfirm{position:fixed;inset:0;z-index:96;background:rgba(3,16,31,.55);display:flex;align-items:flex-end;justify-content:center}
+.kind{display:inline-block;font-size:12px;font-weight:700;color:var(--navy2);background:var(--sky);border-radius:99px;padding:2px 9px;margin-left:6px;vertical-align:1px}
+.st{display:inline-block;font-size:12px;font-weight:700;border-radius:99px;padding:2px 9px}
+.st.wait{background:#fff1d6;color:#8a5a00} .st.ok{background:#e3f3ea;color:var(--ok)} .st.no{background:#fbe4e4;color:var(--bad)}
+.acard{border:1px solid var(--line);border-radius:16px;background:#fff;padding:16px;margin-bottom:12px}
+.acard .ah{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:8px}
+.acard .ah b{font-family:ui-monospace,Menlo,Consolas,monospace;color:var(--navy)}
+.acard .ah span{font-size:12.5px;color:var(--muted)}
+.acard .ap{font-size:14px;margin:0 0 8px}
+.acard ul{list-style:none;padding:0;margin:0 0 10px;font-size:13.5px;color:#3b4b5e}
+.acard ul li{padding:3px 0;border-top:1px dashed var(--line)}
+.abtns{display:grid;grid-template-columns:1fr 2fr;gap:8px;margin-top:10px}
+.abtns button{border-radius:11px;padding:12px;font-weight:700;cursor:pointer;font-size:15px}
+.abtns .no{background:#fff;border:1px solid #d6dde6;color:var(--bad)}
+.abtns .yes{background:var(--navy);border:1px solid var(--navy);color:#fff}
+.asum{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+.asum span{background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-size:13.5px}
+.asum b{color:var(--navy)}
+.arow{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+.arow small{display:block;color:var(--muted);font-size:12.5px}
+.h3{font-family:var(--serif);color:var(--navy);font-size:18px;margin:6px 0 12px}
 </style>
 </head>
 <body>
@@ -373,7 +410,7 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
   <!-- 첫 화면 -->
   <section class="hero">
     <div class="me">
-      <span class="who"><b id="meName"></b> 님 <span id="meDept"></span></span>
+      <span class="who"><b id="meName"></b> <span id="meDept"></span></span>
       <span class="acts">
         <button type="button" class="tbtn" onclick="openMine()"><svg viewBox="0 0 24 24"><path d="M3 7h13v10H3zM16 10h3l2 3v4h-5"/><circle cx="7" cy="18" r="1.6"/><circle cx="18" cy="18" r="1.6"/></svg>내 주문</button>
         <button type="button" class="out" onclick="logout()">로그아웃</button>
@@ -389,6 +426,14 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
       </div>
       <div class="photo"><img src="../order/img/order-hero.webp" alt="몸愛좋은물 Gold 파우치를 든 모델" width="900" height="1200"></div>
       <button class="cta" onclick="document.getElementById('order').scrollIntoView()">주문하기<small id="ctaSmall">임직원가</small></button>
+    </div>
+  </section>
+
+  <!-- 회사 출고 · 승인 (v0.4.0) -->
+  <section class="staffbar">
+    <div class="wrap">
+      <button type="button" class="sbar" onclick="openFree()"><b>회사 출고</b><span>샘플 · 선물 · 방문객 · 냉장고 (무상)</span><i>›</i></button>
+      <button type="button" class="sbar appr hidden" id="apprBtn" onclick="openAppr()"><b>출고 승인</b><span id="apprTxt">승인 대기와 최근 30일 회사 출고</span><i>›</i></button>
     </div>
   </section>
 
@@ -530,7 +575,7 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
       <button type="button" class="tback" onclick="closeMine()">‹ 돌아가기</button>
       <img class="tlogo" src="../order/img/logo-watervis-white.png" alt="WATERVIS" width="120" height="26">
       <h2>내 주문</h2>
-      <p>최근 120일 동안 주문하신 내역입니다.</p>
+      <p>최근 120일 동안의 주문과 회사 출고 요청입니다.</p>
     </div>
   </div>
   <div class="wrap tbody">
@@ -589,6 +634,75 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
   </div>
 </section>
 
+<!-- ═════════ 회사 출고 (무상) ═════════ -->
+<section id="free" class="hidden">
+  <div class="thead">
+    <div class="wrap">
+      <button type="button" class="tback" onclick="closeFree()">‹ 돌아가기</button>
+      <img class="tlogo" src="../order/img/logo-watervis-white.png" alt="WATERVIS" width="120" height="26">
+      <h2>회사 출고</h2>
+      <p>돈을 받지 않고 나가는 물량 — 샘플 · 선물 · 방문객 · 냉장고</p>
+    </div>
+  </div>
+  <div class="wrap tbody" id="freeForm">
+    <div class="field"><label>무엇인가요?<em>*</em></label>
+      <div class="chips" id="fKind">
+        <button type="button" data-v="sample">거래처 샘플</button>
+        <button type="button" data-v="gift">선물·접대</button>
+        <button type="button" data-v="visit">방문객 드림</button>
+        <button type="button" data-v="stock" id="fKindStock">냉장고 채우기</button>
+      </div>
+      <p class="fhint" id="fHint"></p>
+    </div>
+    <div id="fBody"></div>
+    <div class="field" id="fPurposeBox"><label>목적<em>*</em> <span style="font-weight:400;color:var(--muted)">(월별 집계·비용 처리에 그대로 나갑니다)</span></label>
+      <textarea class="inp" id="fPurpose" rows="2" maxlength="300"></textarea></div>
+    <p class="fnote" id="fRule"></p>
+    <ul class="errs" id="fErr"></ul>
+    <button class="submit" id="fBtn" style="background:var(--navy);color:#fff">요청하기</button>
+    <p class="fine">박스 단위로 적습니다. 냉장고에서 꺼내 드시거나 몇 개 가져가시는 것은 적지 않습니다.</p>
+  </div>
+  <div class="wrap tbody hidden" id="freeDone" style="text-align:center">
+    <div style="width:64px;height:64px;border-radius:50%;margin:10px auto 14px;display:grid;place-items:center;border:1px solid var(--gold);color:var(--gold)"><svg viewBox="0 0 32 32" style="width:30px;height:30px;stroke:currentColor;fill:none;stroke-width:1.6"><path d="M8 16.5l5.5 5.5L24.5 10"/></svg></div>
+    <h2 style="font-family:var(--serif);color:var(--navy);margin:0 0 6px" id="fdTitle">요청되었습니다</h2>
+    <p style="color:var(--muted);margin:0 0 6px">요청번호 <b id="fdNo" style="font-family:ui-monospace,Menlo,Consolas,monospace;color:var(--navy)"></b></p>
+    <p class="fnote" id="fdMsg" style="text-align:left"></p>
+    <button class="cta" style="margin:0 auto 10px;width:100%" onclick="openMine()">내 주문에서 보기</button>
+    <button class="cta" style="margin:0 auto;width:100%;background:#fff;color:var(--navy);border:1px solid var(--line);box-shadow:none" onclick="newFree()">하나 더 요청하기</button>
+  </div>
+</section>
+
+<!-- 회사 출고 확인창 -->
+<div id="fconfirm" class="hidden" role="dialog" aria-label="회사 출고 확인">
+  <div class="cbox">
+    <h3>이대로 요청할까요?</h3>
+    <p class="cwho" id="fcWho"></p>
+    <ul class="clist" id="fcList"></ul>
+    <div class="ctot"><span id="fcTotL">출고 수량</span><b id="fcTot"></b></div>
+    <div class="cbtns"><button type="button" class="no" id="fcNo">고치기</button><button type="button" class="yes" id="fcYes">요청하기</button></div>
+  </div>
+</div>
+
+<!-- ═════════ 출고 승인 (승인자만) ═════════ -->
+<section id="appr" class="hidden">
+  <div class="thead">
+    <div class="wrap">
+      <button type="button" class="tback" onclick="closeAppr()">‹ 돌아가기</button>
+      <img class="tlogo" src="../order/img/logo-watervis-white.png" alt="WATERVIS" width="120" height="26">
+      <h2>출고 승인</h2>
+      <p id="aSub">승인 대기와 최근 30일 회사 출고</p>
+    </div>
+  </div>
+  <div class="wrap tbody">
+    <ul class="errs" id="aErr"></ul>
+    <div class="h3">승인 대기</div>
+    <div id="aPending"><p class="empty">불러오는 중…</p></div>
+    <div class="h3" style="margin-top:26px">최근 30일 회사 출고</div>
+    <div class="asum" id="aSum"></div>
+    <div id="aRecent"></div>
+  </div>
+</section>
+
 <div id="postLayer" class="hidden" role="dialog" aria-label="주소 찾기">
   <div class="postwrap">
     <div class="posthead"><b>주소 찾기</b><button type="button" id="postClose" aria-label="닫기">닫기 ✕</button></div>
@@ -603,7 +717,7 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
   강원특별자치도 양양군 현남면 원포1길 53, 환경동 1층<br>
   Tel 033-672-1032 · admin@watervis.co.kr<br>
   <button type="button" class="flink" onclick="openAsk()">문의하기</button> · <button type="button" class="flink auth" onclick="openMine()">내 주문</button> · <button type="button" class="flink auth" onclick="logout()">로그아웃</button><br>
-  <span style="opacity:.7">© 2026 WATERVIS CO., LTD. · 임직원 화면 v0.3.7</span>
+  <span style="opacity:.7">© 2026 WATERVIS CO., LTD. · 임직원 화면 v0.4.0</span>
 </footer>
 
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js" async></script>
@@ -612,12 +726,13 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
    · 로그인 토큰은 이 탭의 메모리에만 둔다 (브라우저 저장소에 넣지 않음 → 탭을 닫으면 끝)
    · 30분 동안 아무 조작이 없으면 스스로 로그아웃 (서버도 따로 검사)
    · 가격은 서버가 계정·품목표로 다시 계산한다. 화면 숫자는 보여 주기용
+   · v0.4.0: 회사 출고(무상: 거래처 샘플·선물·방문객·냉장고) + 출고 승인(승인자) + 인사말에 직급(«임승혁 대표님»)
    · v0.3.7: 금액 박스를 입금 통장 바로 위로, 받는 곳마다 «공장에서 직접 가져가기»(택배비 없음)
    · v0.3.6: 아래 «입금하실 분 성함»·현금영수증 칸을 없애고 받는 곳 카드에서만 받음
    · v0.3.6: 입금하실 분을 받는 곳마다 «임직원(주문자)·받는 분·기타»로 고름. 여러 명 붙여넣기 뺌
    · v0.3.5: 받는 곳마다 입금자(다르면 입금자별로 주문이 나뉨)
    · v0.3.4: 받는 분 입력이 기본(«내 정보로 채우기» 버튼), 받는 곳 여러 개, 여러 명 붙여넣기, 주문 확인창 */
-const VERSION='staff-v0.3.7';
+const VERSION='staff-v0.4.0';
 const API_URL='https://script.google.com/macros/s/AKfycby2u_oD8QlsYJj3fnSBsvO8bzUeiqZLuR1X7o3LAnhaHYdsWRJOo6tN9UweLoOma0G5/exec';
 const PRICE={box:0, list:0, unit:36, ship:0, maxQty:20, maxTotal:60, maxDests:30};   // 로그인 후 서버가 알려 준다 (공개 소스에 가격을 두지 않음)
 const BANK={name:'농협(강릉농협)', no:'355-0097-3405-33', holder:'워터비스코퍼레이션(주)', days:3};
@@ -646,7 +761,7 @@ async function api(action,payload){
 }
 
 /* ── 화면 전환 ── */
-const PAGES=['gate','pwchg','main','mine','ask'];
+const PAGES=['gate','pwchg','main','mine','ask','free','appr'];
 const curPage=()=>PAGES.find(id=>!$(id).classList.contains('hidden'))||'gate';
 function show(id){ PAGES.forEach(p=>$(p).classList.toggle('hidden',p!==id));
   $('foot').classList.toggle('hidden',id==='gate'||id==='pwchg');
@@ -694,7 +809,9 @@ $('pwBtn').onclick=async()=>{
 async function enterMain(me){
   const r=me||await api('staffMe');   // 새 서버는 로그인 응답에 같이 실어 보낸다 (한 번 덜 기다림)
   T.user=r.user; Object.assign(PRICE,r.price||{}); Object.assign(BANK,r.bank||{});
-  $('meName').textContent=T.user.name; $('meDept').textContent=T.user.dept?'· '+T.user.dept:'';
+  Object.assign(FREE,r.free||{});
+  $('meName').textContent=T.user.disp||(T.user.name+' 님'); $('meDept').textContent=T.user.dept?'· '+T.user.dept:'';
+  paintApprBtn();
   $('bName').textContent=T.user.name+(T.user.dept?' ('+T.user.dept+')':''); $('bTel').textContent=fmtTel(T.user.id);
   paintPrice(); if(!D.length) D.push(blank()); renderDests(); newOrder();
 }
@@ -857,15 +974,15 @@ $('addDest').onclick=()=>{
 function closePost(){ $('postLayer').classList.add('hidden'); $('postBox').innerHTML=''; document.body.style.overflow=''; }
 $('postClose').onclick=closePost;
 function openPost(i){
-  const c=$('dests').children[i];
-  if(!(window.daum&&daum.Postcode)){ const z=c.querySelector('[data-f=zip]'); z.readOnly=false; c.querySelector('[data-f=addr1]').focus(); toast('주소를 직접 입력해 주세요.'); return; }
+  openPostCb(r=>{ const d=D[i]; if(!d) return;
+    d.zip=r.zonecode; d.addr1=r.roadAddress||r.jibunAddress; d.open=true; renderDests();
+    setTimeout(()=>{ const a=$('dests').children[i].querySelector('[data-f=addr2]'); a.focus(); },50); }, $('dests').children[i]);
+}
+/* 주소 찾기 공통 — 주문서·회사 출고가 같이 쓴다. 우편번호 서비스를 못 불러오면 직접 입력 */
+function openPostCb(done, card){
+  if(!(window.daum&&daum.Postcode)){ const z=card.querySelector('[data-f=zip]'); z.readOnly=false; card.querySelector('[data-f=addr1]').focus(); toast('주소를 직접 입력해 주세요.'); return; }
   $('postLayer').classList.remove('hidden'); document.body.style.overflow='hidden';
-  new daum.Postcode({
-    oncomplete:r=>{ const d=D[i]; if(!d) return closePost();
-      d.zip=r.zonecode; d.addr1=r.roadAddress||r.jibunAddress; d.open=true; closePost(); renderDests();
-      setTimeout(()=>{ const a=$('dests').children[i].querySelector('[data-f=addr2]'); a.focus(); },50); },
-    width:'100%', height:'100%'
-  }).embed($('postBox'));
+  new daum.Postcode({ oncomplete:r=>{ closePost(); done(r); }, width:'100%', height:'100%' }).embed($('postBox'));
 }
 
 function validate(){
@@ -933,6 +1050,227 @@ $('cYes').onclick=async()=>{
 $('copyAcct2').onclick=()=>$('copyAcct').onclick();
 $('copyAcct').onclick=async()=>{ try{ await navigator.clipboard.writeText(BANK.no.replace(/-/g,'')); toast('계좌번호를 복사했습니다.'); }catch(e){ toast(BANK.no); } };
 
+/* ── 회사 출고 (무상) v0.4.0 — 12_무상출고_기획 ──
+   거래처 샘플 → 샘플 · 선물·접대 → 증정 · 방문객 드림 → 증정(현장 전달) · 냉장고 채우기 → 내부사용
+   박스 단위. 금액 없음. 목적 필수. N박스 이하·승인자·냉장고는 바로 출고 대기, 그 밖은 승인 대기 */
+const FREE={autoMax:2, maxQty:20, maxTotal:60, maxDests:30, pending:0};
+const FK={
+  sample:{label:'거래처 샘플', hint:'판매를 위해 거래처·예비 거래처에 보내는 견본입니다.', ph:'예: ○○호텔 구매팀 납품 검토용'},
+  gift:{label:'선물·접대', hint:'손님·지인께 택배로 보내는 선물입니다. 여러 곳이면 [+ 받는 곳 추가]로 한 분씩 넣어 주세요.', ph:'예: 추석 선물 · 회장님 지시'},
+  visit:{label:'방문객 드림', hint:'회사에 오신 분께 들고 가시라고 드린 박스입니다. 그날 저녁이나 다음 날 적으셔도 됩니다.', ph:'예: ○○시청 견학 방문'},
+  stock:{label:'냉장고 채우기', hint:'창고에서 회사 냉장고로 옮길 때 한 번만 적습니다. 냉장고에서 꺼내 드시는 것은 적지 않습니다.', ph:'예: 본관 냉장고 보충'}
+};
+const todayStr=()=>{ const d=new Date(Date.now()+9*3600e3); return d.toISOString().slice(0,10); };
+const fblank=()=>({company:'',rcv:'',tel:'',ship:'택배',zip:'',addr1:'',addr2:'',memo:'',qty:1});
+const FR={kind:'', D:[fblank()], one:{qty:1,who:'',tel:'',date:todayStr(),place:'회사 냉장고'}, reqId:null, busy:false};
+const multiKind=()=>FR.kind==='sample'||FR.kind==='gift';
+const fDirect=d=>FR.kind==='sample'&&d.ship==='직접전달';
+const fTotQ=()=>multiKind()?FR.D.reduce((a,d)=>a+(Number(d.qty)||0),0):(Number(FR.one.qty)||0);
+let freeFrom='main';
+function openFree(){
+  if(!T.token){ show('gate'); return; }
+  const c=curPage(); if(c!=='free') freeFrom=c;
+  $('fKindStock').classList.toggle('hidden',!(T.user&&T.user.canStock));
+  if(FR.kind==='stock'&&!(T.user&&T.user.canStock)) FR.kind='';
+  $('freeForm').classList.remove('hidden'); $('freeDone').classList.add('hidden');
+  show('free'); renderFree();
+}
+function closeFree(){ show(T.token?(freeFrom==='free'?'main':freeFrom):'gate'); }
+function newFree(){ FR.kind=''; FR.D=[fblank()]; FR.one={qty:1,who:'',tel:'',date:todayStr(),place:'회사 냉장고'}; FR.reqId=null; $('fPurpose').value=''; openFree(); }
+$('fKind').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return;
+  if(FR.kind!==b.dataset.v){ FR.kind=b.dataset.v; FR.reqId=null; } $('fErr').innerHTML=''; renderFree(); });
+function fSum(d){
+  const who=FR.kind==='sample'?(d.company.trim()+(d.rcv.trim()?' · '+d.rcv.trim():'')):d.rcv.trim();
+  if(!who) return FR.kind==='sample'?'회사명·담당자를 넣어 주세요':'받으시는 분을 넣어 주세요';
+  const a=fDirect(d)?'직접 전달':d.addr1.trim().split(/\s+/).slice(0,3).join(' ');
+  return esc(who)+(a?'<small>'+esc(a)+'</small>':'');
+}
+function fCard(d,i){
+  const many=FR.D.length>1, s=FR.kind==='sample', direct=fDirect(d);
+  return `<div class="dcard fcard open" data-i="${i}">
+    <div class="dhead"><span class="dn">${i+1}</span><b class="dsum">${fSum(d)}</b><span class="dq">${d.qty}박스</span>${many?'<button type="button" class="dx" data-act="del">삭제</button>':''}</div>
+    <div class="dbody" style="padding-top:12px">
+      ${s?`<div class="field"><label>회사명<em>*</em></label><input class="inp" data-f="company" placeholder="예: ㈜바다호텔" value="${esc(d.company)}"></div>`:''}
+      <div class="row2">
+        <div class="field"><label>${s?'담당자':'받으시는 분'}<em>*</em></label><input class="inp" data-f="rcv" value="${esc(d.rcv)}" autocomplete="off"></div>
+        <div class="field"><label>연락처${direct?'':'<em>*</em>'}</label><input class="inp" data-f="tel" type="tel" inputmode="tel" placeholder="010-0000-0000" value="${esc(d.tel)}"></div>
+      </div>
+      ${s?`<div class="shipsel"><span class="plabel">보내는 방법</span><div class="seg2">${['택배','직접전달'].map(v=>`<button type="button" data-act="ship" data-v="${v}"${d.ship===v?' class="on"':''}>${v==='택배'?'택배로 보내기':'직접 전달 (영업·방문)'}</button>`).join('')}</div></div>`:''}
+      <div class="field${direct?' hidden':''}"><label>주소<em>*</em></label>
+        <div class="addr"><input class="inp" data-f="zip" placeholder="우편번호" readonly style="max-width:130px" value="${esc(d.zip)}"><button type="button" class="sbtn" data-act="post">주소 찾기</button></div>
+        <input class="inp" data-f="addr1" placeholder="기본 주소" style="margin-top:8px" value="${esc(d.addr1)}">
+        <input class="inp" data-f="addr2" placeholder="상세 주소 (동·호수)" style="margin-top:8px" value="${esc(d.addr2)}">
+      </div>
+      <div class="field"><label>${direct?'전달 예정·메모':'배송 요청사항'}</label><input class="inp" data-f="memo" placeholder="${direct?'예: 10월 2일 미팅 때 전달':'예: 부재 시 경비실'}" value="${esc(d.memo)}"></div>
+      <div class="dqty"><span>수량</span><div class="stepper"><button type="button" data-act="minus" aria-label="한 박스 빼기">−</button><output>${d.qty}</output><button type="button" data-act="plus" aria-label="한 박스 더하기">+</button></div></div>
+    </div></div>`;
+}
+function renderFree(){
+  $('fKind').querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.v===FR.kind));
+  const K=FK[FR.kind];
+  $('fHint').textContent=K?K.hint:'';
+  $('fPurpose').placeholder=K?K.ph:'무엇을 위해 나가는지 한 줄로';
+  $('fPurposeBox').classList.toggle('hidden',!K); $('fBtn').classList.toggle('hidden',!K);
+  let h='';
+  if(!K) h='<p class="fnote">위에서 무엇인지 먼저 골라 주세요.</p>';
+  else if(multiKind()) h=FR.D.map(fCard).join('')+'<div class="dadd"><button type="button" class="abtn" data-act="add">+ 받는 곳 추가</button></div>';
+  else if(FR.kind==='visit') h=`<div class="one">
+      <div class="row2">
+        <div class="field"><label>방문 일자<em>*</em></label><input class="inp" data-o="date" type="date" value="${esc(FR.one.date)}"></div>
+        <div class="field"><label>연락처</label><input class="inp" data-o="tel" type="tel" inputmode="tel" placeholder="(선택)" value="${esc(FR.one.tel)}"></div>
+      </div>
+      <div class="field"><label>방문하신 분 (회사·성함)<em>*</em></label><input class="inp" data-o="who" placeholder="예: ○○시청 김과장 외 3명" value="${esc(FR.one.who)}"></div>
+      <div class="dqty"><span>드린 수량</span><div class="stepper"><button type="button" data-act="ominus" aria-label="한 박스 빼기">−</button><output>${FR.one.qty}</output><button type="button" data-act="oplus" aria-label="한 박스 더하기">+</button></div></div>
+    </div>`;
+  else h=`<div class="one">
+      <div class="field"><label>보관 장소</label><input class="inp" data-o="place" placeholder="예: 본관 냉장고" value="${esc(FR.one.place)}"></div>
+      <div class="dqty"><span>옮긴 수량</span><div class="stepper"><button type="button" data-act="ominus" aria-label="한 박스 빼기">−</button><output>${FR.one.qty}</output><button type="button" data-act="oplus" aria-label="한 박스 더하기">+</button></div></div>
+    </div>`;
+  $('fBody').innerHTML=h; fRule(); fSteppers();
+}
+function fAuto(){ return FR.kind==='stock'||(T.user&&T.user.canApprove)||fTotQ()<=FREE.autoMax; }
+function fRule(){
+  const r=$('fRule'); if(!FR.kind){ r.classList.add('hidden'); return; } r.classList.remove('hidden');
+  const q=fTotQ();
+  if(FR.kind==='stock') r.innerHTML='냉장고 채우기는 <b>바로 출고 대기</b>로 넘어갑니다. 지금 <b>'+q+'박스</b>';
+  else if(T.user&&T.user.canApprove) r.innerHTML='승인자 요청이라 <b>바로 출고 대기</b>로 넘어갑니다. 지금 <b>'+q+'박스</b>';
+  else r.innerHTML='한 번에 <b>'+FREE.autoMax+'박스까지</b>는 바로 출고 대기, 넘으면 <b>승인 후</b> 출고됩니다. 지금 <b>'+q+'박스</b>'+(q>FREE.autoMax?' → 승인 대기':' → 바로 출고 대기');
+  r.classList.toggle('warn',!fAuto());
+}
+function fSteppers(){
+  const full=fTotQ()>=FREE.maxTotal;
+  if(multiKind()) [...$('fBody').querySelectorAll('.fcard')].forEach((c,i)=>{ const d=FR.D[i], b=c.querySelectorAll('.stepper button'); b[0].disabled=d.qty<=1; b[1].disabled=d.qty>=FREE.maxQty||full; });
+  else { const b=$('fBody').querySelectorAll('.stepper button'); if(b.length){ b[0].disabled=FR.one.qty<=1; b[1].disabled=FR.one.qty>=FREE.maxQty; } }
+  const a=$('fBody').querySelector('[data-act=add]'); if(a) a.disabled=FR.D.length>=FREE.maxDests;
+}
+$('fBody').addEventListener('input',e=>{
+  const t=e.target; $('fErr').innerHTML='';
+  if(t.dataset.o){ if(t.dataset.o==='tel') t.value=fmtTel(t.value); FR.one[t.dataset.o]=t.value; return; }
+  const f=t.dataset.f; if(!f) return;
+  const c=t.closest('.fcard'), d=FR.D[+c.dataset.i];
+  if(f==='tel') t.value=fmtTel(t.value);
+  d[f]=t.value; c.classList.remove('bad'); c.querySelector('.dsum').innerHTML=fSum(d);
+});
+$('fBody').addEventListener('click',e=>{
+  const b=e.target.closest('[data-act]'); if(!b) return;
+  const act=b.dataset.act;
+  if(act==='add'){ if(FR.D.length>=FREE.maxDests) return; FR.D.push(fblank()); renderFree();
+    const c=$('fBody').querySelectorAll('.fcard'); const last=c[c.length-1]; last.scrollIntoView({behavior:'smooth',block:'center'}); setTimeout(()=>last.querySelector('[data-f]').focus(),300); return; }
+  if(act==='ominus'||act==='oplus'){ FR.one.qty=act==='ominus'?Math.max(1,FR.one.qty-1):Math.min(FREE.maxQty,FR.one.qty+1);
+    b.parentNode.querySelector('output').textContent=FR.one.qty; fSteppers(); fRule(); return; }
+  const c=b.closest('.fcard'); if(!c) return; const i=+c.dataset.i, d=FR.D[i];
+  if(act==='del'){ const empty=!d.company.trim()&&!d.rcv.trim()&&!d.addr1.trim();
+    if(FR.D.length>1&&(empty||confirm((i+1)+'번 받는 곳을 지울까요?'))){ FR.D.splice(i,1); renderFree(); } }
+  else if(act==='ship'){ d.ship=b.dataset.v; renderFree(); }
+  else if(act==='post') openPostCb(r=>{ const x=FR.D[i]; if(!x) return; x.zip=r.zonecode; x.addr1=r.roadAddress||r.jibunAddress; renderFree();
+      setTimeout(()=>{ const a=$('fBody').querySelectorAll('.fcard')[i]; if(a) a.querySelector('[data-f=addr2]').focus(); },50); }, c);
+  else if(act==='minus'||act==='plus'){
+    if(act==='minus') d.qty=Math.max(1,d.qty-1); else if(fTotQ()<FREE.maxTotal) d.qty=Math.min(FREE.maxQty,d.qty+1);
+    c.querySelector('output').textContent=d.qty; c.querySelector('.dq').textContent=d.qty+'박스'; fSteppers(); fRule();
+    if(act==='plus'&&fTotQ()>=FREE.maxTotal) toast('한 번에 '+FREE.maxTotal+'박스까지입니다.');
+  }
+});
+function fValidate(){
+  const e=[], K=FR.kind;
+  if(!K){ e.push('무엇인지 골라 주세요.'); return e; }
+  if(multiKind()){
+    const seen={}, many=FR.D.length>1;
+    FR.D.forEach((d,i)=>{
+      const x=[], direct=fDirect(d);
+      if(K==='sample'&&!d.company.trim()) x.push('회사명');
+      if(!d.rcv.trim()) x.push(K==='sample'?'담당자':'성함');
+      if(direct){ if(d.tel.trim()&&!TEL.test(d.tel.trim())) x.push('연락처'); }
+      else { if(!TEL.test(d.tel.trim())) x.push('연락처');
+        if(d.addr1.trim().length<5) x.push('주소'); else if(d.zip&&!d.addr2.trim()) x.push('상세 주소'); }
+      if(!x.length){ const k=(d.company+'|'+d.rcv+'|'+(direct?'직접':d.addr1+d.addr2)).replace(/\s/g,''); if(seen[k]) x.push(seen[k]+'번과 같은 받는 곳'); else seen[k]=i+1; }
+      const c=$('fBody').querySelectorAll('.fcard')[i]; if(c) c.classList.toggle('bad',!!x.length);
+      if(x.length) e.push((many?(i+1)+'번 ':'')+'받는 곳 — '+x.join(', ')+' 확인');
+    });
+  } else if(K==='visit'){
+    if(!/^\d{4}-\d{2}-\d{2}$/.test(FR.one.date)) e.push('방문 일자를 넣어 주세요.');
+    if(!FR.one.who.trim()) e.push('방문하신 분(회사·성함)을 넣어 주세요.');
+    if(FR.one.tel.trim()&&!TEL.test(FR.one.tel.trim())) e.push('연락처를 확인해 주세요.');
+  }
+  if(fTotQ()>FREE.maxTotal) e.push('한 번에 '+FREE.maxTotal+'박스까지입니다.');
+  if($('fPurpose').value.trim().length<2) e.push('목적을 적어 주세요.');
+  return e;
+}
+const fAddr=d=>fDirect(d)?'직접 전달':(d.addr1.trim()+' '+d.addr2.trim()).trim();
+$('fBtn').onclick=()=>{
+  const e=fValidate(); $('fErr').innerHTML=e.map(x=>'<li>'+esc(x)+'</li>').join('');
+  if(e.length){ const b=$('fBody').querySelector('.fcard.bad'); (b||$('fErr')).scrollIntoView({behavior:'smooth',block:'center'}); return; }
+  if(FR.busy) return;
+  const K=FK[FR.kind], q=fTotQ();
+  $('fcWho').textContent=K.label+' · 요청 '+T.user.disp+' · '+(fAuto()?'바로 출고 대기':'승인 후 출고');
+  $('fcList').innerHTML=(multiKind()?FR.D.map((d,i)=>'<li><span class="q">'+d.qty+'박스</span><b>'+(FR.D.length>1?(i+1)+'. ':'')+esc(FR.kind==='sample'?d.company.trim()+' · '+d.rcv.trim():d.rcv.trim())+'</b> '+esc(fmtTel(d.tel))+'<small>'+esc(fAddr(d))+(d.memo.trim()?' · '+esc(d.memo.trim()):'')+'</small></li>').join('')
+    :FR.kind==='visit'?'<li><span class="q">'+q+'박스</span><b>'+esc(FR.one.who.trim())+'</b><small>'+esc(FR.one.date)+' 공장 방문 · 현장 전달</small></li>'
+    :'<li><span class="q">'+q+'박스</span><b>'+esc(FR.one.place.trim()||'회사 냉장고')+'</b><small>사내 비치</small></li>')
+    +'<li class="cg"><b>목적</b> '+esc($('fPurpose').value.trim())+'</li>';
+  $('fcTot').textContent=q+'박스';
+  $('fconfirm').classList.remove('hidden'); document.body.style.overflow='hidden';
+};
+function closeFConfirm(){ $('fconfirm').classList.add('hidden'); document.body.style.overflow=''; }
+$('fcNo').onclick=closeFConfirm;
+$('fconfirm').addEventListener('click',e=>{ if(e.target.id==='fconfirm'&&!FR.busy) closeFConfirm(); });
+$('fcYes').onclick=async()=>{
+  if(FR.busy) return;
+  FR.busy=true; $('fcYes').disabled=true; $('fcYes').textContent='요청하는 중…'; $('fBtn').disabled=true;
+  if(!FR.reqId) FR.reqId=(crypto.randomUUID?crypto.randomUUID():Date.now()+'-'+Math.random().toString(36).slice(2));
+  const o={reqId:FR.reqId, kind:FR.kind, purpose:$('fPurpose').value.trim()};
+  if(multiKind()) o.dests=FR.D.map(d=>({company:d.company.trim(), rcv:d.rcv.trim(), rcvTel:d.tel.trim(), ship:FR.kind==='sample'?d.ship:'택배',
+      zip:fDirect(d)?'':d.zip.trim(), addr:fDirect(d)?'':fAddr(d), shipMemo:d.memo.trim(), qty:d.qty}));
+  else o.one={qty:FR.one.qty, who:FR.one.who.trim(), tel:FR.one.tel.trim(), date:FR.one.date, place:FR.one.place.trim()};
+  try{
+    const r=await api('freeOrder',{order:o});
+    closeFConfirm();
+    const wait=r.status==='승인대기';
+    $('fdTitle').textContent=wait?'승인 요청되었습니다':'요청되었습니다';
+    $('fdNo').textContent=r.orderNo;
+    $('fdMsg').className='fnote'+(wait?' warn':'');
+    $('fdMsg').innerHTML=wait?'<b>'+r.qty+'박스</b> — 한 번에 '+FREE.autoMax+'박스를 넘어 <b>승인자가 확인한 뒤</b> 출고됩니다. 진행은 내 주문에서 보실 수 있습니다.'
+      :'<b>'+r.qty+'박스</b> — <b>출고 대기</b>로 넘어갔습니다. '+(FR.kind==='visit'||FR.kind==='stock'?'기록되었습니다.':'출고 담당이 준비합니다.');
+    $('freeForm').classList.add('hidden'); $('freeDone').classList.remove('hidden'); window.scrollTo(0,0);
+    FR.kind=''; FR.D=[fblank()]; FR.one={qty:1,who:'',tel:'',date:todayStr(),place:'회사 냉장고'}; FR.reqId=null; $('fPurpose').value='';
+  }catch(err){ if(T.token) toast(err.message+' (다시 눌러도 두 번 접수되지 않습니다)'); }
+  finally{ FR.busy=false; $('fcYes').disabled=false; $('fcYes').textContent='요청하기'; $('fBtn').disabled=false; }
+};
+
+/* ── 출고 승인 (승인자만) ── */
+let apprFrom='main';
+function paintApprBtn(){ const on=!!(T.user&&T.user.canApprove); $('apprBtn').classList.toggle('hidden',!on);
+  $('apprTxt').innerHTML=FREE.pending?'승인 대기 <span class="cnt">'+FREE.pending+'</span>':'승인 대기 없음 · 최근 30일 회사 출고 보기'; }
+async function openAppr(){
+  if(!T.token){ show('gate'); return; }
+  const c=curPage(); if(c!=='appr') apprFrom=c;
+  show('appr'); $('aErr').innerHTML=''; $('aPending').innerHTML='<p class="empty">불러오는 중…</p>'; $('aRecent').innerHTML=''; $('aSum').innerHTML='';
+  try{
+    const r=await api('freeBoard');
+    FREE.pending=r.pending.length; paintApprBtn();
+    $('aSub').textContent=r.autoMax+'박스를 넘는 요청은 여기서 승인합니다';
+    const dl=x=>'<ul>'+x.dests.map(d=>'<li>'+esc(d.to)+(d.rcv&&d.rcv!==d.to?' · '+esc(d.rcv):'')+' · '+d.qty+'박스<br><small style="color:var(--muted)">'+esc(d.addr)+'</small></li>').join('')+'</ul>';
+    $('aPending').innerHTML=r.pending.length?r.pending.map(x=>'<div class="acard" data-no="'+esc(x.orderNo)+'"><div class="ah"><b>'+esc(x.orderNo)+'<span class="kind">'+esc(x.kind)+'</span></b><span>'+esc(x.date)+'</span></div>'
+      +'<p class="ap"><b>'+esc(x.who)+'</b>'+(x.dept?' ('+esc(x.dept)+')':'')+' · <b>'+x.qty+'박스</b><br>목적: '+esc(x.purpose)+'</p>'+dl(x)
+      +'<input class="inp" data-memo placeholder="메모 (반려할 때는 사유 필수)" style="padding:10px 12px;font-size:14.5px">'
+      +'<div class="abtns"><button type="button" class="no" data-d="반려">반려</button><button type="button" class="yes" data-d="승인">승인</button></div></div>').join('')
+      :'<p class="fnote">승인 대기 중인 요청이 없습니다.</p>';
+    const T2={'샘플':'샘플','증정':'선물·방문객','내부사용':'냉장고'};
+    $('aSum').innerHTML=Object.keys(r.sum).length?Object.keys(r.sum).map(k=>'<span>'+esc(T2[k]||k)+' <b>'+r.sum[k]+'박스</b></span>').join(''):'';
+    const cls=s=>s==='반려'?'no':s==='승인대기'?'wait':'ok';
+    $('aRecent').innerHTML=r.recent.length?r.recent.map(x=>'<div class="arow"><div><b>'+esc(x.kind)+'</b> · '+esc(x.dests[0]?x.dests[0].to:'')+(x.dests.length>1?' 외 '+(x.dests.length-1)+'곳':'')
+      +'<small>'+esc(x.date)+' · '+esc(x.who)+' · '+esc(x.purpose)+'</small></div><div style="text-align:right;white-space:nowrap"><b>'+x.qty+'박스</b><small><span class="st '+cls(x.status)+'">'+esc(x.status)+'</span></small></div></div>').join('')
+      :'<p class="fnote">최근 30일 회사 출고가 없습니다.</p>';
+  }catch(err){ $('aPending').innerHTML=''; $('aErr').innerHTML='<li>'+esc(err.message)+'</li>'; }
+}
+function closeAppr(){ show(T.token?(apprFrom==='appr'?'main':apprFrom):'gate'); }
+$('aPending').addEventListener('click',async e=>{
+  const b=e.target.closest('[data-d]'); if(!b) return;
+  const card=b.closest('.acard'), no=card.dataset.no, memo=card.querySelector('[data-memo]').value.trim(), d=b.dataset.d;
+  if(d==='반려'&&memo.length<2){ toast('반려 사유를 메모에 적어 주세요.'); card.querySelector('[data-memo]').focus(); return; }
+  card.querySelectorAll('button').forEach(x=>x.disabled=true); b.textContent=d+' 중…';
+  try{ await api('freeDecide',{orderNo:no, decision:d, memo}); toast(no+' '+d+'했습니다.'); await openAppr(); }
+  catch(err){ toast(err.message); card.querySelectorAll('button').forEach(x=>x.disabled=false); b.textContent=d; }
+});
+
 /* ── 내 주문 ── */
 const HANJIN='https://www.hanjin.com/kor/CMS/DeliveryMgr/WaybillResult.do?mCode=MN038&schLang=KR&wblnumText2=';
 let mineFrom='main';
@@ -943,6 +1281,7 @@ async function openMine(){
   try{
     const r=await api('staffOrders');
     $('mList').innerHTML=r.orders.length?r.orders.map(o=>{
+      if(o.free) return freeCard(o);
       const multi=o.dests&&o.dests.length>1;
       const steps=['주문 접수','입금 확인','발송','배송 완료'].map((t,i)=>'<li'+(i<=o.step?' class="done"':'')+'>'+t+'</li>').join('');
       const msg=o.status==='취소'?'취소된 주문입니다.':o.step===0?'입금 확인 전입니다. '+esc(BANK.name+' '+BANK.no)+' 로 '+(o.payer?'<b>'+esc(o.payer)+'</b> 님 이름으로 ':'')+won(o.total)+'을 입금해 주세요.':o.step===1?'입금이 확인되었습니다. 곧 발송합니다.'
@@ -962,6 +1301,21 @@ async function openMine(){
   }catch(err){ $('mList').innerHTML=''; $('mErr').innerHTML='<li>'+esc(err.message)+'</li>'; }
 }
 $('mList').addEventListener('click',e=>{ const b=e.target.closest('.ask'); if(b) openAsk(b.dataset.no); });
+/* 내 주문 — 회사 출고 카드 (요청 → 승인 → 출고 → 전달 완료) */
+function freeCard(o){
+  const steps=['요청','승인','출고','전달 완료'].map((t,i)=>'<li'+(o.status!=='반려'&&i<=o.step?' class="done"':i===0?' class="done"':'')+'>'+t+'</li>').join('');
+  const auto=/^자동/.test(o.approver);
+  const msg=o.status==='반려'?'반려되었습니다'+(o.decideMemo?': '+esc(o.decideMemo):'')+(o.approver?' ('+esc(o.approver)+')':'')
+    :o.status==='승인대기'?'승인을 기다리고 있습니다.'
+    :o.step===1?'출고 대기 중입니다'+(o.approver&&!auto?' · 승인 '+esc(o.approver):'')+'.'
+    :o.step===2?'출고되었습니다.':'전달이 끝났습니다.';
+  const destList='<ul class="mdest">'+o.dests.map(d=>'<li><div><b>'+esc(d.to||d.rcv)+'</b>'+(d.rcv&&d.to&&d.rcv!==d.to?' · '+esc(d.rcv):'')+' · '+d.qty+'박스<small>'+esc(d.addr)+'</small>'
+    +(d.waybill?'<span class="wb">'+esc(d.carrier||'한진택배')+' '+esc(d.waybill)+'</span>':'')+'</div>'
+    +(d.waybill?'<a class="trackbtn" target="_blank" rel="noopener" href="'+HANJIN+encodeURIComponent(d.waybill)+'">조회 ›</a>':'')+'</li>').join('')+'</ul>';
+  return '<div class="mcard"><div class="mhead"><b>'+esc(o.orderNo)+'<span class="kind">'+esc(o.kind)+'</span></b><span>'+esc(o.date)+'</span></div>'
+    +'<ol class="stepper4">'+steps+'</ol><p class="tmsg">'+msg+'</p>'+destList
+    +'<dl class="tdl"><dt>수량</dt><dd>'+esc(o.items)+' · 무상</dd><dt>목적</dt><dd>'+esc(o.purpose)+'</dd></dl></div>';
+}
 function closeMine(){ show(T.token?(mineFrom==='mine'?'main':mineFrom):'gate'); }
 
 /* ── 문의하기 (로그인 전에도 열린다) ── */
