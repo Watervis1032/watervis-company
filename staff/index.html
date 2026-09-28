@@ -107,7 +107,7 @@ img{display:block;max-width:100%}
 .inp{width:100%;border:1px solid #d6dde6;border-radius:11px;padding:13px 14px;background:#fff;font-size:16px}
 .inp:focus{outline:none;border-color:var(--navy2);box-shadow:0 0 0 3px rgba(11,42,82,.08)}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.qtyrow{display:flex;align-items:center;justify-content:space-between;border:1px solid #d6dde6;border-radius:14px;padding:12px 16px;margin-bottom:22px}
+.qtyrow{display:flex;align-items:center;justify-content:space-between;border:1px solid #d6dde6;border-radius:14px;padding:10px 12px 10px 16px;margin-bottom:22px}
 .qtyrow .t b{display:block;font-size:15px}
 .qtyrow .t span{font-size:12.5px;color:var(--muted)}
 .stepper{display:flex;align-items:center;gap:4px}
@@ -119,6 +119,7 @@ img{display:block;max-width:100%}
 .sbtn{border:1px solid var(--navy2);background:#fff;color:var(--navy2);border-radius:11px;padding:0 14px;font-weight:600;cursor:pointer;white-space:nowrap}
 .check{display:flex;gap:10px;align-items:flex-start;font-size:14px;margin:6px 0 4px;cursor:pointer}
 .check input{width:20px;height:20px;margin:2px 0 0;accent-color:var(--navy)}
+.same{font-size:13.5px;color:#4b5868;margin:-4px 0 14px}
 details.priv{font-size:12.5px;color:var(--muted);margin:0 0 16px 30px}
 details.priv summary{cursor:pointer;color:#4b5868}
 details.priv table{border-collapse:collapse;margin-top:8px;width:100%}
@@ -140,7 +141,7 @@ details.priv td:first-child{width:78px;background:#f6f8fa;color:#4b5868}
 .bankbox .bcopy{margin:14px auto 0;display:block;width:100%;max-width:280px;border:1px solid var(--navy2);background:#fff;color:var(--navy2);border-radius:12px;padding:11px;font-weight:700;cursor:pointer}
 .bankbox p{margin:12px 0 0;font-size:13px;color:#5b6778}
 .bankbox .bnote{font-size:12px;color:#8a95a3}
-.bill{border-radius:16px;background:var(--navy);color:#fff;padding:18px 18px 16px;margin:0 0 16px}
+.bill{border-radius:16px;background:var(--navy);color:#fff;padding:18px 18px 16px;margin:18px 0 12px}
 .bill .l{display:flex;justify-content:space-between;font-size:14px;color:#c6d3e2;padding:3px 0}
 .bill .tot{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid rgba(230,207,154,.35);margin-top:10px;padding-top:12px}
 .bill .tot span{font-size:14px;color:var(--gold2)}
@@ -150,76 +151,6 @@ details.priv td:first-child{width:78px;background:#f6f8fa;color:#4b5868}
 .errs{list-style:none;margin:0 0 12px;padding:0;color:var(--bad);font-size:13.5px}
 .errs li:before{content:"· "}
 .fine{font-size:12.5px;color:var(--muted);text-align:center;margin:10px 0 0}
-
-/* ── 받는 곳 (v0.3.4 여러 곳) ── */
-.dhint{font-size:13px;color:var(--muted);margin:-6px 0 12px}
-.dcard{border:1px solid #d6dde6;border-radius:14px;margin-bottom:10px;background:#fff;overflow:hidden}
-.dcard.bad{border-color:var(--bad);box-shadow:0 0 0 2px rgba(184,58,58,.08)}
-.dhead{display:flex;align-items:center;gap:10px;padding:12px 14px;cursor:pointer;user-select:none}
-.dhead .dn{flex:none;width:24px;height:24px;border-radius:50%;background:var(--navy);color:#fff;font-size:12.5px;font-weight:700;display:grid;place-items:center}
-.dhead .dsum{flex:1;min-width:0;font-size:14.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.dhead .dsum small{font-weight:400;color:var(--muted);margin-left:6px;font-size:13px}
-.dhead .dsum.empty{color:var(--muted);font-weight:500}
-.dhead .dq{font-size:13.5px;color:var(--navy);font-weight:700;white-space:nowrap}
-.dhead .dx{flex:none;border:0;background:none;color:var(--muted);font-size:13px;cursor:pointer;padding:4px 2px;text-decoration:underline;text-underline-offset:3px}
-.dhead .chev{flex:none;width:14px;height:14px;stroke:var(--muted);fill:none;stroke-width:2;transition:transform .2s}
-.dcard.open .dhead .chev{transform:rotate(180deg)}
-.dbody{padding:0 14px 14px;border-top:1px dashed var(--line)}
-.dcard:not(.open) .dbody{display:none}
-.mefill{border:1px solid var(--line);background:#f6f8fa;border-radius:99px;padding:6px 12px;font-size:13px;cursor:pointer;margin:12px 0 10px;color:var(--navy2);font-weight:600}
-.dqty{display:flex;align-items:center;justify-content:space-between;margin-top:4px}
-.dqty > span{font-size:13px;color:#4b5868;font-weight:600}
-.dadd{display:grid;grid-template-columns:1fr;gap:8px;margin:4px 0 18px}
-.abtn{border:1px dashed var(--navy2);background:#fff;color:var(--navy2);border-radius:12px;padding:12px 8px;font-weight:700;font-size:14.5px;cursor:pointer}
-.abtn.ghost{border-style:solid;border-color:#d6dde6;color:#3b4b5e;font-weight:600}
-.abtn:disabled{opacity:.45;cursor:not-allowed}
-.prow{display:flex;gap:8px;margin-top:10px;align-items:center}
-.prow .sbtn{padding:11px 16px}
-.flat{border:0;background:none;color:var(--muted);cursor:pointer;font-size:14px}
-.pmsg{margin:10px 0 0!important;font-size:13px;white-space:pre-line}
-.pmsg.ok{color:var(--ok)} .pmsg.bad{color:var(--bad)}
-.dpayer{background:#fbf8f0;border:1px solid #efe3c4;border-radius:12px;padding:12px 12px 4px;margin:0 0 14px}
-.dpayer .plabel{display:block;font-size:13px;color:#4b5868;margin-bottom:6px;font-weight:600}
-.dpayer .plabel em{color:var(--bad);font-style:normal;margin-left:2px}
-.seg3{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
-.seg3 button{border:1px solid #d6dde6;background:#fff;border-radius:10px;padding:10px 4px;font-size:14px;cursor:pointer;color:#3b4b5e;word-break:keep-all}
-.seg3 button.on{background:var(--navy);border-color:var(--navy);color:#fff;font-weight:700}
-.shipsel{margin:0 0 14px}
-.shipsel .plabel{display:block;font-size:13px;color:#4b5868;margin-bottom:6px;font-weight:600}
-.seg2{display:grid;grid-template-columns:1fr 1fr;gap:6px}
-.seg2 button{border:1px solid #d6dde6;background:#fff;border-radius:10px;padding:10px 4px;font-size:14px;cursor:pointer;color:#3b4b5e;word-break:keep-all}
-.seg2 button.on{background:var(--navy);border-color:var(--navy);color:#fff;font-weight:700}
-.pickup{background:#eef5fb;border:1px solid #d3e4f3;border-radius:12px;padding:12px 14px;margin:0 0 14px;font-size:13.5px;color:#23405e;line-height:1.6}
-.pickup b{color:var(--navy)}
-.pnote{font-size:12.5px;color:#6b5320;margin:8px 0 6px}
-.dpayer .check{font-size:13.5px;margin:4px 0 8px}
-.ptag{color:#9a7a36;font-weight:600}
-.bill .split{border-top:1px dashed rgba(230,207,154,.3);margin-top:8px;padding-top:8px;display:block;font-size:13px;color:var(--gold2)}
-.bill .split div{display:flex;justify-content:space-between;padding:1px 0}
-.clist li.cg{background:#fbf8f0;border-bottom:1px solid #efe3c4;padding:9px 10px;margin-top:6px;border-radius:10px 10px 0 0}
-.clist li.cg b{color:#6b5320}
-.plist{list-style:none;margin:0;padding:0}
-.plist li{display:flex;justify-content:space-between;gap:8px;padding:2px 0}
-.plist li small{display:block;font-weight:400;color:var(--muted);font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px}
-.bundle{display:inline-block;font-size:11.5px;color:#9a7a36;border:1px solid #efe3c4;border-radius:99px;padding:1px 8px;margin-left:6px;font-weight:600}
-
-/* ── 주문 확인창 ── */
-#confirm{position:fixed;inset:0;z-index:96;background:rgba(3,16,31,.55);display:flex;align-items:flex-end;justify-content:center}
-.cbox{background:#fff;width:100%;max-width:560px;max-height:88svh;overflow:auto;border-radius:18px 18px 0 0;padding:22px 20px calc(20px + env(safe-area-inset-bottom))}
-.cbox h3{font-family:var(--serif);color:var(--navy);font-size:20px;margin:0 0 4px}
-.cbox .cwho{font-size:13.5px;color:var(--muted);margin:0 0 14px}
-.clist{list-style:none;margin:0 0 14px;padding:0;border-top:1px solid var(--line)}
-.clist li{padding:10px 0;border-bottom:1px solid var(--line);font-size:14px}
-.clist li b{color:var(--navy)}
-.clist li .q{float:right;font-weight:700;color:var(--navy)}
-.clist li small{display:block;color:#5b6778;font-size:13px;margin-top:2px}
-.ctot{display:flex;justify-content:space-between;align-items:baseline;margin:0 0 16px}
-.ctot span{font-size:14px;color:var(--muted)}
-.ctot b{font-family:var(--serif);font-size:24px;color:var(--navy)}
-.cbtns{display:grid;grid-template-columns:1fr 2fr;gap:8px}
-.cbtns button{border-radius:12px;padding:15px;font-weight:700;font-size:15.5px;cursor:pointer}
-.cbtns .no{border:1px solid var(--line);background:#fff;color:var(--navy)}
-.cbtns .yes{border:0;background:linear-gradient(180deg,var(--gold2),var(--gold));color:#2a1d05}
 
 /* ── 완료 ── */
 #done{padding:44px 22px 30px;background:#fff;text-align:center}
@@ -270,15 +201,9 @@ details.priv td:first-child{width:78px;background:#f6f8fa;color:#4b5868}
 .tmsg{font-size:14px;color:#3b4b5e;margin:0 0 12px}
 .tdl{margin:0;display:grid;grid-template-columns:82px 1fr;gap:6px 10px;font-size:14px;border-top:1px solid var(--line);padding-top:12px}
 .tdl dt{color:var(--muted)} .tdl dd{margin:0}
-.mdest{list-style:none;padding:0;margin:0 0 12px;border-top:1px solid var(--line)}
-.mdest li{border-bottom:1px solid var(--line);padding:10px 0;font-size:14px;display:flex;justify-content:space-between;gap:10px;align-items:center}
-.mdest li small{color:var(--muted);font-size:12.5px;display:block}
-.mdest li .wb{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12.5px;color:var(--navy);display:block}
-.mdest .trackbtn{padding:7px 10px;font-size:13px}
-.mdest .wait{font-size:12.5px;color:var(--muted);white-space:nowrap}
 .tcs{margin-top:16px;border-radius:16px;background:#f7f9fb;padding:16px 18px;font-size:14px}
 .tcs p{margin:4px 0 0;color:#5b6778}
-#postLayer{position:fixed;inset:0;z-index:97;background:rgba(3,16,31,.55);display:flex;align-items:flex-end;justify-content:center}
+#postLayer{position:fixed;inset:0;z-index:95;background:rgba(3,16,31,.55);display:flex;align-items:flex-end;justify-content:center}
 .postwrap{background:#fff;width:100%;max-width:560px;height:88svh;border-radius:18px 18px 0 0;overflow:hidden;display:flex;flex-direction:column}
 .posthead{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--line)}
 .posthead button{background:none;border:0;font-size:15px;color:var(--navy);cursor:pointer;font-weight:600}
@@ -324,54 +249,6 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
 .empty{text-align:center;color:var(--muted);padding:40px 0}
 .ghelp{margin-top:22px;font-size:14px;color:#9fb3cb;line-height:1.7}
 .ghelp a{display:inline-block;margin-top:6px;color:var(--gold2);font-weight:700;font-size:15.5px;text-decoration:none;border:1px solid rgba(230,207,154,.45);border-radius:99px;padding:9px 18px}
-/* ── v0.4.0 회사 출고 · 승인 ── */
-.staffbar{background:#fff;border-bottom:1px solid var(--line);padding:14px 22px}
-.staffbar .wrap{display:grid;gap:8px}
-.sbar{display:flex;align-items:center;gap:12px;width:100%;border:1px solid #d6dde6;background:#fff;border-radius:14px;padding:13px 16px;cursor:pointer;text-align:left;color:var(--ink)}
-.sbar b{font-size:15.5px;color:var(--navy);white-space:nowrap}
-.sbar span{flex:1;font-size:13px;color:var(--muted)}
-.sbar i{font-style:normal;color:var(--gold);font-weight:700}
-.sbar.appr{border-color:var(--gold2);background:#fffaf0}
-.sbar .cnt{display:inline-block;min-width:22px;text-align:center;background:var(--bad);color:#fff;border-radius:99px;padding:1px 8px;font-size:12.5px;font-weight:700;margin-left:4px}
-#free,#appr{min-height:100svh;background:var(--paper)}
-.fhint{font-size:13px;color:var(--gold);margin:8px 0 0;min-height:1em}
-.fnote{font-size:13px;color:#4b5868;background:#f7f9fb;border-radius:12px;padding:12px 14px;margin:0 0 14px}
-.fnote b{color:var(--navy)}
-.fnote.warn{background:#fff6e6;color:#6b4a12}
-.fcard .dhead{cursor:default}
-.one{border:1px solid #d6dde6;border-radius:14px;background:#fff;padding:16px 16px 10px;margin-bottom:14px}
-#fconfirm{position:fixed;inset:0;z-index:96;background:rgba(3,16,31,.55);display:flex;align-items:flex-end;justify-content:center}
-.kind{display:inline-block;font-size:12px;font-weight:700;color:var(--navy2);background:var(--sky);border-radius:99px;padding:2px 9px;margin-left:6px;vertical-align:1px}
-.st{display:inline-block;font-size:12px;font-weight:700;border-radius:99px;padding:2px 9px}
-.st.wait{background:#fff1d6;color:#8a5a00} .st.ok{background:#e3f3ea;color:var(--ok)} .st.no{background:#fbe4e4;color:var(--bad)}
-.acard{border:1px solid var(--line);border-radius:16px;background:#fff;padding:16px;margin-bottom:12px}
-.acard .ah{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:8px}
-.acard .ah b{font-family:ui-monospace,Menlo,Consolas,monospace;color:var(--navy)}
-.acard .ah span{font-size:12.5px;color:var(--muted)}
-.acard .ap{font-size:14px;margin:0 0 8px}
-.acard ul{list-style:none;padding:0;margin:0 0 10px;font-size:13.5px;color:#3b4b5e}
-.acard ul li{padding:3px 0;border-top:1px dashed var(--line)}
-.abtns{display:grid;grid-template-columns:1fr 2fr;gap:8px;margin-top:10px}
-.abtns button{border-radius:11px;padding:12px;font-weight:700;cursor:pointer;font-size:15px}
-.abtns .no{background:#fff;border:1px solid #d6dde6;color:var(--bad)}
-.abtns .yes{background:var(--navy);border:1px solid var(--navy);color:#fff}
-.asum{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
-.asum span{background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-size:13.5px}
-.asum b{color:var(--navy)}
-.arow{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);font-size:13.5px}
-.arow small{display:block;color:var(--muted);font-size:12.5px}
-.h3{font-family:var(--serif);color:var(--navy);font-size:18px;margin:6px 0 12px}
-.qin{width:72px;height:40px;border:1px solid #d6dde6;border-radius:10px;text-align:center;font-weight:700;font-size:18px;background:#fff;-moz-appearance:textfield}
-.qin::-webkit-outer-spin-button,.qin::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
-.qin:focus{outline:none;border-color:var(--navy2);box-shadow:0 0 0 3px rgba(11,42,82,.08)}
-.qunit{font-size:14px;font-weight:700;color:var(--navy);margin-left:2px}
-.pcswarn{background:#fff3e0;border:1px solid #f0c890;color:#6b4a12;border-radius:12px;padding:12px 14px;font-size:14px;margin:0 0 14px}
-.pcswarn b{color:#b35a00}
-.quick{display:flex;gap:6px;justify-content:flex-end;margin-top:8px}
-.quick button{border:1px solid #d6dde6;background:#fff;border-radius:99px;padding:6px 12px;font-size:13px;cursor:pointer;color:var(--navy2);font-weight:600}
-#swarn{position:fixed;inset:0;z-index:97;background:rgba(3,16,31,.55);display:flex;align-items:center;justify-content:center;padding:20px}
-#swarn .cbox{border-radius:18px;max-width:420px}
-#swarn .big{font-size:22px;font-weight:800;color:#b35a00;margin:6px 0 10px}
 </style>
 </head>
 <body>
@@ -421,7 +298,7 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
   <!-- 첫 화면 -->
   <section class="hero">
     <div class="me">
-      <span class="who"><b id="meName"></b> <span id="meDept"></span></span>
+      <span class="who"><b id="meName"></b> 님 <span id="meDept"></span></span>
       <span class="acts">
         <button type="button" class="tbtn" onclick="openMine()"><svg viewBox="0 0 24 24"><path d="M3 7h13v10H3zM16 10h3l2 3v4h-5"/><circle cx="7" cy="18" r="1.6"/><circle cx="18" cy="18" r="1.6"/></svg>내 주문</button>
         <button type="button" class="out" onclick="logout()">로그아웃</button>
@@ -437,14 +314,6 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
       </div>
       <div class="photo"><img src="../order/img/order-hero.webp" alt="몸愛좋은물 Gold 파우치를 든 모델" width="900" height="1200"></div>
       <button class="cta" onclick="document.getElementById('order').scrollIntoView()">주문하기<small id="ctaSmall">임직원가</small></button>
-    </div>
-  </section>
-
-  <!-- 회사 출고 · 승인 (v0.4.0) -->
-  <section class="staffbar">
-    <div class="wrap">
-      <button type="button" class="sbar" onclick="openFree()"><b>회사 출고</b><span>샘플 · 선물 · 방문객 · 냉장고 (무상)</span><i>›</i></button>
-      <button type="button" class="sbar appr hidden" id="apprBtn" onclick="openAppr()"><b id="apprT">출고 승인</b><span id="apprTxt">승인 대기와 최근 30일 회사 출고</span><i>›</i></button>
     </div>
   </section>
 
@@ -482,7 +351,7 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
           <div class="row"><span class="lbl">정상가</span><span class="was" id="pWas"></span></div>
           <div class="row"><span class="lbl">임직원가 · 1박스</span><span class="now" id="pNow">—<small>원</small></span></div>
           <div class="per" id="pPer"></div>
-          <div class="ship" id="pShip">택배비 박스당 4,500원 별도 · 입금 확인 후 발송</div>
+          <div class="ship" id="pShip">택배비 박스당 5,500원 별도 · 입금 확인 후 발송</div>
         </div>
       </div>
     </div>
@@ -494,25 +363,31 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
       <div class="sec-title"><h2>주문서</h2></div>
 
       <div class="qtyrow">
-        <div class="t"><b>몸愛좋은물 Gold 1박스</b><span>350mL × 36입 · 수량은 받는 곳마다 정합니다</span></div>
+        <div class="t"><b>몸愛좋은물 Gold 1박스</b><span>350mL × 36입</span></div>
+        <div class="stepper">
+          <button type="button" id="minus" aria-label="한 박스 빼기">−</button>
+          <output id="qty">1</output>
+          <button type="button" id="plus" aria-label="한 박스 더하기">+</button>
+        </div>
       </div>
 
       <div class="buyerbox"><span>주문하시는 분</span><b id="bName"></b> · <span id="bTel" style="display:inline;font-size:14.5px;color:inherit"></span></div>
 
       <div class="sec-title" style="margin-top:26px"><h2>받으시는 곳</h2></div>
-      <p class="dhint">받으시는 분·주소·입금하실 분을 넣어 주세요. 다른 곳에도 보내시면 아래 <b>[+ 받는 곳 추가]</b>로 한 분씩 더 넣으시면 됩니다.</p>
-      <div id="dests"></div>
-      <div class="dadd">
-        <button type="button" class="abtn" id="addDest">+ 받는 곳 추가</button>
+      <label class="check same"><input type="checkbox" id="sameAs" checked> 제가 받아요</label>
+      <div id="rcvBox" class="hidden row2">
+        <div class="field"><label>받으시는 분<em>*</em></label><input class="inp" id="rcv"></div>
+        <div class="field"><label>연락처<em>*</em></label><input class="inp" id="rcvTel" type="tel" inputmode="tel" placeholder="010-0000-0000"></div>
       </div>
+      <div class="field">
+        <label>주소<em>*</em></label>
+        <div class="addr"><input class="inp" id="zip" placeholder="우편번호" readonly style="max-width:130px"><button type="button" class="sbtn" id="findAddr">주소 찾기</button></div>
+        <input class="inp" id="addr1" placeholder="기본 주소" style="margin-top:8px">
+        <input class="inp" id="addr2" placeholder="상세 주소 (동·호수)" style="margin-top:8px">
+      </div>
+      <div class="field"><label>배송 요청사항</label><input class="inp" id="shipMemo" placeholder="예: 문 앞에 놓아 주세요"></div>
 
       <div class="sec-title" style="margin-top:26px"><h2>입금</h2></div>
-      <div class="bill">
-        <div class="l"><span>상품 <span id="bQty">1</span>박스<span id="bDest"></span></span><span id="bGoods"></span></div>
-        <div class="l"><span>택배비<span id="bShipSub"></span></span><span id="bShip"></span></div>
-        <div class="tot"><span>입금하실 금액<span id="bTotSub"></span></span><b id="bTot"></b></div>
-        <div class="split hidden" id="bSplit"></div>
-      </div>
       <div class="bankbox">
         <div class="bhead">
           <span class="bankmark"><img src="../order/img/bank-nh.png" alt="" onerror="this.remove()"><em>농협</em><small>강릉농협</small></span>
@@ -522,6 +397,20 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
         <div class="bholder">예금주 <b id="fHolder">워터비스코퍼레이션(주)</b></div>
         <button type="button" class="bcopy" id="copyAcct2">계좌번호 복사</button>
         <p>주문 신청 후 <b id="fDays">3</b>일 안에 입금해 주시면 확인 후 발송합니다.<br><span class="bnote">송금할 때 은행 목록에 «농협»으로 안 되면 «지역농·축협»을 골라 주세요.</span></p>
+      </div>
+      <div class="field">
+        <label>입금하실 분 성함<em>*</em></label>
+        <input class="inp" id="payer" placeholder="통장에 찍히는 이름">
+      </div>
+
+      <label class="check" style="margin-top:-4px"><input type="checkbox" id="cashRcpt"> <span>현금영수증이 필요해요</span></label>
+      <div id="rcptBox" class="field hidden" style="margin-left:30px">
+        <input class="inp" id="rcptNo" inputmode="numeric" placeholder="휴대전화 번호 또는 사업자등록번호">
+      </div>
+      <div class="bill">
+        <div class="l"><span>상품 <span id="bQty">1</span>박스</span><span id="bGoods"></span></div>
+        <div class="l"><span>택배비</span><span id="bShip"></span></div>
+        <div class="tot"><span>입금하실 금액</span><b id="bTot"></b></div>
       </div>
 
       <label class="check"><input type="checkbox" id="agree"> <span>배송을 위한 개인정보 수집·이용에 동의합니다 <em style="color:var(--bad);font-style:normal">(필수)</em></span></label>
@@ -545,20 +434,20 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
     <div class="wrap">
       <div class="seal"><svg viewBox="0 0 32 32"><path d="M8 16.5l5.5 5.5L24.5 10"/></svg></div>
       <h2>주문이 접수되었습니다</h2>
-      <div class="no" id="dNoBox">주문번호 <span id="dNo"></span></div>
+      <div class="no">주문번호 <span id="dNo"></span></div>
       <div class="receipt">
         <div class="top"><span>입금하실 금액</span><b id="dAmt"></b></div>
         <dl>
           <dt>입금 계좌</dt><dd><div class="acct"><span id="dAcct">농협 355-0097-3405-33</span><button class="copybtn" id="copyAcct">복사</button></div></dd>
           <dt>예금주</dt><dd id="dHolder">워터비스코퍼레이션(주)</dd>
-          <dt id="dPayerT">입금자명</dt><dd id="dPayer"></dd>
+          <dt>입금자명</dt><dd id="dPayer"></dd>
           <dt>입금 기한</dt><dd id="dDue"></dd>
           <dt>받으시는 곳</dt><dd id="dTo" style="font-weight:500"></dd>
         </dl>
       </div>
       <p class="savehint">주문 내역과 배송 상황은 언제든 <b>내 주문</b>에서 보실 수 있습니다.</p>
       <ol class="steps">
-        <li id="dStep1">위 계좌로 <b>입금자명 그대로</b> 입금해 주세요.</li>
+        <li>위 계좌로 <b>입금자명 그대로</b> 입금해 주세요.</li>
         <li>입금이 확인되면 발송합니다. 송장번호는 내 주문에 나옵니다.</li>
         <li>문의: 033-672-1032 · 주문번호를 알려 주세요.</li>
       </ol>
@@ -568,17 +457,6 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
   </section>
 </main>
 
-<!-- ═════════ 주문 확인창 ═════════ -->
-<div id="confirm" class="hidden" role="dialog" aria-label="주문 확인">
-  <div class="cbox">
-    <h3>이대로 주문할까요?</h3>
-    <p class="cwho" id="cWho"></p>
-    <ul class="clist" id="cList"></ul>
-    <div class="ctot"><span>입금하실 금액</span><b id="cTot"></b></div>
-    <div class="cbtns"><button type="button" class="no" id="cNo">고치기</button><button type="button" class="yes" id="cYes">주문 신청</button></div>
-  </div>
-</div>
-
 <!-- ═════════ 내 주문 ═════════ -->
 <section id="mine" class="hidden">
   <div class="thead">
@@ -586,7 +464,7 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
       <button type="button" class="tback" onclick="closeMine()">‹ 돌아가기</button>
       <img class="tlogo" src="../order/img/logo-watervis-white.png" alt="WATERVIS" width="120" height="26">
       <h2>내 주문</h2>
-      <p>최근 120일 동안의 주문과 회사 출고 요청입니다.</p>
+      <p>최근 120일 동안 주문하신 내역입니다.</p>
     </div>
   </div>
   <div class="wrap tbody">
@@ -645,85 +523,6 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
   </div>
 </section>
 
-<!-- ═════════ 회사 출고 (무상) ═════════ -->
-<section id="free" class="hidden">
-  <div class="thead">
-    <div class="wrap">
-      <button type="button" class="tback" onclick="closeFree()">‹ 돌아가기</button>
-      <img class="tlogo" src="../order/img/logo-watervis-white.png" alt="WATERVIS" width="120" height="26">
-      <h2>회사 출고</h2>
-      <p>돈을 받지 않고 나가는 물량 — 샘플 · 선물 · 방문객 · 냉장고</p>
-    </div>
-  </div>
-  <div class="wrap tbody" id="freeForm">
-    <div class="field"><label>무엇인가요?<em>*</em></label>
-      <div class="chips" id="fKind">
-        <button type="button" data-v="sample">거래처 샘플</button>
-        <button type="button" data-v="gift">선물·접대</button>
-        <button type="button" data-v="visit">방문객 드림</button>
-        <button type="button" data-v="stock" id="fKindStock">냉장고 채우기</button>
-      </div>
-      <p class="fhint" id="fHint"></p>
-    </div>
-    <div id="fBody"></div>
-    <div class="field" id="fPurposeBox"><label>목적<em>*</em> <span style="font-weight:400;color:var(--muted)">(월별 집계·비용 처리에 그대로 나갑니다)</span></label>
-      <textarea class="inp" id="fPurpose" rows="2" maxlength="300"></textarea></div>
-    <p class="fnote" id="fRule"></p>
-    <ul class="errs" id="fErr"></ul>
-    <button class="submit" id="fBtn" style="background:var(--navy);color:#fff">요청하기</button>
-    <p class="fine">샘플·선물·방문객은 <b>박스</b>, 냉장고 채우기는 <b>낱개(개)</b>로 적습니다. 냉장고에서 꺼내 드시는 것은 적지 않습니다.</p>
-  </div>
-  <div class="wrap tbody hidden" id="freeDone" style="text-align:center">
-    <div style="width:64px;height:64px;border-radius:50%;margin:10px auto 14px;display:grid;place-items:center;border:1px solid var(--gold);color:var(--gold)"><svg viewBox="0 0 32 32" style="width:30px;height:30px;stroke:currentColor;fill:none;stroke-width:1.6"><path d="M8 16.5l5.5 5.5L24.5 10"/></svg></div>
-    <h2 style="font-family:var(--serif);color:var(--navy);margin:0 0 6px" id="fdTitle">요청되었습니다</h2>
-    <p style="color:var(--muted);margin:0 0 6px">요청번호 <b id="fdNo" style="font-family:ui-monospace,Menlo,Consolas,monospace;color:var(--navy)"></b></p>
-    <p class="fnote" id="fdMsg" style="text-align:left"></p>
-    <button class="cta" style="margin:0 auto 10px;width:100%" onclick="openMine()">내 주문에서 보기</button>
-    <button class="cta" style="margin:0 auto;width:100%;background:#fff;color:var(--navy);border:1px solid var(--line);box-shadow:none" onclick="newFree()">하나 더 요청하기</button>
-  </div>
-</section>
-
-<!-- 회사 출고 확인창 -->
-<div id="fconfirm" class="hidden" role="dialog" aria-label="회사 출고 확인">
-  <div class="cbox">
-    <h3>이대로 요청할까요?</h3>
-    <p class="cwho" id="fcWho"></p>
-    <ul class="clist" id="fcList"></ul>
-    <div class="ctot"><span id="fcTotL">출고 수량</span><b id="fcTot"></b></div>
-    <div class="cbtns"><button type="button" class="no" id="fcNo">고치기</button><button type="button" class="yes" id="fcYes">요청하기</button></div>
-  </div>
-</div>
-
-<!-- 냉장고 채우기 주의 -->
-<div id="swarn" class="hidden" role="dialog" aria-label="냉장고 채우기 주의">
-  <div class="cbox">
-    <h3>냉장고 채우기</h3>
-    <p class="big">숫자는 낱개(파우치 개수)입니다</p>
-    <p style="margin:0 0 16px;font-size:15px;color:#3b4b5e">박스 수가 아닙니다. 직접 옮기신 <b>파우치 개수</b>를 적어 주세요.<br>참고: 1박스 = 36개</p>
-    <button type="button" class="submit" id="swOk" style="background:var(--navy);color:#fff">알겠습니다</button>
-  </div>
-</div>
-
-<!-- ═════════ 출고 승인 (승인자만) ═════════ -->
-<section id="appr" class="hidden">
-  <div class="thead">
-    <div class="wrap">
-      <button type="button" class="tback" onclick="closeAppr()">‹ 돌아가기</button>
-      <img class="tlogo" src="../order/img/logo-watervis-white.png" alt="WATERVIS" width="120" height="26">
-      <h2>출고 승인</h2>
-      <p id="aSub">승인 대기와 최근 30일 회사 출고</p>
-    </div>
-  </div>
-  <div class="wrap tbody">
-    <ul class="errs" id="aErr"></ul>
-    <div class="h3" id="aPendH">승인 대기</div>
-    <div id="aPending"><p class="empty">불러오는 중…</p></div>
-    <div class="h3" style="margin-top:26px">최근 30일 회사 출고</div>
-    <div class="asum" id="aSum"></div>
-    <div id="aRecent"></div>
-  </div>
-</section>
-
 <div id="postLayer" class="hidden" role="dialog" aria-label="주소 찾기">
   <div class="postwrap">
     <div class="posthead"><b>주소 찾기</b><button type="button" id="postClose" aria-label="닫기">닫기 ✕</button></div>
@@ -738,26 +537,18 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
   강원특별자치도 양양군 현남면 원포1길 53, 환경동 1층<br>
   Tel 033-672-1032 · admin@watervis.co.kr<br>
   <button type="button" class="flink" onclick="openAsk()">문의하기</button> · <button type="button" class="flink auth" onclick="openMine()">내 주문</button> · <button type="button" class="flink auth" onclick="logout()">로그아웃</button><br>
-  <span style="opacity:.7">© 2026 WATERVIS CO., LTD. · 임직원 화면 v0.4.2</span>
+  <span style="opacity:.7">© 2026 WATERVIS CO., LTD. · 임직원 화면 v0.3.3</span>
 </footer>
 
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js" async></script>
 <script>
-/* 워터비스 임직원 주문  v0.3.4 — 2026-09-26
+/* 워터비스 임직원 주문  v0.3 — 2026-09-26
    · 로그인 토큰은 이 탭의 메모리에만 둔다 (브라우저 저장소에 넣지 않음 → 탭을 닫으면 끝)
    · 30분 동안 아무 조작이 없으면 스스로 로그아웃 (서버도 따로 검사)
-   · 가격은 서버가 계정·품목표로 다시 계산한다. 화면 숫자는 보여 주기용
-   · v0.4.2: 냉장고 채우기는 낱개(개) — 누르면 주의창, 수량 칸에 숫자 직접 입력(+10·+36 버튼)
-   · v0.4.1: 승인 없이 운영(FREE_AUTO_MAX ≥ 60) — 안내 문구·«회사 출고 현황»
-   · v0.4.0: 회사 출고(무상: 거래처 샘플·선물·방문객·냉장고) + 출고 승인(승인자) + 인사말에 직급(«임승혁 대표님»)
-   · v0.3.7: 금액 박스를 입금 통장 바로 위로, 받는 곳마다 «공장에서 직접 가져가기»(택배비 없음)
-   · v0.3.6: 아래 «입금하실 분 성함»·현금영수증 칸을 없애고 받는 곳 카드에서만 받음
-   · v0.3.6: 입금하실 분을 받는 곳마다 «임직원(주문자)·받는 분·기타»로 고름. 여러 명 붙여넣기 뺌
-   · v0.3.5: 받는 곳마다 입금자(다르면 입금자별로 주문이 나뉨)
-   · v0.3.4: 받는 분 입력이 기본(«내 정보로 채우기» 버튼), 받는 곳 여러 개, 여러 명 붙여넣기, 주문 확인창 */
-const VERSION='staff-v0.4.2';
+   · 가격은 서버가 계정·품목표로 다시 계산한다. 화면 숫자는 보여 주기용 */
+const VERSION='staff-v0.3.3';
 const API_URL='https://script.google.com/macros/s/AKfycby2u_oD8QlsYJj3fnSBsvO8bzUeiqZLuR1X7o3LAnhaHYdsWRJOo6tN9UweLoOma0G5/exec';
-const PRICE={box:0, list:0, unit:36, ship:0, maxQty:20, maxTotal:60, maxDests:30};   // 로그인 후 서버가 알려 준다 (공개 소스에 가격을 두지 않음)
+const PRICE={box:0, list:0, unit:36, ship:0, maxQty:20};   // 로그인 후 서버가 알려 준다 (공개 소스에 가격을 두지 않음)
 const BANK={name:'농협(강릉농협)', no:'355-0097-3405-33', holder:'워터비스코퍼레이션(주)', days:3};
 const IDLE_MS=30*60*1000;
 
@@ -765,9 +556,8 @@ const $=id=>document.getElementById(id);
 const won=n=>Number(n).toLocaleString('ko-KR')+'원';
 const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
 const fmtTel=v=>{v=String(v||'').replace(/\D/g,'').slice(0,11);return v.length<4?v:v.length<8?v.slice(0,3)+'-'+v.slice(3):v.slice(0,3)+'-'+v.slice(3,v.length-4)+'-'+v.slice(-4);};
-const TEL=/^01[016789]-?\d{3,4}-?\d{4}$/;
 const T={token:null, user:null};
-const S={busy:false, reqId:null};
+const S={qty:1, busy:false, reqId:null};
 let lastAct=Date.now();
 
 async function api(action,payload){
@@ -784,7 +574,7 @@ async function api(action,payload){
 }
 
 /* ── 화면 전환 ── */
-const PAGES=['gate','pwchg','main','mine','ask','free','appr'];
+const PAGES=['gate','pwchg','main','mine','ask'];
 const curPage=()=>PAGES.find(id=>!$(id).classList.contains('hidden'))||'gate';
 function show(id){ PAGES.forEach(p=>$(p).classList.toggle('hidden',p!==id));
   $('foot').classList.toggle('hidden',id==='gate'||id==='pwchg');
@@ -832,11 +622,10 @@ $('pwBtn').onclick=async()=>{
 async function enterMain(me){
   const r=me||await api('staffMe');   // 새 서버는 로그인 응답에 같이 실어 보낸다 (한 번 덜 기다림)
   T.user=r.user; Object.assign(PRICE,r.price||{}); Object.assign(BANK,r.bank||{});
-  Object.assign(FREE,r.free||{});
-  $('meName').textContent=T.user.disp||(T.user.name+' 님'); $('meDept').textContent=T.user.dept?'· '+T.user.dept:'';
-  paintApprBtn();
+  $('meName').textContent=T.user.name; $('meDept').textContent=T.user.dept?'· '+T.user.dept:'';
   $('bName').textContent=T.user.name+(T.user.dept?' ('+T.user.dept+')':''); $('bTel').textContent=fmtTel(T.user.id);
-  paintPrice(); if(!D.length) D.push(blank()); renderDests(); newOrder();
+  if(!$('payer').dataset.touched) $('payer').value=T.user.name;
+  paintPrice(); calc(); newOrder();
 }
 function newOrder(){ document.querySelectorAll('#main > section').forEach(s=>s.classList.toggle('hidden',s.id==='done')); S.reqId=null; show('main'); }
 function paintPrice(){
@@ -847,479 +636,73 @@ function paintPrice(){
   $('pShip').textContent='택배비 박스당 '+won(PRICE.ship)+' 별도 · 입금 확인 후 발송';
   $('ctaSmall').textContent='임직원가 1박스 '+won(PRICE.box);
 }
+$('minus').onclick=()=>{S.qty=Math.max(1,S.qty-1);calc();};
+$('plus').onclick=()=>{S.qty=Math.min(PRICE.maxQty,S.qty+1);calc();};
 function calc(){
-  const q=totQ(), g=q*PRICE.box, s=shipQ()*PRICE.ship, G=payGroups(), pq=q-shipQ();
-  $('bQty').textContent=q; $('bDest').textContent=D.length>1?' · '+D.length+'곳':'';
-  $('bGoods').textContent=won(g); $('bShip').textContent=won(s); $('bTot').textContent=won(g+s);
-  $('bShipSub').textContent=pq>0?(pq===q?' (방문 수령 — 없음)':' (방문 수령 '+pq+'박스 제외)'):'';
-  $('bTotSub').textContent=G.length>1?' (합계)':'';
-  $('bSplit').classList.toggle('hidden',G.length<2);
-  $('bSplit').innerHTML=G.length>1?'입금하실 분마다 따로 입금 · 주문번호도 따로 나옵니다'+G.map(x=>'<div><span>'+esc(x.payer||'(이름 없음)')+'</span><span>'+won(x.amt)+'</span></div>').join(''):'';
-  $('addDest').disabled=D.length>=PRICE.maxDests;
+  $('qty').textContent=S.qty; $('minus').disabled=S.qty<=1; $('plus').disabled=S.qty>=PRICE.maxQty;
+  const g=S.qty*PRICE.box, s=S.qty*PRICE.ship;
+  $('bQty').textContent=S.qty; $('bGoods').textContent=won(g); $('bShip').textContent=won(s); $('bTot').textContent=won(g+s);
 }
-/* 입금하실 분 — 받는 곳마다 임직원(주문자) / 받는 분 / 기타. 입금자 = 이름 + 휴대폰 으로 묶는다 */
-const PWL={me:'임직원(주문자)', rcv:'받는 분', etc:'기타'};
-const dig=v=>String(v||'').replace(/\D/g,'');
-const mainPayer=()=>T.user?T.user.name:'';   // 임직원(주문자) = 로그인한 직원 이름
-const payerOf=d=>d.pw==='rcv'?d.rcv.trim():d.pw==='etc'?d.pname.trim():mainPayer();
-const ptelOf=d=>d.pw==='rcv'?dig(d.tel):d.pw==='etc'?dig(d.ptel):(T.user?T.user.id:'');
-function payGroups(){
-  const G=[];
-  D.forEach((d,i)=>{ const p=payerOf(d), k=p+'|'+ptelOf(d); let g=G.find(x=>x.key===k);
-    if(!g){ g={key:k, payer:p, idx:[], qty:0, amt:0}; G.push(g); }
-    g.idx.push(i); g.qty+=Number(d.qty)||0; g.amt+=amtOf(d); });
-  return G;
-}
-
-/* ── 받는 곳 (여러 곳) ── */
-const D=[];
-const blank=()=>({rcv:'',tel:'',zip:'',addr1:'',addr2:'',memo:'',qty:1,open:true,pw:'me',pname:'',ptel:'',rc:false,ship:'택배'});
-const isPick=d=>d.ship==='방문수령';
-const shipQ=()=>D.reduce((a,d)=>a+(isPick(d)?0:(Number(d.qty)||0)),0);
-const amtOf=d=>(Number(d.qty)||0)*(PRICE.box+(isPick(d)?0:PRICE.ship));
-const totQ=()=>D.reduce((a,d)=>a+(Number(d.qty)||0),0);
-const isEmpty=d=>!d.rcv.trim()&&!d.tel.trim()&&!d.addr1.trim()&&!d.addr2.trim()&&!d.memo.trim();
-function destErrs(d){
-  const e=[];
-  if(!d.rcv.trim()) e.push('성함');
-  if(!TEL.test(d.tel.trim())) e.push('연락처');
-  if(!isPick(d)){
-    if(d.addr1.trim().length<5) e.push('주소');
-    else if(d.zip&&!d.addr2.trim()) e.push('상세 주소');
-  }
-  if(!(d.qty>=1&&d.qty<=PRICE.maxQty)) e.push('수량(1~'+PRICE.maxQty+'박스)');
-  if(d.pw==='etc'&&!d.pname.trim()) e.push('입금자 성함');
-  if(d.pw==='etc'&&!TEL.test(d.ptel.trim())) e.push('입금자 휴대폰');
-  return e;
-}
-function sumHtml(d){
-  if(!d.rcv.trim()) return '받으시는 분을 넣어 주세요';
-  const a=isPick(d)?'공장 방문 수령':d.addr1.trim().split(/\s+/).slice(0,3).join(' ');
-  return esc(d.rcv.trim())+(a?'<small>'+esc(a)+'</small>':'')+(d.pw!=='me'&&payerOf(d)?'<small class="ptag">입금 '+esc(payerOf(d))+'</small>':'');
-}
-function paintHead(c,d){ const s=c.querySelector('.dsum'); s.innerHTML=sumHtml(d); s.classList.toggle('empty',!d.rcv.trim()); c.querySelector('.dq').textContent=d.qty+'박스'; }
-function renderDests(){
-  const many=D.length>1;
-  $('dests').innerHTML=D.map((d,i)=>`<div class="dcard${d.open?' open':''}" data-i="${i}">
-    <div class="dhead" data-act="toggle"><span class="dn">${i+1}</span><b class="dsum${d.rcv.trim()?'':' empty'}">${sumHtml(d)}</b><span class="dq">${d.qty}박스</span>${many?'<button type="button" class="dx" data-act="del">삭제</button>':''}<svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
-    <div class="dbody">
-      <button type="button" class="mefill" data-act="me">내 정보로 채우기</button>
-      <div class="row2">
-        <div class="field"><label>받으시는 분<em>*</em></label><input class="inp" data-f="rcv" value="${esc(d.rcv)}" autocomplete="off"></div>
-        <div class="field"><label>연락처<em>*</em></label><input class="inp" data-f="tel" type="tel" inputmode="tel" placeholder="010-0000-0000" value="${esc(d.tel)}"></div>
-      </div>
-      <div class="dpayer">
-        <span class="plabel">입금하실 분<em>*</em></span>
-        <div class="seg3">${['me','rcv','etc'].map(v=>`<button type="button" data-act="pw" data-v="${v}"${d.pw===v?' class="on"':''}>${PWL[v]}</button>`).join('')}</div>
-        <div class="row2 etcbox${d.pw==='etc'?'':' hidden'}" style="margin-top:10px">
-          <div class="field"><label>입금자 성함<em>*</em></label><input class="inp" data-f="pname" placeholder="통장에 찍히는 이름" value="${esc(d.pname)}"></div>
-          <div class="field"><label>입금자 휴대폰<em>*</em></label><input class="inp" data-f="ptel" type="tel" inputmode="tel" placeholder="010-0000-0000" value="${esc(d.ptel)}"></div>
-        </div>
-        <p class="pnote">${pnote(d)}</p>
-        <label class="check rcchk"><input type="checkbox" data-f="rc"${d.rc?' checked':''}> <span>현금영수증 발급 (입금자 휴대폰 번호로)</span></label>
-      </div>
-      <div class="shipsel">
-        <span class="plabel">받는 방법</span>
-        <div class="seg2">${['택배','방문수령'].map(v=>`<button type="button" data-act="ship" data-v="${v}"${d.ship===v?' class="on"':''}>${v==='택배'?'택배로 받기':'공장에서 직접 가져가기'}</button>`).join('')}</div>
-      </div>
-      <div class="pickup${isPick(d)?'':' hidden'}"><b>공장 방문 수령 · 택배비 없음</b><br>강원 양양군 현남면 원포1길 53, 환경동 1층 · 033-672-1032<br>입금이 확인되면 준비해 두겠습니다. 오실 날짜를 아래에 적어 주세요.</div>
-      <div class="field addrbox${isPick(d)?' hidden':''}"><label>주소<em>*</em></label>
-        <div class="addr"><input class="inp" data-f="zip" placeholder="우편번호" readonly style="max-width:130px" value="${esc(d.zip)}"><button type="button" class="sbtn" data-act="post">주소 찾기</button></div>
-        <input class="inp" data-f="addr1" placeholder="기본 주소" style="margin-top:8px" value="${esc(d.addr1)}">
-        <input class="inp" data-f="addr2" placeholder="상세 주소 (동·호수)" style="margin-top:8px" value="${esc(d.addr2)}">
-      </div>
-      <div class="field"><label class="memolbl">${isPick(d)?'방문 예정일·요청사항':'배송 요청사항'}</label><input class="inp" data-f="memo" placeholder="${isPick(d)?'예: 10월 2일 오후 방문':'예: 문 앞에 놓아 주세요'}" value="${esc(d.memo)}"></div>
-      <div class="dqty"><span>수량</span><div class="stepper"><button type="button" data-act="minus" aria-label="한 박스 빼기">−</button><output>${d.qty}</output><button type="button" data-act="plus" aria-label="한 박스 더하기">+</button></div></div>
-    </div></div>`).join('');
-  syncSteppers(); calc();
-}
-function pnote(d){
-  if(d.pw==='me') return esc(mainPayer())+' 님(주문자) 이름으로 입금합니다. 다른 통장으로 보내시면 «기타»를 골라 주세요.';
-  if(d.pw==='rcv') return d.rcv.trim()?esc(d.rcv.trim())+' 님이 직접 입금합니다.':'받으시는 분 성함을 먼저 넣어 주세요.';
-  return '아래 적으신 분이 입금합니다.';
-}
-function paintPay(c,d){
-  c.querySelectorAll('.seg3 button').forEach(b=>b.classList.toggle('on',b.dataset.v===d.pw));
-  c.querySelector('.etcbox').classList.toggle('hidden',d.pw!=='etc');
-  c.querySelector('.pnote').innerHTML=pnote(d);
-}
-function syncSteppers(){
-  const full=totQ()>=PRICE.maxTotal;
-  [...$('dests').children].forEach((c,i)=>{ const d=D[i], b=c.querySelectorAll('.stepper button');
-    b[0].disabled=d.qty<=1; b[1].disabled=d.qty>=PRICE.maxQty||full; });
-}
-$('dests').addEventListener('input',e=>{
-  const f=e.target.dataset.f; if(!f) return;
-  const c=e.target.closest('.dcard'), d=D[+c.dataset.i];
-  if(f==='tel'||f==='ptel') e.target.value=fmtTel(e.target.value);
-  if(f==='rc'){ d.rc=e.target.checked;
-    const k=payerOf(d)+'|'+ptelOf(d);                    // 같은 입금자(= 같은 주문)의 다른 받는 곳도 같이 맞춘다
-    D.forEach((x,j)=>{ if(x!==d&&payerOf(x)+'|'+ptelOf(x)===k){ x.rc=d.rc; const cb=$('dests').children[j].querySelector('[data-f=rc]'); if(cb) cb.checked=d.rc; } }); }
-  else d[f]=e.target.value;
-  c.classList.remove('bad'); paintHead(c,d); $('errs').innerHTML='';
-  if(['rcv','tel','pname','ptel'].indexOf(f)>=0){ c.querySelector('.pnote').innerHTML=pnote(d); calc(); }
-});
-$('dests').addEventListener('click',e=>{
-  const b=e.target.closest('[data-act]'); if(!b) return;
-  const c=b.closest('.dcard'), i=+c.dataset.i, d=D[i], act=b.dataset.act;
-  if(act==='toggle'){ d.open=!d.open; c.classList.toggle('open',d.open); }
-  else if(act==='ship'){ d.ship=b.dataset.v; const p=isPick(d);
-    c.querySelectorAll('.seg2 button').forEach(x=>x.classList.toggle('on',x.dataset.v===d.ship));
-    c.querySelector('.pickup').classList.toggle('hidden',!p); c.querySelector('.addrbox').classList.toggle('hidden',p);
-    c.querySelector('.memolbl').textContent=p?'방문 예정일·요청사항':'배송 요청사항';
-    c.querySelector('[data-f=memo]').placeholder=p?'예: 10월 2일 오후 방문':'예: 문 앞에 놓아 주세요';
-    c.classList.remove('bad'); paintHead(c,d); calc(); }
-  else if(act==='pw'){ d.pw=b.dataset.v; c.classList.remove('bad'); paintPay(c,d); paintHead(c,d); calc();
-    if(d.pw==='etc') setTimeout(()=>c.querySelector('[data-f=pname]').focus(),30); }
-  else if(act==='del'){ e.stopPropagation(); if(D.length>1&&(isEmpty(d)||confirm((i+1)+'번 받는 곳('+(d.rcv.trim()||'이름 없음')+')을 지울까요?'))){ D.splice(i,1); renderDests(); } }
-  else if(act==='me'){ if(!T.user) return; d.rcv=T.user.name; d.tel=fmtTel(T.user.id);
-    c.querySelector('[data-f=rcv]').value=d.rcv; c.querySelector('[data-f=tel]').value=d.tel; c.classList.remove('bad'); paintHead(c,d); paintPay(c,d); calc();
-    c.querySelector('[data-f=addr1]').value?null:c.querySelector('[data-act=post]').focus(); }
-  else if(act==='post') openPost(i);
-  else if(act==='minus'||act==='plus'){
-    if(act==='minus') d.qty=Math.max(1,d.qty-1);
-    else if(totQ()<PRICE.maxTotal) d.qty=Math.min(PRICE.maxQty,d.qty+1);
-    c.querySelector('output').textContent=d.qty; paintHead(c,d); syncSteppers(); calc();
-    if(act==='plus'&&totQ()>=PRICE.maxTotal) toast('한 번에 '+PRICE.maxTotal+'박스까지 주문할 수 있습니다.');
-  }
-});
-$('addDest').onclick=()=>{
-  if(D.length>=PRICE.maxDests){ toast('한 번에 '+PRICE.maxDests+'곳까지 넣을 수 있습니다.'); return; }
-  D.forEach(d=>{ if(!destErrs(d).length) d.open=false; });   // 다 채운 곳은 접어서 짧게
-  D.push(blank()); renderDests();
-  const c=$('dests').lastElementChild; c.scrollIntoView({behavior:'smooth',block:'center'});
-  setTimeout(()=>c.querySelector('[data-f=rcv]').focus(),300);
-};
-
-
+$('cashRcpt').onchange=()=>{ $('rcptBox').classList.toggle('hidden',!$('cashRcpt').checked); if($('cashRcpt').checked&&!$('rcptNo').value&&T.user) $('rcptNo').value=T.user.id; };
+$('sameAs').onchange=()=>$('rcvBox').classList.toggle('hidden',$('sameAs').checked);
+$('payer').addEventListener('input',()=>$('payer').dataset.touched='1');
+$('rcvTel').addEventListener('input',e=>e.target.value=fmtTel(e.target.value));
 
 /* 주소 찾기 — 페이지 안에 겹쳐 띄운다 (휴대폰에서 새 창이 처음 화면으로 돌아가던 문제 방지) */
 function closePost(){ $('postLayer').classList.add('hidden'); $('postBox').innerHTML=''; document.body.style.overflow=''; }
 $('postClose').onclick=closePost;
-function openPost(i){
-  openPostCb(r=>{ const d=D[i]; if(!d) return;
-    d.zip=r.zonecode; d.addr1=r.roadAddress||r.jibunAddress; d.open=true; renderDests();
-    setTimeout(()=>{ const a=$('dests').children[i].querySelector('[data-f=addr2]'); a.focus(); },50); }, $('dests').children[i]);
-}
-/* 주소 찾기 공통 — 주문서·회사 출고가 같이 쓴다. 우편번호 서비스를 못 불러오면 직접 입력 */
-function openPostCb(done, card){
-  if(!(window.daum&&daum.Postcode)){ const z=card.querySelector('[data-f=zip]'); z.readOnly=false; card.querySelector('[data-f=addr1]').focus(); toast('주소를 직접 입력해 주세요.'); return; }
+$('findAddr').onclick=()=>{
+  if(!(window.daum&&daum.Postcode)){ $('addr1').focus(); toast('주소를 직접 입력해 주세요.'); $('zip').readOnly=false; return; }
   $('postLayer').classList.remove('hidden'); document.body.style.overflow='hidden';
-  new daum.Postcode({ oncomplete:r=>{ closePost(); done(r); }, width:'100%', height:'100%' }).embed($('postBox'));
-}
+  new daum.Postcode({
+    oncomplete:d=>{ $('zip').value=d.zonecode; $('addr1').value=d.roadAddress||d.jibunAddress; closePost(); setTimeout(()=>$('addr2').focus(),50); },
+    width:'100%', height:'100%'
+  }).embed($('postBox'));
+};
 
 function validate(){
-  const e=[], seen={}, many=D.length>1;
-  D.forEach((d,i)=>{
-    const x=destErrs(d);
-    if(!x.length){ const k=d.tel.replace(/\D/g,'')+'|'+(isPick(d)?'PICKUP':(d.addr1+d.addr2).replace(/\s/g,''));
-      if(seen[k]) x.push(seen[k]+'번과 같은 받는 곳'); else seen[k]=i+1; }
-    const c=$('dests').children[i]; c.classList.toggle('bad',!!x.length);
-    if(x.length){ d.open=true; c.classList.add('open'); e.push((many?(i+1)+'번 받는 곳':'받는 곳')+' — '+x.join(', ')+' 확인'); }
-  });
-  if(totQ()>PRICE.maxTotal) e.push('한 번에 '+PRICE.maxTotal+'박스까지 주문할 수 있습니다.');
+  const e=[], tel=/^01[016789]-?\d{3,4}-?\d{4}$/;
+  if(!$('sameAs').checked){
+    if(!$('rcv').value.trim()) e.push('받으시는 분 성함을 적어 주세요.');
+    if(!tel.test($('rcvTel').value.trim())) e.push('받으시는 분 연락처를 확인해 주세요.');
+  }
+  if(!$('addr1').value.trim()) e.push('주소를 입력해 주세요.');
+  if(!$('addr2').value.trim()) e.push('상세 주소를 입력해 주세요.');
+  if(!$('payer').value.trim()) e.push('입금하실 분 성함을 적어 주세요.');
+  if($('cashRcpt').checked && $('rcptNo').value.replace(/\D/g,'').length<10) e.push('현금영수증 받으실 번호를 확인해 주세요.');
   if(!$('agree').checked) e.push('개인정보 수집·이용에 동의해 주세요.');
   return e;
 }
-$('main').addEventListener('input',e=>{ if(!e.target.closest('#dests')) $('errs').innerHTML=''; });
-const addrOf=d=>isPick(d)?'공장 방문 수령 (택배비 없음)':(d.addr1.trim()+' '+d.addr2.trim()).trim();
-$('submit').onclick=()=>{
+$('main').addEventListener('input',()=>{$('errs').innerHTML='';});
+$('submit').onclick=async()=>{
   const e=validate();
   $('errs').innerHTML=e.map(x=>'<li>'+esc(x)+'</li>').join('');
-  if(e.length){ const b=$('dests').querySelector('.dcard.bad'); (b||$('errs')).scrollIntoView({behavior:'smooth',block:'center'}); return; }
-  if(S.busy) return;
-  const q=totQ(), tot=D.reduce((a,d)=>a+amtOf(d),0), G=payGroups();
-  $('cWho').textContent='주문하시는 분 '+T.user.name+(T.user.dept?' ('+T.user.dept+')':'')+' · 받는 곳 '+D.length+'곳 · '+q+'박스'+(G.length>1?' · 입금자 '+G.length+'분 → 주문 '+G.length+'건':'');
-  const li=i=>{ const d=D[i]; return '<li><span class="q">'+d.qty+'박스</span><b>'+(D.length>1?(i+1)+'. ':'')+esc(d.rcv.trim())+'</b> '+esc(fmtTel(d.tel))
-    +(d.rcv.trim()===T.user.name?' <span style="color:var(--gold);font-size:12.5px">(본인)</span>':'')+'<small>'+esc(addrOf(d))+(d.memo.trim()?' · '+esc(d.memo.trim()):'')+'</small></li>'; };
-  $('cList').innerHTML=G.length>1
-    ? G.map(g=>'<li class="cg"><span class="q">'+won(g.amt)+'</span><b>입금 '+esc(g.payer)+'</b></li>'+g.idx.map(li).join('')).join('')
-    : '<li class="cg"><b>입금 '+esc(G[0].payer)+'</b></li>'+D.map((d,i)=>li(i)).join('');
-  $('cTot').textContent=won(tot); $('cTot').previousElementSibling.textContent=G.length>1?'입금하실 금액 (합계)':'입금하실 금액';
-  $('confirm').classList.remove('hidden'); document.body.style.overflow='hidden';
-};
-function closeConfirm(){ $('confirm').classList.add('hidden'); document.body.style.overflow=''; }
-$('cNo').onclick=closeConfirm;
-$('confirm').addEventListener('click',e=>{ if(e.target.id==='confirm'&&!S.busy) closeConfirm(); });
-$('cYes').onclick=async()=>{
-  if(S.busy) return;
-  S.busy=true; $('cYes').disabled=true; $('cYes').textContent='접수하는 중…'; $('submit').disabled=true;
+  if(e.length||S.busy) return;
+  S.busy=true; $('submit').disabled=true; $('submit').textContent='접수하는 중…';
   if(!S.reqId) S.reqId=(crypto.randomUUID?crypto.randomUUID():Date.now()+'-'+Math.random().toString(36).slice(2));
-  const dests=D.map(d=>({rcv:d.rcv.trim(), rcvTel:d.tel.trim(), ship:d.ship, zip:isPick(d)?'':d.zip.trim(), addr:isPick(d)?'':addrOf(d), shipMemo:d.memo.trim(), qty:d.qty,
-    payType:d.pw, payer: d.pw==='me'?'':payerOf(d), payerTel: d.pw==='me'?'':ptelOf(d), cashReceipt: d.pw!=='me'&&d.rc?ptelOf(d):''}));
-  const o={reqId:S.reqId, dests, qty:totQ(), payer:mainPayer(),                     // 주문자 현금영수증 = 주문자 휴대폰 번호
-    cashReceipt: D.some(d=>d.pw==='me'&&d.rc) ? T.user.id : ''};
+  const same=$('sameAs').checked;
+  const o={reqId:S.reqId, qty:S.qty,
+    rcv: same?T.user.name:$('rcv').value.trim(), rcvTel: same?T.user.id:$('rcvTel').value.trim(),
+    zip:$('zip').value.trim(), addr:($('addr1').value.trim()+' '+$('addr2').value.trim()).trim(),
+    shipMemo:$('shipMemo').value.trim(), payer:$('payer').value.trim(),
+    cashReceipt: $('cashRcpt').checked ? $('rcptNo').value.replace(/\D/g,'') : ''};
   try{
     const r=await api('staffOrder',{order:o});
-    closeConfirm();
     const due=new Date(); due.setDate(due.getDate()+BANK.days);
-    const OR=r.orders&&r.orders.length?r.orders:[{orderNo:r.orderNo, payer:o.payer, total:r.total}], many=OR.length>1;
-    $('dNoBox').innerHTML=many?'주문 '+OR.length+'건 · 입금하실 분마다 주문번호가 따로 나왔습니다':'주문번호 <span id="dNo">'+esc(OR[0].orderNo)+'</span>';
-    $('dAmt').textContent=won(r.total); $('dAmt').previousElementSibling.textContent=many?'입금하실 금액 (합계)':'입금하실 금액';
+    $('dNo').textContent=r.orderNo; $('dAmt').textContent=won(r.total);
     $('dAcct').textContent=BANK.name+' '+BANK.no; $('dHolder').textContent=BANK.holder;
-    $('dPayerT').textContent=many?'입금자별':'입금자명';
-    $('dPayer').innerHTML=many?'<ul class="plist">'+OR.map(x=>'<li><span>'+esc(x.payer)+'<small>'+esc(x.orderNo)+'</small></span><span>'+won(x.total)+'</span></li>').join('')+'</ul>':esc(OR[0].payer);
-    $('dStep1').innerHTML=many?'입금하실 분마다 <b>본인 이름으로, 위 금액만큼 따로</b> 입금해 주세요. (한 번에 합쳐 보내시면 확인이 늦어집니다)':'위 계좌로 <b>입금자명 그대로</b> 입금해 주세요.';
-    $('dDue').textContent=(due.getMonth()+1)+'월 '+due.getDate()+'일까지';
-    $('dTo').innerHTML=dests.map(d=>esc(d.rcv)+' · '+esc(d.ship==='방문수령'?'공장 방문 수령':d.addr)+(dests.length>1?' ('+d.qty+'박스)':'')).join('<br>');
+    $('dPayer').textContent=o.payer; $('dDue').textContent=(due.getMonth()+1)+'월 '+due.getDate()+'일까지';
+    $('dTo').textContent=o.rcv+' · '+o.addr;
     document.querySelectorAll('#main > section').forEach(s=>s.classList.toggle('hidden',s.id!=='done'));
     window.scrollTo(0,0);
-    D.length=0; D.push(blank()); renderDests();
-    $('agree').checked=false;
-    S.reqId=null;
+    ['rcv','rcvTel','addr1','addr2','zip','shipMemo','rcptNo'].forEach(i=>$(i).value='');
+    $('agree').checked=false; $('cashRcpt').checked=false; $('rcptBox').classList.add('hidden');
+    S.qty=1; calc(); S.reqId=null;
   }catch(err){ if(T.token) toast(err.message+' (다시 눌러도 두 번 접수되지 않습니다)'); }
-  finally{ S.busy=false; $('cYes').disabled=false; $('cYes').textContent='주문 신청'; $('submit').disabled=false; }
+  finally{ S.busy=false; $('submit').disabled=false; $('submit').textContent='주문 신청하기'; }
 };
 $('copyAcct2').onclick=()=>$('copyAcct').onclick();
 $('copyAcct').onclick=async()=>{ try{ await navigator.clipboard.writeText(BANK.no.replace(/-/g,'')); toast('계좌번호를 복사했습니다.'); }catch(e){ toast(BANK.no); } };
-
-/* ── 회사 출고 (무상) v0.4.0 — 12_무상출고_기획 ──
-   거래처 샘플 → 샘플 · 선물·접대 → 증정 · 방문객 드림 → 증정(현장 전달) · 냉장고 채우기 → 내부사용
-   박스 단위. 금액 없음. 목적 필수. N박스 이하·승인자·냉장고는 바로 출고 대기, 그 밖은 승인 대기 */
-const FREE={autoMax:2, maxQty:20, maxTotal:60, maxDests:30, stockMax:2000, pending:0};
-const U=()=>FR.kind==='stock'?'개':'박스';
-const oneMax=()=>FR.kind==='stock'?FREE.stockMax:FREE.maxQty;
-const FK={
-  sample:{label:'거래처 샘플', hint:'판매를 위해 거래처·예비 거래처에 보내는 견본입니다.', ph:'예: ○○호텔 구매팀 납품 검토용'},
-  gift:{label:'선물·접대', hint:'손님·지인께 택배로 보내는 선물입니다. 여러 곳이면 [+ 받는 곳 추가]로 한 분씩 넣어 주세요.', ph:'예: 추석 선물 · 회장님 지시'},
-  visit:{label:'방문객 드림', hint:'회사에 오신 분께 들고 가시라고 드린 박스입니다. 그날 저녁이나 다음 날 적으셔도 됩니다.', ph:'예: ○○시청 견학 방문'},
-  stock:{label:'냉장고 채우기', hint:'창고에서 회사 냉장고로 옮길 때 한 번만 적습니다. 냉장고에서 꺼내 드시는 것은 적지 않습니다.', ph:'예: 본관 냉장고 보충'}
-};
-const todayStr=()=>{ const d=new Date(Date.now()+9*3600e3); return d.toISOString().slice(0,10); };
-const fblank=()=>({company:'',rcv:'',tel:'',ship:'택배',zip:'',addr1:'',addr2:'',memo:'',qty:1});
-const FR={kind:'', D:[fblank()], one:{qty:1,who:'',tel:'',date:todayStr(),place:'회사 냉장고'}, reqId:null, busy:false};
-const multiKind=()=>FR.kind==='sample'||FR.kind==='gift';
-const fDirect=d=>FR.kind==='sample'&&d.ship==='직접전달';
-const fTotQ=()=>multiKind()?FR.D.reduce((a,d)=>a+(Number(d.qty)||0),0):(Number(FR.one.qty)||0);
-let freeFrom='main';
-function openFree(){
-  if(!T.token){ show('gate'); return; }
-  const c=curPage(); if(c!=='free') freeFrom=c;
-  $('fKindStock').classList.toggle('hidden',!(T.user&&T.user.canStock));
-  if(FR.kind==='stock'&&!(T.user&&T.user.canStock)) FR.kind='';
-  $('freeForm').classList.remove('hidden'); $('freeDone').classList.add('hidden');
-  show('free'); renderFree();
-}
-function closeFree(){ show(T.token?(freeFrom==='free'?'main':freeFrom):'gate'); }
-function newFree(){ FR.kind=''; FR.D=[fblank()]; FR.one={qty:1,who:'',tel:'',date:todayStr(),place:'회사 냉장고'}; FR.reqId=null; $('fPurpose').value=''; openFree(); }
-$('fKind').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return;
-  if(FR.kind!==b.dataset.v){ FR.kind=b.dataset.v; FR.reqId=null; FR.one.qty=1; } $('fErr').innerHTML=''; renderFree();
-  if(FR.kind==='stock'){ $('swarn').classList.remove('hidden'); document.body.style.overflow='hidden'; } });
-$('swOk').onclick=()=>{ $('swarn').classList.add('hidden'); document.body.style.overflow=''; const q=$('fBody').querySelector('.qin'); if(q){ q.focus(); q.select(); } };
-function fSum(d){
-  const who=FR.kind==='sample'?(d.company.trim()+(d.rcv.trim()?' · '+d.rcv.trim():'')):d.rcv.trim();
-  if(!who) return FR.kind==='sample'?'회사명·담당자를 넣어 주세요':'받으시는 분을 넣어 주세요';
-  const a=fDirect(d)?'직접 전달':d.addr1.trim().split(/\s+/).slice(0,3).join(' ');
-  return esc(who)+(a?'<small>'+esc(a)+'</small>':'');
-}
-function fCard(d,i){
-  const many=FR.D.length>1, s=FR.kind==='sample', direct=fDirect(d);
-  return `<div class="dcard fcard open" data-i="${i}">
-    <div class="dhead"><span class="dn">${i+1}</span><b class="dsum">${fSum(d)}</b><span class="dq">${d.qty}박스</span>${many?'<button type="button" class="dx" data-act="del">삭제</button>':''}</div>
-    <div class="dbody" style="padding-top:12px">
-      ${s?`<div class="field"><label>회사명<em>*</em></label><input class="inp" data-f="company" placeholder="예: ㈜바다호텔" value="${esc(d.company)}"></div>`:''}
-      <div class="row2">
-        <div class="field"><label>${s?'담당자':'받으시는 분'}<em>*</em></label><input class="inp" data-f="rcv" value="${esc(d.rcv)}" autocomplete="off"></div>
-        <div class="field"><label>연락처${direct?'':'<em>*</em>'}</label><input class="inp" data-f="tel" type="tel" inputmode="tel" placeholder="010-0000-0000" value="${esc(d.tel)}"></div>
-      </div>
-      ${s?`<div class="shipsel"><span class="plabel">보내는 방법</span><div class="seg2">${['택배','직접전달'].map(v=>`<button type="button" data-act="ship" data-v="${v}"${d.ship===v?' class="on"':''}>${v==='택배'?'택배로 보내기':'직접 전달 (영업·방문)'}</button>`).join('')}</div></div>`:''}
-      <div class="field${direct?' hidden':''}"><label>주소<em>*</em></label>
-        <div class="addr"><input class="inp" data-f="zip" placeholder="우편번호" readonly style="max-width:130px" value="${esc(d.zip)}"><button type="button" class="sbtn" data-act="post">주소 찾기</button></div>
-        <input class="inp" data-f="addr1" placeholder="기본 주소" style="margin-top:8px" value="${esc(d.addr1)}">
-        <input class="inp" data-f="addr2" placeholder="상세 주소 (동·호수)" style="margin-top:8px" value="${esc(d.addr2)}">
-      </div>
-      <div class="field"><label>${direct?'전달 예정·메모':'배송 요청사항'}</label><input class="inp" data-f="memo" placeholder="${direct?'예: 10월 2일 미팅 때 전달':'예: 부재 시 경비실'}" value="${esc(d.memo)}"></div>
-      <div class="dqty"><span>수량 (박스)</span><div class="stepper"><button type="button" data-act="minus" aria-label="한 박스 빼기">−</button><input class="qin" data-q type="number" inputmode="numeric" min="1" value="${d.qty}" aria-label="수량"><button type="button" data-act="plus" aria-label="한 박스 더하기">+</button></div></div>
-    </div></div>`;
-}
-function renderFree(){
-  $('fKind').querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.v===FR.kind));
-  const K=FK[FR.kind];
-  $('fHint').textContent=K?K.hint:'';
-  $('fPurpose').placeholder=K?K.ph:'무엇을 위해 나가는지 한 줄로';
-  $('fPurposeBox').classList.toggle('hidden',!K); $('fBtn').classList.toggle('hidden',!K);
-  let h='';
-  if(!K) h='<p class="fnote">위에서 무엇인지 먼저 골라 주세요.</p>';
-  else if(multiKind()) h=FR.D.map(fCard).join('')+'<div class="dadd"><button type="button" class="abtn" data-act="add">+ 받는 곳 추가</button></div>';
-  else if(FR.kind==='visit') h=`<div class="one">
-      <div class="row2">
-        <div class="field"><label>방문 일자<em>*</em></label><input class="inp" data-o="date" type="date" value="${esc(FR.one.date)}"></div>
-        <div class="field"><label>연락처</label><input class="inp" data-o="tel" type="tel" inputmode="tel" placeholder="(선택)" value="${esc(FR.one.tel)}"></div>
-      </div>
-      <div class="field"><label>방문하신 분 (회사·성함)<em>*</em></label><input class="inp" data-o="who" placeholder="예: ○○시청 김과장 외 3명" value="${esc(FR.one.who)}"></div>
-      <div class="dqty"><span>드린 수량 (박스)</span><div class="stepper"><button type="button" data-act="ominus" aria-label="하나 빼기">−</button><input class="qin" data-q type="number" inputmode="numeric" min="1" value="${FR.one.qty}" aria-label="수량"><button type="button" data-act="oplus" aria-label="하나 더하기">+</button></div></div>
-    </div>`;
-  else h=`<div class="pcswarn">⚠ 여기에 넣는 숫자는 <b>낱개(파우치 개수)</b>입니다. 박스 수가 아닙니다. (1박스 = 36개)</div>
-    <div class="one">
-      <div class="field"><label>보관 장소</label><input class="inp" data-o="place" placeholder="예: 본관 냉장고" value="${esc(FR.one.place)}"></div>
-      <div class="dqty"><span>옮긴 개수 <b style="color:#b35a00">(낱개)</b></span><div class="stepper"><button type="button" data-act="ominus" aria-label="하나 빼기">−</button><input class="qin" data-q type="number" inputmode="numeric" min="1" value="${FR.one.qty}" aria-label="수량"><span class="qunit">개</span><button type="button" data-act="oplus" aria-label="하나 더하기">+</button></div></div>
-      <div class="quick"><button type="button" data-act="oadd" data-n="10">+10개</button><button type="button" data-act="oadd" data-n="36">+36개 (1박스)</button></div>
-    </div>`;
-  $('fBody').innerHTML=h; fRule(); fSteppers();
-}
-const noAppr=()=>FREE.autoMax>=FREE.maxTotal;   // 승인 없이 운영 (대표님 2026-09-27: FREE_AUTO_MAX=60)
-function fAuto(){ return noAppr()||FR.kind==='stock'||(T.user&&T.user.canApprove)||fTotQ()<=FREE.autoMax; }
-function fRule(){
-  const r=$('fRule'); if(!FR.kind){ r.classList.add('hidden'); return; } r.classList.remove('hidden');
-  const q=fTotQ();
-  if(noAppr()) r.innerHTML='요청하면 <b>바로 출고 대기</b>로 넘어갑니다. 누가·어디에·왜 나갔는지는 회사 출고 현황에 남습니다. 지금 <b>'+q+U()+'</b>';
-  else if(FR.kind==='stock') r.innerHTML='냉장고 채우기는 <b>바로 출고 대기</b>로 넘어갑니다. 지금 <b>'+q+'개</b>';
-  else if(T.user&&T.user.canApprove) r.innerHTML='승인자 요청이라 <b>바로 출고 대기</b>로 넘어갑니다. 지금 <b>'+q+'박스</b>';
-  else r.innerHTML='한 번에 <b>'+FREE.autoMax+'박스까지</b>는 바로 출고 대기, 넘으면 <b>승인 후</b> 출고됩니다. 지금 <b>'+q+'박스</b>'+(q>FREE.autoMax?' → 승인 대기':' → 바로 출고 대기');
-  r.classList.toggle('warn',!fAuto());
-}
-function fSteppers(){
-  const full=fTotQ()>=FREE.maxTotal;
-  if(multiKind()) [...$('fBody').querySelectorAll('.fcard')].forEach((c,i)=>{ const d=FR.D[i], b=c.querySelectorAll('.stepper button'); b[0].disabled=d.qty<=1; b[1].disabled=d.qty>=FREE.maxQty||full; });
-  else { const b=$('fBody').querySelectorAll('.stepper button'); if(b.length){ b[0].disabled=FR.one.qty<=1; b[1].disabled=FR.one.qty>=oneMax(); } }
-  const a=$('fBody').querySelector('[data-act=add]'); if(a) a.disabled=FR.D.length>=FREE.maxDests;
-}
-/* 수량 칸에 숫자를 바로 넣을 수 있다 (+ − 도 그대로) */
-function qSet(t,commit){
-  const card=t.closest('.fcard'), max=card?FREE.maxQty:oneMax();
-  let n=parseInt(String(t.value).replace(/\D/g,''),10);
-  if(!(n>=1)){ if(commit){ n=1; } else return; }
-  if(n>max){ n=max; toast('한 번에 '+max+(card?'박스':U())+'까지입니다.'); t.value=n; }
-  if(card){ const d=FR.D[+card.dataset.i]; d.qty=n; card.querySelector('.dq').textContent=n+'박스'; } else FR.one.qty=n;
-  if(commit) t.value=n; fSteppers(); fRule();
-}
-$('fBody').addEventListener('change',e=>{ if(e.target.dataset.q!==undefined) qSet(e.target,true); });
-$('fBody').addEventListener('focusin',e=>{ if(e.target.dataset.q!==undefined) setTimeout(()=>e.target.select(),0); });
-$('fBody').addEventListener('input',e=>{
-  const t=e.target; $('fErr').innerHTML='';
-  if(t.dataset.q!==undefined){ qSet(t,false); return; }
-  if(t.dataset.o){ if(t.dataset.o==='tel') t.value=fmtTel(t.value); FR.one[t.dataset.o]=t.value; return; }
-  const f=t.dataset.f; if(!f) return;
-  const c=t.closest('.fcard'), d=FR.D[+c.dataset.i];
-  if(f==='tel') t.value=fmtTel(t.value);
-  d[f]=t.value; c.classList.remove('bad'); c.querySelector('.dsum').innerHTML=fSum(d);
-});
-$('fBody').addEventListener('click',e=>{
-  const b=e.target.closest('[data-act]'); if(!b) return;
-  const act=b.dataset.act;
-  if(act==='add'){ if(FR.D.length>=FREE.maxDests) return; FR.D.push(fblank()); renderFree();
-    const c=$('fBody').querySelectorAll('.fcard'); const last=c[c.length-1]; last.scrollIntoView({behavior:'smooth',block:'center'}); setTimeout(()=>last.querySelector('[data-f]').focus(),300); return; }
-  if(act==='ominus'||act==='oplus'||act==='oadd'){
-    FR.one.qty=act==='ominus'?Math.max(1,FR.one.qty-1):Math.min(oneMax(),FR.one.qty+(act==='oadd'?Number(b.dataset.n):1));
-    $('fBody').querySelector('.one .qin').value=FR.one.qty; fSteppers(); fRule(); return; }
-  const c=b.closest('.fcard'); if(!c) return; const i=+c.dataset.i, d=FR.D[i];
-  if(act==='del'){ const empty=!d.company.trim()&&!d.rcv.trim()&&!d.addr1.trim();
-    if(FR.D.length>1&&(empty||confirm((i+1)+'번 받는 곳을 지울까요?'))){ FR.D.splice(i,1); renderFree(); } }
-  else if(act==='ship'){ d.ship=b.dataset.v; renderFree(); }
-  else if(act==='post') openPostCb(r=>{ const x=FR.D[i]; if(!x) return; x.zip=r.zonecode; x.addr1=r.roadAddress||r.jibunAddress; renderFree();
-      setTimeout(()=>{ const a=$('fBody').querySelectorAll('.fcard')[i]; if(a) a.querySelector('[data-f=addr2]').focus(); },50); }, c);
-  else if(act==='minus'||act==='plus'){
-    if(act==='minus') d.qty=Math.max(1,d.qty-1); else if(fTotQ()<FREE.maxTotal) d.qty=Math.min(FREE.maxQty,d.qty+1);
-    c.querySelector('.qin').value=d.qty; c.querySelector('.dq').textContent=d.qty+'박스'; fSteppers(); fRule();
-    if(act==='plus'&&fTotQ()>=FREE.maxTotal) toast('한 번에 '+FREE.maxTotal+'박스까지입니다.');
-  }
-});
-function fValidate(){
-  const e=[], K=FR.kind;
-  if(!K){ e.push('무엇인지 골라 주세요.'); return e; }
-  if(multiKind()){
-    const seen={}, many=FR.D.length>1;
-    FR.D.forEach((d,i)=>{
-      const x=[], direct=fDirect(d);
-      if(K==='sample'&&!d.company.trim()) x.push('회사명');
-      if(!d.rcv.trim()) x.push(K==='sample'?'담당자':'성함');
-      if(direct){ if(d.tel.trim()&&!TEL.test(d.tel.trim())) x.push('연락처'); }
-      else { if(!TEL.test(d.tel.trim())) x.push('연락처');
-        if(d.addr1.trim().length<5) x.push('주소'); else if(d.zip&&!d.addr2.trim()) x.push('상세 주소'); }
-      if(!x.length){ const k=(d.company+'|'+d.rcv+'|'+(direct?'직접':d.addr1+d.addr2)).replace(/\s/g,''); if(seen[k]) x.push(seen[k]+'번과 같은 받는 곳'); else seen[k]=i+1; }
-      const c=$('fBody').querySelectorAll('.fcard')[i]; if(c) c.classList.toggle('bad',!!x.length);
-      if(x.length) e.push((many?(i+1)+'번 ':'')+'받는 곳 — '+x.join(', ')+' 확인');
-    });
-  } else if(K==='visit'){
-    if(!/^\d{4}-\d{2}-\d{2}$/.test(FR.one.date)) e.push('방문 일자를 넣어 주세요.');
-    if(!FR.one.who.trim()) e.push('방문하신 분(회사·성함)을 넣어 주세요.');
-    if(FR.one.tel.trim()&&!TEL.test(FR.one.tel.trim())) e.push('연락처를 확인해 주세요.');
-  }
-  if(K==='stock'&&!(FR.one.qty>=1&&FR.one.qty<=FREE.stockMax)) e.push('옮긴 개수를 넣어 주세요 (1~'+FREE.stockMax+'개).');
-  if(multiKind()&&fTotQ()>FREE.maxTotal) e.push('한 번에 '+FREE.maxTotal+'박스까지입니다.');
-  if($('fPurpose').value.trim().length<2) e.push('목적을 적어 주세요.');
-  return e;
-}
-const fAddr=d=>fDirect(d)?'직접 전달':(d.addr1.trim()+' '+d.addr2.trim()).trim();
-$('fBtn').onclick=()=>{
-  const e=fValidate(); $('fErr').innerHTML=e.map(x=>'<li>'+esc(x)+'</li>').join('');
-  if(e.length){ const b=$('fBody').querySelector('.fcard.bad'); (b||$('fErr')).scrollIntoView({behavior:'smooth',block:'center'}); return; }
-  if(FR.busy) return;
-  const K=FK[FR.kind], q=fTotQ();
-  $('fcWho').textContent=K.label+' · 요청 '+T.user.disp+' · '+(fAuto()?'바로 출고 대기':'승인 후 출고');
-  $('fcList').innerHTML=(multiKind()?FR.D.map((d,i)=>'<li><span class="q">'+d.qty+'박스</span><b>'+(FR.D.length>1?(i+1)+'. ':'')+esc(FR.kind==='sample'?d.company.trim()+' · '+d.rcv.trim():d.rcv.trim())+'</b> '+esc(fmtTel(d.tel))+'<small>'+esc(fAddr(d))+(d.memo.trim()?' · '+esc(d.memo.trim()):'')+'</small></li>').join('')
-    :FR.kind==='visit'?'<li><span class="q">'+q+'박스</span><b>'+esc(FR.one.who.trim())+'</b><small>'+esc(FR.one.date)+' 공장 방문 · 현장 전달</small></li>'
-    :'<li><span class="q">'+q+'개</span><b>'+esc(FR.one.place.trim()||'회사 냉장고')+'</b><small>사내 비치 · 낱개 '+q+'개 (약 '+(Math.round(q/36*10)/10)+'박스)</small></li>')
-    +'<li class="cg"><b>목적</b> '+esc($('fPurpose').value.trim())+'</li>';
-  $('fcTot').textContent=q+U(); $('fcTotL').textContent=FR.kind==='stock'?'옮긴 개수 (낱개)':'출고 수량';
-  $('fconfirm').classList.remove('hidden'); document.body.style.overflow='hidden';
-};
-function closeFConfirm(){ $('fconfirm').classList.add('hidden'); document.body.style.overflow=''; }
-$('fcNo').onclick=closeFConfirm;
-$('fconfirm').addEventListener('click',e=>{ if(e.target.id==='fconfirm'&&!FR.busy) closeFConfirm(); });
-$('fcYes').onclick=async()=>{
-  if(FR.busy) return;
-  FR.busy=true; $('fcYes').disabled=true; $('fcYes').textContent='요청하는 중…'; $('fBtn').disabled=true;
-  if(!FR.reqId) FR.reqId=(crypto.randomUUID?crypto.randomUUID():Date.now()+'-'+Math.random().toString(36).slice(2));
-  const o={reqId:FR.reqId, kind:FR.kind, purpose:$('fPurpose').value.trim()};
-  if(multiKind()) o.dests=FR.D.map(d=>({company:d.company.trim(), rcv:d.rcv.trim(), rcvTel:d.tel.trim(), ship:FR.kind==='sample'?d.ship:'택배',
-      zip:fDirect(d)?'':d.zip.trim(), addr:fDirect(d)?'':fAddr(d), shipMemo:d.memo.trim(), qty:d.qty}));
-  else o.one={qty:FR.one.qty, who:FR.one.who.trim(), tel:FR.one.tel.trim(), date:FR.one.date, place:FR.one.place.trim()};
-  try{
-    const r=await api('freeOrder',{order:o});
-    closeFConfirm();
-    const wait=r.status==='승인대기';
-    $('fdTitle').textContent=wait?'승인 요청되었습니다':'기록되었습니다';
-    $('fdNo').textContent=r.orderNo;
-    $('fdMsg').className='fnote'+(wait?' warn':'');
-    const uu=r.unit||'박스';
-    $('fdMsg').innerHTML=wait?'<b>'+r.qty+uu+'</b> — 한 번에 '+FREE.autoMax+'박스를 넘어 <b>승인자가 확인한 뒤</b> 출고됩니다. 진행은 내 주문에서 보실 수 있습니다.'
-      :'<b>'+r.qty+uu+'</b> — <b>출고 대기</b>로 넘어갔습니다. '+(FR.kind==='visit'||FR.kind==='stock'?'기록되었습니다.':'출고 담당이 준비합니다.');
-    $('freeForm').classList.add('hidden'); $('freeDone').classList.remove('hidden'); window.scrollTo(0,0);
-    FR.kind=''; FR.D=[fblank()]; FR.one={qty:1,who:'',tel:'',date:todayStr(),place:'회사 냉장고'}; FR.reqId=null; $('fPurpose').value='';
-  }catch(err){ if(T.token) toast(err.message+' (다시 눌러도 두 번 접수되지 않습니다)'); }
-  finally{ FR.busy=false; $('fcYes').disabled=false; $('fcYes').textContent='요청하기'; $('fBtn').disabled=false; }
-};
-
-/* ── 출고 승인 (승인자만) ── */
-let apprFrom='main';
-function paintApprBtn(){ const on=!!(T.user&&T.user.canApprove); $('apprBtn').classList.toggle('hidden',!on);
-  $('apprT').textContent=noAppr()?'회사 출고 현황':'출고 승인';
-  $('apprTxt').innerHTML=noAppr()&&!FREE.pending?'최근 30일 누가·어디에·몇 박스':FREE.pending?'승인 대기 <span class="cnt">'+FREE.pending+'</span>':'승인 대기 없음 · 최근 30일 회사 출고 보기'; }
-async function openAppr(){
-  if(!T.token){ show('gate'); return; }
-  const c=curPage(); if(c!=='appr') apprFrom=c;
-  show('appr'); $('aErr').innerHTML=''; $('aPending').innerHTML='<p class="empty">불러오는 중…</p>'; $('aRecent').innerHTML=''; $('aSum').innerHTML='';
-  try{
-    const r=await api('freeBoard');
-    FREE.pending=r.pending.length; paintApprBtn();
-    const na=r.autoMax>=FREE.maxTotal;
-    $('appr').querySelector('.thead h2').textContent=na?'회사 출고 현황':'출고 승인';
-    $('aSub').textContent=na?'최근 30일 누가·어디에·왜·몇 박스 나갔는지':r.autoMax+'박스를 넘는 요청은 여기서 승인합니다';
-    $('aPendH').classList.toggle('hidden',na&&!r.pending.length); $('aPending').classList.toggle('hidden',na&&!r.pending.length);
-    const dl=x=>'<ul>'+x.dests.map(d=>'<li>'+esc(d.to)+(d.rcv&&d.rcv!==d.to?' · '+esc(d.rcv):'')+' · '+d.qty+esc(x.unit||'박스')+'<br><small style="color:var(--muted)">'+esc(d.addr)+'</small></li>').join('')+'</ul>';
-    $('aPending').innerHTML=r.pending.length?r.pending.map(x=>'<div class="acard" data-no="'+esc(x.orderNo)+'"><div class="ah"><b>'+esc(x.orderNo)+'<span class="kind">'+esc(x.kind)+'</span></b><span>'+esc(x.date)+'</span></div>'
-      +'<p class="ap"><b>'+esc(x.who)+'</b>'+(x.dept?' ('+esc(x.dept)+')':'')+' · <b>'+x.qty+esc(x.unit||'박스')+'</b><br>목적: '+esc(x.purpose)+'</p>'+dl(x)
-      +'<input class="inp" data-memo placeholder="메모 (반려할 때는 사유 필수)" style="padding:10px 12px;font-size:14.5px">'
-      +'<div class="abtns"><button type="button" class="no" data-d="반려">반려</button><button type="button" class="yes" data-d="승인">승인</button></div></div>').join('')
-      :'<p class="fnote">승인 대기 중인 요청이 없습니다.</p>';
-    const T2={'샘플':'샘플','증정':'선물·방문객','내부사용':'냉장고'};
-    $('aSum').innerHTML=Object.keys(r.sum).length?Object.keys(r.sum).map(k=>{ const t=k.split('|')[0], u=k.split('|')[1]||'박스'; return '<span>'+esc(T2[t]||t)+' <b>'+r.sum[k]+esc(u)+'</b></span>'; }).join(''):'';
-    const cls=s=>s==='반려'?'no':s==='승인대기'?'wait':'ok';
-    $('aRecent').innerHTML=r.recent.length?r.recent.map(x=>'<div class="arow"><div><b>'+esc(x.kind)+'</b> · '+esc(x.dests[0]?x.dests[0].to:'')+(x.dests.length>1?' 외 '+(x.dests.length-1)+'곳':'')
-      +'<small>'+esc(x.date)+' · '+esc(x.who)+' · '+esc(x.purpose)+'</small></div><div style="text-align:right;white-space:nowrap"><b>'+x.qty+esc(x.unit||'박스')+'</b><small><span class="st '+cls(x.status)+'">'+esc(x.status)+'</span></small></div></div>').join('')
-      :'<p class="fnote">최근 30일 회사 출고가 없습니다.</p>';
-  }catch(err){ $('aPending').innerHTML=''; $('aErr').innerHTML='<li>'+esc(err.message)+'</li>'; }
-}
-function closeAppr(){ show(T.token?(apprFrom==='appr'?'main':apprFrom):'gate'); }
-$('aPending').addEventListener('click',async e=>{
-  const b=e.target.closest('[data-d]'); if(!b) return;
-  const card=b.closest('.acard'), no=card.dataset.no, memo=card.querySelector('[data-memo]').value.trim(), d=b.dataset.d;
-  if(d==='반려'&&memo.length<2){ toast('반려 사유를 메모에 적어 주세요.'); card.querySelector('[data-memo]').focus(); return; }
-  card.querySelectorAll('button').forEach(x=>x.disabled=true); b.textContent=d+' 중…';
-  try{ await api('freeDecide',{orderNo:no, decision:d, memo}); toast(no+' '+d+'했습니다.'); await openAppr(); }
-  catch(err){ toast(err.message); card.querySelectorAll('button').forEach(x=>x.disabled=false); b.textContent=d; }
-});
 
 /* ── 내 주문 ── */
 const HANJIN='https://www.hanjin.com/kor/CMS/DeliveryMgr/WaybillResult.do?mCode=MN038&schLang=KR&wblnumText2=';
@@ -1331,41 +714,18 @@ async function openMine(){
   try{
     const r=await api('staffOrders');
     $('mList').innerHTML=r.orders.length?r.orders.map(o=>{
-      if(o.free) return freeCard(o);
-      const multi=o.dests&&o.dests.length>1;
       const steps=['주문 접수','입금 확인','발송','배송 완료'].map((t,i)=>'<li'+(i<=o.step?' class="done"':'')+'>'+t+'</li>').join('');
-      const msg=o.status==='취소'?'취소된 주문입니다.':o.step===0?'입금 확인 전입니다. '+esc(BANK.name+' '+BANK.no)+' 로 '+(o.payer?'<b>'+esc(o.payer)+'</b> 님 이름으로 ':'')+won(o.total)+'을 입금해 주세요.':o.step===1?'입금이 확인되었습니다. 곧 발송합니다.'
-        :o.step===2?(multi&&o.shipped<o.dests.length?o.dests.length+'곳 중 '+o.shipped+'곳 발송되었습니다.':'발송되었습니다.'):'배송이 완료되었습니다.';
-      const destList=multi?'<ul class="mdest">'+o.dests.map(d=>'<li><div><b>'+esc(d.rcv)+'</b> · '+d.qty+'박스<small>'+esc(d.addr)+'</small>'
-          +(d.waybill?'<span class="wb">'+esc(d.carrier||'한진택배')+' '+esc(d.waybill)+'</span>':'')+'</div>'
-          +(d.waybill?'<a class="trackbtn" target="_blank" rel="noopener" href="'+HANJIN+encodeURIComponent(d.waybill)+'">조회 ›</a>':'<span class="wait">'+(d.pickup?'방문 수령':'발송 전')+'</span>')+'</li>').join('')+'</ul>'
-        :(o.waybill?'<div class="ship"><div><span>'+esc(o.carrier||'한진택배')+'</span><b>'+esc(o.waybill)+'</b></div><a class="trackbtn" target="_blank" rel="noopener" href="'+HANJIN+encodeURIComponent(o.waybill)+'">배송 조회 ›</a></div>':'');
-      return '<div class="mcard"><div class="mhead"><b>'+esc(o.orderNo)+(o.bundle?'<span class="bundle">함께 주문 '+esc(o.bundle.slice(-3))+'</span>':'')+'</b><span>'+esc(o.date)+'</span></div>'
+      const msg=o.status==='취소'?'취소된 주문입니다.':o.step===0?'입금 확인 전입니다. '+esc(BANK.name+' '+BANK.no)+' 로 '+won(o.total)+'을 입금해 주세요.':o.step===1?'입금이 확인되었습니다. 곧 발송합니다.':o.step===2?'발송되었습니다.':'배송이 완료되었습니다.';
+      return '<div class="mcard"><div class="mhead"><b>'+esc(o.orderNo)+'</b><span>'+esc(o.date)+'</span></div>'
         +'<ol class="stepper4">'+steps+'</ol>'
-        +(multi?'':destList)
+        +(o.waybill?'<div class="ship"><div><span>'+esc(o.carrier||'한진택배')+'</span><b>'+esc(o.waybill)+'</b></div><a class="trackbtn" target="_blank" rel="noopener" href="'+HANJIN+encodeURIComponent(o.waybill)+'">배송 조회 ›</a></div>':'')
         +'<p class="tmsg">'+msg+'</p>'
-        +(multi?destList:'')
-        +'<dl class="tdl"><dt>주문 상품</dt><dd>'+esc(o.items)+'</dd><dt>금액</dt><dd>'+won(o.total)+'</dd>'+(o.payer?'<dt>입금자</dt><dd>'+esc(o.payer)+'</dd>':'')+(multi?'':'<dt>받으시는 곳</dt><dd>'+esc(o.to)+'</dd>')+'</dl>'
+        +'<dl class="tdl"><dt>주문 상품</dt><dd>'+esc(o.items)+'</dd><dt>금액</dt><dd>'+won(o.total)+'</dd><dt>받으시는 곳</dt><dd>'+esc(o.to)+'</dd></dl>'
         +'<button type="button" class="ask" data-no="'+esc(o.orderNo)+'">이 주문 문의하기 ›</button></div>';
     }).join(''):'<p class="empty">최근 주문이 없습니다.</p>';
   }catch(err){ $('mList').innerHTML=''; $('mErr').innerHTML='<li>'+esc(err.message)+'</li>'; }
 }
 $('mList').addEventListener('click',e=>{ const b=e.target.closest('.ask'); if(b) openAsk(b.dataset.no); });
-/* 내 주문 — 회사 출고 카드 (요청 → 승인 → 출고 → 전달 완료) */
-function freeCard(o){
-  const steps=['요청','승인','출고','전달 완료'].map((t,i)=>'<li'+(o.status!=='반려'&&i<=o.step?' class="done"':i===0?' class="done"':'')+'>'+t+'</li>').join('');
-  const auto=/^자동/.test(o.approver);
-  const msg=o.status==='반려'?'반려되었습니다'+(o.decideMemo?': '+esc(o.decideMemo):'')+(o.approver?' ('+esc(o.approver)+')':'')
-    :o.status==='승인대기'?'승인을 기다리고 있습니다.'
-    :o.step===1?'출고 대기 중입니다'+(o.approver&&!auto?' · 승인 '+esc(o.approver):'')+'.'
-    :o.step===2?'출고되었습니다.':'전달이 끝났습니다.';
-  const destList='<ul class="mdest">'+o.dests.map(d=>'<li><div><b>'+esc(d.to||d.rcv)+'</b>'+(d.rcv&&d.to&&d.rcv!==d.to?' · '+esc(d.rcv):'')+' · '+d.qty+esc(o.unit||'박스')+'<small>'+esc(d.addr)+'</small>'
-    +(d.waybill?'<span class="wb">'+esc(d.carrier||'한진택배')+' '+esc(d.waybill)+'</span>':'')+'</div>'
-    +(d.waybill?'<a class="trackbtn" target="_blank" rel="noopener" href="'+HANJIN+encodeURIComponent(d.waybill)+'">조회 ›</a>':'')+'</li>').join('')+'</ul>';
-  return '<div class="mcard"><div class="mhead"><b>'+esc(o.orderNo)+'<span class="kind">'+esc(o.kind)+'</span></b><span>'+esc(o.date)+'</span></div>'
-    +'<ol class="stepper4">'+steps+'</ol><p class="tmsg">'+msg+'</p>'+destList
-    +'<dl class="tdl"><dt>수량</dt><dd>'+esc(o.items)+' · 무상</dd><dt>목적</dt><dd>'+esc(o.purpose)+'</dd></dl></div>';
-}
 function closeMine(){ show(T.token?(mineFrom==='mine'?'main':mineFrom):'gate'); }
 
 /* ── 문의하기 (로그인 전에도 열린다) ── */
