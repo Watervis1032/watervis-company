@@ -35,21 +35,6 @@ img{display:block;max-width:100%}
 .rule i{display:block;width:56px;height:1px;background:currentColor;opacity:.55}
 .rule b{width:5px;height:5px;border-radius:50%;background:currentColor}
 
-/* ── 초대코드 ── */
-#gate{min-height:100svh;display:grid;place-items:center;padding:32px 24px;
-  background:radial-gradient(120% 80% at 50% 0%,#12396b 0%,var(--navy) 55%,var(--deep) 100%);color:#fff;text-align:center}
-#gate .glogo{width:220px;height:auto;margin:0 auto 4px}
-#gate h1{font-family:var(--serif);font-size:24px;font-weight:800;margin:6px 0 4px;letter-spacing:-.01em}
-#gate p{color:#b9c7d8;font-size:14.5px;margin:0 0 26px}
-.codebox{display:flex;gap:8px;max-width:320px;margin:0 auto}
-.codebox input{flex:1;min-width:0;background:rgba(255,255,255,.07);border:1px solid rgba(230,207,154,.45);border-radius:10px;padding:13px 14px;color:#fff;text-align:center;letter-spacing:.2em}
-.codebox input::placeholder{color:#8ea3bd;letter-spacing:.05em}
-.codebox input:focus{outline:none;border-color:var(--gold2);background:rgba(255,255,255,.12)}
-.gbtn{border:0;border-radius:10px;padding:0 18px;background:linear-gradient(180deg,var(--gold2),var(--gold));color:#2a1d05;font-weight:700;cursor:pointer}
-#gateMsg{min-height:22px;margin-top:12px;font-size:13.5px;color:#f1c7c7}
-#gate .codehelp{margin-top:22px;font-size:14px;color:#b9c7d8;line-height:1.7}
-#gate .codehelp a{color:var(--gold2);font-weight:700;text-decoration:none;border-bottom:1px solid rgba(230,207,154,.5)}
-#gate .note{margin-top:28px;font-size:12.5px;color:#7f95b1}
 
 /* ── 첫 화면 ── */
 .hero{position:relative;overflow:hidden;background:linear-gradient(180deg,#bcdcf6 0%,#dcebf8 40%,#fff 100%)}
@@ -302,29 +287,14 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
 .toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);background:var(--navy);color:#fff;padding:11px 18px;border-radius:12px;font-size:14px;z-index:99;box-shadow:0 8px 22px rgba(0,0,0,.2)}
 .demo{position:fixed;left:0;right:0;bottom:0;z-index:90;background:#f6c343;color:#3a2a00;font-size:12.5px;padding:7px 12px;text-align:center;font-weight:600}
 @media (prefers-reduced-motion:no-preference){.fade{animation:fade .7s ease both}@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}}
+.qa{background:#f7f9fb;border-radius:12px;padding:10px 12px;margin:12px 0 0}
+.qa span{display:block;font-size:12.5px;color:var(--muted);margin-bottom:4px}
+.qa p{margin:0;white-space:pre-wrap;font-size:14.5px}
+.qa.ans{background:#fbf8f0;border:1px solid #efe3c4}
+.qa.ans span{color:#9a7a36;font-weight:600}
 </style>
 </head>
 <body>
-
-<!-- ═════════ 초대코드 ═════════ -->
-<section id="gate">
-  <div>
-    <img class="glogo" src="img/logo-watervis-white.png" alt="WATERVIS" width="220" height="48">
-    <div class="rule" style="color:var(--gold2)"><i></i><b></b><i></i></div>
-    <div class="eyebrow" style="color:var(--gold2)">Private Order</div>
-    <h1>초대받은 분을 위한 주문</h1>
-    <p>입장 코드를 입력해 주세요.</p>
-    <div class="codebox">
-      <input id="code" type="text" inputmode="numeric" autocomplete="off" autocapitalize="off" maxlength="20" placeholder="입장 코드">
-      <button class="gbtn" id="codeBtn">확인</button>
-    </div>
-    <div id="gateMsg"></div>
-    <button type="button" class="glink" onclick="openTrack()">이미 주문하셨나요? <b>주문 조회</b> ›</button>
-    <button type="button" class="glink2" onclick="openAsk()">궁금한 점이 있으신가요? 문의하기 ›</button>
-    <div class="codehelp">입장 코드가 없으신가요?<br><a href="tel:0336721032">033-672-1032</a>로 문의해 주세요</div>
-    <div class="note">워터비스 임직원 · 가족 · 지인 전용 페이지입니다.</div>
-  </div>
-</section>
 
 <main id="main" class="hidden">
 
@@ -376,7 +346,7 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
         <div class="specs"><span>먹는해양심층수</span><span>350mL 파우치</span><span>경도 300</span><span>36입 / 1박스</span></div>
         <div class="price">
           <div class="row"><span class="lbl">정상가</span><span class="was" id="pWas">28,800원</span></div>
-          <div class="row"><span class="lbl">초대 특별가 · 1박스</span><span class="now" id="pNow">18,000<small>원</small></span></div>
+          <div class="row"><span class="lbl">특별가 · 1박스</span><span class="now" id="pNow">18,000<small>원</small></span></div>
           <div class="per" id="pPer">1개당 500원</div>
           <div class="ship" id="pShip">택배비 박스당 4,500원 별도 · 입금 확인 후 발송</div>
         </div>
@@ -490,15 +460,30 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
       <button type="button" class="tback" onclick="closeTrack()">‹ 돌아가기</button>
       <img class="tlogo" src="img/logo-watervis-white.png" alt="WATERVIS" width="120" height="26">
       <h2>주문 조회</h2>
-      <p>주문하실 때 적으신 연락처와 주문번호를 넣어 주세요.</p>
+      <p>연락처와 주문번호(또는 문의번호)를 넣어 주세요.</p>
     </div>
   </div>
   <div class="wrap tbody">
     <div class="field"><label>연락처</label><input class="inp" id="tTel" type="tel" inputmode="tel" placeholder="010-0000-0000"></div>
-    <div class="field"><label>주문번호</label><input class="inp" id="tNo" autocapitalize="characters" placeholder="예: F260925-001"></div>
+    <div class="field"><label>주문번호 또는 문의번호</label><input class="inp" id="tNo" autocapitalize="characters" placeholder="예: F260925-001 · 문의는 Q260925-001"></div>
     <ul class="errs" id="tErr"></ul>
     <button class="submit" id="tBtn" style="background:var(--navy);color:#fff">조회하기</button>
-    <p class="fine">주문번호는 주문 완료 화면과 안내 문자에 있습니다.<br>잊으셨으면 033-672-1032 로 연락 주세요.</p>
+    <p class="fine">주문번호는 주문 완료 화면에, 문의번호는 문의 접수 화면에 있습니다.<br>문의 답변은 문의번호로 조회하시면 보입니다. 잊으셨으면 033-672-1032 로 연락 주세요.</p>
+
+    <div id="qRes" class="hidden">
+      <div class="tcard">
+        <div class="tno"><span>문의번호</span><b id="qrNo"></b></div>
+        <p class="tmsg" id="qrSt"></p>
+        <dl class="tdl"><dt>문의 유형</dt><dd id="qrType"></dd><dt>문의일</dt><dd id="qrDate"></dd><dt>관련 주문</dt><dd id="qrOrder"></dd></dl>
+        <div class="qa"><span>문의하신 내용</span><p id="qrBody"></p></div>
+        <div id="qrAns"></div>
+      </div>
+      <div class="tcs">
+        <b>더 궁금하신 점이 있으신가요?</b>
+        <button type="button" class="cta" style="margin:10px 0 8px;width:100%" onclick="openAsk($('qrOrder').dataset.no||'')">다시 문의하기</button>
+        <a class="telbtn" href="tel:0336721032">급하시면 전화 033-672-1032</a>
+      </div>
+    </div>
 
     <div id="tRes" class="hidden">
       <div class="tcard">
@@ -570,7 +555,8 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
   <div class="wrap tbody hidden" id="askDone" style="text-align:center">
     <div class="seal" style="width:64px;height:64px;border-radius:50%;margin:10px auto 14px;display:grid;place-items:center;border:1px solid var(--gold);color:var(--gold)"><svg viewBox="0 0 32 32" style="width:30px;height:30px;stroke:currentColor;fill:none;stroke-width:1.6"><path d="M8 16.5l5.5 5.5L24.5 10"/></svg></div>
     <h2 style="font-family:var(--serif);color:var(--navy);margin:0 0 6px">문의가 접수되었습니다</h2>
-    <p style="color:var(--muted);margin:0 0 20px">문의번호 <b id="qDoneNo" style="font-family:ui-monospace,Menlo,Consolas,monospace;color:var(--navy)"></b><br>담당자가 확인 후 연락드리겠습니다.</p>
+    <p style="color:var(--muted);margin:0 0 20px">문의번호 <b id="qDoneNo" style="font-family:ui-monospace,Menlo,Consolas,monospace;color:var(--navy)"></b><br>담당자가 확인 후 연락드리겠습니다.<br><span style="font-size:13.5px">답변은 <b>주문 조회</b>에서 <b>이 문의번호와 연락처</b>로 보실 수 있습니다. 화면을 캡처해 두세요.</span></p>
+    <button class="cta" style="margin:0 auto 10px;width:100%" id="qDoneTrack">답변 확인하러 가기 (주문 조회)</button>
     <button class="cta" style="margin:0 auto;width:100%" onclick="closeAsk()">돌아가기</button>
   </div>
 </section>
@@ -589,7 +575,7 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
   강원특별자치도 양양군 현남면 원포1길 53, 환경동 1층<br>
   Tel 033-672-1032 · admin@watervis.co.kr<br>
   <button type="button" class="flink" onclick="openAsk()">문의하기</button> · <button type="button" class="flink" onclick="openTrack()">주문 조회</button><br>
-  <span style="opacity:.7">© 2026 WATERVIS CO., LTD. · 화면 v0.9.1</span>
+  <span style="opacity:.7">© 2026 WATERVIS CO., LTD. · 화면 v0.9.2</span>
 </footer>
 
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js" async></script>
@@ -597,8 +583,8 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
 /* 워터비스 Private Order  v0.9 — 2026-09-27
    · v0.9: 임직원 화면과 같은 구조 — 받는 곳 여러 개, 받는 곳마다 입금하실 분(주문하신 분/받는 분/기타), 공장 방문 수령(택배비 없음)
    (v0.1 시안 2026-09-24)
-   API_URL 이 비어 있으면 데모: 아무 초대코드나 통과, 저장 안 함 */
-const VERSION='v0.9.1';
+   API_URL 이 비어 있으면 데모: 저장 안 함 */
+const VERSION='v0.9.3';
 const API_URL='https://script.google.com/macros/s/AKfycby2u_oD8QlsYJj3fnSBsvO8bzUeiqZLuR1X7o3LAnhaHYdsWRJOo6tN9UweLoOma0G5/exec';
 const PRICE={box:18000, list:28800, unit:36, ship:4500, maxQty:20, maxTotal:40, maxDests:10};  // 서버가 다시 계산한다
 const BANK={name:'농협(강릉농협)', no:'355-0097-3405-33', holder:'워터비스코퍼레이션(주)', days:3};
@@ -608,58 +594,57 @@ const won=n=>Number(n).toLocaleString('ko-KR')+'원';
 const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
 const fmtTel=v=>{v=String(v||'').replace(/\D/g,'').slice(0,11);return v.length<4?v:v.length<8?v.slice(0,3)+'-'+v.slice(3):v.slice(0,3)+'-'+v.slice(3,v.length-4)+'-'+v.slice(-4);};
 const TEL=/^01[016789]-?\d{3,4}-?\d{4}$/;
-const S={code:'', busy:false, reqId:null, lastNo:''};
+const S={busy:false, reqId:null, lastNo:''};
 
 async function api(action,payload){
   if(!API_URL){ await new Promise(r=>setTimeout(r,400));
-    if(action==='friendLogin'){ if(S.code!=='1032') throw new Error('코드'); return {ok:true, price:PRICE, bank:BANK}; }
+    if(action==='friendLogin'){ return {ok:true, price:PRICE, bank:BANK}; }
     if(action==='track'){ if(!/^[A-Z]\d{6}-\d{3}$/.test(payload.orderNo)) throw new Error('주문을 찾을 수 없습니다. 연락처와 주문번호를 확인해 주세요.');
       return {ok:true, order:{orderNo:payload.orderNo, step:2, status:'발송', waybill:'459497649203', carrier:'한진택배', items:'몸愛좋은물 Gold 350mL × 2박스', total:47000, to:'홍*동 · 강원 양양군 현남면 ***', date:'2026-09-25', message:'9월 26일 발송되었습니다. 보통 1~2일 안에 도착합니다.'}}; }
     if(action==='ask'){ const d=new Date(); return {ok:true, askNo:'Q'+String(d.getFullYear()).slice(2)+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0')+'-001'}; }
     if(action==='friendOrder'){ const d=new Date(); return {ok:true, orderNo:'F'+String(d.getFullYear()).slice(2)+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0')+'-001', total:D.reduce((a,x)=>a+amtOf(x),0)}; }
   }
   const r=await fetch(API_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},
-    body:JSON.stringify(Object.assign({action, invite:S.code, client:VERSION},payload||{}))});
+    body:JSON.stringify(Object.assign({action, client:VERSION},payload||{}))});
   const j=await r.json(); if(!j.ok) throw new Error(j.error||'잠시 후 다시 시도해 주세요'); return j;
 }
 
-/* 초대코드 */
-$('codeBtn').onclick=enter; $('code').onkeydown=e=>{if(e.key==='Enter')enter();};
-async function enter(){
-  S.code=S.code||$('code').value.trim();
-  if(!S.code){$('gateMsg').textContent='입장 코드를 입력해 주세요.';return;}
-  $('gateMsg').textContent=''; $('codeBtn').disabled=true;
+/* v0.9.3 (09-28): 입장 코드 없음 — 들어오면 바로 주문 화면. 가격·계좌는 서버(10_품목)에서 받아 온다 */
+let loaded=false;
+async function loadPrice(){
   try{
     const r=await api('friendLogin');
     if(r.price) Object.assign(PRICE,r.price); if(r.bank) Object.assign(BANK,r.bank);
-    $('gate').classList.add('hidden'); $('main').classList.remove('hidden'); $('foot').classList.remove('hidden');
-    if(!API_URL){const d=document.createElement('div');d.className='demo';d.textContent='오픈 준비 중입니다 · 지금은 주문이 실제로 접수되지 않아요';document.body.appendChild(d);}
-    try{ sessionStorage.setItem('wv_code',S.code); }catch(_){}
-    paintPrice(); if(!D.length) D.push(blank()); renderDests(); window.scrollTo(0,0);
-  }catch(e){ S.code=''; try{ sessionStorage.removeItem('wv_code'); }catch(_){} $('gate').classList.remove('hidden'); $('gateMsg').textContent='입장 코드를 확인해 주세요.'; }
-  finally{ $('codeBtn').disabled=false; }
+    loaded=true;
+  }catch(e){ toast('가격 정보를 불러오지 못했습니다. 잠시 후 새로고침해 주세요.'); }
+  paintPrice(); renderDests();
 }
-/* 지인에게 준 링크(…/order.html#1032 또는 ?c=1032)는 코드 입력 없이 바로 들어간다.
-   홈페이지에서 넘어온 주소(…/order.html)는 입장 코드 화면이 보인다. */
+function showMain(){
+  PAGES.forEach(id=>$(id).classList.add('hidden'));
+  $('main').classList.remove('hidden'); $('foot').classList.remove('hidden');
+}
 window.addEventListener('DOMContentLoaded',function(){
+  try{ sessionStorage.removeItem('wv_code'); }catch(_){}
+  if(!API_URL){const d=document.createElement('div');d.className='demo';d.textContent='오픈 준비 중입니다 · 지금은 주문이 실제로 접수되지 않아요';document.body.appendChild(d);}
+  if(!D.length) D.push(blank());
+  paintPrice(); renderDests();
   const h=decodeURIComponent((location.hash||'').replace(/^#/,'').replace(/^c=/,''));
-  const q=new URLSearchParams(location.search).get('c')||'';
-  let saved=''; try{ saved=sessionStorage.getItem('wv_code')||''; }catch(_){}
-  const code=(h||q).trim() || saved;
-  if(code==='track'){ openTrack(new URLSearchParams(location.search).get('no')||''); return; }
-  if(code==='ask'){ openAsk(new URLSearchParams(location.search).get('no')||''); return; }
-  if(code){ S.code=code; $('gate').classList.add('hidden'); enter(); }
+  const no=new URLSearchParams(location.search).get('no')||'';
+  if(h==='track') openTrack(no);
+  else if(h==='ask') openAsk(no);
+  else showMain();                                   // 옛 링크(#1032 등)도 그냥 주문 화면
+  loadPrice();
 });
-/* 주문 조회 — 입장 코드 없이도 열린다 (연락처 + 주문번호가 맞아야만 보임) */
+/* 주문 조회 (연락처 + 주문번호가 맞아야만 보임) */
 const HANJIN='https://www.hanjin.com/kor/CMS/DeliveryMgr/WaybillResult.do?mCode=MN038&schLang=KR&wblnumText2=';
 let trackFrom=null;
-const PAGES=['gate','main','track','ask'];
-const curPage=()=>PAGES.find(id=>!$(id).classList.contains('hidden'))||'gate';
+const PAGES=['main','track','ask'];
+const curPage=()=>PAGES.find(id=>!$(id).classList.contains('hidden'))||'main';
 function openTrack(no){
-  const c=curPage(); if(c!=='track') trackFrom=(c==='ask'?(askFrom||'gate'):c);
+  const c=curPage(); if(c!=='track') trackFrom=(c==='ask'?(askFrom||'main'):c);
   PAGES.forEach(id=>$(id).classList.add('hidden'));
   $('track').classList.remove('hidden'); $('foot').classList.remove('hidden');
-  if(no){ $('tNo').value=no; } $('tRes').classList.add('hidden'); window.scrollTo(0,0);
+  if(no){ $('tNo').value=no; } $('tRes').classList.add('hidden'); $('qRes').classList.add('hidden'); window.scrollTo(0,0);
 }
 /* 문의하기 — 주문과 상관없이도 보낼 수 있다. 주문 조회에서 오면 주문번호가 채워진다 */
 let askFrom=null, Q={type:'', photos:[], reqId:null, busy:false};
@@ -674,8 +659,7 @@ function openAsk(no){
   if(!$('qTel').value && $('tTel').value) $('qTel').value=$('tTel').value;
   window.scrollTo(0,0);
 }
-function closeAsk(){ $('ask').classList.add('hidden'); const to=askFrom||'gate'; $(to).classList.remove('hidden');
-  if(to==='gate') $('foot').classList.add('hidden'); window.scrollTo(0,0); }
+function closeAsk(){ $('ask').classList.add('hidden'); $(askFrom||'main').classList.remove('hidden'); window.scrollTo(0,0); }
 $('qType').querySelectorAll('button').forEach(b=>b.onclick=()=>{
   Q.type=b.dataset.v; $('qType').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));
   $('qHint').textContent=Q_HINT[Q.type]||'';
@@ -712,21 +696,35 @@ $('qBtn').onclick=async()=>{
     const r=await api('ask',{ask:{reqId:Q.reqId, type:Q.type, name:$('qName').value.trim(), tel,
       orderNo:$('qNo').value.trim().toUpperCase(), body:$('qBody').value.trim(), photos:Q.photos, agree:true}});
     $('qDoneNo').textContent=r.askNo; $('askForm').classList.add('hidden'); $('askDone').classList.remove('hidden');
+    { const t=$('qTel').value; $('qDoneTrack').onclick=()=>{ openTrack(r.askNo); if(t) $('tTel').value=t; }; }
     ['qName','qTel','qNo','qBody'].forEach(i=>$(i).value=''); $('qPhoto').value=''; $('qThumbs').innerHTML='';
     Q={type:'', photos:[], reqId:null, busy:false}; $('qType').querySelectorAll('button').forEach(x=>x.classList.remove('on')); $('qHint').textContent=''; $('qAgree').checked=false;
     window.scrollTo(0,0);
   }catch(err){ $('qErr').innerHTML='<li>'+(err.message||'보내지 못했습니다')+'</li>'; toast('보내지 못했습니다 (다시 눌러도 두 번 접수되지 않습니다)'); }
   finally{ Q.busy=false; $('qBtn').disabled=false; $('qBtn').textContent='문의 보내기'; }
 };
-function closeTrack(){ $('track').classList.add('hidden'); $(trackFrom||'gate').classList.remove('hidden');
-  if(trackFrom==='gate') $('foot').classList.add('hidden'); window.scrollTo(0,0); }
+function closeTrack(){ $('track').classList.add('hidden'); $(trackFrom||'main').classList.remove('hidden'); window.scrollTo(0,0); }
 $('tTel').addEventListener('input',e=>{ const v=e.target.value.replace(/\D/g,'').slice(0,11);
   e.target.value=v.length<4?v:v.length<8?v.slice(0,3)+'-'+v.slice(3):v.slice(0,3)+'-'+v.slice(3,v.length-4)+'-'+v.slice(-4); });
 $('tBtn').onclick=async()=>{
   const tel=$('tTel').value.replace(/\D/g,''), no=$('tNo').value.trim().toUpperCase(), e=[];
-  if(tel.length<10) e.push('연락처를 확인해 주세요.'); if(!no) e.push('주문번호를 넣어 주세요.');
+  if(tel.length<10) e.push('연락처를 확인해 주세요.'); if(!no) e.push('주문번호 또는 문의번호를 넣어 주세요.');
   $('tErr').innerHTML=e.map(x=>'<li>'+x+'</li>').join(''); if(e.length) return;
   $('tBtn').disabled=true; $('tBtn').textContent='조회 중…';
+  $('qRes').classList.add('hidden');
+  if(/^Q/.test(no)){                                   // 문의번호 → 문의 답변 보기 (서버 v0.7.2 askTrack)
+    try{
+      const a=(await api('askTrack',{tel, askNo:no})).ask;
+      $('qrNo').textContent=a.askNo; $('qrType').textContent=a.type; $('qrDate').textContent=a.date;
+      $('qrOrder').textContent=a.orderNo||'없음'; $('qrOrder').dataset.no=a.orderNo||'';
+      $('qrSt').textContent=a.done?'답변이 완료되었습니다.':a.answers.length?'담당자가 처리하고 있습니다. 아래 답변을 확인해 주세요.':'접수되었습니다. 담당자가 확인하고 있습니다.';
+      $('qrBody').textContent=a.body;
+      $('qrAns').innerHTML=a.answers.length?a.answers.map(x=>'<div class="qa ans"><span>워터비스 답변'+(x.at?' · '+esc(x.at):'')+'</span><p>'+esc(x.text)+'</p></div>').join(''):'<p class="fine" style="text-align:left">아직 답변이 없습니다. 보통 하루 안에 답변드립니다.</p>';
+      $('tRes').classList.add('hidden'); $('qRes').classList.remove('hidden'); $('tErr').innerHTML='';
+    }catch(err){ $('qRes').classList.add('hidden'); $('tErr').innerHTML='<li>'+esc(err.message||'조회하지 못했습니다')+'</li>'; }
+    finally{ $('tBtn').disabled=false; $('tBtn').textContent='조회하기'; }
+    return;
+  }
   try{
     const o=(await api('track',{tel, orderNo:no})).order;
     $('rNo').textContent=o.orderNo;
