@@ -345,7 +345,7 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
         <h3><img class="plogo" src="img/logo-momae.png" alt="몸愛좋은물" width="170" height="69"><span class="gold">Gold</span></h3>
         <div class="specs"><span>먹는해양심층수</span><span>350mL 파우치</span><span>경도 300</span><span>36입 / 1박스</span></div>
         <div class="price">
-          <div class="row"><span class="lbl">정상가</span><span class="was" id="pWas">28,800원</span></div>
+          <div class="row"><span class="lbl">정상가</span><span class="was" id="pWas">36,000원</span></div>
           <div class="row"><span class="lbl">특별가 · 1박스</span><span class="now" id="pNow">18,000<small>원</small></span></div>
           <div class="per" id="pPer">1개당 500원</div>
           <div class="ship" id="pShip">택배비 박스당 4,500원 별도 · 입금 확인 후 발송</div>
@@ -575,7 +575,7 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
   강원특별자치도 양양군 현남면 원포1길 53, 환경동 1층<br>
   Tel 033-672-1032 · admin@watervis.co.kr<br>
   <button type="button" class="flink" onclick="openAsk()">문의하기</button> · <button type="button" class="flink" onclick="openTrack()">주문 조회</button><br>
-  <span style="opacity:.7">© 2026 WATERVIS CO., LTD. · 화면 v0.9.2</span>
+  <span style="opacity:.7">© 2026 WATERVIS CO., LTD. · 화면 <span id="ver">v0.9.4</span></span>
 </footer>
 
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js" async></script>
@@ -584,9 +584,9 @@ footer .flogo{width:150px;height:auto;margin:0 auto 12px;opacity:.9}
    · v0.9: 임직원 화면과 같은 구조 — 받는 곳 여러 개, 받는 곳마다 입금하실 분(주문하신 분/받는 분/기타), 공장 방문 수령(택배비 없음)
    (v0.1 시안 2026-09-24)
    API_URL 이 비어 있으면 데모: 저장 안 함 */
-const VERSION='v0.9.3';
+const VERSION='v0.9.4';
 const API_URL='https://script.google.com/macros/s/AKfycby2u_oD8QlsYJj3fnSBsvO8bzUeiqZLuR1X7o3LAnhaHYdsWRJOo6tN9UweLoOma0G5/exec';
-const PRICE={box:18000, list:28800, unit:36, ship:4500, maxQty:20, maxTotal:40, maxDests:10};  // 서버가 다시 계산한다
+const PRICE={box:18000, list:36000, unit:36, ship:4500, maxQty:20, maxTotal:40, maxDests:10};  // 서버가 다시 계산한다
 const BANK={name:'농협(강릉농협)', no:'355-0097-3405-33', holder:'워터비스코퍼레이션(주)', days:3};
 
 const $=id=>document.getElementById(id);
@@ -625,6 +625,7 @@ function showMain(){
 }
 window.addEventListener('DOMContentLoaded',function(){
   try{ sessionStorage.removeItem('wv_code'); }catch(_){}
+  $('ver').textContent=VERSION;
   if(!API_URL){const d=document.createElement('div');d.className='demo';d.textContent='오픈 준비 중입니다 · 지금은 주문이 실제로 접수되지 않아요';document.body.appendChild(d);}
   if(!D.length) D.push(blank());
   paintPrice(); renderDests();
